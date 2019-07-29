@@ -1,0 +1,51 @@
+html {
+    max-width:70ch;
+    padding:2ch;
+    margin:auto;
+    color:#373D3F;
+    font-size:1.2em;
+    font-family: 'Courier New', Courier, monospace  
+}
+
+a {
+    text-decoration: none;
+}
+a:link {
+    color: hotpink;
+}
+a:visited {
+    color: rgba(136, 18, 128, 1); 
+}
+
+#nav-bar {
+    padding-left: 0;
+}
+#nav-bar li {
+        display: inline;
+}
+
+#nav-bar li + li:before{
+    content: " | ";
+    padding: 0 10px;
+}
+
+@media all and (max-width: 699px) {
+   html {
+    font-size: 1.5em;
+  }
+  nav {
+      font-size: .5em;
+  }
+  h1 {
+      font-size: 1.6em;
+  }
+  h2 {
+      font-size: 1em;
+  }
+  h4 {
+      font-size: .8em;
+  }
+  content li{
+      margin-top: 15px;
+  }
+}
