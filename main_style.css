@@ -17,10 +17,6 @@ a:visited {
     color: rgba(136, 18, 128, 1); 
 }
 
-a.strikethrough {
-    text-decoration: line-through
-}
-
 #nav-bar {
     padding-left: 0;
 }
