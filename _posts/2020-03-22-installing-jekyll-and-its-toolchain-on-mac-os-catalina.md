@@ -2,7 +2,7 @@
 layout: post
 ---
 
-# Install Jekyll (and all the tools that come with it) on macOS Catalina
+# Installing Jekyll (and all the tools that come with it) on macOS Catalina
 
 This post is inspired by the [Desired Persona's](https://desiredpersona.com/) [helpful post](https://desiredpersona.com/install-jekyll-on-macos/) on how to install Jekyll for Mac OS Mojave.  If you're not using Catalina and are running into Jekyll installation issues, I recommend starting with their post first.
 
