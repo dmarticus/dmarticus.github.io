@@ -18,7 +18,7 @@ object X extends Square
 object O extends Square
 ```
 
-If we imagine the board at the beginning of the game, it can also be empty, so we need a notion of an empty **Square**. 
+If we imagine the board at the beginning of the game, it can also be empty, so we need a notion of an empty *Square*. 
 We can represent it with `Option[Square]` . Where `Some[Square]` is a Square with a set value and `None: Option[Square]` 
 is a square with an empty value. A *Row* would look like this:
 
@@ -26,14 +26,14 @@ is a square with an empty value. A *Row* would look like this:
 case class Row(col1: Option[Square], col2: Option[Square], col3: Option[Square])
 ```
 
-As mentioned before our **Game** has nine squares, so 3 x 3 squares. So the game might look like:
+As mentioned before our *Game* has nine squares, so 3 x 3 squares. So the game might look like:
 
 ```scala
 case class Game(row1: Row, row2: Row, row3: Row)
 ```
 
-The only thing missing for game-related logic is to define a way to talk about a **Square** position on the game board. 
-So let’s define the concept of **Coordinates**.
+The only thing missing for game-related logic is to define a way to talk about a *Square* position on the game board. 
+So let’s define the concept of *Coordinates*.
 
 ```scala
 sealed trait ColumnCoordinate
@@ -51,8 +51,8 @@ case object Row3 extends RowCoordinate
 case class Coordinate(column: ColumnCoordinate, row: RowCoordinate)
 ```
 
-Because we will use either **X** or **O,** our decision also needs to have information about the **Square**. 
-We can define a **Move** in the game as:
+Because we will use either *X* or *O*, our decision also needs to have information about the *Square*. 
+We can define a *Move* in the game as:
 
 ```scala
 case class Move(square: Square, coordinates: Coordinate)
@@ -82,9 +82,9 @@ def move(game: Game, move: Move): Option[Game] = {
 }
 ```
 
-Now let’s start thinking about how can we complete the game. There are two basic ways. Either someone **wins,** or 
-there is a **draw** when the board is full. Let’s start from **draw** case because it only requires us to know if we 
-can make any more moves. To figure that out, we need to know if each *Row* in the **Game** is full.
+Now let’s start thinking about how can we complete the game. There are two basic ways. Either someone *wins*, or 
+there is a *draw* when the board is full. Let’s start from *draw* case because it only requires us to know if we 
+can make any more moves. To figure that out, we need to know if each *Row* in the *Game* is full.
 
 ```scala
 def full(row: Row): Boolean = Seq(row.col1, row.col2, row.col3).forall(_.isDefined)
@@ -159,7 +159,7 @@ val combinations: List[Coordinate] = for {
 
 ## Displaying the game
 
-To be able to interact with the **Console**, we need a way to encode our **game** into a String. 
+To be able to interact with the *Console*, we need a way to encode our *game* into a String. 
 Let's use TypeClasses for that:
 
 ```scala
@@ -207,7 +207,7 @@ implicit val rowCoordinatesEncoder: Encoder[RowCoordinate] = {
 implicit val coordinatesEncoder: Encoder[Coordinate] = (t: Coordinate) => t.column.encode + t.row.encode
 ```
 
-We also need a decoder to read inputs from the **Console.** They might fail, so the result needs to be an `Option` type:
+We also need a decoder to read inputs from the *Console.* They might fail, so the result needs to be an `Option` type:
 
 ```scala
 trait Decoder[T] {
@@ -260,7 +260,7 @@ Seq(
 
 ## Interacting with the World
 
-The last bit for us to interact with the world is to define constraints on how we talk to the **Console**:
+The last bit for us to interact with the world is to define constraints on how we talk to the *Console*:
 
 ```scala
 trait Console[F[_]] {
@@ -284,7 +284,7 @@ val validInputs: String = coordinates.combinations.map(_.encode).mkString(" ")
 }
 ```
 
-And finally, the game interaction with the **Console**:
+And finally, the game interaction with the *Console*:
 
 ```scala
 def run[F[_]: Monad](implicit console: Console[F], applicative: Applicative[F]): F[ExitCode] = {
