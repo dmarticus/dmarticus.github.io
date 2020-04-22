@@ -3,7 +3,7 @@ layout: post
 ---
 # Putting Finite-State Machines to Work: on writing Hangman in Functional Scala
 
-TODO HEADER PIC OF MY CONSOLE
+![Hangman Console](../../../media/hangman.png)
 
 I was inspired to write a game after learning about a concept known as a [finite-State machine](https://en.wikipedia.org/wiki/Finite-state_machine) (FSM).  In system architecture terms, a finite-state machine is the process of expressing simple subsets of the system as predefined states and inputs that let your state transition from one state to another. It's a popular model for modeling computation, and also serves as an excellent mechanism for expression sequential game logic.  
 
@@ -14,7 +14,7 @@ When combined with the concept of [Algebraic Data Types](https://en.wikipedia.or
 
 Our game might look something like this.
 
-TODO UML DIAGRAM
+![Hangman Diagram](../../../media/hangman-diagram.jpg)
 
 Where the dark dots represent the start (left) and end (right) nodes, squares express game states, and lines symbolise inputs.
 
@@ -72,7 +72,7 @@ case object Hard extends DifficultyLevel {
 
 ## Adding additional building blocks
 
-To enable gameplay, we need to have a a way to get new words, display the game on the console, parse the inputs from the user, and decode these inputs to the program.  Since these actions all represent side-effect free functions, we can model this using a [Tagless](https://scalac.io/tagless-final-pattern-for-scala-code/) (meaning we can declare this gameplay as a generic, type-safe DSL) approach.  These actions can be modeled with the following ADTs in Scala.
+To enable gameplay, we need to have a a way to get new words, display the game on the console, parse the inputs from the user, and decode these inputs to the program.  Since these actions all represent side-effect free functions, we can model this using a [Tagless](https://scalac.io/tagless-final-pattern-for-scala-code/) (meaning we can declare this gameplay as a generic, type-safe Domain-Specific Language [DSL]) approach.  These actions can be modeled with the following ADTs in Scala.
 
 ```scala
 trait WordService[F[_]] {
@@ -232,7 +232,7 @@ def run[F[_] : Monad : WordService](implicit console: Console[F]): F[ExitCode] =
 }
 ```
 
-(Note, I've only described the fundamentals of the game operation here, for the other TypeClasses that I used to model some of necessary components that make this game Hangman, you can check out them out in this project's [Github repository](https://github.com/dmarticus/scala-games/tree/master/src/main/scala/games/typeClasses))
+(Note, I've only described the fundamentals of the game operation here, to view the implementation of the other TypeClasses that I used to model the other necessary components of this game, check out this [Github repository](https://github.com/dmarticus/scala-games/tree/master/src/main/scala/games/typeClasses))
 
 ## Conclusion
 
