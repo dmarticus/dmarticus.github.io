@@ -1,5 +1,7 @@
-
-# Tic-Tac-Toe in FP Scala
+---
+layout: post
+---
+# Tic-Tac-Toe in Functional Scala
 
 
 It tends to be hard to understand functional concepts without a context. And what’s a better setting than a simple game 
