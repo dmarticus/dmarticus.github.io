@@ -1,0 +1,6 @@
+# standard jekyll config
+
+permalink: date
+highlighter: rouge
+markdown: kramdown
+exclude: ['README.md', 'Gemfile' , 'Gemfile.lock']
