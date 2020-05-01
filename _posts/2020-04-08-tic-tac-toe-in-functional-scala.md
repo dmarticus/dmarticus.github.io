@@ -68,20 +68,29 @@ we want only to fill non-empty squares:
 
 ```scala
 def move(game: Game, move: Move): Option[Game] = {
-  import game._
-  move.coordinates match {
-    case Coordinate(Col1, Row1) if row1.col1.isEmpty => Some(copy(row1 = row1.copy(col1 = Some(move.square))))
-    case Coordinate(Col2, Row1) if row1.col2.isEmpty => Some(copy(row1 = row1.copy(col2 = Some(move.square))))
-    case Coordinate(Col3, Row1) if row1.col3.isEmpty => Some(copy(row1 = row1.copy(col3 = Some(move.square))))
-    case Coordinate(Col1, Row2) if row2.col1.isEmpty => Some(copy(row2 = row2.copy(col1 = Some(move.square))))
-    case Coordinate(Col2, Row2) if row2.col2.isEmpty => Some(copy(row2 = row2.copy(col2 = Some(move.square))))
-    case Coordinate(Col3, Row2) if row2.col3.isEmpty => Some(copy(row2 = row2.copy(col3 = Some(move.square))))
-    case Coordinate(Col1, Row3) if row3.col1.isEmpty => Some(copy(row3 = row3.copy(col1 = Some(move.square))))
-    case Coordinate(Col2, Row3) if row3.col2.isEmpty => Some(copy(row3 = row3.copy(col2 = Some(move.square))))
-    case Coordinate(Col3, Row3) if row3.col3.isEmpty => Some(copy(row3 = row3.copy(col3 = Some(move.square))))
-    case _ => None
+    import game._
+    move.coordinates match {
+      case Coordinate(Col1, Row1) if row1.col1.isEmpty =>
+        Some(copy(row1 = row1.copy(col1 = Some(move.square))))
+      case Coordinate(Col2, Row1) if row1.col2.isEmpty =>
+        Some(copy(row1 = row1.copy(col2 = Some(move.square))))
+      case Coordinate(Col3, Row1) if row1.col3.isEmpty =>
+        Some(copy(row1 = row1.copy(col3 = Some(move.square))))
+      case Coordinate(Col1, Row2) if row2.col1.isEmpty =>
+        Some(copy(row2 = row2.copy(col1 = Some(move.square))))
+      case Coordinate(Col2, Row2) if row2.col2.isEmpty =>
+        Some(copy(row2 = row2.copy(col2 = Some(move.square))))
+      case Coordinate(Col3, Row2) if row2.col3.isEmpty =>
+        Some(copy(row2 = row2.copy(col3 = Some(move.square))))
+      case Coordinate(Col1, Row3) if row3.col1.isEmpty =>
+        Some(copy(row3 = row3.copy(col1 = Some(move.square))))
+      case Coordinate(Col2, Row3) if row3.col2.isEmpty =>
+        Some(copy(row3 = row3.copy(col2 = Some(move.square))))
+      case Coordinate(Col3, Row3) if row3.col3.isEmpty =>
+        Some(copy(row3 = row3.copy(col3 = Some(move.square))))
+      case _ => None
+    }
   }
-}
 ```
 
 Now let’s start thinking about how can we complete the game. There are two basic ways. Either someone *wins*, or 
@@ -172,7 +181,7 @@ trait Encoder[T] {
 object Encoder {
   def apply[T](implicit ev: Encoder[T]): Encoder[T] = ev
 
-implicit class EncoderClass[T: Encoder](value: T) {
+  implicit class EncoderClass[T: Encoder](value: T) {
     def encode: String = Encoder[T].encode(value)
   }
 }
@@ -186,13 +195,16 @@ def toSymbol(value: Square): Char = value match {
   case O => o
 }
 
-implicit val squareEncoder: Encoder[Square] = (value: Square) => toSymbol(value).toString
+implicit val squareEncoder: Encoder[Square] = (value: Square) =>
+  toSymbol(value).toString
 
-implicit val squareOptEncoder: Encoder[Option[Square]] = (t: Option[Square]) => t.map(_.encode).getOrElse(empty.toString)
+implicit val squareOptEncoder: Encoder[Option[Square]] =
+  (t: Option[Square]) => t.map(_.encode).getOrElse(empty.toString)
 
-implicit val rowEncoder: Encoder[Row] = (t: Row) => Seq(t.col1, t.col2, t.col3).map(_.encode).mkString(" ")
+implicit val rowEncoder: Encoder[Row] = (t: Row) =>
+  Seq(t.col1, t.col2, t.col3).map(_.encode).mkString(" ")
 
-// and for the game moves
+  // and for the game moves
 
 implicit val columnCoordinatesEncoder: Encoder[ColumnCoordinate] = {
   case Col1 => "A"
@@ -206,7 +218,8 @@ implicit val rowCoordinatesEncoder: Encoder[RowCoordinate] = {
   case Row3 => "3"
 }
 
-implicit val coordinatesEncoder: Encoder[Coordinate] = (t: Coordinate) => t.column.encode + t.row.encode
+implicit val coordinatesEncoder: Encoder[Coordinate] = (t: Coordinate) =>
+  t.column.encode + t.row.encode
 ```
 
 We also need a decoder to read inputs from the *Console.* They might fail, so the result needs to be an `Option` type:
@@ -224,13 +237,15 @@ object Decoder {
   }
 }
 
-implicit val squareDecoder: Decoder[Square] = (value: String) => value.headOption.flatMap {
-  case Square.x => Some(X)
-  case Square.o => Some(O)
-  case _ => None
+implicit val squareDecoder: Decoder[Square] = (value: String) =>
+  value.headOption.flatMap {
+    case Square.x => Some(X)
+    case Square.o => Some(O)
+    case _        => None
 }
 
-implicit val coordinatesDecoder: Decoder[Coordinate] = (value: String) => if (value.length == 2) {
+implicit val coordinatesDecoder: Decoder[Coordinate] = (value: String) => 
+  if (value.length == 2) {
   Applicative[Option].map2(
     Decoder[ColumnCoordinate].decode(value.charAt(0).toString),
     Decoder[RowCoordinate].decode(value.charAt(1).toString)
@@ -244,14 +259,18 @@ The last, but not least thing is we want to display our game in a way that would
 
 ```scala
 def displayGameOnConsole(game: Game): String = {
-  def encodeRow(row: Row, coordinate: RowCoordinate) = s"${coordinate.encode} ${row.encode}"
+  def encodeRow(row: Row, coordinate: RowCoordinate) =
+    s"${coordinate.encode} ${row.encode}"
 
-Seq(
-    "  " + Seq[ColumnCoordinate](Col1, Col2, Col3).map(_.encode).mkString(" "),
+  Seq(
+    "  " + Seq[ColumnCoordinate](Col1, Col2, Col3)
+    .map(_.encode)
+    .mkString(" "),
     encodeRow(game.row1, Row1),
     encodeRow(game.row2, Row2),
     encodeRow(game.row3, Row3)
   ).mkString("\n")
+}
 
 // this make it look like:
 //   A B C
@@ -280,46 +299,55 @@ object Text {
   val draw = "It was a draw"
   def winner(square: Square) = s"${square.encode} won"
   def nextMove(square: Square) = s"Your next move with ${square.encode}:"
-  def chooseText(square: Square) = s"Choose initial symbol: ${square.encode} or ${Square.opposite(square).encode}"
+  def chooseText(square: Square) =
+    s"Choose initial symbol: ${square.encode} or ${Square.opposite(square).encode}"
 
-val validInputs: String = coordinates.combinations.map(_.encode).mkString(" ")
+val validInputs: String =
+  coordinates.combinations.map(_.encode).mkString(" ")
 }
 ```
 
 And finally, the game interaction with the *Console*:
 
 ```scala
-def run[F[_]: Monad](implicit console: Console[F], applicative: Applicative[F]): F[ExitCode] = {
+def run[F[_]: Monad](implicit console: Console[F],
+                       applicative: Applicative[F]): F[ExitCode] = {
   import console._, applicative._
-
+    
   // we retry if user input was invalid
   def retry[T](readValue: F[Option[T]]): F[T] = readValue.flatMap { element =>
-    if(element.isDefined) pure(element.get) else printLine(Text.invalidChoice) > retry(readValue)
+    if (element.isDefined) pure(element.get)
+    else printLine(Text.invalidChoice) > retry(readValue)
   }
-
+    
   // we show current state of the game and take user input
-  def readGame(square: Square, currentGame: Game): F[Game] = for {
-    _ <- printLine(displayGameOnConsole(currentGame))
-    _ <- printLine(Text.nextMove(square))
-    _ <- printLine(Text.validInputs)
-    nextStage <- retry(readLine.map(Decoder[Coordinate].decode).map(_.flatMap(coordinates => game.move(currentGame, 
-      Move(square, coordinates)))))
-  } yield nextStage
-
-  // we loop the game until someone wins or there is a draw
-  def gameLoop(square: Square, gameState: Game): F[Option[Square]] = readGame(square, gameState).flatMap{ currentGame =>
-    if(game.full(currentGame))
-      pure(None: Option[Square])
-    else {
-      val winner = game.winner(currentGame)
-      if(winner.isDefined)
-        pure(winner)
-      else
-        gamo(Square.opposite(square), currentGame)
+  def readGame(square: Square, currentGame: Game): F[Game] =
+    for {
+      _ <- printLine(displayGameOnConsole(currentGame))
+      _ <- printLine(Text.nextMove(square))
+      _ <- printLine(Text.validInputs)
+      nextStage <- retry(
+        readLine
+          .map(Decoder[Coordinate].decode)
+          .map(_.flatMap(coordinates =>
+            game.move(currentGame, Move(square, coordinates)))))
+    } yield nextStage
+    
+    // we loop the game until someone wins or there is a draw
+  def gameLoop(square: Square, gameState: Game): F[Option[Square]] =
+    readGame(square, gameState).flatMap { currentGame =>
+      if (game.full(currentGame))
+        pure(None: Option[Square])
+      else {
+        val winner = game.winner(currentGame)
+        if (winner.isDefined)
+          pure(winner)
+        else
+          gamo(Square.opposite(square), currentGame)
+      }
     }
-  }
-
-for {
+    
+  for {
     _ <- printLine(Text.chooseText(X)) // choose symbol
     square <- retry(readLine.map(Decoder[Square].decode))
     result <- gameLoop(square, game.empty)
@@ -334,13 +362,12 @@ To run the game, we can provide it with an interpreter and `Main` method:
 object Main extends IOApp {
 
 implicit val ioInstance: Console[IO] = new Console[IO] {
-    import scala.io.StdIn
+  import scala.io.StdIn
 
-override def readLine: IO[String] = IO(StdIn.readLine)
+  override def readLine: IO[String] = IO(StdIn.readLine)
     override def printLine(text: String): IO[Unit] = IO(println(text))
   }
-
-override def run(args: List[String]): IO[ExitCode] = {
+  override def run(args: List[String]): IO[ExitCode] = {
     TicTacToe.run[IO]
   }
 }

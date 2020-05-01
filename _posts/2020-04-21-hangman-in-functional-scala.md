@@ -122,34 +122,45 @@ So as demonstrated, it wasn't too complex to model most of the game states with 
 object Guesses {
   // simple way to create an empty instance
   val empty = Guesses(None, None)
-  
-  def apply(letter: Letter): Guesses = Guesses(Some(NonEmptySet.of(letter)), None)
-  
+
+  def apply(letter: Letter): Guesses =
+    Guesses(Some(NonEmptySet.of(letter)), None)
+
   def apply(word: Word): Guesses = Guesses(None, Some(NonEmptySet.of(word)))
-  
+
   def addLetter(guesses: Guesses, letter: Letter): Guesses =
-    guesses.copy(letters = guesses.letters.map(_.add(letter))
-      .orElse(Some(NonEmptySet.of(letter))))
-    
+    guesses.copy(
+      letters = guesses.letters
+        .map(_.add(letter))
+        .orElse(Some(NonEmptySet.of(letter))))
+
   def addWord(guesses: Guesses, word: Word): Guesses =
-    guesses.copy(words = guesses.words.map(_.add(word))
-      .orElse(Some(NonEmptySet.of(word))))
-    
+    guesses.copy(
+      words = guesses.words
+        .map(_.add(word))
+        .orElse(Some(NonEmptySet.of(word))))
+
   // by adding a letter do the letter we have form a word we are looking for
-  def isWordGuessedCorrectly(word: Word, letter: Letter, guesses: Guesses): Boolean = 
-    word.toNes.toSortedSet.subsetOf(guesses.letters.map(_.add(letter))
-    .getOrElse(NonEmptySet.of(letter)).toSortedSet)
-    
-  def alreadyContains(guesses: Guesses, letter: Letter): Boolean = 
+  def isWordGuessedCorrectly(word: Word,
+                             letter: Letter,
+                             guesses: Guesses): Boolean =
+    word.toNes.toSortedSet.subsetOf(
+      guesses.letters
+        .map(_.add(letter))
+        .getOrElse(NonEmptySet.of(letter))
+        .toSortedSet)
+
+  def alreadyContains(guesses: Guesses, letter: Letter): Boolean =
     guesses.letters.exists(_.exists(_ == letter))
-  
-  def alreadyContains(guesses: Guesses, word: Word): Boolean = 
+
+  def alreadyContains(guesses: Guesses, word: Word): Boolean =
     guesses.words.exists(_.exists(_ == word))
 
-  def alreadyContains(guesses: Guesses, gameInput: GameInput): Boolean = gameInput match {
-    case GuessLetter(letter) => alreadyContains(guesses, letter)
-    case GuessWord(word) => alreadyContains(guesses, word)
-  }
+  def alreadyContains(guesses: Guesses, gameInput: GameInput): Boolean =
+    gameInput match {
+      case GuessLetter(letter) => alreadyContains(guesses, letter)
+      case GuessWord(word)     => alreadyContains(guesses, word)
+    }
 }
 ```
 
@@ -158,11 +169,14 @@ object Guesses {
 Finally, with all of our inputs and states taken care of, we can start working on the game logic that takes in the inputs and transitions through the various states.  To do this, we need a simple way to combine *State* and *Input*.  By using the FSM of this game as the model, we can say that the fundamentals of this game can be described as `(GameState, Input) => F[GameState]` , where `F` is a context that holds information about `WordService`/`Console`.  In addition, we can take this a little further, as two types of gameplay that are modeled by `F` can be separated into two subsets. In the case of Hangman, we have an `outerGame` (the process of choosing to start, restart, or exit the game) and the `innerGame` (the process of playing a game of Hangman).  These two game subsets can be modeled this:
 
 ```scala
-def outerGame[F[_] : Applicative : WordService]: PartialFunction[(GameState, Input), F[GameState]] = {
-  // loads new word from `WordService` and starts a new game with selected difficulty
-  case (_, Restart(difficulty)) => WordService[F].getWord.map(Game(difficulty.lives, _, Guesses.empty))
-  // exits the game by setting the state to `Exit`
-  case (_, ExitGame) => Applicative[F].pure(Exit)
+def outerGame[F[_]: Applicative: WordService]
+    : PartialFunction[(GameState, Input), F[GameState]] = {
+    // loads new word from `WordService` and 
+    // starts a new game with selected difficulty
+    case (_, Restart(difficulty)) =>
+      WordService[F].getWord.map(Game(difficulty.lives, _, Guesses.empty))
+    // exits the game by setting the state to `Exit`
+    case (_, ExitGame) => Applicative[F].pure(Exit)
 }
 ```
 
@@ -170,45 +184,59 @@ and
 
 ```scala
 val innerGame: PartialFunction[(GameState, Input), GameState] = {
-  // when user guesses unguessed symbol or word then run
-  case (game@Game(lives, word, guesses), input: GameInput) if !Guesses.alreadyContains(guesses, input) => input match {
-    // winning the game
-    case GuessWord(guessWord) if word == guessWord => Win(word)
-    case GuessLetter(letter) if Guesses.isWordGuessedCorrectly(word, letter, guesses) => Win(word)
-    
-    // guessing words
-    case GuessWord(guessWord) if word != guessWord && Lives.sub(lives).isDefined => 
-      game.copy(lives = Lives.sub(lives).get, guesses = Guesses.addWord(guesses, guessWord))
-      
-    case GuessWord(guessWord) if word != guessWord && Lives.sub(lives).isEmpty => 
-      Lose(word, guesses = Guesses.addWord(guesses, guessWord))
-    
-    // guessing letters
-    case GuessLetter(letter) if !word.toNes.contains(letter) && Lives.sub(lives).isDefined => 
-      game.copy(lives = Lives.sub(lives).get, guesses = Guesses.addLetter(guesses, letter))
-    
-    case GuessLetter(letter) if !word.toNes.contains(letter) && Lives.sub(lives).isEmpty => 
-      Lose(word, Guesses.addLetter(guesses, letter))
-    
-    case GuessLetter(letter) if word.toNes.contains(letter) => 
-      game.copy(guesses = Guesses.addLetter(guesses, letter))
+    // when user guesses unguessed symbol or word then run
+    case (game @ Game(lives, word, guesses), input: GameInput)
+        if !Guesses.alreadyContains(guesses, input) =>
+      input match {
+        // winning the game
+        case GuessWord(guessWord) if word == guessWord => Win(word)
+        case GuessLetter(letter)
+            if Guesses.isWordGuessedCorrectly(word, letter, guesses) =>
+          Win(word)
+
+        // guessing words
+        case GuessWord(guessWord)
+            if word != guessWord && Lives.sub(lives).isDefined =>
+          game.copy(lives = Lives.sub(lives).get,
+                    guesses = Guesses.addWord(guesses, guessWord))
+
+        case GuessWord(guessWord)
+            if word != guessWord && Lives.sub(lives).isEmpty =>
+          Lose(word, guesses = Guesses.addWord(guesses, guessWord))
+
+        // guessing letters
+        case GuessLetter(letter)
+            if !word.toNes.contains(letter) && Lives.sub(lives).isDefined =>
+          game.copy(lives = Lives.sub(lives).get,
+                    guesses = Guesses.addLetter(guesses, letter))
+
+        case GuessLetter(letter)
+            if !word.toNes.contains(letter) && Lives.sub(lives).isEmpty =>
+          Lose(word, Guesses.addLetter(guesses, letter))
+
+        case GuessLetter(letter) if word.toNes.contains(letter) =>
+          game.copy(guesses = Guesses.addLetter(guesses, letter))
+      }
   }
-}
 ```
 
 Finally, we need to combine these two layers:
 
 ```scala
-def hangmanFSM[F[_] : Applicative : WordService](state: GameState, input: Input): F[GameState] =
-  outerGame orElse (innerGame andThen Applicative[F].pure) applyOrElse (
-     (state, input), 
-     (_: (GameState, Input)) => Applicative[F].pure(state)
-  )
-    
-def hangmanFSM[F[_] : Applicative : WordService](state: GameState, inputText: String): F[GameState] =
-  Decoder[Input].decode(inputText)
-    .map(input => hangmanFSM(state, input))
-    .getOrElse(Applicative[F].pure(state))
+def hangmanFSM[F[_]: Applicative: WordService](state: GameState,
+                                                 input: Input): F[GameState] =
+    outerGame orElse (innerGame andThen Applicative[F].pure) applyOrElse (
+      (state, input),
+      (_: (GameState, Input)) => Applicative[F].pure(state)
+    )
+
+  def hangmanFSM[F[_]: Applicative: WordService](
+      state: GameState,
+      inputText: String): F[GameState] =
+    Decoder[Input]
+      .decode(inputText)
+      .map(input => hangmanFSM(state, input))
+      .getOrElse(Applicative[F].pure(state))
 ```
 
 and represent our game loop:
