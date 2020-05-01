@@ -171,7 +171,8 @@ Finally, with all of our inputs and states taken care of, we can start working o
 ```scala
 def outerGame[F[_]: Applicative: WordService]
     : PartialFunction[(GameState, Input), F[GameState]] = {
-    // loads new word from `WordService` and starts a new game with selected difficulty
+    // loads new word from `WordService` and 
+    // starts a new game with selected difficulty
     case (_, Restart(difficulty)) =>
       WordService[F].getWord.map(Game(difficulty.lives, _, Guesses.empty))
     // exits the game by setting the state to `Exit`
