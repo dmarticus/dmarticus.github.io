@@ -13,7 +13,8 @@ However, when I tried to install Jekyll on macOS Catalina, I ran into some issue
 Chances are you've gotten this far because you want to install Jekyll on macOS.  If you've followed all of the steps outlined in the various places where this question is asked on the internet, you've probably already
 
 1. Installed the Xcode Command Line tools via `xcode-select --install` and installed 
-the macOS headers via `open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg`
+the macOS headers via `open /Library/Developer/CommandLineTools/Packages/
+macOS_SDK_headers_for_macOS_10.14.pkg`
 2. Installed Ruby via Homebrew[^bignote] via `brew install ruby` and then updated your shell profile 
 (bash, zsh, whatever) with the following entries (don't forget to run `source $PROFILE (e.g. bash_profile or zshrc)` or restart your terminal to save these changes)
 ```bash
@@ -42,8 +43,10 @@ What will likely happen for you is that you'll run `gem install jekyll` and then
     Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
 
     current directory:
-    /Users/foobar/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/ffi-1.9.21/ext/ffi_c
-    /Users/foobar/.rbenv/versions/2.5.1/bin/ruby -r ./siteconf20181118-49440-k8mjki.rb
+    /Users/foobar/.rbenv/versions/2.5.1/lib/ruby/
+    gems/2.5.0/gems/ffi-1.9.21/ext/ffi_c
+    /Users/foobar/.rbenv/versions/2.5.1/bin/ruby -r 
+    ./siteconf20181118-49440-k8mjki.rb
     extconf.rb
     checking for ffi.h... no
     checking for ffi.h in /usr/local/include,/usr/include/ffi... no
@@ -55,11 +58,13 @@ What will likely happen for you is that you'll run `gem install jekyll` and then
     creating Makefile
 
     current directory:
-    /Users/foobar/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/ffi-1.9.21/ext/ffi_c
+    /Users/foobar/.rbenv/versions/2.5.1/lib/ruby/
+    gems/2.5.0/gems/ffi-1.9.21/ext/ffi_c
     make "DESTDIR=" clean
 
     current directory:
-    /Users/foobar/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/ffi-1.9.21/ext/ffi_c
+    /Users/foobar/.rbenv/versions/2.5.1/lib/ruby/
+    gems/2.5.0/gems/ffi-1.9.21/ext/ffi_c
     make "DESTDIR="
     Running autoreconf for libffi
     autoreconf: Entering directory .'
@@ -77,9 +82,11 @@ What will likely happen for you is that you'll run `gem install jekyll` and then
     make failed, exit code 2
 
     Gem files will remain installed in
-    /Users/foobar/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/ffi-1.9.21 for inspection.
+    /Users/foobar/.rbenv/versions/2.5.1/lib/ruby/
+    gems/2.5.0/gems/ffi-1.9.21 for inspection.
     Results logged to
-    /Users/foobar/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/extensions/x86_64-darwin-18/
+    /Users/foobar/.rbenv/versions/2.5.1/lib/ruby/
+    gems/2.5.0/extensions/x86_64-darwin-18/
     2.5.0-static/ffi-1.9.21/gem_make.out
 
     An error occurred while installing ffi (1.9.21), and Bundler cannot continue.

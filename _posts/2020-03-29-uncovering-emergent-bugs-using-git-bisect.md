@@ -2,7 +2,7 @@
 layout: post
 ---
 
-# Uncovering emergent bugs using git bisect
+# Uncovering Emergent Bugs using git bisect
 
 Recently I came across a weird bug in our codebase that I didn't recognize and wasn't sure where it had come from, but it was blocking my ability to build my branch.
 In this case, the bug had to do with a scalastyle rule being violated that prevented our service from building, but while in most cases scalastyle does a great job of
