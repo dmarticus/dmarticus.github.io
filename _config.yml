@@ -2,5 +2,5 @@
 
 permalink: date
 highlighter: rouge
-markdown: kramdown
+markdown: redcarpet
 exclude: ['README.md', 'Gemfile' , 'Gemfile.lock']
