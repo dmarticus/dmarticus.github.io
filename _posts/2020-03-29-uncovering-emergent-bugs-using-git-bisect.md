@@ -17,7 +17,7 @@ Using it is really straightforward.  To begin the process, you enter `git bisect
 
 Next, you need to identify two commits, one in which the issue exists and one in which the issue does not exist.
 
-In my case, `master` was busted, so I just ran `git bisect bad` and my master branch.  This created an endpoint for the git bisect binary search.
+In my case, my master branch was busted, so I just ran `git bisect bad` on my master branch.  This created an endpoint for the git bisect binary search.
 
 Now, you need to find a commit where the bug doesn’t exist. To do that, you can look through your repo’s recent commits by entering `git log --oneline`. 
 

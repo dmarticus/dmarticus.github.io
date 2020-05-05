@@ -1,11 +1,11 @@
 ---
 layout: post
 ---
-# Putting Finite-State Machines to Work: on writing Hangman in Functional Scala
+# Putting Finite-State Machines to Work: Writing Hangman in Functional Scala
 
 ![Hangman Console](../../../media/hangman.png)
 
-I was inspired to write a game after learning about a concept known as a [finite-State machine](https://en.wikipedia.org/wiki/Finite-state_machine) (FSM).  In system architecture terms, a finite-state machine is the process of expressing simple subsets of the system as predefined states and inputs that let your state transition from one state to another. It's a popular model for modeling computation, and also serves as an excellent mechanism for expression sequential game logic.  
+I was inspired to write a game after learning about a concept known as a [finite-state machine](https://en.wikipedia.org/wiki/Finite-state_machine) (FSM).  In system architecture terms, a finite-state machine is the process of expressing simple subsets of the system as predefined states and inputs that let your state transition from one state to another. It's a popular model for modeling computation, and also serves as an excellent mechanism for expression sequential game logic.  
 
 When combined with the concept of [Algebraic Data Types](https://en.wikipedia.org/wiki/Algebraic_data_type) (ADTs), which are a useful model of expressing composite types of data (such as a singly linked list), we have in our programming toolkit two simple building blocks that can give us the tools for building relatively robust games. In this post, I want to talk about how I wrote a game of Hangman using FP Scala libraries and building on the concepts of FSM and ADTs as my foundation.
 

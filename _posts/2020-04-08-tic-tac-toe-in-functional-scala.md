@@ -7,7 +7,7 @@ layout: post
 It tends to be hard to understand functional concepts without a context. And what’s a better setting than a simple game 
 of TicTacToe. A quick reminder: TicTacToe is a game where you have a board of 9 squares, and you and your opponent are 
 trying to fill the board with X’s or O’s in specific configurations. You can learn more about the rules and strategies 
-on Wikipedia [https://en.wikipedia.org/wiki/Tic-tac-toe](https://en.wikipedia.org/wiki/Tic-tac-toe).
+on [Wikipedia](https://en.wikipedia.org/wiki/Tic-tac-toe).
 
 ## Game Algebra
 
@@ -272,7 +272,7 @@ def displayGameOnConsole(game: Game): String = {
   ).mkString("\n")
 }
 
-// this make it look like:
+// this makes it look like:
 //   A B C
 //1  X . O
 //2  . X O
@@ -300,14 +300,15 @@ object Text {
   def winner(square: Square) = s"${square.encode} won"
   def nextMove(square: Square) = s"Your next move with ${square.encode}:"
   def chooseText(square: Square) =
-    s"Choose initial symbol: ${square.encode} or ${Square.opposite(square).encode}"
+        s"Choose initial symbol: ${square.encode} " +
+          s"or ${Square.opposite(square).encode}"
 
 val validInputs: String =
   coordinates.combinations.map(_.encode).mkString(" ")
 }
 ```
 
-And finally, the game interaction with the *Console*:
+And finally, the game interaction with the *Console*
 
 ```scala
 def run[F[_]: Monad](implicit console: Console[F],

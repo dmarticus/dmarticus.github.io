@@ -7,7 +7,7 @@ html {
     font-family: 'Roboto', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-h1 {
+h1,h2,h3,h4,h5,h6 {
     font-family: 'Rubik Light', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -264,5 +264,13 @@ and is ported straight from the Rougify CSS
     color: #bbbbbb;
 }
 .highlight {
-    background-color: #f8f8f8;
+    background-color: #f5f6fa;
+}
+
+code.highlighter-rouge {
+    /*display: block;*/
+    white-space: pre;
+    margin: 1em 0px;
+    font-size: 1.1em;
+    background-color: #f5f6fa;
 }
