@@ -4,7 +4,11 @@ html {
     margin:auto;
     color:#373D3F;
     font-size:1.2em;
-    font-family: 'Helvetica Neue', monospace;
+    font-family: 'Roboto', "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+h1 {
+    font-family: 'Rubik Light', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 a {
