@@ -36,7 +36,13 @@ Now, if you're like me, these steps all went relatively smoothly, and you should
 
 ## How to do the thing: the hard part
 
-So you've installed all of your dependencies (non-system Ruby and Bundler), and all that's left to do is run `gem install jekyll` and you'll be ready to Jekyll your heart out.  And, there's a distinct possibility that this command works great for you and that jekyll just installs the first time and you'll be good to go (this is a likely outcome if you had no problems with installing the Xcode command line tools and compiling the header files).  Howeverm if you're like me and the `xcode-select --install` command turned up something like ```xcode-select: error: command line tools are already installed, use "Software Update" to install updates```, then you'll probably need this next bit.
+So you've installed all of your dependencies (non-system Ruby and Bundler), and all that's left to do is run `gem install jekyll` and you'll be ready to Jekyll your heart out.  
+And, there's a distinct possibility that this command works great for you and that jekyll just installs the first time and you'll be good to go (this is a likely outcome if you had no problems with installing the Xcode command line tools and compiling the header files).  Howeverm if you're like me and the `xcode-select --install` command turned up something like 
+```
+xcode-select: error: command line tools are already installed, 
+use "Software Update" to install updates
+``` 
+then you'll probably need this next bit.
 
 What will likely happen for you is that you'll run `gem install jekyll` and then you see something like this:
 
