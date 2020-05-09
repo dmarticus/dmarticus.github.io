@@ -3,15 +3,21 @@ layout: post
 ---
 # Tic-Tac-Toe in Functional Scala
 
-
-It tends to be hard to understand functional concepts without a context. And what’s a better setting than a simple game 
-of TicTacToe. A quick reminder: TicTacToe is a game where you have a board of 9 squares, and you and your opponent are 
-trying to fill the board with X’s or O’s in specific configurations. You can learn more about the rules and strategies 
-on [Wikipedia](https://en.wikipedia.org/wiki/Tic-tac-toe).
+I was inspired to work on this game because I wanted to start practicing functional programming in Scala, and I always
+learn best when I give abstract concepts.  In this case, I wanted to learn functional programming by writing games, as
+games are an excellent example of writing a combinatorial system that has a closed solution.  In my case, I wanted to
+ start with TicTacToe for two reasons: (1) it's an [easy game](https://en.wikipedia.org/wiki/Tic-tac-toe) -- there are 
+ only two players and 9 possible moves, so writing the game logic is relatively straightforward, and (2) the game 
+ renders well on a terminal, so it's easy to build as a CLI-style app.  Once I had my game in mind, it was time to 
+ start defining some of the fundamental functional components of the game, starting with the 
+ [game algebra](https://alvinalexander.com/scala/fp-book/functional-programming-is-like-algebra/).  Note: this is a 
+ technical post, and going forward there will be a lot of examples of how I implement the functional programming concepts
+ in Scala.      
 
 ## Game Algebra
 
-Let’s start by defining our basic building block of the game as an Algebraic Data Type (commonly known as an ADT):
+Let’s start by defining our basic building block of the game as an Algebraic Data Type (commonly known as an ADT),
+which is a commonly used method of data modeling in functional programming:
 
 ```scala
 sealed trait Square
@@ -28,7 +34,7 @@ is a square with an empty value. A *Row* would look like this:
 case class Row(col1: Option[Square], col2: Option[Square], col3: Option[Square])
 ```
 
-As mentioned before our *Game* has nine squares, so 3 x 3 squares. So the game might look like:
+A TicTacToe*Game* has nine squares in a 3 x 3 grid, so in this case the game can look like:
 
 ```scala
 case class Game(row1: Row, row2: Row, row3: Row)
@@ -93,9 +99,10 @@ def move(game: Game, move: Move): Option[Game] = {
   }
 ```
 
-Now let’s start thinking about how can we complete the game. There are two basic ways. Either someone *wins*, or 
-there is a *draw* when the board is full. Let’s start from *draw* case because it only requires us to know if we 
-can make any more moves. To figure that out, we need to know if each *Row* in the *Game* is full.
+Now, let’s start thinking about how can we complete the game. There are two basic of game completion -- either 
+someone *wins*, or there is a *draw* when the board is full without any winners. Let’s start from *draw* case because it only 
+requires us to know if we can make any more moves. To figure that out, we need to know if each *Row* 
+in the *Game* is full.
 
 ```scala
 def full(row: Row): Boolean = Seq(row.col1, row.col2, row.col3).forall(_.isDefined)
@@ -152,8 +159,8 @@ def winner(game: Game): Option[Square] = {
 }
 ```
 
-The last few bits of mechanics we need is a way to have an empty game ready quickly, 
-and a list of all the possibles moves:
+The last few bits of mechanics we need are (1) a way to have an empty game ready quickly, 
+and (2) a list of all the possibles moves:
 
 ```scala
 val empty = Game(
@@ -380,7 +387,7 @@ When learning any programming concept, it’s common to look for simple problems
 in complexity. You might try [Project Euler](https://projecteuler.net/), [HackerRank](https://www.hackerrank.com/), 
 [Codility](https://app.codility.com/programmers/) or [Exercism](https://exercism.io/tracks). 
 If you reach a plateau, try building some simple games you love like [Chess](https://www.youtube.com/watch?v=ScS8Q32lMxA), 
-TicTacToe, or [Hangman](https://en.wikipedia.org/wiki/Hangman) (I'm gonna work on this soon!).
+TicTacToe, [Hangman](https://dylanamartin.com/2020/04/21/hangman-in-functional-scala.html), or Connect4 (coming soon!).
 
 ## Resources
 
