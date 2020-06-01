@@ -135,3 +135,8 @@ Finally, we need to customize any additional settings that could not be configur
 ### Conclusion
 
 Here's a [todoist template](https://todoist.com/API/v8.6/import/project_from_url?t_url=https%3A%2F%2Fd1aspxi4rjqbaz.cloudfront.net%2Fa09297b0f06267f2d38f384b86fc5b9f_New%2520Macbook%2520Setup.csv) for all of these steps if you'd rather follow along that way!
+
+Finally, I want to give credit to the following blog posts for paving the way for mine :)
+* http://dreynaud.fail/new-mac-setup/
+* https://www.taniarascia.com/setting-up-a-brand-new-mac-for-development/
+
