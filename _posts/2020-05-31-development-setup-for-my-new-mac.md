@@ -2,7 +2,7 @@
 layout: post
 ---
 
-# macOS Catalina 10.15.4: Development Setup for my New Mac
+# macOS Catalina 10.15.4: Development Setup for my new Mac
 
 I bought a new personal laptop recently and I'm starting a new job soon, which means that I'm going to have a few new Mac laptops to set up in the near future.  So, I figured it would be prudent to write my new Mac setup steps before I get the new computers and publish these steps somewhere so that I can easily get up and running with my new machine.  My configurations isn't too crazy, but it is custom, and I think I have enough 3rd-party development and productivity tools installed that it's worth covering all of the bases.  On a final note, I'm primarily a backend/distributed-systems/data engineer, my needs mostly revolve around Scala, Go, Python, and command-line tools.
 
@@ -12,10 +12,10 @@ This blog will be broken into two sections: a "Before" section that covers what 
 
 There's not too many steps here, but I definitely recommend making sure that these tasks are done before configuring a new machine since my .rc files and my editor keybindings are specific and integral parts to my efficient workflow.  Here's are the recommended tasks:
 
-* Save any custom shell configs (bashrc, zshrc, etc) and custom editor keybindings (VSCode, Sublime, Intellij, vimrc, etc) to your dotfiles or Dropbox.  Mine are all on Github [here](https://github.com/dmarticus/dotfiles)
+* Save any custom shell configs (.bashrc, .zshrc, etc) and custom editor keybindings (VSCode, Sublime, Intellij, .vimrc, etc) to your dotfiles or Dropbox.  Mine are all on Github [here](https://github.com/dmarticus/dotfiles)
 * Create a [Brewfile](https://github.com/Homebrew/homebrew-bundle) for your brew-installed packages (this will make it much easier to add all of your brew dependencies on your new machine).  My Brewfile is [here](https://github.com/dmarticus/dotfiles/blob/master/Brewfile)
-* Export existing secrets from LastPass to a secure cloud location (Dropbox, GDrive, etc) so that you can access them on your new machine without having to reset all of your passwords.  My secrets are located at *REDACTED*
-* Make sure any files, folders, photos, or other are backed up to iCloud, Google Photos, or Dropbox
+* Export existing secrets from LastPass to a secure cloud location (Dropbox, GDrive, etc) so that you can access them on your new machine without having to reset all of your passwords.  My secrets are located at *REDACTED* (lol nice try NSA)
+* Make sure any files, folders, photos, or anything else you want saved are backed up to iCloud, Google Photos, or Dropbox
 
 ## Setup
 
