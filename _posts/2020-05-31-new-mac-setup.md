@@ -2,7 +2,7 @@
 layout: post
 ---
 
-# macOS Catalina 10.15.4: Development Setup for a New Mac
+# macOS Catalina 10.15.4: Development Setup for my New Mac
 
 I bought a new personal laptop recently and I'm starting a new job soon, which means that I'm going to have a few new Mac laptops to set up in the near future.  So, I figured it would be prudent to write my new Mac setup steps before I get the new computers and publish these steps somewhere so that I can easily get up and running with my new machine.  My configurations isn't too crazy, but it is custom, and I think I have enough 3rd-party development and productivity tools installed that it's worth covering all of the bases.  On a final note, I'm primarily a backend/distributed-systems/data engineer, my needs mostly revolve around Scala, Go, Python, and command-line tools.
 
