@@ -139,4 +139,3 @@ Here's a [todoist template](https://todoist.com/API/v8.6/import/project_from_url
 Finally, I want to give credit to the following blog posts for paving the way for mine :)
 * [http://dreynaud.fail/new-mac-setup/](http://dreynaud.fail/new-mac-setup/)
 * [https://www.taniarascia.com/setting-up-a-brand-new-mac-for-development/](http://dreynaud.fail/new-mac-setup/)
-
