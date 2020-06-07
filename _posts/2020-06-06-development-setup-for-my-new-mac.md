@@ -4,24 +4,24 @@ layout: post
 
 # macOS Catalina 10.15.4: Development Setup for my new Mac
 
-I bought a new personal laptop recently and I'm starting a new job soon, which means that I'm going to have a few new Mac laptops to set up in the near future.  So, I figured it would be prudent to write my new Mac setup steps before I get the new computers and publish these steps somewhere so that I can easily get up and running with my new machine.  My configurations isn't too crazy, but it is custom, and I think I have enough 3rd-party development and productivity tools installed that it's worth covering all of the bases.  On a final note, I'm primarily a backend/distributed-systems/data engineer, my needs mostly revolve around Scala, Go, Python, and command-line tools.
+I bought a new personal laptop recently and I'm starting a new job soon, which means that I'm going to have a few new Mac laptops to set up in the near future.  So, I figured it would be prudent to write my new Mac setup steps before I get the new computers and publish these steps somewhere so that I can easily get up and running with my new machine.  My configurations isn't too crazy, but it is custom, and I think I have enough 3rd-party development and productivity tools installed that it's worth a blog post to cover all of the bases.  On a final note, I'm primarily a backend/distributed-systems/data engineer, so my needs mostly revolve around Scala, Java, Go, Node, Python, and Haskell.  YMMV!
 
-This blog will be broken into two sections: a "Before" section that covers what to do before setting up a new Mac (it's a shorter section that covers exporting/porting existing system settings) and an "Setup" section that covers that actual steps required to get up and running. 
+This blog will be broken into two sections: a "Before" section that covers what to do before setting up a new Mac (it's a shorter section that covers exporting/porting existing system settings) and an "Setup" section that covers that actual steps required to get up and running.  Finally, before we get started, I wanted to make available a [todoist template](https://todoist.com/API/v8.6/import/project_from_url?t_url=https%3A%2F%2Fd1aspxi4rjqbaz.cloudfront.net%2Fa09297b0f06267f2d38f384b86fc5b9f_New%2520Macbook%2520Setup.csv) for all of these tasks that you can easily import into Todoist if you'd just prefer to see the steps without all of the extra explanations.  Alright, let's get started!
 
 ## Before
 
 There's not too many steps here, but I definitely recommend making sure that these tasks are done before configuring a new machine since my .rc files and my editor keybindings are specific and integral parts to my efficient workflow.  Here's are the recommended tasks:
 
-* Save any custom shell configs (.bashrc, .zshrc, etc) and custom editor keybindings (VSCode, Sublime, Intellij, .vimrc, etc) to your dotfiles or Dropbox.  Mine are all on Github [here](https://github.com/dmarticus/dotfiles)
-* Create a [Brewfile](https://github.com/Homebrew/homebrew-bundle) for your brew-installed packages (this will make it much easier to add all of your brew dependencies on your new machine).  My Brewfile is [here](https://github.com/dmarticus/dotfiles/blob/master/Brewfile)
-* Export existing secrets from LastPass to a secure cloud location (Dropbox, GDrive, etc) so that you can access them on your new machine without having to reset all of your passwords.  My secrets are located at *REDACTED* (lol nice try NSA)
-* Make sure any files, folders, photos, or anything else you want saved are backed up to iCloud, Google Photos, or Dropbox
+* Save any custom shell configs (.bashrc, .zshrc, etc) and custom editor keybindings (VSCode, Sublime, Intellij, .vimrc, etc) to your dotfiles or Dropbox.  Mine are all on Github [here](https://github.com/dmarticus/dotfiles).
+* Create a [Brewfile](https://github.com/Homebrew/homebrew-bundle) for your brew-installed packages (this will make it much easier to add all of your brew dependencies on your new machine).  My Brewfile is [here](https://github.com/dmarticus/dotfiles/blob/master/Brewfile).
+* Export existing secrets from LastPass to a secure cloud location (Dropbox, GDrive, etc) so that you can access them on your new machine without having to reset all of your passwords.  My secrets are located at *REDACTED* (lol nice try NSA).
+* Make sure any files, folders, photos, or anything else you want saved are backed up to iCloud, Google Photos, or Dropbox.
 
 ## Setup
 
 These are all the tasks I recommend doing after you've gotten your new Mac and want to configure it so that all of the settings match the old one.
 
-### The Basics: browser, backups, and secrets
+### The basics: browser, backups, and secrets
 
 * download and install system update
 * turn on FileVault for encryption
@@ -32,7 +32,7 @@ These are all the tasks I recommend doing after you've gotten your new Mac and w
     * add the following settings:
         * turn on "warn before quitting"
         * Set theme to "Dark"
-        * Go to chrome://flags and set Developer Tools Experiments to "Enabled"
+        * Go to `chrome://flags` and set Developer Tools Experiments to "Enabled"
         * Go to Experiments and select "Allow custom UI themes"
 * sign in to [Dropbox](https://www.dropbox.com/h) using Google authentication
 * download [1Password](https://1password.com/)
@@ -84,18 +84,31 @@ Now just run the alias (`ssh myssh`) to connect.
 
 ### Installing 3rd-Party Apps
 
-#### Install all 3rd-party apps via Brew
+#### Install all 3rd-party apps via Homebrew
 
-* install [Homebrew](https://brew.sh/) (Mac packaged manager)
-    * Make sure your [Brewfile](https://github.com/dmarticus/dotfiles/blob/master/Brewfile) is at `~/Brewfile`
+* install [Homebrew](https://brew.sh/) (awesome 3rd-party Mac package manager)
+    * make sure your [Brewfile](https://github.com/dmarticus/dotfiles/blob/master/Brewfile) is at `~/Brewfile`
     * run `brew bundle install` to install all relevant brew and mas depedendencies.  This will take a minute but should work great
+
+####  Install Additional Programming-Related Mac Apps that weren't handled by Homebrew
+
+(note: double check these against your Brewfile and see if they make sense to include)
+
+* install [VSCode](https://code.visualstudio.com/)
+    * export [vscode keymaps](https://github.com/dmarticus/dotfiles/tree/master/vscode) and copy them into the new installation
+* install [Sublime](https://www.sublimetext.com/) and activate your license key (stored in 1Password)
+* install [Docker](https://docs.docker.com/docker-for-mac/install/)
+* install [Go](https://golang.org/doc/install)
+* install [Haskell](https://www.haskell.org/platform/mac.html)
+* install [node and NVM](https://www.taniarascia.com/setting-up-a-brand-new-mac-for-development/#nodejs)
+* install [Jekyll and other blog tools](https://dylanamartin.com/2020/03/22/installing-jekyll-and-its-toolchain-on-mac-os-catalina.html)
 
 #### Install Additional Non-Programming-Related Mac Apps
 * download [Firefox](https://www.mozilla.org/en-US/firefox/new/)
 * download [Slack](https://slack.com/downloads/mac)
 * download [Spotify](https://www.spotify.com/us/download/mac/)
 * download [Spectacle](https://www.spectacleapp.com/)
-    * Configure spectacle for your computer.  My settings look like this:
+    * Configure Spectacle for your computer.  My settings look like this:
         * Center = ctrl+cmd+T
         * Fullscreen = ctrl+cmd+B
         * Next Display = ctrl+shift+cmd+A
@@ -111,19 +124,6 @@ Now just run the alias (`ssh myssh`) to connect.
         * Make Larger = ctrl+cmd+->
         * Make Smaller = ctrl+cmd+<-
 
-####  Install Additional Programming-Related Mac Apps that weren't handled by Homebrew
-
-(note: double check these against your Brewfile and see if they make sense to include)
-
-* install [VSCode](https://code.visualstudio.com/)
-    * export [vscode keymaps](https://github.com/dmarticus/dotfiles/tree/master/vscode) and copy them into the new installation
-* install [Sublime](https://www.sublimetext.com/) and activate your license key (stored in 1Password)
-* install [Docker](https://docs.docker.com/docker-for-mac/install/)
-* install [Go](https://golang.org/doc/install)
-* install [node and NVM](https://www.taniarascia.com/setting-up-a-brand-new-mac-for-development/#nodejs)
-* install [Jekyll and other blog tools](https://dylanamartin.com/2020/03/22/installing-jekyll-and-its-toolchain-on-mac-os-catalina.html)
-* install [Haskell](https://www.haskell.org/platform/mac.html)
-
 ### Customize Additional Settings
 
 Finally, we need to customize any additional settings that could not be configured with the `defaults-write-our-favorites.sh` script (Mac OS loves to make it hard to change default settings).
@@ -134,7 +134,7 @@ Finally, we need to customize any additional settings that could not be configur
 
 ## Conclusion
 
-Here's a [todoist template](https://todoist.com/API/v8.6/import/project_from_url?t_url=https%3A%2F%2Fd1aspxi4rjqbaz.cloudfront.net%2Fa09297b0f06267f2d38f384b86fc5b9f_New%2520Macbook%2520Setup.csv) for all of these steps if you'd rather follow along that way!
+At this point, all of the essentials should be installed and ready to go.  As of writing this (6/6/2020), I've currently used this setup guide for one (1) of my new Macs and have updated it slightly from the original draft form to reflect the actually installation process, but now this post has officially been end-to-end tested!
 
 Finally, I want to give credit to the following blog posts for paving the way for mine :)
 * [http://dreynaud.fail/new-mac-setup/](http://dreynaud.fail/new-mac-setup/)
