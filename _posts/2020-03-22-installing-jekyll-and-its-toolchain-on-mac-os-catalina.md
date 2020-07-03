@@ -12,24 +12,26 @@ However, when I tried to install Jekyll on macOS Catalina, I ran into some issue
 
 Chances are you've gotten this far because you want to install Jekyll on macOS.  If you've followed all of the steps outlined in the various places where this question is asked on the internet, you've probably already
 
-1. Installed the Xcode Command Line tools via `xcode-select --install` and installed 
+1. Installed the Xcode Command Line tools via `xcode-select --install` and installed
 the macOS headers via `open /Library/Developer/CommandLineTools/Packages/
 macOS_SDK_headers_for_macOS_10.14.pkg`
-2. Installed Ruby via Homebrew[^bignote] via `brew install ruby` and then updated your shell profile 
+2. Installed Ruby via Homebrew[^bignote] via `brew install ruby` and then updated your shell profile
 (bash, zsh, whatever) with the following entries (don't forget to run `source $PROFILE (e.g. bash_profile or zshrc)` or restart your terminal to save these changes)
+
 ```bash
 # Ruby
 export PATH=/usr/local/opt/ruby/bin:$PATH
 export GEM_HOME=$HOME/gems
 export PATH=$HOME/gems/bin:$PATH
 ```
-3. Checked that the `which ruby` command outputs something like `/usr/local/opt/ruby/bin/ruby` 
+
+3. Checked that the `which ruby` command outputs something like `/usr/local/opt/ruby/bin/ruby`
 (this means you're using the brew installed version of ruby, rather than system ruby, which is what we want)
 4. Installed bundler via gem, e.g. `gem install bundler`
 
-[^bignote]: We need to install ruby via homebrew because macOS ships with system Ruby since Mojave, 
-            but a lot of the system directories that the system ruby would point to are locked down, meaning 
-            you'd have to do a bunch of stuff with `sudo`, which increases the possibility that 
+[^bignote]: We need to install ruby via homebrew because macOS ships with system Ruby since Mojave,
+            but a lot of the system directories that the system ruby would point to are locked down, meaning
+            you'd have to do a bunch of stuff with `sudo`, which increases the possibility that
             you can mess up your system in a bad way.
 
 Now, if you're like me, these steps all went relatively smoothly, and you should be full of optimism that installed Jekyll will be just as straightforward.  Unfortunately, dear reader, this is where you'd be wrong.  
@@ -37,11 +39,13 @@ Now, if you're like me, these steps all went relatively smoothly, and you should
 ## How to do the thing: the hard part
 
 So you've installed all of your dependencies (non-system Ruby and Bundler), and all that's left to do is run `gem install jekyll` and you'll be ready to Jekyll your heart out.  
-And, there's a distinct possibility that this command works great for you and that jekyll just installs the first time and you'll be good to go (this is a likely outcome if you had no problems with installing the Xcode command line tools and compiling the header files).  Howeverm if you're like me and the `xcode-select --install` command turned up something like 
-```
+And, there's a distinct possibility that this command works great for you and that jekyll just installs the first time and you'll be good to go (this is a likely outcome if you had no problems with installing the Xcode command line tools and compiling the header files).  Howeverm if you're like me and the `xcode-select --install` command turned up something like
+
+```sh
 xcode-select: error: command line tools are already installed, 
 use "Software Update" to install updates
-``` 
+```
+
 then you'll probably need this next bit.
 
 What will likely happen for you is that you'll run `gem install jekyll` and then you see something like this:
@@ -103,12 +107,14 @@ Some of the path-specific details may not match your setup, but the root of the 
 In the case with this issue, run `brew reinstall libffi`.  
 2. Add specific install flags to your shell that point to the brew-installed version of the new gem native extension.  
 To do this run the following commands in your shell:
-```
+
+```sh
 export LDFLAGS="-L/usr/local/opt/libffi/lib"
 export PKG_CONFIG_PATH="/usr/local/opt/libffi/lib/pkgconfig"
 ```
-3. Finally, you should be good to go!  Rerun `gem install jekyll` and you should be 
-rewarded by your system finally installing jekyll.  Note that you may see some issues with that install 
+
+3. Finally, you should be good to go!  Rerun `gem install jekyll` and you should be
+rewarded by your system finally installing jekyll.  Note that you may see some issues with that install
 re: version of themes or other jekyll dependencies being out of date, simply run `bundler update` to resolve those errors
 
 And that should do it!  I hope putting all these steps in the same place saves a future hapless Jekyll user from having to scour the internet like I did.
