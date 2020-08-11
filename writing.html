@@ -5,11 +5,12 @@ title: Writing
 <h1>Writing</h1>
 
 <p>
-Here are some things I've written.  Mostly all of it's technical, but maybe one day I'll write about something else.
+    Here are some things I've written. Mostly all of it's technical, but maybe one day I'll write about something else.
 </p>
 
 <ul class="posts">
-{% for post in site.posts %}
-<li><span>{{ post.date | date_to_string }}</span> » <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
-{% endfor %}
+    {% for post in site.posts %}
+    <li><span>{{ post.date | date_to_string }}</span> » <a href="{{ post.url }}"
+            title="{{ post.title }}">{{ post.title }}</a></li>
+    {% endfor %}
 </ul>
