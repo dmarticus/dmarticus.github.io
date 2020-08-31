@@ -1,5 +1,7 @@
 ---
+title: "macOS Catalina 10.15.4: Development Setup for my new Mac"
 layout: post
+tags: [guide]
 ---
 
 # macOS Catalina 10.15.4: Development Setup for my new Mac
