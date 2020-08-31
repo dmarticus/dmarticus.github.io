@@ -1,5 +1,7 @@
 ---
+title: "ValidatedNel in the Wild"
 layout: post
+tags: [scala, cats, functional programming, validation, error handling, code tutorials]
 ---
 
 # ValidatedNel in the Wild

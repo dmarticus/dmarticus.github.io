@@ -7,3 +7,8 @@ exclude: ['README.md', 'Gemfile' , 'Gemfile.lock']
 plugins:
   - jekyll-redirect-from
   - jekyll-feed
+  - jekyll-analytics
+
+Matomo:
+  url: dylanamartin.matomo.cloud
+  siteId: "1"

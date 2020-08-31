@@ -1,5 +1,7 @@
 ---
+title: "47 Days at 47 Degrees"
 layout: post
+tags: [tips, reflection, work]
 ---
 
 # 47 Days at 47 Degrees

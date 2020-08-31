@@ -1,5 +1,7 @@
 ---
+title: "Setting up a Functional Scala REPL with Ammonite"
 layout: post
+tags: [tips, guide, scala, cats, ammonite]
 ---
 
 # Setting up a Functional Scala REPL with Ammonite

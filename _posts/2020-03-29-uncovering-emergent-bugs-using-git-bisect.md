@@ -1,5 +1,7 @@
 ---
+title: "Uncovering Emergent Bugs using git bisect"
 layout: post
+tags: [tips, git, guide]
 ---
 
 # Uncovering Emergent Bugs using git bisect
