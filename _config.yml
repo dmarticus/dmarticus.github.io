@@ -4,3 +4,5 @@ permalink: date
 highlighter: rouge
 markdown: kramdown
 exclude: ['README.md', 'Gemfile' , 'Gemfile.lock']
+plugins:
+  - jekyll-redirect-from
