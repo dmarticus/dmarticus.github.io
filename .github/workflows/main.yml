@@ -11,9 +11,9 @@ jobs:
           urls: |
             https://dylanamartin.com/
             https://dylanamartin.com/meta.html
-            https://dylanmartin.com/writing.html
+            https://dylanamartin.com/writing.html
             https://dylanamartin.com/reading.html
-            https://dylanmartin.com/talks.html
+            https://dylanamartin.com/talks.html
           budgetPath: ./budget.json # test performance budgets
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
