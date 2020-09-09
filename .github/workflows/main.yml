@@ -11,7 +11,7 @@ jobs:
           urls: |
             https://dylanamartin.com/
             https://dylanamartin.com/meta.html
-            https://dylanamartin.com/writing.html
+            https://dylanamartin.com/blog.html
             https://dylanamartin.com/reading.html
             https://dylanamartin.com/talks.html
           budgetPath: ./budget.json # test performance budgets
