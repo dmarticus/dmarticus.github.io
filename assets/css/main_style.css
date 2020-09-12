@@ -7,6 +7,12 @@ html {
     font-family: 'Roboto', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+footer {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
 h1,h2,h3,h4,h5,h6 {
     font-family: 'Rubik Light', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
