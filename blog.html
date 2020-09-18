@@ -6,13 +6,14 @@ redirect_from: /writing.html
 <h1>Blog</h1>
 
 <p>
-    You can subscribe to updates via the <a href="feed.xml">Atom Feed</a>. I also send out updates via <a
-        href="/subscribe.html">my newsletter.</a>
+    You can subscribe to updates via the <a href="feed.xml">Atom Feed</a>. I'll also mention any new posts in my weekly
+    newsletter -- <a href="/subscribe.html">click here</a> if you want to subscribe to that.
 </p>
 
 <ul class="posts">
     {% for post in site.posts %}
-    <li><span>{{ post.date | date_to_string }}</span> » <a href="{{ post.url }}"
-            title="{{ post.title }}">{{ post.title }}</a></li>
+    <li><span>{{ post.date | date_to_string }}</span> >> <a href="{{ post.url }}"
+            title="{{ post.title }}">{{ post.title }}</a> <br /> <i><small>{{ post.post_summary }}<a
+                    href="{{ post.url }}" title="{{ post.title }}">  Keep reading...</a></small></i> </li><br />
     {% endfor %}
 </ul>

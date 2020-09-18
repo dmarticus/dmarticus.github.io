@@ -2,13 +2,14 @@
 title: "Installing Jekyll and its Toolchain on macOS Catalina"
 layout: post
 tags: [tips, guide, jekyll, macOS, catalina]
+post_summary: "This post is for people like me: folks who want to install Jekyll on Mac OS Catalina, have run into dumb errors along the way, and just want one place where all the steps are laid out in an easy-to-follow way."
 ---
 
 # Installing Jekyll and its Toolchain on macOS Catalina
 
 This post is inspired by the [Desired Persona's](https://desiredpersona.com/) [helpful post](https://desiredpersona.com/install-jekyll-on-macos/) on how to install Jekyll for Mac OS Mojave.  If you're not using Catalina and are running into Jekyll installation issues, I recommend starting with their post first.
 
-However, when I tried to install Jekyll on macOS Catalina, I ran into some issues that the aforementioned post did not solve -- in fact, in the several hours I spent trying to debug my setup, I didn't find any website, forum post, or StackOverflow that solved answered all of my questions in an end-to-end way.  So, dear reader, this post is for people like me: people who want to install Jekyll on Mac OS Catalina, are running into dumb errors along the way, and just want one place where all the steps are laid out in an easy-to-follow way.  
+However, when I tried to install Jekyll on macOS Catalina, I ran into some issues that the aforementioned post did not solve -- in fact, in the several hours I spent trying to debug my setup, I didn't find any website, forum post, or StackOverflow that solved answered all of my questions in an end-to-end way.  So, dear reader, this post is for people like me: folks who want to install Jekyll on Mac OS Catalina, have run into dumb errors along the way, and just want one place where all the steps are laid out in an easy-to-follow way.  
 
 ## How to do the thing: the easy parts
 
