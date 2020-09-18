@@ -2,6 +2,7 @@
 title: "My Note-Taking Process"
 layout: post
 tags: [tips, reflection, work]
+post_summary: "The other day I was asked about my approach towards packaging up my knowledge into a format that's worth sharing: 'My question to you is at what point do you package up what you have learnt to share with others? I’m a software dev and forming a habit of writing what I have done seems like it might distract me out of flow if i’m to take notes to share later when i’m working, consequently, I think i’m a little exhausted after coding to write something decent. That’s the little quagmire I find myself in at the moment, I wish to share, just don’t have the method. Any tips?' It was a great question, I figured it deserved an involved response, and when I finished writing my thoughts I'd written almost 500 words." 
 ---
 
 # My Note-Taking Process

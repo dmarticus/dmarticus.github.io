@@ -2,6 +2,11 @@
 title: "Uncovering Emergent Bugs using git bisect"
 layout: post
 tags: [tips, git, guide]
+post_summary: "Recently I came across a weird bug in our codebase that I didn't recognize and wasn't sure where it had come from, but it was blocking my ability to build my branch.
+In this case, the bug had to do with a scalastyle rule being violated that prevented our service from building, but while in most cases scalastyle does a great job of
+specifying where the style issue is being violated, in this case even the scalastyle tool was confused as to where the issue was and the error messages it was printing weren't
+helpful in diagnosing where the problem was.  In addition, after looking at the issue a little bit, I realized that it had been present in our codebase several weeks of commits,
+and it wasn't immediately obvious which commit had introduced the change because we'd been making a ton of commits to this repo over the past few weeks (what with the end of quarter rush and all that)."
 ---
 
 # Uncovering Emergent Bugs using git bisect
