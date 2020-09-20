@@ -12,8 +12,8 @@ redirect_from: /writing.html
 
 <ul class="posts">
     {% for post in site.posts %}
-    <li><span>{{ post.date | date_to_string }}</span> >> <a href="{{ post.url }}"
-            title="{{ post.title }}">{{ post.title }}</a> <br /> <i><small>{{ post.post_summary }}<a
-                    href="{{ post.url }}" title="{{ post.title }}">  Keep reading...</a></small></i> </li><br />
+    <li><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a> <span>({{ post.date | date_to_string }})</span> <br />
+        <i><small>{{ post.post_summary }}<a href="{{ post.url }}" title="{{ post.title }}"> Keep
+                    reading...</a></small></i> </li><br />
     {% endfor %}
 </ul>
