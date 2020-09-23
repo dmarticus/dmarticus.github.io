@@ -6,7 +6,7 @@ markdown: kramdown
 github: [metadata]
 exclude: ['README.md', 'Gemfile' , 'Gemfile.lock']
 title: "Dylan Martin's personal website"
-description: "Blogging and curating content about tech, business, and culture"
+description: "Blogging and curating content about tech, programming, finance, politics, business, and culture"
 url: "https://dylanamartin.com/"
 
 collections:
