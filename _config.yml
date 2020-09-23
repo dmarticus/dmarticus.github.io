@@ -5,6 +5,21 @@ highlighter: rouge
 markdown: kramdown
 github: [metadata]
 exclude: ['README.md', 'Gemfile' , 'Gemfile.lock']
+title: "Dylan Martin's personal website"
+description: "Blogging and curating content about tech, programming, finance, politics, business, and culture"
+url: "https://dylanamartin.com/"
+
+collections:
+  reading:
+    output: true
+
+feed:
+  collections:
+    reading:
+      path: "/reading.xml"
+    posts:
+      path: "/blog.xml"
+
 repository: dmarticus/dmarticus.github.io
 plugins:
   - jekyll-redirect-from
