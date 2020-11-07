@@ -39,6 +39,24 @@ a:visited {
     padding: 0 3px;
 }
 
+.PageNavigation {
+  font-size: 16px;
+  display: block;
+  width: auto;
+  overflow: hidden;
+}
+
+.PageNavigation a {
+  display: block;
+  width: 50%;
+  float: left;
+  margin: 1em 0;
+}
+
+.PageNavigation .next {
+  text-align: right;
+}
+
 @media all and (max-width: 699px) {
    html {
     font-size: 1.5em;
