@@ -163,10 +163,7 @@ df.to_csv(r'path/to/data.csv')
 
 Below, I included an example of how the KDE estimation works. `j` represents an arbitrary draft from which we can generate a Gaussian KDE probability density function for the player corresponding to that draft rank.
 
-The various point estimates for that player (from ESPN, SI, ets.) are indicated by the red '+'s at the bottom of the graph. What KDE does is to center a normal gaussian distribution (with area =  
-1
-n
-  for n point estimates) over each of thes point estimates. Then, to generate the probabilty density function, we sum all of these "kernels" together - this summation is the orange line in the graph below.
+The various point estimates for that player (from ESPN, SI, etc.) are indicated by the red '+'s at the bottom of the graph. What KDE does is to center a normal gaussian distribution (with area = `1/n`) for n point estimates) over each of these point estimates. Then, to generate the probability density function, we sum all of these "kernels" together - this summation is the orange line in the graph below.
 
 Then, the following block of code generates a histogram from the KDE PDF showing the 1- and 2- standard deviation confidence intervals.
 
@@ -210,13 +207,14 @@ ax.grid(True, zorder=-5)
 
 ![KDE Demo](../../../media/KDE_demo.png)
 
-This distribution is then used to generate median point estimations and confidence intervals for each player. For example, this code generates the following confidence interval.
+This distribution is then used to generate median point estimations and confidence intervals for each player. For example, this code
 
 ```python
 box_plot_data=kde.icdf
 plt.boxplot(box_plot_data, vert=False, labels=[df['Name'][j]])
 plt.show()
 ```
+generates the following confidence interval.
 
 ![CI Demo](../../../media/confidence_interval_demo.png)
 
