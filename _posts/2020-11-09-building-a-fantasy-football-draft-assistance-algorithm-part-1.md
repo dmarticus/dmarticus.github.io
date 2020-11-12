@@ -61,8 +61,7 @@ Next, I had to combine everything together into one dataframe.  I decided to com
 ```python
 # load Yahoo! draft positions
 df = pd.read_excel('./raw_data/Yahoo_2020_Draft_Positions.xlsx')
-# strip the names so they can be directly compared to other lists
-df['Name'] = df['Name'].str.strip()
+df['Name'] = df['Name'].str.strip() # strip the names so they can be directly compared to other lists
 
 # load Fantasy Pros Projections
 df_fantasy_pros = pd.read_excel('./raw_data/Fantasy_Pros_2020_proj.xlsx')
@@ -127,27 +126,26 @@ df['pts'] = np.nan
 # density function (icdf) data for each player's kde estimation
 df['kde_icdf'] = [[] for _ in range(len(df))]
 
+# start from index 67 because the first 66 entries in my df are contextual cruft and not training data
 for j in range(66,len(df)):
-    # model each each player with the different fantasy point estimates. 
-    # This array is used for the KDE.
-    test_array = []
-    test_array.append(df['fp_pts'][j])
-    test_array.append(df['nfl_pts'][j])
-    test_array.append(df['espn_pts'][j])
-    test_array.append(df['fs_pts'][j])
-    test_array.append(df['si_pts'][j])
+    # this block constructs an array of training data for each player of the different fantasy point estimates. This array is used to generate the KDE.
+    training_data = []
+    training_data.append(df['fp_pts'][j])
+    training_data.append(df['nfl_pts'][j])
+    training_data.append(df['espn_pts'][j])
+    training_data.append(df['fs_pts'][j])
+    training_data.append(df['si_pts'][j])
+    training_data = [x for x in training_data if str(x) != 'nan'] # clean the training_data for NaN values - which interfere with the analysis below
+    if len(training_data) == 0:
+        training_data = [0]
 
-    # clean the test_array for NaN values
-    test_array = [x for x in test_array if str(x) != 'nan']
-    if len(test_array) == 0:
-        test_array = [0]
-    
     # this sets up and runs the non-parametric estimation
-    kde = sm.nonparametric.KDEUnivariate(test_array)
-    kde.fit(kernel='gau', bw='silverman', fft=False) # Estimate the densities
+    kde = sm.nonparametric.KDEUnivariate(training_data)
+    # Estimate the densities
+    kde.fit(kernel='gau', bw='silverman', fft=False)
 
     # This for loop processes to find the median projection
-    ci_50 = 0 #initialize median value to zero
+    ci_50 = 0 # initialize median value to zero
     for i in range(0, len(kde.cdf)):
         if kde.cdf[i] < 0.50:
             i+=1
@@ -159,7 +157,7 @@ for j in range(66,len(df)):
     df['pts'][j]=ci_50 # add median projection
     df['kde_icdf'][j]=kde.icdf # add icdf for whisker plot construction
 
-# export the dataset to a .csv file
+# export the dataset to a .csv file so we don't have to run the code above again (it's time consuming!)
 df.to_csv(r'./prepared_data/2020_ffl_df.csv')
 ```
 
@@ -172,18 +170,19 @@ Finally, I want include a specific example of how the KDE estimation works for a
 ```python
 j = 125
 
-test_array = []
-test_array.append(df['fp_pts'][j])
-test_array.append(df['nfl_pts'][j])
-test_array.append(df['espn_pts'][j])
-test_array.append(df['fs_pts'][j])
-test_array.append(df['si_pts'][j])
-test_array = [x for x in test_array if str(x) != 'nan']
-if len(test_array) == 0:
-    test_array = [0]
+training_data = []
+training_data.append(df['fp_pts'][j])
+training_data.append(df['nfl_pts'][j])
+training_data.append(df['espn_pts'][j])
+training_data.append(df['fs_pts'][j])
+training_data.append(df['si_pts'][j])
+training_data = [x for x in training_data if str(x) != 'nan']
+if len(training_data) == 0:
+    training_data = [0]
 
-kde = sm.nonparametric.KDEUnivariate(test_array)
-kde.fit(kernel='gau', bw='silverman', fft=False)    
+# this sets up and runs the non-parametric estimation
+kde = sm.nonparametric.KDEUnivariate(training_data)
+kde.fit(kernel='gau', bw='silverman', fft=False) # Estimate the densities
 ```
 
 The various point estimates for that player will be indicated by red '+'s at the bottom of the graph. The KDE lets us center a normal gaussian distribution (with area = `1/n`) for `n` point estimates) over each of these point estimates. Then, to generate the probability density function, we sum all of these "kernels" together - this summation is the orange line in the graph below.
@@ -191,16 +190,18 @@ The various point estimates for that player will be indicated by red '+'s at the
 Finally, the following code snippet generates a histogram from the KDE PDF showing the 1- and 2- standard deviation confidence intervals.
 
 ```python   
-ax.hist(test_array, bins=5, density=True, label='Histogram from forecasts',
-        zorder=5, edgecolor='k', alpha=0.5)
-ax.plot(kde.support, kde.density, lw=3, label='KDE from projections', 
-        zorder=10)
-    
-# Plot the samples
-ax.scatter(test_array, np.abs(np.random.randn(len(test_array)))/100000,
-        marker='+', color='red', zorder=20, label='Point Forecasts', 
-        alpha=0.5)
+# Note: some plots for the kde visualizations that I'm turning off for the working loops
+fig = plt.figure(figsize=(10, 5))
+ax = fig.add_subplot(111)
 
+# Plot the histrogram
+ax.hist(training_data, bins=5, density=True, label='Histogram from forecasts',
+        zorder=5, edgecolor='k', alpha=0.5)
+# Plot the KDE as fitted using the default arguments
+ax.plot(kde.support, kde.density, lw=3, label='KDE from projections', zorder=10)
+
+# Plot the samples
+ax.scatter(training_data, np.abs(np.random.randn(len(training_data)))/100000,marker='+', color='red', zorder=20, label='Point Forecasts', alpha=0.5)
 ax.legend(loc='best')
 ax.grid(True, zorder=-5)
 ```
