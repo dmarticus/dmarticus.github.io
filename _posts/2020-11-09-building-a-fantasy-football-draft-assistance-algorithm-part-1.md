@@ -1,29 +1,34 @@
 ---
-title: "Building a Fantasy Football Draft Assistance Algorithm Part One: Collecting, Cleaning, and Preparing the Data"
+title: "Building a Fantasy Football Draft Assistance Algorithm: Part One"
 layout: post
 tags: [fun, data science, python]
 post_summary: "Constructing a Fantasy Football draft assistance algorithm using Gaussian Kernel Density Estimation (Gaussian KDE) Part One: Collecting, Cleaning, and Preparing the Data."
 ---
 
-# Building a Fantasy Football Draft Assistance Algorithm: Part One
-### Part One of a two-part series.  Part One focuses on collecting, cleaning, and preparing the data that will power the algorithm.
+# Building a Fantasy Football Draft Assistance Algorithm
+### Part One -- choosing the model, dealing with the data, and generating the model
 
 ## Context
 
-I'm in a pretty competitive fantasy football league with some friends, and back when we started the season I wanted to find an edge when it came to drafting against them so that I could put together the best team possible to start the season (if you're not familiar with fantasy football, check out [quick but thorough summary](https://www.vox.com/2014/8/15/6003131/fantasy-football-how-to-play-draft-rankings)).  Most fantasy platforms provide existing player recommendations to assist with drafting players, and ours (ESPN) was no exception, but I wanted to make my own, preferably through combining multiple different data sources to come up with a more robust model for ranking the players.  Ultimately, my goal was to make a tool into which I could feed (1) the player picked and (2) the position in the draft in which that player was picked, and it would return the best possible candidate for every position when it was my turn to pick.  I called my tool DAsHA, which stands for "Draft Assistance Heuristic Algorithm".
+I'm in a competitive fantasy football league with some friends, with a lot of pride (and a non-insignificant amount of money) on the line, and when we started the season I wanted to find any edge I could to help me draft against them (if you're not familiar with fantasy football, [read this first](https://www.vox.com/2014/8/15/6003131/fantasy-football-how-to-play-draft-rankings)).  
 
-## Methodology
+Most fantasy football platforms have a recommendation system to assist with drafting players, but I wanted to make my own, both as a learning exercise for myself, but mostly as a way to try and beat the recommendations provided by our platform (ESPN).  ESPN's recommendations only come from their existing pre-season player projections (LINK to prove this), and I wanted to see that if by combining several different fantasy football platform projections, I could come up with more accurate model for the probability distribution that generates the projected point totals for each player, and hopefully use that model to give me that edge I was looking for  Ultimately, my goal was to make a tool that I could run while I was drafting and into which I could feed (1) the player picked and (2) the position in the draft in which that player was picked, and it would return the best possible candidate for every position when it was my turn to pick.  I decided to call my tool DAsHA, which stands for "Draft Assistance Heuristic Algorithm".
 
-What is Gaussian KDE?
-Why use it?
-What do I expect to get out of it?
-Inverse Cumulative Density Data
+This post is Part One of how I built DAsHA -- in this post, I'll cover the model that I used to project player performance and the reason I chose it, how I collected and prepared the data that I wanted to use, and how I generated the model to power the algorithm.
 
-## Implementation
+## Choosing the Model
+
+Fantasy football point projections are all various probability distributions -- each player has a given probability of scoring your team a given number of points based on the player's skill, their position, and their week-over-week matchup.  Therefore, the model I'll need to construct needs to be one that can estimate a probability density function.  One of the classic tools for this type of estimation is a [histogram](https://en.wikipedia.org/wiki/Histogram), which works by plotting a curve over a series of buckets that represent different subsets of the range of values in the dataset, and then the data are sorted into the buckets to represent frequency (with the higher buckets representing values that occur more frequently in the dataset).  You can fit a Gaussian curve to a histogram to normalize the data, and this gives you a relatively accurate estimation for assessing the probability distribution of a given variable (in our case, points).  However, one of the drawbacks of a histogram is in its simplicity -- since a histogram only uses buckets to represent the data distribution means, the curve that can be fit to a histogram doesn't actually use all of the sample points: it just uses the buckets.  So while modeling my data with a Gaussian histogram seemed like a promising start, I was worried that the curve generated from my histogram wouldn't be accurate enough to outperform the ESPN projections.
+
+Enter kernel density estimation.  Kernel density estimation is a technique for estimation of probability density function that is a must-have enabling the user to better analyse the studied probability distribution than when using a traditional histogram. Unlike the histogram, the kernel technique produces smooth estimate of the pdf, uses all sample points' locations and more convincingly suggest multimodality.  In this case, since I plan on using multiple different buckets of potential scoring projections, I wanted to take advantage of this multimodality, and leverage any potential insights buried therein.  
+
+Fortunately, python has some excellent libraries for implementing Gaussian (Normalized) Kernel Density Estimations (KDEs), so I decided to charge ahead with a python notebook to see where this model could get me.  But first, I needed some actual data.  
+
+## Dealing with the Data
 
 ### Step 1 - Collecting the data
 
-I wanted a diverse set of projections to improve the accuracy of my KDE, so I collected the projected player performance data from the following five sources: [ESPN](https://fantasy.espn.com/football/players/projections?leagueFormatId=1), [Fantasy Sharks](https://www.fantasysharks.com/apps/Projections/SeasonProjections.php?pos=ALL), [Fantasy Pros](https://www.fantasypros.com/nfl/rankings/consensus-cheatsheets.php?loggedin=&my-experts=ALL), [Fantasy Football Toolbox](https://fftoolbox.fulltimefantasy.com/football/rankings/index.php?noppr=true), and [NFL.com](https://fantasy.nfl.com/research/projections?position=O&sort=projectedPts&statCategory=projectedStats&statSeason=2020&statType=seasonProjectedStats#researchProjections=researchProjections%2C%2Fresearch%2Fprojections%253Fposition%253DO%2526statCategory%253DprojectedStats%2526statSeason%253D2020%2526statType%253DseasonProjectedStats%2526statWeek%253D1%2Creplace).  I also used [Yahoo!](https://football.fantasysports.yahoo.com/f1/826195/1/editprerank) for the projected fantasy draft positions.
+I wanted a diverse set of projections to improve the accuracy of my KDE, so I collected the projected player performance data from five major fantasy football data sources: [ESPN](https://fantasy.espn.com/football/players/projections?leagueFormatId=1), [Fantasy Sharks](https://www.fantasysharks.com/apps/Projections/SeasonProjections.php?pos=ALL), [Fantasy Pros](https://www.fantasypros.com/nfl/rankings/consensus-cheatsheets.php?loggedin=&my-experts=ALL), [Fantasy Football Toolbox](https://fftoolbox.fulltimefantasy.com/football/rankings/index.php?noppr=true), and [NFL.com](https://fantasy.nfl.com/research/projections?position=O&sort=projectedPts&statCategory=projectedStats&statSeason=2020&statType=seasonProjectedStats#researchProjections=researchProjections%2C%2Fresearch%2Fprojections%253Fposition%253DO%2526statCategory%253DprojectedStats%2526statSeason%253D2020%2526statType%253DseasonProjectedStats%2526statWeek%253D1%2Creplace).  I also used [Yahoo!](https://football.fantasysports.yahoo.com/f1/826195/1/editprerank) for the projected fantasy draft positions.
 
 Collecting this data posed a challenge initially, since none of these sources had public APIs that I could figure out how to work with, and I didn't want to write some sort of HTML scraper to import the data into a CSV. Fortunately, though, after a little research (turns out there are a LOT of sports bloggers), I found out that Excel has a native method to [import data from the web](https://www.spreadsheetsports.com/free-tools/how-to-download-sport-data-into-a-spreadsheet/) that just worked out of the box for the above links.  Using this approach, I made an Excel spreadsheet for each data source and put them all into the `/raw_data` directory at the root of my project.
 
@@ -37,9 +42,9 @@ raw_data/
     |-- ESPN_2020_proj.xlsx
 ```
 
-### Step 2 - Cleaning the data
+### Step 2 - Preparing the data
 
-Now that I had the data, I set up my Python notebook to use the relevant data science libraries to generate a Gaussian KDE.  For this project, I used [NumPy](https://numpy.org/), [pandas](https://pandas.pydata.org/), [matplotlib](https://matplotlib.org/), [SciPy](https://www.scipy.org/), and [statsmodels](https://www.statsmodels.org/stable/index.html).
+Now that I had the data, I could start working on generating the Gaussian KDE.  First, I needed to import all the necessary data science libraries that provide user-friendly APIs to help me with that math that I'd need to generate the model.  For this project, I used [NumPy](https://numpy.org/), [pandas](https://pandas.pydata.org/), [matplotlib](https://matplotlib.org/), [SciPy](https://www.scipy.org/), and [statsmodels](https://www.statsmodels.org/stable/index.html).
 
 ```python
 import numpy as np
@@ -51,9 +56,7 @@ import matplotlib.pyplot as plt
 from statsmodels.distributions.mixture_rvs import mixture_rvs
 ```
 
-Next, I compiled and merged the data using the on player names from the Yahoo! draft list as the primary index (since my goal for DAsHA is to look up information based on the player name).   
-
-TODO MORE ON WHAT I MEAN BY THIS
+Next, I had to combine everything together into one dataframe.  I decided to combine everything together and use the player names from the Yahoo! draft list as the primary index, since my goal for DAsHA is to look up information based on the player name.  What this meant was that I wanted a 2-dimensional matrix where every player had a list of projected points that corresponded to the various projections that I'd collected.  The implementation looked like this
 
 ```python
 # load Yahoo! draft positions
@@ -108,17 +111,13 @@ df = pd.merge(df, df_temp, on='Name', how ='outer')
 df = df.dropna(subset=['Draft Position'])
 ```
 
-Now, I have a dataframe with all of the players and their projected fantasy scores across my various different sources, indexed on the player name.  Now for the non-parametric fun!
+Now for the non-parametric fun!
 
-## Step 2 - Gaussian Kernel Density Estimation
+## Generating the Gaussian Kernel Density Estimation
 
-I created a Gaussian kernel density estimation for each player using the projected points from each source (NFL, ESPN, Fantasy Sharks, etc.) for the kernels.
+Dataframe in hand, I then created a Gaussian KDE for each player using the projected points from each source as the kernels.  Each player had 5 sources, so I'd have 5 different kernels per player.
 
-The following block of code generates the non-parametric estimations for each player and stores: (1) the median value from the KDE as their projected points and (2) the inverse CDF as an array in `kde_icdf` so we can generate the non-parametric confidence intervals for the draft tool.
-
-TODO MORE CONTEXT AS TO WHY I DO THIS
-
-TODO SOME SORT OF NOTE ABOUT HOW THIS CODE TAKES A WHILE TO RUN
+The following code snippet implements the non-parametric estimations for each player.  It calculates (1) the median value from the KDE as their projected points and (2) the inverse Cumulative Distribution Function (CDF) as an array in `kde_icdf` so we can generate the non-parametric confidence intervals for DAsHA.
 
 ```python
 # create an empty column to store point projections for each player
@@ -137,6 +136,7 @@ for j in range(66,len(df)):
     test_array.append(df['espn_pts'][j])
     test_array.append(df['fs_pts'][j])
     test_array.append(df['si_pts'][j])
+
     # clean the test_array for NaN values
     test_array = [x for x in test_array if str(x) != 'nan']
     if len(test_array) == 0:
@@ -163,11 +163,11 @@ for j in range(66,len(df)):
 df.to_csv(r'./prepared_data/2020_ffl_df.csv')
 ```
 
-Below, I included an example of how the KDE estimation works for a given draft number. In the following example, `j` represents an arbitrary draft order from which we can generate a Gaussian KDE probability density function for the player corresponding to that draft rank.
+The above code takes a while to run, and since I'm no python wizard (and I'd only need to run this once to generate my final dataset), I couldn't be bothered to speed it up.  If you're a python/data science wizard who has any tips on this, bang inbox.  Something something Cunningham's law.  But anyway, once this code finished running, I had a model for doing KDE estimation!
 
-The various point estimates for that player (from ESPN, SI, etc.) are indicated by the red '+'s at the bottom of the graph. What KDE does is to center a normal gaussian distribution (with area = `1/n`) for `n` point estimates) over each of these point estimates. Then, to generate the probability density function, we sum all of these "kernels" together - this summation is the orange line in the graph below.
+## An applied example of KDE
 
-Then, the following block of code generates a histogram from the KDE PDF showing the 1- and 2- standard deviation confidence intervals.
+Finally, I want include a specific example of how the KDE estimation works for a given draft number to provide context for how DAsHA would ultimately work.  In the following code snippet, `j` represents an arbitrary draft order from which we can generate a Gaussian KDE probability density function for the player corresponding to that draft rank (i.e. it would be represent which pick you'd be making as the fantasy football manager).
 
 ```python
 j = 125
@@ -181,13 +181,16 @@ test_array.append(df['si_pts'][j])
 test_array = [x for x in test_array if str(x) != 'nan']
 if len(test_array) == 0:
     test_array = [0]
-    
+
 kde = sm.nonparametric.KDEUnivariate(test_array)
-kde.fit(kernel='gau', bw='silverman', fft=False)
+kde.fit(kernel='gau', bw='silverman', fft=False)    
+```
 
-fig = plt.figure(figsize=(10, 5))
-ax = fig.add_subplot(111)
+The various point estimates for that player will be indicated by red '+'s at the bottom of the graph. The KDE lets us center a normal gaussian distribution (with area = `1/n`) for `n` point estimates) over each of these point estimates. Then, to generate the probability density function, we sum all of these "kernels" together - this summation is the orange line in the graph below.
 
+Finally, the following code snippet generates a histogram from the KDE PDF showing the 1- and 2- standard deviation confidence intervals.
+
+```python   
 ax.hist(test_array, bins=5, density=True, label='Histogram from forecasts',
         zorder=5, edgecolor='k', alpha=0.5)
 ax.plot(kde.support, kde.density, lw=3, label='KDE from projections', 
@@ -211,10 +214,16 @@ box_plot_data=kde.icdf
 plt.boxplot(box_plot_data, vert=False, labels=[df['Name'][j]])
 plt.show()
 ```
-generates the following confidence interval.
+generates the following confidence interval for a given player (in this case, Kareem Hunt)
 
 ![CI Demo](../../../media/confidence_interval_demo.png)
 
 ## Conclusion and Further Reading
 
-I'll expand on the user interface of DAsHA for Part Two!
+And that's all for now!  I threw a lot of data science concepts out in this post and I don't want to share too much too quickly.  Hopefully, after reading this far you now understand:
+
+1. The value of using Gaussian KDEs for projecting fantasy football player performance
+2. How to collect data to run build this type of model
+3. How to use popular python libraries to generate a Gaussian KDE from the given data.
+
+In Part Two, we'll cover how implement this model as a real-time draft assistant tool, and how I used it to out-draft my friends.  I look forward to sharing!
