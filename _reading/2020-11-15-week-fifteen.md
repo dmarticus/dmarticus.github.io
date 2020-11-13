@@ -25,3 +25,10 @@ tags: ["software engineering", "types", "haskell", "kotlin", "design", "learning
 * [Foundations of Software Engineering](https://cmu-313.github.io/).  Lecture Notes from CMU's Software Engineering class. 
 * [How to Make the Kotlin Compiler Smarter](https://deniskrr.medium.com/how-to-make-the-compiler-smarter-b37f414875ac).  Kotlin compiler optimization.  TODO
 * [Why Typing Erlang is Hard](https://abstractmachines.dev/posts/am012-why-typing-erlang-is-hard.html).  Type systems. TODO
+
+* [Troy Hunt: Hacking Grindr Accounts with Copy and Paste](https://www.troyhunt.com/hacking-grindr-accounts-with-copy-and-paste/)
+* http://www.haskellforall.com/2020/11/pretty-print-syntax-trees-with-this-one.html
+* [Virtual Consensus in Delos](https://www.usenix.org/conference/osdi20/presentation/balakrishnan)
+* [Wasp](https://wasp-lang.dev/)
+* [Creating a Haskell development environment with LSP on NixOS – Jussi Kuokkanen’s Computing Blog](https://jkuokkanen109157944.wordpress.com/2020/11/10/creating-a-haskell-development-environment-with-lsp-on-nixos/)
+* [css examples](https://css-examples.wizardzines.com/)
