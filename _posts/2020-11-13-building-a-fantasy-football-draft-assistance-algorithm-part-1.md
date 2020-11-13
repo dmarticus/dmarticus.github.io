@@ -236,4 +236,4 @@ And that's all for now!  I threw a lot of data science concepts out in this post
 
 In Part Two, we'll cover how implement this model as a real-time draft assistant tool, and how I used it to out-draft my friends.  I look forward to sharing!
 
-Finally, I just wanted to thank my brother, [Owen Martin](https://github.com/owingit) for code-reviewing my shitty python.  He writes python for data science all the time and is much better at this than me.  Thanks bro!
+Finally, I just wanted to thank my brother, [Owen Martin](https://github.com/owingit), for code-reviewing my shitty python.  He writes python for data science all the time and is much better at this than me.  Thanks bro!
