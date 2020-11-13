@@ -139,7 +139,7 @@ for j in range(66,len(df)):
     training_data.append(df['espn_pts'][j])
     training_data.append(df['fs_pts'][j])
     training_data.append(df['si_pts'][j])
-    # clean the training_data for NaN values - which interfere with the analysis below
+    # clean the training_data for NaN values
     training_data = [x for x in training_data if str(x) != 'nan'] 
     if len(training_data) == 0:
         training_data = [0]
@@ -213,7 +213,7 @@ ax.legend(loc='best')
 ax.grid(True, zorder=-5)
 ```
 
-![KDE Demo](../../../media/KDE_demo.png){:height="400px" width="760px"}
+![KDE Demo](../../../media/KDE_demo.png)
 
 This distribution is then used to generate median point estimations and confidence intervals for each player. For example, this code
 
