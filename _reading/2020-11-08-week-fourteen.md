@@ -1,14 +1,14 @@
 ---
-title: "11/02 - 11/08"
+title: "11/01 - 11/08"
 layout: post
 tags: ["haskell", "managers", "profiles", "economics", "functional programming", "software architecture", "fun"]
 ---
 
-### 11/02 - 11/08
+### 11/01 - 11/08
 
 This was a big week!  The USA had its presidential election and while it's not officially done yet, it looks like Joe Biden has won, which is a positive development.  When I woke up on Saturday morning and read the news it felt like the first time I'd woken up to good news in years.  I don't have as many reads for this week because once election coverage began on Tuesday night I just kept refreshing [the open-source election tracker](https://alex.github.io/nyt-2020-election-scraper/battleground-state-changes.html) every few minutes alongside reading as insipid hot takes about voting trends as much as I could.  It was a bad week for careful, thoughtful, reading for me.  But a good week overall :)
 
-But in addition to this being a big week for politics, it was a big week for Haskell, as the [Haskell Foundation](https://haskell.foundation/) was launced this week at Haskell eXchange.  This is really exciting news; it's encouraging to see Haskell -- which has historically been a very distributed language with no clear leadership -- take clear steps towards centralizing governance, which can hopefully lead to more industrial engineering applications, and optimally more usage.  Haskell is a great language and I'd be thrilled to see more folks adopting it.
+But in addition to this being a big week for politics, it was a big week for Haskell, as the [Haskell Foundation](https://haskell.foundation/) was launched this week at Haskell eXchange.  This is really exciting news; it's encouraging to see Haskell -- which has historically been a very distributed language with no clear leadership -- take clear steps towards centralizing governance, which can hopefully lead to more industrial engineering applications, and optimally more usage.  Haskell is a great language and I'd be thrilled to see more folks adopting it.
 
 Finally, I have some personal Haskell-related news that I'd love to share but it isn't quite public yet; stay tuned for a newsletter coming soon!  Okay, on to the links!
 
