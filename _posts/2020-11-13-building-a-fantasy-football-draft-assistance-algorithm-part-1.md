@@ -61,7 +61,8 @@ Next, I had to combine everything together into one dataframe.  I decided to com
 ```python
 # load Yahoo! draft positions
 df = pd.read_excel('./raw_data/Yahoo_2020_Draft_Positions.xlsx')
-df['Name'] = df['Name'].str.strip() # strip the names so they can be directly compared to other lists
+# strip the names so they can be directly compared to other lists
+df['Name'] = df['Name'].str.strip() 
 
 # load Fantasy Pros Projections
 df_fantasy_pros = pd.read_excel('./raw_data/Fantasy_Pros_2020_proj.xlsx')
@@ -126,16 +127,20 @@ df['pts'] = np.nan
 # density function (icdf) data for each player's kde estimation
 df['kde_icdf'] = [[] for _ in range(len(df))]
 
-# start from index 67 because the first 66 entries in my df are contextual cruft and not training data
+# start from index 67 because the first 66 entries in my df
+# are contextual cruft and not training data
 for j in range(66,len(df)):
-    # this block constructs an array of training data for each player of the different fantasy point estimates. This array is used to generate the KDE.
+    # this block constructs an array of training 
+    # data for each player of the different fantasy point estimates. 
+    # This array is used to generate the KDE.
     training_data = []
     training_data.append(df['fp_pts'][j])
     training_data.append(df['nfl_pts'][j])
     training_data.append(df['espn_pts'][j])
     training_data.append(df['fs_pts'][j])
     training_data.append(df['si_pts'][j])
-    training_data = [x for x in training_data if str(x) != 'nan'] # clean the training_data for NaN values - which interfere with the analysis below
+    # clean the training_data for NaN values - which interfere with the analysis below
+    training_data = [x for x in training_data if str(x) != 'nan'] 
     if len(training_data) == 0:
         training_data = [0]
 
@@ -157,7 +162,7 @@ for j in range(66,len(df)):
     df['pts'][j]=ci_50 # add median projection
     df['kde_icdf'][j]=kde.icdf # add icdf for whisker plot construction
 
-# export the dataset to a .csv file so we don't have to run the code above again (it's time consuming!)
+# export the dataset to a .csv file
 df.to_csv(r'./prepared_data/2020_ffl_df.csv')
 ```
 
@@ -190,7 +195,6 @@ The various point estimates for that player will be indicated by red '+'s at the
 Finally, the following code snippet generates a histogram from the KDE PDF showing the 1- and 2- standard deviation confidence intervals.
 
 ```python   
-# Note: some plots for the kde visualizations that I'm turning off for the working loops
 fig = plt.figure(figsize=(10, 5))
 ax = fig.add_subplot(111)
 
@@ -198,10 +202,13 @@ ax = fig.add_subplot(111)
 ax.hist(training_data, bins=5, density=True, label='Histogram from forecasts',
         zorder=5, edgecolor='k', alpha=0.5)
 # Plot the KDE as fitted using the default arguments
-ax.plot(kde.support, kde.density, lw=3, label='KDE from projections', zorder=10)
+ax.plot(kde.support, kde.density, lw=3, 
+    label='KDE from projections', zorder=10)
 
 # Plot the samples
-ax.scatter(training_data, np.abs(np.random.randn(len(training_data)))/100000,marker='+', color='red', zorder=20, label='Point Forecasts', alpha=0.5)
+ax.scatter(training_data, np.abs(np.random.randn(len(training_data)))/100000,
+    marker='+', color='red', zorder=20, 
+    label='Point Forecasts', alpha=0.5)
 ax.legend(loc='best')
 ax.grid(True, zorder=-5)
 ```
