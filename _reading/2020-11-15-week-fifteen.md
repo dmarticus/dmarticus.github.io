@@ -6,12 +6,7 @@ tags: ["software engineering", "types", "haskell", "kotlin", "design", "learning
 
 ### 11/09 - 11/15
 
-
-#### Business
-
-#### Culture
-
-#### Life
+Buncha techy content this week!  I've been going really hard on trying to understand haskell better lately (for reasons that I'll disclose within a week or so!), and in addition to working on some small projects in Haskell, I've been reading a lot of articles about the language as well.  It's so cool!  This week also deviates from my normal behavior in that I read an enjoyed not one but TWO articles about Facebook engineering this week... as much as I find their product and business model actively duplicitous, I really can't fault their engineering chops.  
 
 #### Work
 
@@ -20,15 +15,12 @@ tags: ["software engineering", "types", "haskell", "kotlin", "design", "learning
 #### Tech
 
 * [Haskell: The Bad Parts, part 2](https://www.snoyman.com/blog/2020/11/haskell-bad-parts-2).  Another excellent criticism of some of Haskell's warts from the prolific Snoyberg.  If you're interested in critiquing programming language design choices, especially for a language as carefully designed as Haskell, you'll likely enjoy this read.  Rust fans probably will, too ;)
-* [Distributed Systems Learning Diary](https://timilearning.com/).  A great example of learning in public by a guy named Timil in London.  I'm currently working through his notes (and the source material) from the [Spark Course](https://timilearning.com/posts/mit-6.824/lecture-15-spark/).  
-* [Average UX Improvements Are Shrinking Over Time](https://www.nngroup.com/articles/ux-gains-shrinking/) this is good actually; we're stabilizing.  TODO
-* [Foundations of Software Engineering](https://cmu-313.github.io/).  Lecture Notes from CMU's Software Engineering class. 
-* [How to Make the Kotlin Compiler Smarter](https://deniskrr.medium.com/how-to-make-the-compiler-smarter-b37f414875ac).  Kotlin compiler optimization.  TODO
-* [Why Typing Erlang is Hard](https://abstractmachines.dev/posts/am012-why-typing-erlang-is-hard.html).  Type systems. TODO
-
-* [Troy Hunt: Hacking Grindr Accounts with Copy and Paste](https://www.troyhunt.com/hacking-grindr-accounts-with-copy-and-paste/)
-* http://www.haskellforall.com/2020/11/pretty-print-syntax-trees-with-this-one.html
-* [Virtual Consensus in Delos](https://www.usenix.org/conference/osdi20/presentation/balakrishnan)
-* [Wasp](https://wasp-lang.dev/)
-* [Creating a Haskell development environment with LSP on NixOS – Jussi Kuokkanen’s Computing Blog](https://jkuokkanen109157944.wordpress.com/2020/11/10/creating-a-haskell-development-environment-with-lsp-on-nixos/)
-* [css examples](https://css-examples.wizardzines.com/)
+* [Open-sourcing Haxl, a library for Haskell](https://engineering.fb.com/2014/06/10/web/open-sourcing-haxl-a-library-for-haskell/).  Honestly, this was one of my favorite reads of the week because it's an thorough and detailed writeup of how Facebook solved a technical problem in the perfect way by using Haskell.  One my current gripes with Haskell blogs (I'm still pretty new to learning which ones to read, so bear with me) is that many of them focus on small, one-off problems and don't make a case for why Haskell is the best tool for an enterprise use case.  This post does a great job for that, and I'd recommend it to anyone who's curious about why Haskell matters for enterprise software development.
+* [Distributed Systems Learning Diary](https://timilearning.com/).  A great example of learning in public by a guy named Timil in London.  I'm currently working through his notes (and the source material) from the [Spark Course](https://timilearning.com/posts/mit-6.824/lecture-15-spark/).
+* [Average UX Improvements Are Shrinking Over Time](https://www.nngroup.com/articles/ux-gains-shrinking/) this is good actually; the smaller improvements are indicating that our views on what constitutes "good design" are starting to converge, which means that there's less instability in how we approach UX design.  
+* [How to Make the Kotlin Compiler Smarter](https://deniskrr.medium.com/how-to-make-the-compiler-smarter-b37f414875ac).  The Kotlin compiler is smart, but sometimes you understand your code better than the compiler.  With the use of Kotlin Contracts (a new compiler feature), you can transfer your knowledge to the compiler by specifying the effect that the invocation of a function produces.
+The compiler tracks all the effects and uses the acquired information to smart cast variables or permit the initialization of variables in a lambda.  This is a really intersting application of a functional effect system.  I'm looking forward to seeing future applications of Kotlin Contracts!
+* [Troy Hunt: Hacking Grindr Accounts with Copy and Paste](https://www.troyhunt.com/hacking-grindr-accounts-with-copy-and-paste/).  Troy Hunt's exploit write-ups are always interesting and this one was a particularly egregious bug.
+* [Virtual Consensus in Delos](https://www.usenix.org/conference/osdi20/presentation/balakrishnan).  Again, another great post from Facebook engineering when they were solving problems that no one else was worrying about.  Back in 2017 the engineering team at Facebook had a problem. They needed a table store to power core control plane services, which meant strong guarantees on durability, consistency, and availability. They also needed it fast – the goal was to be in production within 6 to 9 months. While ultimately this new system should be able to take advantage of the latest advances in consensus for improved performance, that’s not realistic given a 6-9 month in-production target.  This paper describes what Facebook did to solve this problem.  
+* [Wasp](https://wasp-lang.dev/).  Another super cool applicatoon of Haskell that, while not as battle-tested by Mt. Production as the Facebook applications are, still does a great job of showing an area where Haskell is an exemplary product fit.  TL;DR, Haskell is a world-class language for writing DSLs.  
+* [Creating a Haskell development environment with LSP on NixOS – Jussi Kuokkanen’s Computing Blog](https://jkuokkanen109157944.wordpress.com/2020/11/10/creating-a-haskell-development-environment-with-lsp-on-nixos/).  Standard read on how to set up a Haskell dev environment.  I've been reading a lot of these lately as I've been trying to find the best way to run Haskell on my machine and the approach outlined by this author works well for me so far.  
