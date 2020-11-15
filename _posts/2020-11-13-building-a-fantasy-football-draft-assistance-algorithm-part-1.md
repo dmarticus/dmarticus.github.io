@@ -196,7 +196,7 @@ The various point estimates for that player will be indicated by red '+'s at the
 
 Finally, the following code snippet generates a histogram from the KDE PDF showing the 1- and 2- standard deviation confidence intervals.
 
-```python   
+```python
 fig = plt.figure(figsize=(10, 5))
 ax = fig.add_subplot(111)
 
