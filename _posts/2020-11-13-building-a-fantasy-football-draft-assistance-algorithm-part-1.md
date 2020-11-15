@@ -224,6 +224,7 @@ box_plot_data=kde.icdf
 plt.boxplot(box_plot_data, vert=False, labels=[df['Name'][j]])
 plt.show()
 ```
+
 generates the following confidence interval for a given player (in this case, Kareem Hunt)
 
 ![CI Demo](../../../media/confidence_interval_demo.png)
