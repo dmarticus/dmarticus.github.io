@@ -291,6 +291,11 @@ and is ported straight from the Rougify CSS
     background-color: #f5f6fa;
 }
 
+pre {
+    padding: 5px;
+    overflow-x: scroll;
+}
+
 code.highlighter-rouge {
     /*display: block;*/
     white-space: pre;
