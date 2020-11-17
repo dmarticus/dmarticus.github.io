@@ -2,13 +2,14 @@
 layout: default
 ---
 
+{% assign post = page %}
 {{ content }}
 
 <div class="PageNavigation">
-    {% if post.previous.url %}
-    <a class="prev" href="{{post.previous.url}}">&laquo; {{post.previous.title}}</a>
+    {% if page.previous.url %}
+    <a class="prev" href="{{page.previous.url}}">&laquo; {{page.previous.title}}</a>
     {% endif %}
-    {% if post.next.url %}
-    <a class="next" href="{{post.next.url}}">{{post.next.title}} &raquo;</a>
+    {% if page.next.url %}
+    <a class="next" href="{{page.next.url}}">{{page.next.title}} &raquo;</a>
     {% endif %}
 </div>
