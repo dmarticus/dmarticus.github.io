@@ -4,8 +4,6 @@ layout: post
 tags: [security, AI, wildfires, optics, functional programming, capitalism, haskell, types, scala]
 ---
 
-### 9/14 - 9/20
-
 #### Culture
 
 * [When you browse Instagram and find former Australian Prime Minister Tony Abbott's passport number.](https://mango.pdf.zone/finding-former-australian-prime-minister-tony-abbotts-passport-number-on-instagram) This is the most fun vulnerability disclosure I've ever read. "Alex" is hilarious and their posts are both insightful and a great read.

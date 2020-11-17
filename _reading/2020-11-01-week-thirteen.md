@@ -4,8 +4,6 @@ layout: post
 tags: [career, computer science, culture, scala, excel, entrepeneurship, distributed systems, life, business, consulting]
 ---
 
-### 10/26 - 11/01
-
 This week the theme of my selected readings is about careers: how to succeed in your respective one, how to apply theoretical concepts in CS to a software engineering day job, and how to know when it's time to quit a typical day job.  I also included a few beautiful musings on life and death.  There's also a bunch of other unrelated things that run the gamut from distributed systems, hackathons at scale, and more indictments of Facebook (as per usual) :)  Enjoy!
 
 #### Culture
