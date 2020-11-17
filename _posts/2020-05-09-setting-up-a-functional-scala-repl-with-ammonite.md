@@ -8,8 +8,6 @@ tool and one I use daily when writing Scala.  My favorite thing to use it for is
 scripts and run them in the command line as I used to do with Python or Node."
 ---
 
-# Setting up a Functional Scala REPL with Ammonite
-
 One of my favorite tools in the Scala ecosystem is [Li Haoyi's](https://www.lihaoyi.com/) [Ammonite](https://github.com/lihaoyi/Ammonite), which is a tool that enable first-class
 scripting support in Scala.  You can use Ammonite to run Scala code in the REPL, as scripts, or even as a system-level shell as a replacement to something like Bash.  It's a great 
 tool and one I use daily when writing Scala.  My favorite thing to use it for is for advanced REPL support -- Scala is my favorite language and Ammonite lets me whip up little Scala

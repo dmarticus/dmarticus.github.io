@@ -4,8 +4,6 @@ layout: post
 tags: [database, rust, platforms, google, cloud, haskell, distributed systems, security, open-source, career, engineering, TikTok]
 ---
 
-### 8/17 - 8/23
-
 #### Business
 
 * [Open-sourcing Have I Been Pwned.](https://www.troyhunt.com/im-open-sourcing-the-have-i-been-pwned-code-base/) I loved all of the specifics that Troy Hunt goes into about running a massively successful open-source project.

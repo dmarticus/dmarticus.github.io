@@ -4,8 +4,6 @@ layout: post
 tags: [github, parser, scala, haskell, functional programming, formal verification, philosophy, programming languages]
 ---
 
-### 9/21 - 9/27
-
 Got a bunch of cool things from Github this week, various posts about parsers, and some fun meditations on removing oneself from the machine.  Enjoy :)
 
 #### Business

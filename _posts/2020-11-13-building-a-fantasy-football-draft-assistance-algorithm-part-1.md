@@ -4,8 +4,6 @@ layout: post
 tags: [fun, data science, python]
 post_summary: "Constructing a Fantasy Football draft assistance algorithm using Gaussian Kernel Density Estimation (Gaussian KDE) Part One: Collecting, Cleaning, and Preparing the Data."
 ---
-
-# Building a Fantasy Football Draft Assistance Algorithm
 ### Part One -- choosing the model, dealing with the data, and generating the model
 
 ## Context
