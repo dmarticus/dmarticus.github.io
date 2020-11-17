@@ -8,6 +8,12 @@ post_summary: "Constructing a Fantasy Football draft assistance algorithm using 
 # Building a Fantasy Football Draft Assistance Algorithm
 ### Part Two -- building the user interface to run alongside the draft
 
+## Background
+
+## User Interface
+
+## Running the Draft
+
 The second notebook, "DAsHA_user_interface" provides a user-interface that you can use during a fantasy football draft to optimize your draft choices.
 
 The idea here is that DAsHA will return a panel of players at each position with the highest projected points. DAsHA will also show a "marginal" score, which is how many more points this player is expected to generate compared to the best player at the same position who will be available in the next round.
@@ -21,3 +27,7 @@ Finally, DAsHa generates graphs comparing the players at the two positions with 
 An example of DAsHA's menu output is:
 
 ![UI Demo](../../../media//UI_demo.PNG)
+
+And here's how it works with me running the demo live:
+
+![DAsHA Demo](../../../media/DAsHA_Demo.gif){:height="650px" width="700px"}
