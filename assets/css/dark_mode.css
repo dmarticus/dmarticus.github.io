@@ -1,11 +1,54 @@
+
 html {
-    max-width:70ch;
-    padding:2ch;
-    margin:auto;
-    color:#373D3F;
-    font-size:1.2em;
-    font-family: 'Roboto', "Helvetica Neue", Helvetica, Arial, sans-serif;
+    max-width: 70ch;
+    padding: 2ch;
+    margin: auto;
+    color: rgb(191, 191, 191);
+    font-size: 1.2em;
+    background-image:none !important;
+    background:#1f1f1f !important;
+    font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+
+a:link {
+    color: magenta;
+}
+
+a:visited {
+    color:#6D71C3;
+}
+
+a {
+    text-decoration: none;
+}
+
+*::-webkit-scrollbar-track-piece {
+        background-color:rgba(255, 255, 255, 0.2) !important;
+}
+
+*::-webkit-scrollbar-track {
+        background-color:rgba(255, 255, 255, 0.3) !important;
+}
+
+*::-webkit-scrollbar-thumb {
+        background-color:rgba(255, 255, 255, 0.5) !important;
+}
+
+.pdfViewer,
+embed[type="application/pdf"] {
+        filter:invert(90%);
+}
+
+
+body {
+    background-color:#1f1f1f;
+    background-image:none !important;
+}
+
+/* input, select, textarea, button {
+    color:#bfbfbf;
+    background-color:#1f1f1f;
+} */
 
 footer {
     display: flex;
@@ -17,21 +60,11 @@ h1,h2,h3,h4,h5,h6 {
     font-family: 'Rubik Light', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-a {
-    text-decoration: none;
-}
-a:link {
-    color: magenta;
-}
-a:visited {
-    color: purple; 
-}
-
 #nav-bar {
     padding-left: 0;
 }
 #nav-bar li {
-        display: inline;
+    display: inline;
 }
 
 #nav-bar li + li:before{
@@ -84,7 +117,8 @@ and is ported straight from the Rougify CSS
 .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 .highlight, .highlight .w {
-  color: #586e75;
+  color: #93a1a1;
+  background-color: #002b36;
 }
 .highlight .err {
   color: #002b36;
@@ -159,13 +193,13 @@ and is ported straight from the Rougify CSS
   color: #859900;
 }
 
-
 pre {
     padding: 5px;
     overflow-x: scroll;
 }
 
 code.highlighter-rouge {
+    /*display: block;*/
     white-space: pre;
     margin: 1em 0px;
     font-size: 1.1em;

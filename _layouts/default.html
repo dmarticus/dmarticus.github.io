@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="Description" content="Dylan Martin's personal website">
   <link rel="shortcut icon" type="image/png" href="/favicon-192x192.png">
-  <link rel="stylesheet" type="text/css" href="/assets/css/main_style.css" />
+  <link rel="stylesheet" id="CSS" type="text/css" href="/assets/css/main_style.css" />
   <title>{{ page.title }}</title>
   <!-- Matomo -->
   <script type="text/javascript">
@@ -32,3 +32,40 @@
 </body>
 
 </html>
+
+<script type="text/javascript">
+
+  // looks for the ?darkmode parameter 
+  // sets global variable darkMode to true or false
+  const enteredURL = window.location.href;
+  if (enteredURL.includes('?darkmode')) {
+    var darkMode = true;
+  } else {
+    var darkMode = false;
+  }
+
+  // these variables create the URL for switcher in the nav menu 
+  const darkModeLink = enteredURL + "?darkmode";
+  const lightModeLink = enteredURL.replace('?darkmode', '');
+
+  // loop through links on page to add '?darkmode' to internal links 
+  if (darkMode) {
+    document.getElementById('CSS').href = "/assets/css/dark_mode.css";
+    const allLinks = document.getElementsByTagName("a");
+    for (let i = 0; i < allLinks.length; i++) {
+      allLinks[i].href = allLinks[i].href + '?darkmode';
+    }
+  }
+
+  // it's important for this to come after internal links have '?darkmode' added
+  // otherwise the switch in the nav menu to turn on light mode won't work! 
+  document.getElementById('colorChanger').innerHTML = "🌝";
+  document.getElementById('colorChanger').href = lightModeLink;
+
+  // sets nav switcher to allow dark mode to be enabled 
+  if (darkMode === false) {
+    document.getElementById('CSS').href = "/assets/css/main_style.css";
+    document.getElementById('colorChanger').innerHTML = "🌚";
+    document.getElementById('colorChanger').href = darkModeLink;
+  }
+</script>
