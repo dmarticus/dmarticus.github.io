@@ -1,18 +1,4 @@
-html {
-    max-width:70ch;
-    padding:2ch;
-    margin:auto;
-    color:#373D3F;
-    font-size:1.2em;
-    font-family: 'Roboto', "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-footer {
-    display: flex;
-    justify-content: center;
-    padding: 15px;
-}
-
+/* Shared settings for light and dark mode */
 h1,h2,h3,h4,h5,h6 {
     font-family: 'Rubik Light', "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -21,19 +7,12 @@ a {
     text-decoration: none;
 }
 
-a:link {
-    color: magenta;
-}
-
-a:visited {
-    color: purple; 
-}
-
 #nav-bar {
     padding-left: 0;
 }
+
 #nav-bar li {
-        display: inline;
+    display: inline;
 }
 
 #nav-bar li + li:before{
@@ -60,7 +39,7 @@ a:visited {
 }
 
 @media all and (max-width: 699px) {
-   html {
+  html {
     font-size: 1.5em;
   }
   nav {
@@ -79,88 +58,6 @@ a:visited {
       margin-top: 15px;
   }
 }
-/* All the content after these lines is related to syntax highlighting for code examples
-and is ported straight from the Rougify CSS
- */
-
-.highlight table td { padding: 5px; }
-.highlight table pre { margin: 0; }
-.highlight, .highlight .w {
-  color: #586e75;
-}
-.highlight .err {
-  color: #002b36;
-  background-color: #dc322f;
-}
-.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
-  color: #657b83;
-}
-.highlight .cp {
-  color: #b58900;
-}
-.highlight .nt {
-  color: #b58900;
-}
-.highlight .o, .highlight .ow {
-  color: #93a1a1;
-}
-.highlight .p, .highlight .pi {
-  color: #93a1a1;
-}
-.highlight .gi {
-  color: #859900;
-}
-.highlight .gd {
-  color: #dc322f;
-}
-.highlight .gh {
-  color: #268bd2;
-  background-color: #002b36;
-  font-weight: bold;
-}
-.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
-  color: #6c71c4;
-}
-.highlight .kc {
-  color: #cb4b16;
-}
-.highlight .kt {
-  color: #cb4b16;
-}
-.highlight .kd {
-  color: #cb4b16;
-}
-.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
-  color: #859900;
-}
-.highlight .sr {
-  color: #2aa198;
-}
-.highlight .si {
-  color: #d33682;
-}
-.highlight .se {
-  color: #d33682;
-}
-.highlight .nn {
-  color: #b58900;
-}
-.highlight .nc {
-  color: #b58900;
-}
-.highlight .no {
-  color: #b58900;
-}
-.highlight .na {
-  color: #268bd2;
-}
-.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
-  color: #859900;
-}
-.highlight .ss {
-  color: #859900;
-}
-
 
 pre {
     padding: 5px;
@@ -171,4 +68,234 @@ code.highlighter-rouge {
     white-space: pre;
     margin: 1em 0px;
     font-size: 1.1em;
+}
+
+/* Light Mode */
+@media (prefers-color-scheme: light) {
+  html {
+    max-width:70ch;
+    padding:2ch;
+    margin:auto;
+    color:#373D3F;
+    font-size:1.2em;
+    font-family: 'Roboto', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  footer {
+      display: flex;
+      justify-content: center;
+      padding: 15px;
+  }
+
+  a:link {
+      color: magenta;
+  }
+
+  a:visited {
+      color: purple; 
+  }
+
+  .highlight table td { padding: 5px; }
+  .highlight table pre { margin: 0; }
+  .highlight, .highlight .w {
+    color: #586e75;
+  }
+  .highlight .err {
+    color: #002b36;
+    background-color: #dc322f;
+  }
+  .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+    color: #657b83;
+  }
+  .highlight .cp {
+    color: #b58900;
+  }
+  .highlight .nt {
+    color: #b58900;
+  }
+  .highlight .o, .highlight .ow {
+    color: #93a1a1;
+  }
+  .highlight .p, .highlight .pi {
+    color: #93a1a1;
+  }
+  .highlight .gi {
+    color: #859900;
+  }
+  .highlight .gd {
+    color: #dc322f;
+  }
+  .highlight .gh {
+    color: #268bd2;
+    background-color: #002b36;
+    font-weight: bold;
+  }
+  .highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+    color: #6c71c4;
+  }
+  .highlight .kc {
+    color: #cb4b16;
+  }
+  .highlight .kt {
+    color: #cb4b16;
+  }
+  .highlight .kd {
+    color: #cb4b16;
+  }
+  .highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+    color: #859900;
+  }
+  .highlight .sr {
+    color: #2aa198;
+  }
+  .highlight .si {
+    color: #d33682;
+  }
+  .highlight .se {
+    color: #d33682;
+  }
+  .highlight .nn {
+    color: #b58900;
+  }
+  .highlight .nc {
+    color: #b58900;
+  }
+  .highlight .no {
+    color: #b58900;
+  }
+  .highlight .na {
+    color: #268bd2;
+  }
+  .highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+    color: #859900;
+  }
+  .highlight .ss {
+    color: #859900;
+  }
+}
+
+/* Dark Mode */
+@media(prefers-color-scheme: dark) {
+  html {
+    max-width: 70ch;
+    padding: 2ch;
+    margin: auto;
+    color: rgb(191, 191, 191);
+    font-size: 1.2em;
+    background-image:none !important;
+    background:#1f1f1f !important;
+    font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+
+  a:link {
+      color: magenta;
+  }
+
+  a:visited {
+      color:#6D71C3;
+  }
+
+  *::-webkit-scrollbar-track-piece {
+          background-color:rgba(255, 255, 255, 0.2) !important;
+  }
+
+  *::-webkit-scrollbar-track {
+          background-color:rgba(255, 255, 255, 0.3) !important;
+  }
+
+  *::-webkit-scrollbar-thumb {
+          background-color:rgba(255, 255, 255, 0.5) !important;
+  }
+
+  .pdfViewer,
+  embed[type="application/pdf"] {
+          filter:invert(90%);
+  }
+
+  body {
+      background-color:#1f1f1f;
+      background-image:none !important;
+  }
+  /* All the content after these lines is related to syntax highlighting for code examples
+  and is ported straight from the Rougify CSS
+  */
+
+  .highlight table td { padding: 5px; }
+  .highlight table pre { margin: 0; }
+  .highlight, .highlight .w {
+    color: #93a1a1;
+    background-color: #002b36;
+  }
+  .highlight .err {
+    color: #002b36;
+    background-color: #dc322f;
+  }
+  .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+    color: #657b83;
+  }
+  .highlight .cp {
+    color: #b58900;
+  }
+  .highlight .nt {
+    color: #b58900;
+  }
+  .highlight .o, .highlight .ow {
+    color: #93a1a1;
+  }
+  .highlight .p, .highlight .pi {
+    color: #93a1a1;
+  }
+  .highlight .gi {
+    color: #859900;
+  }
+  .highlight .gd {
+    color: #dc322f;
+  }
+  .highlight .gh {
+    color: #268bd2;
+    background-color: #002b36;
+    font-weight: bold;
+  }
+  .highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+    color: #6c71c4;
+  }
+  .highlight .kc {
+    color: #cb4b16;
+  }
+  .highlight .kt {
+    color: #cb4b16;
+  }
+  .highlight .kd {
+    color: #cb4b16;
+  }
+  .highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+    color: #859900;
+  }
+  .highlight .sr {
+    color: #2aa198;
+  }
+  .highlight .si {
+    color: #d33682;
+  }
+  .highlight .se {
+    color: #d33682;
+  }
+  .highlight .nn {
+    color: #b58900;
+  }
+  .highlight .nc {
+    color: #b58900;
+  }
+  .highlight .no {
+    color: #b58900;
+  }
+  .highlight .na {
+    color: #268bd2;
+  }
+  .highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+    color: #859900;
+  }
+  .highlight .ss {
+    color: #859900;
+  }
 }
