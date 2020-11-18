@@ -59,6 +59,12 @@ a {
   }
 }
 
+footer {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
 pre {
     padding: 5px;
     overflow-x: scroll;
@@ -79,12 +85,6 @@ code.highlighter-rouge {
     color:#373D3F;
     font-size:1.2em;
     font-family: 'Roboto', "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
-
-  footer {
-      display: flex;
-      justify-content: center;
-      padding: 15px;
   }
 
   a:link {
