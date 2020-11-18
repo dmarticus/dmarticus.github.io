@@ -4,8 +4,6 @@ layout: post
 tags: [fun, data science, python]
 post_summary: "Constructing a Fantasy Football draft assistance algorithm using Gaussian Kernel Density Estimation (Gaussian KDE) Part One: Collecting, Cleaning, and Preparing the Data."
 ---
-
-# Building a Fantasy Football Draft Assistance Algorithm
 ### Part One -- choosing the model, dealing with the data, and generating the model
 
 ## Context
@@ -215,7 +213,7 @@ ax.legend(loc='best')
 ax.grid(True, zorder=-5)
 ```
 
-![KDE Demo](../../../media/KDE_demo.PNG){:height="400px" width="760px"}
+![KDE Demo](../../../media/KDE_demo.PNG){:width="740px"}
 
 This distribution is then used to generate median point estimations and confidence intervals for each player. For example, this code
 
@@ -227,7 +225,7 @@ plt.show()
 
 generates the following confidence interval for a given player (in this case, Kareem Hunt)
 
-![CI Demo](../../../media/confidence_interval_demo.png)
+![CI Demo](../../../media/confidence_interval_demo.png){:width="740px"}
 
 ## Conclusion and Further Reading
 
