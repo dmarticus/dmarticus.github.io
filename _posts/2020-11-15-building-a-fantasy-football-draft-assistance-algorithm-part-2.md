@@ -5,7 +5,6 @@ tags: [fun, data science, python]
 post_summary: "Constructing a Fantasy Football draft assistance algorithm using Gaussian Kernel Density Estimation (Gaussian KDE) Part Two: Building the User Interface."
 ---
 
-# Building a Fantasy Football Draft Assistance Algorithm
 ### Part Two -- building the user interface to run alongside the draft
 
 ## Background
