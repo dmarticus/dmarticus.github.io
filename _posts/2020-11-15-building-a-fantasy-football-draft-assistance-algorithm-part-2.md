@@ -2,16 +2,16 @@
 title: "Building a Fantasy Football Draft Assistance Algorithm: Part Two"
 layout: post
 tags: [fun, data science, python]
-post_summary: "Constructing a Fantasy Football draft assistance algorithm using Gaussian Kernel Density Estimation (Gaussian KDE) Part Two: Building the User Interface."
+post_summary: "Constructing a Fantasy Football draft assistance algorithm using Gaussian Kernel Density Estimation (Gaussian KDE) Part Two: Building the User Interface.  Given my cross-sectional dataset from a variety of different fantasy football prediction sources, I implemented a DAsHA, a tool into which I could feed (a) the current draft position and (b) players already picked, and return as much data as possible for me to pick the best player that round."
 ---
 
 ### Part Two -- building the user interface to run alongside the draft
 
-Now that I had my `.csv` file full of players and their projections, I now wanted to turn this data into DAsHA proper -- I wanted a tool that could take (a) the draft order and (b) players already picked as inputs and return the best possible players per position.  Here's how I went about doing that.
+In [part one](/2020/11/13/building-a-fantasy-football-draft-assistance-algorithm-part-1.html) of this post, I collected and prepared a bunch of data that I needed to generate a fantasy football draft assistant, and exported all of that data to a `.csv` file.  Now that I had all the data, it was time to implement the user interface for DAsHA -- I wanted to make a tool into which I could feed (a) the current draft position and (b) players already picked, and return as much data as possible for me to pick the best player per position.  Here's how I went about doing that.
 
 ## Getting Started
 
-For starters, I did a bit of data cleanup so that the player scores could be displayed in a user-friend way.  I also had to import all the necessary libraries to run my model.  Enter my second Jupyter Notebook: `DAsHA_User_Interface`!
+For starters, I did a bit of data cleanup so that the player scores could be displayed in a user-friend way.  I also had to import all the necessary libraries to run my model.  Enter my second Jupyter Notebook: `DAsHA_User_Interface`.
 
 ```python
 import numpy as np
@@ -39,19 +39,22 @@ df['drafted']=0
 
 Now that my data was ready, it was time to write DAsHA, the algorithm for determining the best player from the given remaining ones.
 
-The idea here is that DAsHA would return a panel of players at each position with the highest projected points and provide context as to which ones would be the best to pick that round.  This was done in two ways -- (1) DAsHA calculated the "marginal" score for each player, with this score representing how many more points this player is expected to generate compared to the best player at the same position who will be available in the next round[^bignote]; and (2) DAsHA constructed a series of confidence intervals for each player.  This would let me select players based on variance as well as projected points.
+The idea here is that DAsHA would return a panel of players at each position with the highest projected points and provide context as to which ones would be the best to pick that round.  This was done in two ways:
 
-Finally, since I had to _act_ on all this data, I needed DAsHA to generate graphs comparing the players at the two positions with the highest point projections to the next best option available at that position in the current round.  Since I wanted DAsHA to be a heuristic _helper_ (as compared to an out-and-out predictive tool), my goal was to provide as much data for myself to make an informed decision based on the variance / distribution of point projections in addition to the raw point totals. For example, I wanted to include a confidence interval for each player so to represent the upside / downside potential. Depending on my draft position, I could be willing to accept a player with a lower median projection but higher upside as opposed to locking in a player with a higher median point projection, but very low variance.
+1. DAsHA calculated the "marginal" score for each player, with this score representing how many more points this player is expected to generate compared to the best player at the same position who will be available in the next round.[^bignote]
+2. DAsHA constructed a series of confidence intervals for each player.  These confidence intervals would let me select players based on variance as well as projected points.[^bignote2]
+
+Finally, since I had to _act_ on all information, I needed DAsHA to generate charts and graphs that displayed all of these comparisons.  Since I wanted DAsHA to be a heuristic _helper_ (as compared to an out-and-out predictive tool), my goal was to provide as much data for myself to make an informed decision based on the variance / distribution of point projections in addition to the raw point totals.
 
 ## Comparing the players
 
-DAsHA needed three different datasets to generate the things that I needed, namely
+DAsHA needed three different data structures to accomplish my goals, namely
 
 1. The list of best players per position for the round
 2. The list of the best players per position for the next round (to calculate the marginal score)
 3. The list of the second best players for each position, to provide more information for my draft decision.  
 
-I wrote each approach as a separate method in my Jupyter notebook so it could be easier to extend in the future.  Below are the three methods.
+I wrote each collection as a separate method in my Jupyter notebook so it could be easier to extend in the future.  Below are the three methods.
 
 Best players:
 
@@ -180,11 +183,11 @@ for j in range(0,len(positions)):
     best_players[j].append(marg)
 ```
 
-(the full code can be found on Github [here](https://github.com/dmarticus/dasha/blob/master/DAsHA_user_interface.ipynb)).
+(If you're curious the full code for DAsHA's UI can be found on Github [here](https://github.com/dmarticus/dasha/blob/master/DAsHA_user_interface.ipynb)).
 
 ## Visualizing the results
 
-Now that I had my dynamic player comparisons, it was time to build the scaffolding to visualize the results as a user interface!  Since I wanted the most important information to help me draft first (I only have 90 seconds per round), I started off just showing a table of the top players:
+Now that I had my player comparison results, it was time to build the scaffolding to visualize these results in a user interface!  Since I wanted the most important information to help me draft first (I only have 90 seconds per round), I started off just showing a table of the top players:
 
 ```python
 # print recommendations menu
@@ -280,3 +283,5 @@ Now that I had a rudimentary system for tracking state, I could run DAsHA live d
 TODO
 
 [^bignote]: For example, if the top RB available now is projected to get 150 points, but the top RB that will be available during your next pick is projected to get 100 points, the marginal score will be 50. However, if the top kicker available this round will also be available next round, the marginal score for drafting that kicker will be 0. ***In general, you should draft the player with the highest marginal score.***
+
+[^bignote2]: I wanted to include a confidence interval for each player so to represent the upside / downside potential. Depending on my draft position, I could be willing to accept a player with a lower median projection but higher upside as opposed to locking in a player with a higher median point projection, but very low variance.
