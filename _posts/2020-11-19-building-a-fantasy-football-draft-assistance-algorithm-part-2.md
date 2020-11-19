@@ -7,11 +7,11 @@ post_summary: "Constructing a Fantasy Football draft assistance algorithm using 
 
 ### Part Two -- building the user interface to assist with real-time drafting
 
-In [part one](/2020/11/13/building-a-fantasy-football-draft-assistance-algorithm-part-1.html) of this project, I collected and prepared a bunch of data that I needed to create a fantasy football draft assistant, and exported all of that data to a `.csv` file.  Now that I had all the data, it was time to implement the user interface for DAsHA -- I wanted to make a tool into which I could feed (a) the current draft position and (b) players already picked, and return as much data as possible for me to pick the best player per position.
+In [part one](/2020/11/13/building-a-fantasy-football-draft-assistance-algorithm-part-1.html) of this project, I collected and prepared a bunch of data that I needed to create a fantasy football draft assistant (DAsHA), and exported all of that data to a `.csv` file.  Now that I had all the data, it was time to implement the user interface for DAsHA -- I wanted to make a tool into which I could feed (a) the current draft position and (b) players already picked, and return as much data as possible for me to pick the best player per position.
 
 ## Getting Started
 
-First, I did a bit of data cleanup so that the player scores could be displayed in a user-friend way.  I also had to import all the necessary libraries to run my model.  Enter my second Jupyter Notebook: `DAsHA_User_Interface.ipynb`.
+First, I did a bit of data cleanup so that the player scores could be displayed in a user-friend way.  I also had to import all the necessary libraries to run my model.
 
 ```python
 import numpy as np
@@ -44,17 +44,17 @@ The idea here is that DAsHA would return a panel of players at each position wit
 1. DAsHA calculated the "marginal" score for each player, with this score representing how many more points this player is expected to generate compared to the best player at the same position who will be available in the next round.[^bignote]
 2. DAsHA constructed a series of confidence intervals for each player.  These confidence intervals would let me select players based on variance as well as projected points.[^bignote2]
 
-Finally, since I had to _act_ on all information, I needed DAsHA to generate charts and graphs that displayed all of these comparisons.  Since I wanted DAsHA to be a heuristic _helper_ (as compared to an out-and-out predictive tool), my goal was to provide as much data for myself to make an informed decision based on the variance/distribution of point projections in addition to the raw point totals.
+Finally, since I had to _act_ on all information, I needed DAsHA to generate charts and graphs that displayed all of these comparisons.  Since I wanted DAsHA to be a heuristic helper (as compared to an out-and-out predictive tool), my goal was to provide as much data for myself to make an informed decision based on the variance/distribution of point projections in addition to the raw point totals.
 
 ## Comparing the players
 
-DAsHA needed three different data structures to accomplish my goals, namely
+DAsHA needed three different arrays to accomplish my goals, namely
 
 1. The list of best players per position for the round
 2. The list of the best players per position for the next round (to calculate the marginal score)
 3. The list of the second best players for each position, to provide more information for my draft decision.  
 
-I wrote each collection as a separate method in my Jupyter notebook so it could be easier to extend in the future.  Below is the python code I used to implement these three methods.
+I wrote each collection as a separate method in my Jupyter notebook so it could be easier to extend in the future.  Below is my implementation of each method.
 
 ```python
 ### BEST PLAYERS ###
@@ -81,6 +81,35 @@ def compare_best_players(positions):
                         k += 1
 
     return best_players
+
+### BEST PLAYERS IN THE NEXT ROUND ###
+def compare_best_players_next_round(positions, next_available_pick):
+    best_players_next_round = []
+    j = 0
+    for j in range(0, len(positions)):
+        k = 0
+        for k in range(0, len(df)):
+            if df['drafted'][k] == 1:
+                k += 1
+            if df['drafted'][k] == 0:
+                if df['POS'][k] == positions[j]:
+                    if len(best_players_next_round) > j:
+                        if df['Draft Position'][k] < next_available_pick:
+                            k += 1
+                        else:
+                            if df['pts'][k] > best_players_next_round[j][2]:
+                                best_players_next_round[j] = [df['POS'][k], df['Name'][k], df['pts'][k], df['Draft Position'][k]]
+                                k += 1
+                            if df['pts'][k] <= best_players_next_round[j][2]:
+                                k += 1
+                    if len(best_players_next_round) <= j:
+                        if df['Draft Position'][k] < next_available_pick:
+                            k += 1
+                        else:
+                            best_players_next_round.append([df['POS'][k], df['Name'][k], df['pts'][k], df['Draft Position'][k]])
+                            k += 1
+
+    return best_players_next_round
 
 ### SECOND BEST PLAYERS ###
 def compare_second_best_players(positions, best_players):
@@ -112,38 +141,9 @@ def compare_second_best_players(positions, best_players):
                                 df['pts'][k], df['Draft Position'][k]])
                             k += 1
     return second_best_players
-
-### BEST PLAYERS IN THE NEXT ROUND ###
-def compare_best_players_next_round(positions, next_available_pick):
-    best_players_next_round = []
-    j = 0
-    for j in range(0, len(positions)):
-        k = 0
-        for k in range(0, len(df)):
-            if df['drafted'][k] == 1:
-                k += 1
-            if df['drafted'][k] == 0:
-                if df['POS'][k] == positions[j]:
-                    if len(best_players_next_round) > j:
-                        if df['Draft Position'][k] < next_available_pick:
-                            k += 1
-                        else:
-                            if df['pts'][k] > best_players_next_round[j][2]:
-                                best_players_next_round[j] = [df['POS'][k], df['Name'][k], df['pts'][k], df['Draft Position'][k]]
-                                k += 1
-                            if df['pts'][k] <= best_players_next_round[j][2]:
-                                k += 1
-                    if len(best_players_next_round) <= j:
-                        if df['Draft Position'][k] < next_available_pick:
-                            k += 1
-                        else:
-                            best_players_next_round.append([df['POS'][k], df['Name'][k], df['pts'][k], df['Draft Position'][k]])
-                            k += 1
-
-    return best_players_next_round
 ```
 
-Now that I had the methods for calculating my three data structures, I could put it all together like this:
+Now that I had the methods for populating the three arrays, I could put them all together like this:
 
 ```python
 # generate the current draft position
