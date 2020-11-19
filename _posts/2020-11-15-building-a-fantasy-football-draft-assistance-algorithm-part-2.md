@@ -5,13 +5,13 @@ tags: [fun, data science, python]
 post_summary: "Constructing a Fantasy Football draft assistance algorithm using Gaussian Kernel Density Estimation (Gaussian KDE) Part Two: Building the User Interface.  Given my cross-sectional dataset from a variety of different fantasy football prediction sources, I implemented a DAsHA, a tool into which I could feed (a) the current draft position and (b) players already picked, and return as much data as possible for me to pick the best player that round."
 ---
 
-### Part Two -- building the user interface to run alongside the draft
+### Part Two -- building the user interface to assist with real-time drafting
 
 In [part one](/2020/11/13/building-a-fantasy-football-draft-assistance-algorithm-part-1.html) of this post, I collected and prepared a bunch of data that I needed to generate a fantasy football draft assistant, and exported all of that data to a `.csv` file.  Now that I had all the data, it was time to implement the user interface for DAsHA -- I wanted to make a tool into which I could feed (a) the current draft position and (b) players already picked, and return as much data as possible for me to pick the best player per position.  Here's how I went about doing that.
 
 ## Getting Started
 
-For starters, I did a bit of data cleanup so that the player scores could be displayed in a user-friend way.  I also had to import all the necessary libraries to run my model.  Enter my second Jupyter Notebook: `DAsHA_User_Interface`.
+First, I did a bit of data cleanup so that the player scores could be displayed in a user-friend way.  I also had to import all the necessary libraries to run my model.  Enter my second Jupyter Notebook: `DAsHA_User_Interface.ipynb`.
 
 ```python
 import numpy as np
@@ -150,7 +150,7 @@ def compare_best_players_next_round(positions, next_available_pick):
     return best_players_next_round
 ```
 
-Tying everything together, the comparison section of DAsHA looked something like this:
+Now that I had the methods for calculating my three data structures, I could put it all together like this:
 
 ```python
 # generate the current draft position
@@ -183,11 +183,11 @@ for j in range(0,len(positions)):
     best_players[j].append(marg)
 ```
 
-(If you're curious the full code for DAsHA's UI can be found on Github [here](https://github.com/dmarticus/dasha/blob/master/DAsHA_user_interface.ipynb)).
+(If you're curious, the full code for DAsHA's UI can be found on Github [here](https://github.com/dmarticus/dasha/blob/master/DAsHA_user_interface.ipynb)).
 
 ## Visualizing the results
 
-Now that I had my player comparison results, it was time to build the scaffolding to visualize these results in a user interface!  Since I wanted the most important information to help me draft first (I only have 90 seconds per round), I started off just showing a table of the top players:
+Now that I had my player comparison information, it was time to build the scaffolding to visualize these results in a user interface!  Since I wanted the most important information to help me draft first (I only have 90 seconds per round), I started off just showing a table of the top players:
 
 ```python
 # print recommendations menu
@@ -249,13 +249,13 @@ plt.show()
 
 ![UI Demo](../../../media/second_best_boxplot.png){:width="740px"}
 
-Tying all of these visualizations together gave me the following UI each time I ran DAsHA.
+Tying all of these visualizations together led to a visualization that looked something like this:
 
 ![UI Demo](../../../media/UI_demo.png)
 
-## Running DAsHA
+## Running DAsHA in real-time
 
-I'll admit, I definitely hacked together this part, but my draft was in 20 minutes!  Anyway, since DAsHA ran inside a Jupyter Notebook, I wrote little while loop to return `True` unless it was my turn.  This way, I could run DAsHA live and feed it inputs while my draft was going:
+I'll admit, I definitely hacked together this part, but when I was writing it the draft was only 20 minutes away!  Basically, what I did was take advantage of my format; since DAsHA ran inside a Jupyter Notebook, I wrote little while loop to return `True` unless it was my turn.  This way, I could run DAsHA live and feed it inputs while my draft was going:
 
 ```python
 your_turn = False
@@ -274,17 +274,19 @@ while your_turn == False:
         your_turn = True
 ```
 
-Now that I had a rudimentary system for tracking state, I could run DAsHA live during my draft!  It looked something like this:
-
-![UI Demo](../../../media/DAsHA_Demo.gif){:width="740px"}
+Now that I had a rudimentary system for tracking state, I could run DAsHA live during my draft!  All I had to do was feed it the (a) draft number and (b) the player taken, and when it was my turn it would show me the various visualizations that I put together earlier in this post.  Pretty nifty!
 
 ### Conclusion
 
-While I hadn't really set a concrete goal for DAsHA other than "beat ESPN's player projections so that I could draft more shrewdly than my friends", I'd say this project was a rousing success.  On top of having the best draft out of all my friends (my team is the one on the top in the below image), 
+While I hadn't really set a concrete goal for DAsHA other than "beat ESPN's player projections so that I could draft more shrewdly than my friends", I'd say this project was a rousing success.  On top of having the best draft out of all my friends (my team is the one on the top in the below image that has sadly taken a turn for the worse),
 
 ![UI Demo](../../../media/draft_rankings.png){:width="740px"}
 
-I learned a lot about estimating probability distributions using Gaussian KDEs (read [part one](/2020/11/13/building-a-fantasy-football-draft-assistance-algorithm-part-1.html) for more details on that) and I had fun hacking a Jupyter notebook into a UI that I could use in real-time to help me draft.  Unfortunately, the end of this story is not a happy one; despite my excellent draft, my record this season is only 5-5.  Perhaps for my next project I'll use some data science to help me with my week over week player projections so I stop leaving my good players on the bench!
+I learned a lot about estimating probability distributions using Gaussian KDEs (read [part one](/2020/11/13/building-a-fantasy-football-draft-assistance-algorithm-part-1.html) for more details on that) and I had fun hacking a Jupyter notebook into a UI that I could use to help me draft in real-time.  
+
+Unfortunately, the end of this story is not a happy one; despite my excellent draft, my record this season is only 5-5.  Perhaps for my next project I'll use some data science to help me with my week over week player projections so I stop leaving my good players on the bench!
+
+#### Footnotes
 
 [^bignote]: For example, if the top RB available now is projected to get 150 points, but the top RB that will be available during your next pick is projected to get 100 points, the marginal score will be 50. However, if the top kicker available this round will also be available next round, the marginal score for drafting that kicker will be 0. ***In general, you should draft the player with the highest marginal score.***
 
