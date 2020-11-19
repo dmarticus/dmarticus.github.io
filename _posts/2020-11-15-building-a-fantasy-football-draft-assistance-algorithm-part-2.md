@@ -9,7 +9,9 @@ post_summary: "Constructing a Fantasy Football draft assistance algorithm using 
 
 Now that I had my `.csv` file full of players and their projections, I now wanted to turn this data into DAsHA proper -- I wanted a tool that could take (a) the draft order and (b) players already picked as inputs and return the best possible players per position.  Here's how I went about doing that.
 
-For starters, I had to do a little bit of data cleanup so that the player scores were displaye in a user-friend way.  I also had to import all the necessary libraries to run my model.  Enter my second Jupyter Notebook!
+## Getting Started
+
+For starters, I did a bit of data cleanup so that the player scores could be displayed in a user-friend way.  I also had to import all the necessary libraries to run my model.  Enter my second Jupyter Notebook: `DAsHA_User_Interface`!
 
 ```python
 import numpy as np
@@ -27,7 +29,7 @@ df = pd.read_csv('./prepared_data/2020_ffl_df.csv')
 for i in range(0,len(df)):
     df['kde_icdf'][i] = df['kde_icdf'][i].replace('\n',' ').replace('[','').replace(']','')
     df['kde_icdf'][i] = [float(x) for x in df['kde_icdf'][i].split()]
-    
+
 # more data cleanup for the position names
 df['POS']=df['POS'].str.strip()
 
@@ -35,15 +37,26 @@ df['POS']=df['POS'].str.strip()
 df['drafted']=0
 ```
 
-Now that my data was ready, it was time to create DAsHA, the algorithm for determining the best player from the given remaining ones.
+Now that my data was ready, it was time to write DAsHA, the algorithm for determining the best player from the given remaining ones.
 
-The idea here is that DAsHA will return a panel of players at each position with the highest projected points. DAsHA will also show a "marginal" score, which is how many more points this player is expected to generate compared to the best player at the same position who will be available in the next round.
+The idea here is that DAsHA would return a panel of players at each position with the highest projected points and provide context as to which ones would be the best to pick that round.  This was done in two ways -- (1) DAsHA calculated the "marginal" score for each player, with this score representing how many more points this player is expected to generate compared to the best player at the same position who will be available in the next round[^bignote]; and (2) DAsHA constructed a series of confidence intervals for each player.  This would let me select players based on variance as well as projected points.
 
-Here's how I compared the best players:
+Finally, since I had to _act_ on all this data, I needed DAsHA to generate graphs comparing the players at the two positions with the highest point projections to the next best option available at that position in the current round.  Since I wanted DAsHA to be a heuristic _helper_ (as compared to an out-and-out predictive tool), my goal was to provide as much data for myself to make an informed decision based on the variance / distribution of point projections in addition to the raw point totals. For example, I wanted to include a confidence interval for each player so to represent the upside / downside potential. Depending on my draft position, I could be willing to accept a player with a lower median projection but higher upside as opposed to locking in a player with a higher median point projection, but very low variance.
+
+## Comparing the players
+
+DAsHA needed three different datasets to generate the things that I needed, namely
+
+1. The list of best players per position for the round
+2. The list of the best players per position for the next round (to calculate the marginal score)
+3. The list of the second best players for each position, to provide more information for my draft decision.  
+
+I wrote each approach as a separate method in my Jupyter notebook so it could be easier to extend in the future.  Below are the three methods.
+
+Best players:
 
 ```python
 def compare_best_players(positions):
-    # identify best players per position
     best_players = []
     j = 0
     for j in range(0, len(positions)):
@@ -55,22 +68,23 @@ def compare_best_players(positions):
                 if df['POS'][k] == positions[j]:
                     if len(best_players) > j:
                         if df['pts'][k] > best_players[j][2]:
-                            best_players[j] = [df['POS'][k], df['Name'][k], df['pts'][k], df['Draft Position'][k]]
+                            best_players[j] = [df['POS'][k], df['Name'][k],
+                                df['pts'][k], df['Draft Position'][k]]
                             k += 1
                         if df['pts'][k] <= best_players[j][2]:
                             k += 1
                     if len(best_players)<=j:
-                        best_players.append([df['POS'][k], df['Name'][k], df['pts'][k],df['Draft Position'][k]])
+                        best_players.append([df['POS'][k], df['Name'][k],
+                            df['pts'][k],df['Draft Position'][k]])
                         k += 1
 
     return best_players
 ```
 
-Then, I needed to compare the _second_ best players:
+Second best players:
 
 ```python
 def compare_second_best_players(positions, best_players):
-    # loop to collect second-best choices for each round
     second_best_players = []
     j = 0
     for j in range(0,len(positions)):
@@ -85,7 +99,9 @@ def compare_second_best_players(positions, best_players):
                             k += 1
                         else:
                             if df['pts'][k] > second_best_players[j][2]:
-                                second_best_players[j]=[df['POS'][k], df['Name'][k], df['pts'][k], df['Draft Position'][k]]
+                                second_best_players[j] =
+                                    [df['POS'][k], df['Name'][k],
+                                        df['pts'][k], df['Draft Position'][k]]
                                 k += 1
                             if df['pts'][k] <= second_best_players[j][2]:
                                 k += 1
@@ -93,16 +109,16 @@ def compare_second_best_players(positions, best_players):
                         if df['Name'][k] == best_players[j][1]:
                             k += 1
                         else:
-                            second_best_players.append([df['POS'][k], df['Name'][k], df['pts'][k], df['Draft Position'][k]])
+                            second_best_players.append([df['POS'][k], df['Name'][k],
+                                df['pts'][k], df['Draft Position'][k]])
                             k += 1
     return second_best_players
 ```
 
-Finally, I wanted to get the list of the best players for the next round so I could calculate the _marginal_ score.
+Best players for the next round:
 
 ```python
 def compare_best_players_next_round(positions, next_available_pick):
-    # identify best choice in next round at each position
     best_players_next_round = []
     j = 0
     for j in range(0, len(positions)):
@@ -131,9 +147,10 @@ def compare_best_players_next_round(positions, next_available_pick):
     return best_players_next_round
 ```
 
-Tying everything together, my calculations looked like this:
+Tying everything together, the comparison section of DAsHA looked something like this:
 
 ```python
+# generate the current draft position
 current_draft_number = 0
 i = 0
 while current_draft_number == 0:
@@ -151,34 +168,36 @@ positions = ['QB','RB','WR','TE','K','DEF']
 # identify best choices at each position
 best_players = compare_best_players(positions)
 
+# collect the second-best choices for each round
+second_best_players = compare_second_best_players(positions, best_players)
+
 # identify best choice in next round at each position
 best_players_next_round = compare_best_players_next_round(positions, next_available_pick)
 
-# collect the second-best choices for each round
-second_best_players = compare_second_best_players(positions, best_players)
-```
-
-Then, I calculated the marginal examples
-
-```python
-# make marginal comparison and append to best_players list
+# make marginal comparisons and append them to the best_players list
 for j in range(0,len(positions)):
     marg = best_players[j][2] - best_players_next_round[j][2]
     best_players[j].append(marg)
 ```
 
-Finally, it's time to start visualizing the data!  Since I wanted the most important information to help me draft first (I only have 90 seconds per round), I started with my recommendations:
+(the full code can be found on Github [here](https://github.com/dmarticus/dasha/blob/master/DAsHA_user_interface.ipynb)).
+
+## Visualizing the results
+
+Now that I had my dynamic player comparisons, it was time to build the scaffolding to visualize the results as a user interface!  Since I wanted the most important information to help me draft first (I only have 90 seconds per round), I started off just showing a table of the top players:
 
 ```python
-# print recommendation menu
+# print recommendations menu
 for i in range(0,len(positions)):
     print(f"{best_players[i][0]:{5}} - {best_players[i][1]:{20}} - {round(best_players[i][2],2):{6}}, margin: {round(best_players[i][4],2)}")
 ```
 
-Then I visualized the actual spread of the best players, broken out by position.
+![UI Demo](../../../media/best_players_menu.png){:width="740px"}
+
+Then, I visualized the scores and confidence intervals for these top players.
 
 ```python
-# finding index values (based off Yahoo! draft position) to create the boxplots
+# identify index values (based off Yahoo! draft position) to create the boxplots
 DEF = best_players[0][3] - 1
 K = best_players[1][3] - 1
 TE = best_players[2][3] - 1
@@ -186,23 +205,31 @@ WR = best_players[3][3] - 1
 RB = best_players[4][3] - 1
 QB = best_players[5][3] - 1
 
-# boxplots of recs
+# boxplots of recommendations
 box_plot_data=[df['kde_icdf'][QB], df['kde_icdf'][RB], df['kde_icdf'][WR], df['kde_icdf'][TE], df['kde_icdf'][K], df['kde_icdf'][DEF]]
 plt.boxplot(box_plot_data, vert=False, labels=[df['Name'][QB], df['Name'][RB], df['Name'][WR], df['Name'][TE], df['Name'][K], df['Name'][DEF] ])
 plt.show()
 ```
 
-Finally, I calculated the second-best player by position and visualized that data, too (mostly to just give myself the option)
+![UI Demo](../../../media/best_players_boxplot.png){:width="740px"}
+
+And finally, I grouped the second-best players by position,
 
 ```python
-# find top two second-best
+# find the top two second-best
 top_seconds = [second_best_players[0][2], second_best_players[1][2], second_best_players[2][2], second_best_players[3][2],second_best_players[4][2],second_best_players[5][2],]
 
 first_comparison = top_seconds.index(max(top_seconds))
-top_seconds[first_comparison] = 0
-second_comparison = top_seconds.index(max(top_seconds))
 
-# boxplots of second best
+top_seconds[first_comparison] = 0
+
+second_comparison = top_seconds.index(max(top_seconds))
+```
+
+and made box plots for each of them.
+
+```python
+# create boxplot of second best recommendations
 first_best_first = best_players[first_comparison][3] - 1
 second_best_first = second_best_players[first_comparison][3] - 1
 first_best_second = best_players[second_comparison][3] - 1
@@ -217,19 +244,15 @@ plt.boxplot(box_plot_data, vert=False, labels=[df['Name'][second_best_second], d
 plt.show()
 ```
 
-(TODO SHOW GRAPH)
+![UI Demo](../../../media/second_best_boxplot.png){:width="740px"}
 
-For example, if the top RB available now is projected to get 150 points, but the top RB that will be available during your next pick is projected to get 100 points, the marginal score will be 50. However, if the top kicker available this round will also be available next round, the marginal score for drafting that kicker will be 0. ***In general, you should draft the player with the highest marginal score.***
+Tying all of these visualizations together gave me the following UI each time I ran DAsHA.
 
-DAsHA will also return a chart of confidence intervals of each player. This lets you select based on variance as well as projected points.
+![UI Demo](../../../media/UI_demo.png)
 
-Finally, DAsHa generates graphs comparing the players at the two positions with the highest point projections to the next best option available at that position in the current round. Again, DAsHA is a _helper_ tool, so my goal was to provide as much data for myself to make an informed decision based on the variance / distribution of point projections in addition to the raw point totals. For example, the tails on either side show upside / downside potential (TODO SHOW GRAPH). Depending on your draft position, you may be willing to accept a player with a lower median projection but higher upside as opposed to locking in a player with a higher median point projection, but very low variance.
+## Running DAsHA
 
-An example of DAsHA's menu output is:
-
-![UI Demo](../../../media//UI_demo.PNG)
-
-Finally, I built a little while loop so I could run DAsHA live and feed it inputs while my draft was going:
+I'll admit, I definitely hacked together this part, but my draft was in 20 minutes!  Anyway, since DAsHA ran inside a Jupyter Notebook, I wrote little while loop to return `True` unless it was my turn.  This way, I could run DAsHA live and feed it inputs while my draft was going:
 
 ```python
 your_turn = False
@@ -241,13 +264,19 @@ while your_turn == False:
         df['drafted'][temp_no] = 1
         new_draft = ''
     your_turn_input = input('Is it your turn?')
-    no_set = {'no', 'n', 'N', 'No'}   
+    no_set = {'no', 'n', 'N', 'No'}
     if your_turn_input in no_set: 
         your_turn = False
     else:
         your_turn = True
 ```
 
-Here's what it looked like while I was drafting!
+Now that I had a rudimentary system for tracking state, I could run DAsHA live during my draft!  It looked something like this:
 
-![DAsHA Demo](../../../media/DAsHA_Demo.gif){:height="650px" width="700px"}
+![UI Demo](../../../media/DAsHA_Demo.gif){:width="740px"}
+
+### Conclusion
+
+TODO
+
+[^bignote]: For example, if the top RB available now is projected to get 150 points, but the top RB that will be available during your next pick is projected to get 100 points, the marginal score will be 50. However, if the top kicker available this round will also be available next round, the marginal score for drafting that kicker will be 0. ***In general, you should draft the player with the highest marginal score.***
