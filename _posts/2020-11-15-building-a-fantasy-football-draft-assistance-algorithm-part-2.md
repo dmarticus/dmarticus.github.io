@@ -37,7 +37,7 @@ df['POS']=df['POS'].str.strip()
 df['drafted']=0
 ```
 
-Now that my data was ready, it was time to write DAsHA, the algorithm for determining the best player from the given remaining ones.
+Now that my data was ready, it was time to write some code to determine the best players to pick.
 
 The idea here is that DAsHA would return a panel of players at each position with the highest projected points and provide context as to which ones would be the best to pick that round.  This was done in two ways:
 
@@ -280,7 +280,11 @@ Now that I had a rudimentary system for tracking state, I could run DAsHA live d
 
 ### Conclusion
 
-TODO
+While I hadn't really set a concrete goal for DAsHA other than "beat ESPN's player projections so that I could draft more shrewdly than my friends", I'd say this project was a rousing success.  On top of having the best draft out of all my friends (my team is the one on the top in the below image), 
+
+![UI Demo](../../../media/draft_rankings.png){:width="740px"}
+
+I learned a lot about estimating probability distributions using Gaussian KDEs (read [part one](/2020/11/13/building-a-fantasy-football-draft-assistance-algorithm-part-1.html) for more details on that) and I had fun hacking a Jupyter notebook into a UI that I could use in real-time to help me draft.  Unfortunately, the end of this story is not a happy one; despite my excellent draft, my record this season is only 5-5.  Perhaps for my next project I'll use some data science to help me with my week over week player projections so I stop leaving my good players on the bench!
 
 [^bignote]: For example, if the top RB available now is projected to get 150 points, but the top RB that will be available during your next pick is projected to get 100 points, the marginal score will be 50. However, if the top kicker available this round will also be available next round, the marginal score for drafting that kicker will be 0. ***In general, you should draft the player with the highest marginal score.***
 
