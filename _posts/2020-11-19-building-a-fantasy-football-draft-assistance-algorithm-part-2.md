@@ -242,7 +242,7 @@ plt.show()
 
 ![UI Demo](../../../media/second_best_boxplot.png){:width="740px"}
 
-Tying all of these visualizations together led to a visualization that looked something like this:
+Tying all of these visualizations together led to a final output that looked something like this:
 
 ![UI Demo](../../../media/UI_demo.png)
 
