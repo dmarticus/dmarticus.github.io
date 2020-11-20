@@ -188,7 +188,7 @@ for i in range(0,len(positions)):
     print(f"{best_players[i][0]:{5}} - {best_players[i][1]:{20}} - {round(best_players[i][2],2):{6}}, margin: {round(best_players[i][4],2)}")
 ```
 
-![UI Demo](../../../media/best_players_menu.png){:width="740px"}
+![Best Players Menu](../../../media/best_players_menu.png){:width="740px"}
 
 Then, I visualized the scores and confidence intervals for these top players.
 
@@ -207,7 +207,7 @@ plt.boxplot(box_plot_data, vert=False, labels=[df['Name'][QB], df['Name'][RB], d
 plt.show()
 ```
 
-![UI Demo](../../../media/best_players_boxplot.png){:width="740px"}
+![Best Players Boxplot](../../../media/best_players_boxplot.png){:width="740px"}
 
 And finally, I grouped the second-best players by position,
 
@@ -240,7 +240,7 @@ plt.boxplot(box_plot_data, vert=False, labels=[df['Name'][second_best_second], d
 plt.show()
 ```
 
-![UI Demo](../../../media/second_best_boxplot.png){:width="740px"}
+![Second Best Boxplot](../../../media/second_best_boxplot.png){:width="740px"}
 
 Tying all of these visualizations together led to a final output that looked something like this:
 
@@ -273,7 +273,7 @@ Now that I had a rudimentary system for tracking state, I could run DAsHA live d
 
 While I hadn't really set a concrete goal for DAsHA other than "beat ESPN's player projections so that I could draft more shrewdly than my friends", I'd say this project was a rousing success.  On top of having the best draft out of all my friends (my team is the one on the top in the below image that has sadly taken a turn for the worse),
 
-![UI Demo](../../../media/draft_rankings.png){:width="740px"}
+![Draft Rankings](../../../media/draft_rankings.png){:width="740px"}
 
 I learned a lot about estimating probability distributions using Gaussian KDEs (read [part one](/2020/11/13/building-a-fantasy-football-draft-assistance-algorithm-part-1.html) for more details on that) and I had fun hacking a Jupyter notebook into a UI that I could use to help me draft in real-time.  
 
