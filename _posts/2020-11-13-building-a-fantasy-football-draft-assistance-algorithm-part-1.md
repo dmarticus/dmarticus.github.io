@@ -213,7 +213,7 @@ ax.legend(loc='best')
 ax.grid(True, zorder=-5)
 ```
 
-![KDE Demo](../../../media/KDE_demo.png){:width="740px"}
+![KDE Demo](../../../media/KDE_demo.PNG){:width="740px"}
 
 This distribution is then used to generate median point estimations and confidence intervals for each player. For example, this code
 

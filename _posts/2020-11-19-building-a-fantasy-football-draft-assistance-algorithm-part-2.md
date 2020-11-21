@@ -244,7 +244,7 @@ plt.show()
 
 Tying all of these visualizations together led to a final output that looked something like this:
 
-![UI Demo](../../../media/UI_demo.png){:width="740px"}
+![UI Demo](../../../media/UI_demo.PNG){:width="740px"}
 
 ## Running DAsHA in real-time
 
