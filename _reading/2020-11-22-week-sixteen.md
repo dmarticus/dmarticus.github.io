@@ -13,7 +13,7 @@ This week I did a lot more production than consumption; work was pretty hectic a
 
 #### Culture
 
-* ['It's the screams of the damned!' The eerie AI world of deepfake music | Music | The Guardian](https://www.theguardian.com/music/2020/nov/09/deepfake-pop-music-artificial-intelligence-ai-frank-sinatra).  I think a lot about the effect of ML on music generation and this article does a decent job summarizing the current state of AI music generation.  Worth checking out Google's [Magenta Project](https://magenta.tensorflow.org/), too.
+* ['It's the screams of the damned!' The eerie AI world of deepfake music](https://www.theguardian.com/music/2020/nov/09/deepfake-pop-music-artificial-intelligence-ai-frank-sinatra).  I think a lot about the effect of ML on music generation and this article does a decent job summarizing the current state of AI music generation.  Worth checking out Google's [Magenta Project](https://magenta.tensorflow.org/), too.
 
 #### Work
 
