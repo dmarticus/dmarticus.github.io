@@ -2,7 +2,7 @@
 title: "08/17 - 08/23"
 layout: post
 tags: [database, rust, platforms, google, cloud, haskell, distributed systems, security, open-source, career, engineering, TikTok]
-summary: "No summary this week"
+summary: "This week is mostly focused on technical content.  I cover a deep dive of sled.rs, a guide on marketing languages, and a summary of distributed systems."
 ---
 
 #### Business
