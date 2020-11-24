@@ -2,6 +2,7 @@
 title: "11/01 - 11/08"
 layout: post
 tags: ["haskell", "managers", "profiles", "economics", "functional programming", "software architecture", "fun"]
+summary: "This was a big week!  The USA had its presidential election and while it's not officially done yet, it looks like Joe Biden has won, which is a positive development.  When I woke up on Saturday morning and read the news it felt like the first time I'd woken up to good news in years.  I don't have as many reads for this week because once election coverage began on Tuesday night I just kept refreshing [the open-source election tracker every few minutes alongside reading as insipid hot takes about voting trends as much as I could.  It was a bad week for careful, thoughtful, reading for me.  But a good week overall :)"
 ---
 
 This was a big week!  The USA had its presidential election and while it's not officially done yet, it looks like Joe Biden has won, which is a positive development.  When I woke up on Saturday morning and read the news it felt like the first time I'd woken up to good news in years.  I don't have as many reads for this week because once election coverage began on Tuesday night I just kept refreshing [the open-source election tracker](https://alex.github.io/nyt-2020-election-scraper/battleground-state-changes.html) every few minutes alongside reading as insipid hot takes about voting trends as much as I could.  It was a bad week for careful, thoughtful, reading for me.  But a good week overall :)

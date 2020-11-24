@@ -2,6 +2,7 @@
 title: "10/19 - 10/25"
 layout: post
 tags: [history, computer science, machine learning, ocaml, programming languages, operations, scala, nanotechnology, poker, blogging]
+summary: "This week I have a mixed bag of pretty dense content, and other than the two podcasts and the first link I mostly skimmed the content, but many of these links are rich resources that you can continue to come back to.  I recommend bookmarking any link you find interesting.  Enjoy!"
 ---
 
 This week I have a mixed bag of pretty dense content, and other than the two podcasts and the first link I mostly skimmed the content, but many of these links are rich resources that you can continue to come back to.  I recommend bookmarking any link you find interesting.  Enjoy!

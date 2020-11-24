@@ -2,6 +2,7 @@
 title: "09/14 - 09/20"
 layout: post
 tags: [security, AI, wildfires, optics, functional programming, capitalism, haskell, types, scala]
+summary: "No summary this week"
 ---
 
 #### Culture

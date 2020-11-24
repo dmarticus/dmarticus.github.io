@@ -2,6 +2,7 @@
 title: "08/17 - 08/23"
 layout: post
 tags: [database, rust, platforms, google, cloud, haskell, distributed systems, security, open-source, career, engineering, TikTok]
+summary: "No summary this week"
 ---
 
 #### Business
