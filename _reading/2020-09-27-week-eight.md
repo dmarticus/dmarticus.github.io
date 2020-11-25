@@ -2,9 +2,10 @@
 title: "09/21 - 09/27"
 layout: post
 tags: [github, parser, scala, haskell, functional programming, formal verification, philosophy, programming languages]
+summary: "This week, I've got a bunch of cool things from Github, various posts about parsers, and some fun meditations on removing oneself from the machine.  Enjoy :)"
 ---
 
-Got a bunch of cool things from Github this week, various posts about parsers, and some fun meditations on removing oneself from the machine.  Enjoy :)
+This week, I've got a bunch of cool things from Github, various posts about parsers, and some fun meditations on removing oneself from the machine.  Enjoy :)
 
 #### Business
 

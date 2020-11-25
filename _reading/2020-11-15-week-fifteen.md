@@ -2,6 +2,7 @@
 title: "11/09 - 11/15"
 layout: post
 tags: ["software engineering", "types", "haskell", "kotlin", "design", "learning in public"]
+summary: "Buncha techy content this week!  I've been going really hard on trying to understand haskell better lately (for reasons that I'll disclose within a week or so!), and in addition to working on some small projects in Haskell, I've been reading a lot of articles about the language as well.  It's so cool!  This week also deviates from my normal behavior in that I read an enjoyed not one but TWO articles about Facebook engineering this week... as much as I find their product and business model actively duplicitous, I really can't fault their engineering chops."
 ---
 
 Buncha techy content this week!  I've been going really hard on trying to understand haskell better lately (for reasons that I'll disclose within a week or so!), and in addition to working on some small projects in Haskell, I've been reading a lot of articles about the language as well.  It's so cool!  This week also deviates from my normal behavior in that I read an enjoyed not one but TWO articles about Facebook engineering this week... as much as I find their product and business model actively duplicitous, I really can't fault their engineering chops.  

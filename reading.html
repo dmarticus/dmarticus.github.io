@@ -18,8 +18,9 @@ every week in <a href="/subscribe.html">my newsletter</a>, or you can subscribe 
 <div class="links">
         {% assign sorted_entries = site.reading | sort: collection | reverse %}
         {% for entry in sorted_entries %}
-        <p><h3><a href="{{ entry.url }}" title="{{ entry.title }}">{{ entry.title }}</a></h3></p>
-        <p>{{ entry.content }}</p>
+        <!-- don't use the huge line break -->
+        <p><h3 style="display:inline"><a href="{{ entry.url }}" title="{{ entry.title }}">{{ entry.title }}</a></h3></br>
+        <i><small>{{ entry.summary }}</small></i></p>
         {% endfor %}
 </div>
 

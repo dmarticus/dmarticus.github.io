@@ -1,7 +1,8 @@
 ---
 title: "09/14 - 09/20"
 layout: post
-tags: [security, AI, wildfires, optics, functional programming, capitalism, haskell, types, scala]
+tags: [security, AI, wildfires, functional programming, capitalism, haskell, types, scala]
+summary: "This week I cover security vulnerabilities, AI, functional programming, and a mixed bag of other things."
 ---
 
 #### Culture

@@ -2,6 +2,7 @@
 title: "11/16 - 11/22"
 layout: post
 tags: ["capitalism", "finance", "tiktok", "entrepeneurship", "scala", "haskell", "postgresql", "linux"]
+summary: "This week I did a lot more production than consumption; work was pretty hectic and I also wanted to finish part two of my fantasy football data science blog post (here's part one, if you want the full story).  As a result, I've got fewer pieces that I read and thought about this week, and I definitely skewed more towards interesting cultural tidbits than deeply technical pieces.  Enjoy!"
 ---
 
 This week I did a lot more production than consumption; work was pretty hectic and I also wanted to finish part two of my fantasy football data science blog post (here's part one, if you want the full story).  As a result, I've got fewer pieces that I read and thought about this week, and I definitely skewed more towards interesting cultural tidbits than deeply technical pieces.  Enjoy!
