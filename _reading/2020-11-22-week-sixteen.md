@@ -20,6 +20,7 @@ This week I did a lot more production than consumption; work was pretty hectic a
 
 * [The Gods on HackerNews](https://www.riknieu.com/the-gods-on-hackernews/) and [Holy heck this is hard](https://www.indiehackers.com/post/holy-heck-this-is-hard-8ebe864174).  Hackernews is mostly a great thing to read if you're interested in cool content but the comment sections can be a a total cesspool and the first link is a tongue-in-cheek commentary on how any time someone does something cool and shares it with Hackernews then there's always a bunch of folks who think it's _super edgy_ to just dunk on it.  And the second link is a reflection on how hard making and scaling a product independently is really difficult.  
 * [I sold Baremetrics](https://baremetrics.com/blog/i-sold-baremetrics).  In the same spirit of the previous link, this one is a story of someone who did successfully accomplish the very difficult challenge of building, scaling, and selling his technology business.  
+* [Simple Explanations without Sounding Condescending](https://jvns.ca/blog/2020/11/15/simple-explanations-without-sounding-condescending/).  Another excellent read from Julia Evans about how to explain things well.  Some of her techniques include (1) write true explanations (as compared to ELI5-esque ones) (2) only use visuals if the visuals are easy to understand (3) tell a relevant story and (4) have a specific audience (explanations are not one-size fits all).
 
 #### Tech
 
