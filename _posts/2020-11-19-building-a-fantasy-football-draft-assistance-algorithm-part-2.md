@@ -261,7 +261,7 @@ while your_turn == False:
         new_draft = ''
     your_turn_input = input('Is it your turn?')
     no_set = {'no', 'n', 'N', 'No'}
-    if your_turn_input in no_set: 
+    if your_turn_input in no_set:
         your_turn = False
     else:
         your_turn = True

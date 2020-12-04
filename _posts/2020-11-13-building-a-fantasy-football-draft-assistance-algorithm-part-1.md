@@ -32,7 +32,7 @@ I wanted a diverse set of projections to improve the accuracy of my KDE, so I co
 
 Collecting this data posed a challenge initially, since none of these sources had public APIs (not surprising, but still sad) that I could figure out how to work with, and I didn't want to write some sort of HTML scraper to import the data into a CSV (nor did I want to reverse-engineer the APIs that they were using to generate the data). Fortunately, though, after a little research (turns out there are a LOT of sports bloggers out there who do stuff like this), I found out that Excel has a native method to [import data from the web](https://www.spreadsheetsports.com/free-tools/how-to-download-sport-data-into-a-spreadsheet/) that just worked out of the box for the above links.  Using this speedy approach, I made an Excel spreadsheet for each data source and put them all into the `/raw_data` directory at the root of my project, like so.
 
-```
+```text
 raw_data/
     |-- Yahoo_2020_Draft_Positions.xlsx
     |-- Fantasy_Pros_2020_proj.xlsx
