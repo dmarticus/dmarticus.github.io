@@ -30,6 +30,8 @@ Fortunately, it turns out it's really easy to configure dark mode with pure CSS 
 
 (TODO show screenshots of both versions and add a note on how to change it up if you want to).
 
-## Choosing the Dark Mode CSS
+## Dark Mode Colorway
 
-Now that I knew how to enable dark mode with pure CSS, my next challenge was coming up with the actual CSS colors.  I used NightEye, then I stole the colors with the dev tools, and then I just pasted them into my CSS file.  For the code snippets, I used rougify to auto-generate it.
+Now that I knew how to enable dark mode with pure CSS, my next challenge was coming up with the colors -- I wanted a color palette that would complement my light mode palette,but I wasn't sure which colors would make good complements.  To get these colors, I used a little chrome extension trickery.  There's a popular chrome extension for automatically generating night mode for any browser page called NightEye, so what I did was install NightEye on my browser, navigate to my site, and then use ColorPicker (another chrome extension) to determine the colors for the text, background, and links.  Low-tech?  Maybe, but worked well and only took about 15 minutes!  The only thing that NightEye didn't provide great CSS for was my code blocks, but fortunately I had a solution for that: Rougify.  Rougify is a Jekyll tool that auto-generates CSS for several different code blocks syntax highlight formats, and since I was already using the `base16.solarized.light` theme for my original code blocks, all I had to do was run `rougify style base16.solarized.dark` and I had my code block CSS.
+
+## Conclusion TODO
