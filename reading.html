@@ -9,7 +9,8 @@ I consume a lot of content and I like sharing cool stuff I find.
 So, I figured I'd try and make a running list of links to things I've consumed and why I like them.
 Call it link curation, call it time-wasting; whatever -- it brings me joy. If you want to be updated on the latest
 batch, I send these links out
-every week in <a href="/subscribe.html">my newsletter</a>, or you can subscribe to updates via the <a href="/reading.xml">Atom Feed</a>
+every week in <a href="/subscribe.html">my newsletter</a>, or you can subscribe to updates via the <a
+        href="/reading.xml">Atom Feed</a>
 
 <h2>Link Archive (updated weekly)</h2>
 
@@ -19,7 +20,8 @@ every week in <a href="/subscribe.html">my newsletter</a>, or you can subscribe 
         {% assign sorted_entries = site.reading | sort: collection | reverse %}
         {% for entry in sorted_entries %}
         <!-- don't use the huge line break -->
-        <p><h3 style="display:inline"><a href="{{ entry.url }}" title="{{ entry.title }}">{{ entry.title }}</a></h3></br>
+        <p>
+        <h3 style="display:inline"><a href="{{ entry.url }}" title="{{ entry.title }}">{{ entry.title }}</a></h3></br>
         <i><small>{{ entry.summary }}</small></i></p>
         {% endfor %}
 </div>
@@ -58,6 +60,10 @@ every week in <a href="/subscribe.html">my newsletter</a>, or you can subscribe 
                 <li><i>Terranauts</i> by T.C. Boyle</li>
                 <li><i>The Buried Giant</i> by Kazuo Ishiguro</li>
                 <li><i>Liar's Poker</i> by Michael Lewis</li>
+                <li><i>The New Wilderness</i> by Diane Cook</li>
+                <li><i>The Attention Merchants</i> by Tim Wu</li>
+                <li><i>The Southern Book Club's Guide to Slaying Vampires</i> by Grady Hendrix</li>
+                <li><i>Leave the World Behind</i> by Rumaan Alam</li>
         </ul>
 
         <h3>2019</h3>
@@ -85,9 +91,5 @@ every week in <a href="/subscribe.html">my newsletter</a>, or you can subscribe 
                 <li><i>The Goldfinch</i> by Donna Tartt</li>
                 <li><i>The Gift of Struggle</i> Bobby Herrera</li>
                 <li><i>My Sister, the Serial Killer</i> by Oyinkan Braithwaite</li>
-                <li><i>The New Wilderness</i> by Diane Cook</li>
-                <li><i>The Attention Merchants</i> by Tim Wu</li>
-                <li><i>The Southern Book Club's Guide to Slaying Vampires</i> by Grady Hendrix</li>
-                <li><i>Leave the World Behind</i> by Rumaan Alam</li>
         </ul>
 </div>
