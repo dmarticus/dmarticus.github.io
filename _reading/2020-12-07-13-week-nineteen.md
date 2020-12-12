@@ -1,15 +1,15 @@
 ---
 title: "12/07 - 12/13"
 layout: post
-tags: ["culture", "work", "haskell", "functional programming", "language servers"]
-summary: "Back on the timely release schedule!  This week I read some excellent pieces, including one on reading in the meta, and I am really excited to share them.  They cover the wildness in tech IPOs, interesting reads on performance and dev tooling, some papers on examining bias and approximating species diversity, and some killer nature photograher.  Enjoy!"
+tags: ["culture", "work", "haskell", "documentation", "reading", "tech IPOs", "covid-19", "hustle culture","programming", "language servers"]
+summary: "Back on the timely release schedule!  This week I read some excellent pieces, including one on reading in the meta, and I am really excited to share them.  They cover the wildness in tech IPOs, interesting reads on performance and dev tooling, some papers on examining bias and approximating species diversity, and some killer nature photographer.  Enjoy!"
 ---
 
-Back on the timely release schedule!  This week I read some excellent pieces, including one on reading in the meta, and I am really excited to share them.  They cover the wildness in tech IPOs, interesting reads on performance and dev tooling, some papers on examining bias and approximating species diversity, and some killer nature photograher.  Enjoy!
+Back on the timely release schedule!  This week I read some excellent pieces, including one on reading in the meta, and I am really excited to share them.  They cover the wildness in tech IPOs, interesting reads on performance and dev tooling, some papers on examining bias and approximating species diversity, and some killer nature photographer.  Enjoy!
 
 ### My Favorite Link
 
-* [About Reading 100 Books | Durmonski.com](https://durmonski.com/private/reading-100-books/).  I've always read for pleasure.  Ever since I could read, it's something I've always enjoyed doing, and I end up reading between 20-30 books a year just because I can't help myself.  This article makes an interesting case for the value prop of reading, which I found interesting, especially since I don't really care about it.  I read because I'm curious, because I enjoy the feeling of losing myself in a book, and because I honestly can't help myself.  But, if you're the type of person who chooses their hobbies based on how these hobbies will benefit them, I'm all for encouraging folks to read more.  To wit, here's my favorite except from this piece: "reading is not about getting outside gains. It’s primarily about taming your inner demons and finding comfort in your own skin. Once you start accepting yourself the way you are, eventually, positive consequences will follow."
+* [About Reading 100 Books](https://durmonski.com/private/reading-100-books/).  I've always read for pleasure.  Ever since I could read, it's something I've always enjoyed doing, and I end up reading between 20-30 books a year just because I can't help myself.  This article makes an interesting case for the value prop of reading, which I found interesting, especially since I don't really care about it.  I read because I'm curious, because I enjoy the feeling of losing myself in a book, and because I honestly can't help myself.  But, if you're the type of person who chooses their hobbies based on how these hobbies will benefit them, I'm all for encouraging folks to read more.  To wit, here's my favorite except from this piece: "reading is not about getting outside gains. It’s primarily about taming your inner demons and finding comfort in your own skin. Once you start accepting yourself the way you are, eventually, positive consequences will follow."
 
 ### Business
 
