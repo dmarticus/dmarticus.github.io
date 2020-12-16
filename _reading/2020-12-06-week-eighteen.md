@@ -11,7 +11,7 @@ Ugh, slow again this week. I started my new role at [Mercury](https://mercury.co
 
 Trying a new segment on my newsletter this week called "My Favorite Link".  Should be pretty self-explanatory as to what it represents :)
 
-Anyway, this week, my favorite link was [Write five, then synthesize: good engineering strategy is boring.](https://lethain.com/good-engineering-strategy-is-boring/) by Will Larson (@lethain).  This piece is full of engineering strategy that is both actionably insightful ("Prefer minimal design document templates that allow authors to select the most useful sections and only insist on exhaustive details for the riskiest projects.") and introspective ("Most folks are better writers than they are editors.", I initially disagree with this take and then I slept on it and realized that he's exactly right).
+* Anyway, this week, my favorite link was [Write five, then synthesize: good engineering strategy is boring.](https://lethain.com/good-engineering-strategy-is-boring/) by Will Larson (@lethain).  This piece is full of engineering strategy that is both actionably insightful ("Prefer minimal design document templates that allow authors to select the most useful sections and only insist on exhaustive details for the riskiest projects.") and introspective ("Most folks are better writers than they are editors.", I initially disagree with this take and then I slept on it and realized that he's exactly right).
 
 ### Culture
 
@@ -19,12 +19,12 @@ Anyway, this week, my favorite link was [Write five, then synthesize: good engin
 * [Lorde: The Blackbird Spyplane Interview - Blackbird Spyplane](https://www.blackbirdspyplane.com/p/lorde-the-blackbird-spyplane-interview).  Jonah Weiner writes this hilarious newsletter on fashion, culture, and general media-elite navel-gazing, and I loved this week's interview with Lorde.  I'm a big Lorde stan and it's not surprising that this newsletter's interview with her was so cool.  
 * [Inside the New York Public Library's Last, Secret Apartments - Atlas Obscura](https://www.atlasobscura.com/articles/inside-the-new-york-public-librarys-last-secret-apartments).  My favorite paragraph: "When these libraries were built, about a century ago, they needed people to take care of them. Andrew Carnegie had given New York $5.2 million, worth well over $100 million today, to create a city-wide system of library branches, and these buildings, the Carnegie libraries, were heated by coal. Each had a custodian, who was tasked with keeping those fires burning and who lived in the library, often with his family. “The family mantra was: Don’t let that furnace go out,” one woman who grew up in a library told the New York Times."  New York has so much cool history and this piece does a great job of conjuring up the historical context around a cool New York attribute.  
 
-#### Work
+### Work
 
 * [This Japanese Shop Is 1,020 Years Old. It Knows a Bit About Surviving Crises. - The New York Times](https://www.nytimes.com/2020/12/02/business/japan-old-companies.html).  Slow and stable works for a business if everyone is on the same page.
 * [Career Chats with Swyx and Randall (Staff Eng Podcast by Lethain)](https://share.transistor.fm/s/d499230a).  What happens after you go past Senior? Will Larson, CTO of Calm, has been interviewing Staff-plus engineers across the industry for his new book, Staff Engineering. This is his first full-length interview podcast episode!
 
-#### Tech
+### Tech
 
 * [2020 Haskell survey analysis](https://www.ariis.it/static/articles/2020-haskell-survey-analysis/page.html).  Some findings from the 2020 State of Haskell survey that extracts some additional insight from the data by clustering the respondents into various categories based on their Haskell usage and experience and analyzing the responses of those clusters.  
 
