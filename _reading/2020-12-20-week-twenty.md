@@ -1,7 +1,7 @@
 ---
 title: "12/14 - 12/20"
 layout: post
-tags: [""]
+tags: ["haskell", "AI", "music", "IQ", "technology", "writing"]
 summary: "This is my last newsletter of 2020!  I started my newsletter this year as a way to both share cool things that I'd found on the internet and as a way for me to remember what the heck I'd been reading.  Now I'm 20 weeks deep and have no plans on slowing down in 2021.  However, I'm not going to be posting another one for the rest of the year; I want to take some time to reflect and recharge before next year.  Enjoy this week, and happy holidays!"
 ---
 
