@@ -18,7 +18,12 @@ This is my last newsletter of 2020!  I started my newsletter this year as a way 
 ### Culture
 
 * [2020 In Photos: A Year Like No Other](https://www.nytimes.com/interactive/2020/world/year-in-pictures.html).  I think this year is a sign of wild years to come, but until we have data for that, here's a picture history of the craziest year of my lifetime.
-* [Blob Opera](https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw).  Any project where Jacob Collier is involved is a good project IMO.
+* [Blob Opera](https://artsandculture.google.com/experiment/blob-opera/AAHWrq360NcGbw).  Any project where [Jacob Collier](https://twitter.com/googlearts/status/1339948535312130051) is involved is a good project IMO.  But seriously this is an incredible bit of tech.  I played around with it for way too long.
+* [Texas Photographers have seen some shit](https://www.texasmonthly.com/being-texan/texas-wedding-photographers-have-seen-some/).  This piece got me so mad.  
+
+### Politics
+
+* [Defund the Crime Beat](https://www.niemanlab.org/2020/12/defund-the-crime-beat/).  Crime coverage is terrible -- it’s racist, classist, fear-based clickbait masking as journalism. It creates lasting harm for the communities that newsrooms are supposed to serve. And because it so rarely meets the public’s needs, it’s almost never newsworthy.  If we weren't so addicted to gory details as a population, we'd have no need for it.  We should get rid of it.
 
 ### Tech
 
