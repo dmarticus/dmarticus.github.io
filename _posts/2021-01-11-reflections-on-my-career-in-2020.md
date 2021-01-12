@@ -7,7 +7,9 @@ post_summary: "2020 felt like a particularly long year for a variety of reasons,
 
 2020 felt like a particularly long year for a variety of reasons.  For me, one of the reasons was because I changed companies twice after 5 years at the same place!  After starting the year at  [Qualtrics](https://www.qualtrics.com/qualtrics-life/why-qualtrics-dylan-martin-software-engineer-seattle-wa/), I did a stint at [47 Degrees](https://www.47deg.com/) before joining [Mercury](https://mercury.com/) at the start of December.  Since this was the first time in my career that I'd changed companies, I wanted to write down some of my reflections on what I learned (both good and bad) throughout the process.  
 
-## Timeline
+In my opinion (and the opinion of [others](https://lethain.com/learn-when-you-reflect/)), reflecting is really valuable; while some of the things that I realized this past year aren't necessarily advice for you, I hope that this process of reflection it's an example of how you can reflect on yourself and maybe you'll find some helpful wisdom from my experiences.  Like everything that you read on the internet: your mileage may vary.
+
+### Timeline
 
 I've loosely ordered my reflections chronologically, but I wanted to open with a brief timeline of my year to provide some context around the timing of my career moves.
 
@@ -17,11 +19,7 @@ From June to December, I worked at 47 Degrees.  While there, I worked on some op
 
 Finally, in December, I started working at Mercury.  I haven't done much there yet, but I did write and record a song for the [Mercury Christmas Album](https://www.youtube.com/watch?v=gvrv1My-pFY&feature=youtu.be) (my song is at 13:27).
 
-### Quick Disclaimer
-
-I want to point out that these reflections aren't intended as advice to other folks or as capital-T Truths about "how to navigate a career in software" or anything like that.  Hell, I don't even know if I'll still believe in the things I learned a year from now.  Like everything that you read on the internet: your mileage may vary.  If folks resonate with any of the reflections that I'm about to share, that's awesome; but if you want to find value in figuring out which moves to make (or not make) as part of your software engineering career, my best advice would be to spend some time reflecting on yourself (this advice is not [unique to me](https://lethain.com/learn-when-you-reflect/)).
-
-## Reflection #1: I do my best work when using technology that excites me
+### Reflection #1: I do my best work when using technology that excites me
 
 One of the most resonant things that I've learned about myself this year is that my motivation for doing good, impactful work is directly tied to the type of software engineering that I get to do.  Specifically for me, I do my best work when I get to do strongly-typed (and preferably) functional programming in well-designed languages alongside of a team of people who share that enthusiasm and are eager to both share knowledge and listen (look, I know that previous sentence sounds obnoxious as hell, but this is my blog and these are my reflections, so let me live).
 
@@ -29,7 +27,7 @@ Last year, I first started working in Scala (after doing TypeScript and Go befor
 
 Once I joined 47 Degrees, I realized that I loved writing code in a paradigm that I enjoyed -- I was regularly falling into the mythical "flow state" that I'd never experienced prior, and I was generally much more productive when it came to designing and writing software.  After a few weeks doing this, I realized that much of my motivation to work comes from my underlying appreciation for the software that I'm working on.  Functional programming isn't a silver bullet, and work is still work, but I'm much more excited when I wake up if I know I'm going to work on something that is intrinsically interesting to me.
 
-## Reflection #2: I can leave my job without burning bridges
+### Reflection #2: I can leave my job without burning bridges
 
 I was nervous to leave Qualtrics.  I was scared of burning bridges, I was scared of being judged negatively by my peers, and I didn't want to hurt the feelings of my coworkers, all of whom I liked.  In hindsight, most of these fears were pretty irrational, and they largely manifested because it was the first time I'd ever considered leaving a company that I'd worked at full-time.  Qualtrics will always be a special place for me -- I owe my career to the chance that they took on me -- but once I'd realized that there were better opportunities to work on functional programming outside of Qualtrics, I couldn't stop thinking about what it would be like to try something different.  Since I was leaving in the middle of a multi-quarter project and as someone who was relatively well-liked on my team, I was worried that folks would begrudge me for leaving, but fortunately, the opposite was true.  My manager wished me the best, my teammates all encouraged me to go, and the CTO even shouted me out on my last day.  
 
@@ -37,15 +35,15 @@ Evidently, this positive memory of departure managed to stick with me, as I ende
 
 This year in particular, many of my peers have expressed similar fears that I had regarding wanting to leave their role, or their company.  While my experience is obviously different than theirs (or yours, dear reader), my experience with departures this year taught me that the likelihood of the negative possibilities of burning bridges is much lower than your mind is likely to assume.  Unless you, y'know, [steal $10 million of gift cards from your former employer](https://www.justice.gov/usao-wdwa/pr/former-microsoft-software-engineer-sentenced-nine-years-prison-stealing-more-10-million).
 
-## Reflection #3: Getting involved in open-source is less frightening and more rewarding than I'd thought
+### Reflection #3: Getting involved in open-source was less frightening and more rewarding than I'd thought
 
 One of the things I was excited about when I took the job at 47 Degrees was that I'd be able to work on open-source software full-time.  I'm a big fan of open-source software; I share [Danny McClanahan's sentiment](https://twitter.com/hipsterelectron) that good open-source helps to "to unlock the shoulders of giants from golden handcuffs", but prior to this year I'd never made any serious contributions to open-source software outside of one-off patches.  I thought open-source was for programmers that were more serious, more talented, more motivated, than someone like me.  
 
 Working on open-source fulltime at 47 helped dispel basically all of these notions, and my biggest takeaway was that contributing to open-source was much less difficult than it appeared from the outside.  Mind, I still think there's still some opacity to the process(so much so that I felt inspired to [write a guide](https://dylanamartin.com/2020/10/15/my-experience-getting-started-in-open-source.html) about how to get involved), but I now feel like can be a much more confident and useful open-source contributor going forward.  
 
-Finally, working on open-source helped me appreciate the things that make good open-source possible are also incredible valuable in any software working context.  I specifically appreciated (1) automated PRs and CI, (2) a focus on asynchronous, distributed work (3) a bias towards good issues descriptions with context and (4) good writing as a force multiplier.  
+Finally, working on open-source helped me appreciate the things that make good open-source possible are also incredible valuable in any software working context.  I specifically appreciated (1) automated PRs and CI, (2) a focus on asynchronous, distributed work (3) a bias towards good issues descriptions with context and (4) good writing as a force multiplier.  Going forward, I want any project that I work on (open-source or not) to emphasize those four components as essential processes.
 
-## Reflection #4: I'm more motivated at work when my coworkers and I are working on a shared vision
+### Reflection #4: I'm more motivated at work when my coworkers and I are working on a shared vision
 
 One of the biggest career risks that I took this year was going from product engineering to software consulting.  As I mentioned before, I made the move to 47 Degrees primarily to deepen my expertise in functional programming, but I wasn't sure how I'd feel about consulting.  On one hand, I saw it as an opportunity ot explore a branch of software engineering that I hadn't spent much time doing yet.  On the other hand, because I had no experience in consulting, I had no idea how I'd find it.  In short, I struggled as a consultant, and one of the reasons that I did was because I didn't have the chance work with my coworkers that I valued so much.  
 
@@ -53,7 +51,7 @@ One of the biggest career risks that I took this year was going from product eng
 
 With Mercury, I'm back at a company where I'm running in the same direction as all my inspiring coworkers, and that helps keep me motivated on days when life is bringing me down.  It's a little too early for my to tell if this unified team has a positive effect on my productivity, but the folks at Mercury have definitely gone out of their way to make me feel at home :)  
 
-## Reflection #5: It's important to set long-term goals for yourself when joining a new company
+### Reflection #5: I need to set long-term goals for myself when joining a new company
 
 My big career regret for this past year was not setting measurable long-term goals when joining 47, since this led to me to not having a sense of completion when I left the company.  When I joined 47 Degrees, I knew what I wanted _from_ the job (open-source work, functional programming tech stack), but I didn't have a very clear idea of what I wanted to do _in_ the job.  
 
@@ -61,7 +59,7 @@ For example, when I was considering leaving 47 Degrees, I talked with a coworker
 
 When I heard those answers, I was both impressed with her and dejected: outside of my goals for contributing to open-source and writing more FP Scala, none of the goals that I'd set for 47 Degrees were very measurable or time-bound.  As a result, when I left the company, I couldn't help but feel as though I'd left something on the table, since I'd never clearly set a goal for what I wanted to do while there.  I knew that going into my new role at Mercury, I was going to set at least 3 long-term, big-picture goals for myself so I could better assess the impact of my time at Mercury.  
 
-## Reflection #6: The best way to master something is to learn it from first principles
+### Reflection #6: I discovered I like learning things from first principles
 
 My final reflection comes from my last month and a half at Mercury, the vast majority of which I've spent learning Haskell from first principles (via the [appropriately-titled book](https://haskellbook.com/)).  Despite having done plenty of functional programming in Scala over the last year, I'd never written any serious Haskell, and I'm grateful that the folks at Mercury are letting me ramp up by learning the language from scratch before diving into the codebase (Mercury has a backend that's 100% Haskell).  
 
@@ -73,6 +71,6 @@ When I was reflecting back on this year, I was a little sad that I felt as thoug
 
 * assessing and interviewing for external roles,
 * setting goals for myself at the beginning of new roles, and
-* determining what my values and motivators are,
+* determining what my values and motivators are
 
 I learned a lot about how I work, what I value at work, and the environmental factors that motivate me.  Going into 2021, I feel more prepared and motivated than ever to make an impact on my work, and to do it in a way that doesn't burn me out.  I'm fired up for the year to come.
