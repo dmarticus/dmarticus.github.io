@@ -1,5 +1,5 @@
 ---
-title: "Reflections on my Career in 2020"
+title: "Reflections on my career in 2020"
 layout: post
 tags: [career, reflection, software engineering]
 post_summary: "2020 felt like a particularly long year for a variety of reasons, and one of the reasons it felt long for me was because I changed companies twice after 5 years at Qualtrics!  After starting the year there, I did a stint at 47 Degrees before joining Mercury at the start of December.  Since this was the first time in my career that I'd actually changed companies, I wanted to write down some of my reflections on what I learned (both good and bad) throughout the process."
