@@ -13,8 +13,8 @@ This blog will be broken into two sections: a "Before" section that covers what 
 
 There's not too many steps here, but I definitely recommend making sure that these tasks are done before configuring a new machine since my .rc files and my editor keybindings are specific and integral parts to my efficient workflow.  Here's are the recommended tasks:
 
-* Save any custom shell configs (.bashrc, .zshrc, etc) and custom editor keybindings (VSCode, Sublime, Intellij, .vimrc, etc) to your dotfiles or Dropbox.  Mine are all on Github [here](https://github.com/dmarticus/dotfiles).
-* Create a [Brewfile](https://github.com/Homebrew/homebrew-bundle) for your brew-installed packages (this will make it much easier to add all of your brew dependencies on your new machine).  My Brewfile is [here](https://github.com/dmarticus/dotfiles/blob/master/Brewfile).
+* Save any custom shell configs (.bashrc, .zshrc, etc) and custom editor keybindings (VSCode, Sublime, Intellij, .vimrc, etc) in Github, Dropbox, or anywhere safe, really.
+* Create a [Brewfile](https://github.com/Homebrew/homebrew-bundle) for your brew-installed packages (this will make it much easier to add all of your brew dependencies on your new machine).
 * Export existing secrets from LastPass to a secure cloud location (Dropbox, GDrive, etc) so that you can access them on your new machine without having to reset all of your passwords.  My secrets are located at *REDACTED* (lol nice try NSA).
 * Make sure any files, folders, photos, or anything else you want saved are backed up to iCloud, Google Photos, or Dropbox.
 
