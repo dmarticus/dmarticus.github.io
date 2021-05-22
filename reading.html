@@ -7,24 +7,7 @@ redirect_from: /links.html
 
 I consume a lot of content and I like sharing cool stuff I find.
 So, I figured I'd try and make a running list of links to things I've consumed and why I like them.
-Call it link curation, call it time-wasting; whatever -- it brings me joy. If you want to be updated on the latest
-batch, I send these links out
-every week in <a href="/subscribe.html">my newsletter</a>, or you can subscribe to updates via the <a
-  href="/reading.xml">Atom Feed</a>
-
-<h2>Link Archive (updated weekly)</h2>
-
-<h3>2020</h3>
-
-<div class="links">
-  {% assign sorted_entries = site.reading | sort: collection | reverse %}
-  {% for entry in sorted_entries %}
-  <!-- don't use the huge line break -->
-  <p>
-  <h3 style="display:inline"><a href="{{ entry.url }}" title="{{ entry.title }}">{{ entry.title }}</a></h3></br>
-  <i><small>{{ entry.summary }}</small></i></p>
-  {% endfor %}
-</div>
+Call it link curation, call it time-wasting; whatever -- it brings me joy.
 
 <h2>Book Archive (updated whenever I finish one)</h2>
 
@@ -33,6 +16,15 @@ every week in <a href="/subscribe.html">my newsletter</a>, or you can subscribe 
   <ul>
     <li><i>1Q84</i> by Haruki Murakami</li>
     <li><i>In the Dream House</i> by Carmen Maria Machado</li>
+    <li><i>Death's End</i> by Cixin Liu</li>
+    <li><i>The Fifth Season</i> by N.K. Jemisin</li>
+    <li><i>The Psychology of Money</i> by Morgan Housel</li>
+    <li><i>Exhalation</i> by Ted Chiang</li>
+    <li><i>The Obelisk Gate</i> by N.K. Jemisin</li>
+    <li><i>The Stone Sky</i> by N.K. Jemisin</li>
+    <li><i>Haskell Programming from First Principles</i> by Chris Allen and Julie Moronuki</li>
+    <li><i>Vesper Flights</i> by Helen MacDonald</li>
+    <li><i>Braiding Sweetgrass</i> by Robin Wall Kimmerer</li>
   </ul>
   <h3>2020</h3>
   <ul>
@@ -101,4 +93,18 @@ every week in <a href="/subscribe.html">my newsletter</a>, or you can subscribe 
     <li><i>The Gift of Struggle</i> by Bobby Herrera</li>
     <li><i>My Sister, the Serial Killer</i> by Oyinkan Braithwaite</li>
   </ul>
+</div>
+
+<h2>Link Archive (updated weekly throughout 2020, now updated sporadically)</h2>
+
+<h3>2020</h3>
+
+<div class="links">
+  {% assign sorted_entries = site.reading | sort: collection | reverse %}
+  {% for entry in sorted_entries %}
+  <!-- don't use the huge line break -->
+  <p>
+  <h3 style="display:inline"><a href="{{ entry.url }}" title="{{ entry.title }}">{{ entry.title }}</a></h3></br>
+  <i><small>{{ entry.summary }}</small></i></p>
+  {% endfor %}
 </div>
