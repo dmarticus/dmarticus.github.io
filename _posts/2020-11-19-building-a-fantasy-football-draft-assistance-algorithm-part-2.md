@@ -7,7 +7,7 @@ post_summary: "Constructing a Fantasy Football draft assistance algorithm using 
 
 ### Part Two -- building the user interface to assist with real-time drafting
 
-In [part one](/2020/11/13/building-a-fantasy-football-draft-assistance-algorithm-part-1.html) of this project, I collected and prepared a bunch of data that I needed to create a fantasy football draft assistant (DAsHA), and exported all of that data to a `.csv` file.  Now that I had all the data, it was time to implement the user interface for DAsHA -- I wanted to make a tool into which I could feed (a) the current draft position and (b) players already picked, and return as much data as possible for me to pick the best player per position.
+In [part one](/2020/11/13/building-a-fantasy-football-draft-assistance-algorithm-part-1.html), I collected and prepared a bunch of data that I needed to create a fantasy football draft assistant (DAsHA), and exported all of that data to a `.csv` file.  Now that I had all the data, it was time to implement the user interface for DAsHA -- I wanted to make a tool into which I could feed (a) the current draft position and (b) players already picked, and return as much data as possible for me to pick the best player per position.
 
 ## Getting Started
 

@@ -20,9 +20,9 @@ Fantasy football point projections are powered by probability distributions -- e
 
 However, one of the drawbacks of a histogram is in its simplicity -- since a histogram only uses buckets to represent the data distribution means, the curve that can be fit to a histogram doesn't actually use all of the sample points: it just uses the buckets.  So while modeling my data with a Gaussian histogram seemed like a promising start, I was worried that the curve generated from my histogram wouldn't be accurate enough to outperform the ESPN projections.
 
-This is where kernel density estimation comes into play.  Kernel density estimation is a technique for estimation of probability density function that is a must-have enabling the user to better analyse the studied probability distribution than when using a traditional histogram. Unlike the histogram, the kernel technique produces smooth estimate of the pdf, uses all sample points' locations and more convincingly suggest multimodality.  In this case, since I plan on using multiple different buckets of potential scoring projections, I wanted to take advantage of this multimodality, and leverage any potential insights buried therein.  
+This is where kernel density estimation comes into play.  Kernel density estimation is a technique for estimating a probability density function (PDF) that can often outperform histograms, depending on what you want to do. Unlike the histogram, the kernel technique produces smooth estimate of the PDF, uses all sample points' locations, and more convincingly suggests multimodality.  In my case, since I planned on using multiple different buckets of potential scoring projections, I wanted to take advantage of this multimodality, and leverage any potential insights buried therein.  
 
-Fortunately, python has some excellent libraries for implementing Gaussian (Normalized) Kernel Density Estimations (KDEs), so I decided to implement my solution in python. I'm not really a python developer, though -- I've only ever used it to do data science, but since this project neede some data science, I figured: "what the hell?"  But before I could do the science, I needed some actual data.  
+Fortunately, Python has some excellent libraries for implementing Gaussian (Normalized) Kernel Density Estimations (KDEs), and it's generally a great language for quickly prototyping any sort of data science problem.  But before I could do the science, I needed some actual data. 
 
 ## Dealing with the Data
 
@@ -237,4 +237,4 @@ And that's all for now!  I threw a lot of data science concepts out in this post
 
 In [Part Two](/2020/11/19/building-a-fantasy-football-draft-assistance-algorithm-part-2.html), we'll cover how implement this model as a real-time draft assistant tool, and how I used it to out-draft my friends.  I look forward to sharing!
 
-Finally, I just wanted to thank my brother, [Owen Martin](https://github.com/owingit), for code-reviewing my shitty python.  He writes python for data science all the time and is much better at this than me.  Thanks bro!
+Finally, I just wanted to thank my brother, [Owen Martin](https://github.com/owingit), for code-reviewing my shitty Python.  He writes Python all the time and is much better at this than me.  Thanks, Bro!
