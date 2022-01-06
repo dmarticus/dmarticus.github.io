@@ -12,7 +12,7 @@ jobs:
             https://dylanamartin.com/
             https://dylanamartin.com/meta.html
             https://dylanamartin.com/blog.html
-            https://dylanamartin.com/reading.html
+            https://dylanamartin.com/media.html
             https://dylanamartin.com/talks.html
           budgetPath: ./budget.json # test performance budgets
           uploadArtifacts: true # save results as an action artifacts

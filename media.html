@@ -1,14 +1,32 @@
 ---
 layout: default
-title: Reading
-redirect_from: /links.html
+title: Media
+redirect_from:
+- /links.html
+- /reading.html
 ---
-<h1>Reading</h1>
+<h1>Media</h1>
 
-<h2>Book Archive (updated whenever I finish one)</h2>
-
+<h2>2022</h2>
+<div class="movies">
+  <h3>Movies</h3>
+  <ul>
+    <li><i>A Clockwork Orange</i> (Stanley Kubrick)</li>
+    <li><i>French Dispatch</i> (Wes Anderson)</li>
+    <li><i>C'mon C'mon!</i> (Michael Mills)</li>
+    <li><i>The Royal Tenenbaums</i> (Wes Anderson)</li>
+  </ul>
+</div>
 <div class="books">
-  <h3>2021</h3>
+  <h3>Books</h3>
+  <ul>
+    <li><i>Play It As It Lays</i> (Joan Didion)</li>
+  </ul>
+</div>
+
+<h2>2021</h2>
+<div class="books">
+  <h3>Books</h3>
   <ul>
     <li><i>1Q84</i> (Haruki Murakami)</li>
     <li><i>Killing Commendatore</i> (Haruki Murakami)</li>
@@ -47,7 +65,10 @@ redirect_from: /links.html
     <li><i>Slade House</i> (David Mitchell)</li>
     <li><i>Averno</i> (Louise Glück)</li>
   </ul>
-  <h3>2020</h3>
+</div>
+<h2>2020</h2>
+<div class="books">
+  <h3>Books</h3>
   <ul>
     <li><i>Men without Women</i> (Haruki Murakami)</li>
     <li><i>Small Great Things</i> (Jodi Picoult)</li>
@@ -85,8 +106,11 @@ redirect_from: /links.html
     <li><i>Four in the Morning</i> (Sy Safranksy)</li>
     <li><i>The Neil Gaiman Reader: Selected Fiction</i> (Neil Gaiman (loved this one!))</li>
   </ul>
+</div>
 
-  <h3>2019</h3>
+<h2>2019</h2>
+<div class="books">
+  <h3>Books</h3>
   <ul>
     <li><i>All the Light We Cannot See</i> (Anthony Doerr)</li>
     <li><i>The Gene</i> (Siddhartha Mukherjee)</li>
@@ -114,10 +138,7 @@ redirect_from: /links.html
   </ul>
 </div>
 
-<h2>Link Archive (updated weekly throughout 2020, now updated sporadically)</h2>
-
-<h3>2020</h3>
-
+<h2>Newsletter Archive</h2>
 <div class="links">
   {% assign sorted_entries = site.reading | sort: collection | reverse %}
   {% for entry in sorted_entries %}
