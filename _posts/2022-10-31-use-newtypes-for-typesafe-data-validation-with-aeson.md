@@ -9,9 +9,9 @@ This post assumes some familiarity with Haskell, JSON, and [aeson](https://hacka
 
 ## Introduction
 
-Haskell is one of my favorite programming languages, and one of my favorite things to do when doing web programming with Haskell is modeling string-like data with `newtypes`. Much of web development involves dealing with strings (idk why exactly but I imagine mostly because JavaScript and the fact that most web communication protocols use strings as primitives), but not all strings are created equal!  Strings can be emails, or addresses, or routing numbers, or can be a range of possible enums, and just using type `String` to capture all of the variance is a poor data model: it doesn't have the granularity needed to distinguish between different use cases. 
+Haskell is one of my favorite programming languages, and one of the reasons I like it so much is how nicely it supports modeling string-like data with `newtypes` when doing web programming. Much of web development involves dealing with strings (idk why exactly but I imagine mostly because JavaScript and the fact that most web communication protocols use strings as primitives), but not all strings are created equal!  Strings can be emails, or addresses, or routing numbers, or can be a range of possible enums, and just using type `String` to capture all of the variance is a poor data model: it doesn't have the granularity needed to distinguish between different use cases.
 
-This is where using [`newtypes`](https://wiki.haskell.org/Newtype) can help.  Using `newtypes` and their associated [smart constructors](https://wiki.haskell.org/Smart_constructors) to model string-like data is a nice approach for adding granularity to strings to help differentiate string-like types from each other.  Furthermore, the enhanced data modeling provided by newtypes can be extended (via aeson) all the way to JSON parsing, which makes it possible to write a JSON API client in Haskell that provides a type-safe parsing experience with ergonomic errors and a high degree of confidence with respect to data validation.  It's even easy to write tests!  To explain more about what I mean, let's dive into an example of some data modeling I'm doing for an upcoming project that takes advantage of `newtypes` smart constructors, and custom JSON parsing with aeson.
+This is where using [`newtypes`](https://wiki.haskell.org/Newtype) can help.  Using `newtypes` (and their associated [smart constructors](https://wiki.haskell.org/Smart_constructors)) to model string-like data is a nice approach for adding granularity to strings to help differentiate string-like types from each other.  Furthermore, the enhanced data modeling provided by newtypes can be extended (via aeson) all the way to JSON parsing, which makes it possible to write a JSON API client in Haskell that provides a type-safe parsing experience with ergonomic errors and a high degree of confidence with respect to data validation.  It's even easy to write tests!  To explain more about what I mean, let's dive into an example of some data modeling I'm doing for an upcoming project that takes advantage of `newtypes` smart constructors, and custom JSON parsing with aeson.
 
 ## How I use newtypes and smart constructors
 
@@ -37,7 +37,7 @@ mkRoutingNumber t =
     else Nothing
 ```
 
-Now, I can ensure that any instance of `RoutingNumber` types being used in the code will not exist if they don't obey the routing number constraints.  Using this approach, I can take an API that sends a response body that looks like this:
+Now, I can ensure that any instance of `RoutingNumber` types must obey the routing number constraints.  Using this approach, I can take an API that sends a response body that looks like this:
 
 ```hs
 data BeneficiaryBankDetails = BeneficiaryBankDetails
@@ -69,9 +69,9 @@ data BeneficiaryBankDetails = BeneficiaryBankDetails
   }
 ```
 
-The latter example models the data in a way that is both more readable and type-safe.  Any subsequent instance of me using these types in my code will require to me obey these constraints, which will make it harder for me to write bugs.  
+by adding similar constraints to the other fields. This approach lets me modes the data in a way that is both more readable and type-safe, and any subsequent instance of me using these types in my code will require to me obey these constraints, which will make it harder for me to write bugs. As someone who enjoys guardrails in programming because I'm dumb, this is awesome.
 
-(NB: For [`Quasiquotation`](https://wiki.haskell.org/Quasiquotation) fans, I can even write cool helper methods that let me write literal IDs that type-check at compile time, in case I want to use my types in tests later and avoid something unsafe like `fromJust`):
+(Aside: For [`Quasiquotation`](https://wiki.haskell.org/Quasiquotation) fans, I can even write cool helper methods that let me write literal IDs that type-check at compile time, in case I want to use my types in tests later and avoid something unsafe like `fromJust`):
 
 ```hs
 compileRoutingNumber :: QuasiQuoter
@@ -204,7 +204,7 @@ and when I smart constructors and custom ToJSON and FromJSON instances for every
 
 ## Extra benefit: pre-parsed JSON data makes testing easy
 
-As I mentioned in the intro, of the extra perks of all of this type safety means that writing integration tests for this API client is easy.  Once I've modeled all of my data, I can write a test like this
+As I mentioned in the intro, a nice benefit of this type of data modeling is that it make writing integration tests for this API easy.  Once I've modeled all of my data, I can write a test like this
 
 ```hs
 it "gets configuration info" $ do
