@@ -170,8 +170,8 @@ instance FromJSON PayoutErrorCode where
     "invalid_ach_rtn" -> return InvalidACHRoutingTransitNumber
     "invalid_wire_rtn" -> return InvalidWireRoutingTransitNumber
     "vendor_inactive" -> return VendorInactive
-    _ -> error "JSON format not expected"
-  parseJSON _ = error "JSON format not expected"
+    _ -> fail "JSON format not expected"
+  parseJSON _ = fail "JSON format not expected"
 ```
 
 Now that we've established that aeson lets me write custom instances of its core methods for my custom types, so it makes sense that I can take advantage of my newtypes and smart constructors to write something like this
