@@ -253,4 +253,4 @@ and any hand-rolled aeson parsers that reference types that use `ThisOrThat` (su
 
 If you're wondering what all this JSON parsing is for, stay tuned for a library announcement dropping next week!  I'm almost done with the project that uses all of this code and I hope to throw it up on Hackage once I'm done.  It'll have an accompanying blog post, too :)
 
-[^bignote]: Please don't sue me for saving this, Mercury legal.
+[^bignote]: Please don't sue me for saving this, Mercury legal.  There's no business logic in the code and this kind of bifunctor instance already exists all over Github.
