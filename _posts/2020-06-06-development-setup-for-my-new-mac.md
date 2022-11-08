@@ -100,7 +100,7 @@ Now just run the alias (`ssh myssh`) to connect.
 * install [Go](https://golang.org/doc/install)
 * install [Haskell](https://www.haskell.org/platform/mac.html)
 * install [node and NVM](https://www.taniarascia.com/setting-up-a-brand-new-mac-for-development/#nodejs)
-* install [Jekyll and other blog tools](https://dylanamartin.com/2020/03/22/installing-jekyll-and-its-toolchain-on-mac-os-catalina.html)
+* install [Jekyll and other blog tools](https://www.dylanamartin.com/2020/03/22/installing-jekyll-and-its-toolchain-on-mac-os-catalina.html)
 
 #### Install Additional Non-Programming-Related Mac Apps
 

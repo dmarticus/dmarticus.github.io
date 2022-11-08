@@ -9,11 +9,11 @@ jobs:
         uses: treosh/lighthouse-ci-action@v3
         with:
           urls: |
-            https://dylanamartin.com/
-            https://dylanamartin.com/meta.html
-            https://dylanamartin.com/blog.html
-            https://dylanamartin.com/media.html
-            https://dylanamartin.com/talks.html
+            https://www.dylanamartin.com/
+            https://www.dylanamartin.com/meta.html
+            https://www.dylanamartin.com/blog.html
+            https://www.dylanamartin.com/media.html
+            https://www.dylanamartin.com/talks.html
           budgetPath: ./budget.json # test performance budgets
           uploadArtifacts: true # save results as an action artifacts
           temporaryPublicStorage: true # upload lighthouse report to the temporary storage
