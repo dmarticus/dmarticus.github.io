@@ -2,7 +2,7 @@
 title: "Improving the experience of JSON in Haskell with autodocodec and bifunctors"
 layout: post
 tags: [haskell, aeson, types, APIs, functional programming, autodocodec, JSON,validation, code tutorials]
-post_summary: "Libraries and techniques for improving the developer experience of working with JSON in Haskell"
+post_summary: "Libraries and techniques for improving the developer experience of working with JSON in Haskell."
 ---
 ## Introduction
 
