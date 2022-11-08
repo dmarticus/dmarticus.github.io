@@ -4,10 +4,14 @@ layout: post
 tags: [haskell, aeson, types, APIs, functional programming, autodocodec, JSON,validation, code tutorials]
 post_summary: "Libraries and techniques for improving the developer experience of working with JSON in Haskell"
 ---
+## Introduction
 
-In my [last post](http://www.dylanamartin.com/2022/10/31/use-newtypes-for-typesafe-data-validation-with-aeson.html), I talked about how Haskell `newtypes` are great tools for modeling JSON data when writing API clients in Haskell, and I included some examples on how to write custom `ToJSON` and `FromJSON` methods that incorporated these `newtypes`.  That post generated [some discussion on Lobsters](https://lobste.rs/s/ulqssr/data_validation_haskell_with_newtypes), from which I learned about this interesting library called [autodocodec](https://github.com/NorfairKing/autodocodec#readme).  Given the advantages laid out in that discussion, I decided to give that library a try on my project's codebase, and it worked so well that, so I ended up refactoring basically all of my types to use autodocodec to generate JSON parsers for my types.  In fact, I enjoyed the experience of using autodocodec so much that I thought it was worth blogging about.  So here we go!
+In my [last post](http://www.dylanamartin.com/2022/10/31/use-newtypes-for-typesafe-data-validation-with-aeson.html), I talked about how Haskell `newtypes` are great tools for modeling JSON data when writing API clients in Haskell, and I included some examples on how to write custom `ToJSON` and `FromJSON` methods that incorporated these `newtypes`.  That post generated [some discussion on Lobsters](https://lobste.rs/s/ulqssr/data_validation_haskell_with_newtypes), from which I learned about this interesting library called [autodocodec](https://github.com/NorfairKing/autodocodec#readme).  Given the advantages laid out in that discussion, I decided to give that library a try on my project's codebase, and it worked so well that, so I ended up refactoring basically all of my types to use autodocodec to generate JSON parsers for my types.  In fact, I enjoyed the experience of using autodocodec so much that I thought it was worth blogging about.  
 
-## Rewriting my types with autodocodec
+The subsequent code examples will probably make more sense if you have some familiarity with Haskell, JSON, and [aeson](https://hackage.haskell.org/package/aeson).
+
+
+## Rewriting Haskell types with autodocodec
 
 As [janus mentioned](https://lobste.rs/s/ulqssr/data_validation_haskell_with_newtypes#c_nhn8oj), the big benefit of autodocodec is that it generates _bidirectional_ parsers; rather than requiring the user to write both `ToJSON` and `FromJSON` instances, autodocodec lets you specify a single `HasCodec` instance for a given type, and then you can generate `ToJSON` and `FromJSON` instances from that type through the [DerivingVia](https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/deriving_via.html) language extension.  This feature let me rewrite code that looks like this:
 
