@@ -3,16 +3,30 @@ layout: default
 title: Blog
 redirect_from: /writing.html
 ---
+
 <h1>Blog</h1>
 
 <p>
-    You can subscribe to updates via the <a href="/blog.xml">Atom Feed</a>.  I don't maintain a mailing list any more.
+  You can subscribe to updates via the <a href="/blog.xml">Atom Feed</a>. I
+  don't maintain a mailing list any more.
 </p>
 
 <ul class="posts">
-    {% for post in site.posts %}
-    <li><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a> <span>({{ post.date | date_to_string }})</span> <br />
-        <i><small>{{ post.post_summary }}<a href="{{ post.url }}" title="{{ post.title }}"> Keep
-                    reading...</a></small></i> </li><br />
-    {% endfor %}
+  {% for post in site.posts %}
+  <li>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    <span>({{ post.date | date_to_string }})</span> <br />
+    <i
+      ><small
+        >{{ post.post_summary }}<a
+          href="{{ post.url }}"
+          title="{{ post.title }}"
+        >
+          Keep reading...</a
+        ></small
+      ></i
+    >
+  </li>
+  <br />
+  {% endfor %}
 </ul>
