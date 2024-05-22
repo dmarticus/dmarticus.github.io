@@ -2,7 +2,7 @@
 title: "Getting the blog back together"
 layout: post
 tags: [meta, jekyll, ruby]
-post_summary: "My triumphant return to blogging, some notes on bringing this site back to life, and setting the stage for what's coming next"
+post_summary: "My triumphant return to blogging, some notes on bringing this site back to life, and setting the stage for what's coming next."
 ---
 
 The other day I was reading one of my [old blog posts](https://www.dylanamartin.com/2022/10/31/use-newtypes-for-typesafe-data-validation-with-aeson.html), and I was struck by how happy it made me.  I wrote that post during a time in my life where I was programming a lot and really enjoying it, and returning to that post brought me back to that time in my life where my joy for my work was overflowing and I could scarcely contain my excitement to share what I was learning with the world.  A few exhausting jobs later, and I almost don't recognize the guy who wrote those posts.  For the last several months, programming (and frankly, much of my work in general) hasn't felt joyful at all.  I miss that old version of myself.  I wanted to bring him back.
