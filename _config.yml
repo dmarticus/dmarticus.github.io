@@ -9,6 +9,7 @@ title: "Dylan Martin"
 author: "Dylan"
 description: "Blogging and curating content about tech, programming, finance, politics, business, and culture"
 url: "https://www.dylanamartin.com"
+future: true
 
 collections:
   reading:
