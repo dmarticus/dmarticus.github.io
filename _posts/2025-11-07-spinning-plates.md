@@ -98,7 +98,7 @@ Part of why I’m writing this is just to admit that out loud: my focus is worse
 
 I listened to the recent [interview between Dwarkesh Patel and Andrej Karpathy](https://www.dwarkesh.com/p/andrej-karpathy) while I was in the middle of all this, and I liked the whole thing, but two parts really lodged in my brain since they felt relevant to this "how do I work with LLMs without lobotomizing myself" sentiment I’ve been feeling.
 
-The first was how he actually *uses* them. In the section where he [talks about how he codes day-to-day](https://www.youtube.com/watch?v=lXUZvyajciY&t=2142s), walking through how he built [Nanochat](https://github.com/karpathy/nanochat), he describes his workflow as almost entirely in-editor tab completion—his "sweet spot" for using LLMs—rather than giant freeform prompts in a chat box. He writes comments and partial code, lets the model fill in the rest, and only occasionally does the big "send this whole thing off for a refactor" move.
+The first was how he actually *uses* them. In the section where he [talks about how he codes day-to-day](https://www.youtube.com/watch?v=lXUZvyajciY&t=2142s), walking through how he built [Nanochat](https://github.com/karpathy/nanochat), he describes his workflow as almost entirely in-editor tab completion—his "sweet spot" for using LLMs—rather than giant freeform prompts in a chat box.
 
 The second was how he encourages people to *learn* from Nanochat itself. The repo is framed as an educational, hackable, end-to-end LLM stack. His recommended way to study it (and his other materials) is very deliberate:
 
