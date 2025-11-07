@@ -9,7 +9,7 @@ Over the last six months, the way I work has changed more than it did in the pre
 
 I have a feeling it's not just a "me" thing. Companies and tech influencers are loudly pushing AI-first workflows, YouTube talks and blog posts explain "how I use LLMs" as if that’s now a core part of your stack, and experienced devs keep reporting the same weird combo: they *feel* faster while also suspecting they’re learning less[^bignote]
 
-Even as I write this, I have Claude Code spun up in another terminal pane, churning out unit tests for a chunk of code that I mostly didn’t write… but that’s probably 95% of the way to production ready.
+Even as I write this, I have Claude Code spun up in another terminal pane, churning out unit tests for a chunk of code that I mostly didn’t write but that’s probably 95% of the way to production-ready.
 
 It’s incredible.
 
