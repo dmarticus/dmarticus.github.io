@@ -17,7 +17,7 @@ I genuinely don’t know how I feel about it.
 
 ## TL;DR
 
-- LLMs have transformed my work into lots of shallow touches on many tasks instead of long focus on one.
+- LLMs have transformed my work into lots of shallow touches on many tasks instead of long focus sessions on a few things.
 - I’m shipping more than ever, but I retain less and feel less ownership.
 - I now spend as much time optimizing my workflow as I do thinking about the code itself, and the ROI is objectively good and subjectively cursed.
 - My deep-focus muscle is weaker; hard problems feel harder.
