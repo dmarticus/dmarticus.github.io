@@ -53,7 +53,7 @@ Under the hood, though, the feedback loop has been re-sized:
 
 There’s still skill there—prompt design, taste, knowing what "smells wrong"—but the locus of difficulty moves. It’s less "can *I* solve this?" and more "can I supervise this?" The reward structure changes too: less "wow, I learned something deep" and more "nice, another plate spun and didn’t fall." Still satisfying, just in a more managerial way.
 
-And when the model drops a solution fully formed, part of the joy evaporates. The problem gets solved; I don’t get the same little "oh sick, figured that out" hit. When I scroll through my own diffs, I’ll sometimes realize I can’t actually explain why I did X instead of Y in a given PR without re-reading the whole thing.
+And when the model drops a solution fully formed, part of the joy evaporates. The problem gets solved; I don’t get the same little "oh sick, I figured that out" hit. When I scroll through my own diffs, I’ll sometimes realize I can’t actually explain why I did X instead of Y in a given PR without re-reading the whole thing.
 
 The work has my name on it; it just doesn’t always feel like it has my fingerprints. Intellectually, I know that programming has always been "assembly on top of other people’s abstractions." Emotionally, the gap between "I shipped this" and "I understand this" has never felt quite this wide.
 
@@ -98,9 +98,9 @@ Part of why I’m writing this is just to admit that out loud: my focus is worse
 
 I listened to the recent [interview between Dwarkesh Patel and Andrej Karpathy](https://www.dwarkesh.com/p/andrej-karpathy) while I was in the middle of all this, and I liked the whole thing, but two parts really lodged in my brain since they felt relevant to this "how do I work with LLMs without lobotomizing myself" sentiment I’ve been feeling.
 
-The first was how he actually *uses* them. In the section where he [talks about how he codes day-to-day](https://www.youtube.com/watch?v=lXUZvyajciY&t=2142s), walking through how he built Nanochat, he describes his workflow as almost entirely in-editor tab completion—his "sweet spot" for using LLMs—rather than giant freeform prompts in a chat box. He writes comments and partial code, lets the model fill in the rest, and only occasionally does the big "send this whole thing off for a refactor" move.
+The first was how he actually *uses* them. In the section where he [talks about how he codes day-to-day](https://www.youtube.com/watch?v=lXUZvyajciY&t=2142s), walking through how he built [Nanochat](https://github.com/karpathy/nanochat), he describes his workflow as almost entirely in-editor tab completion—his "sweet spot" for using LLMs—rather than giant freeform prompts in a chat box. He writes comments and partial code, lets the model fill in the rest, and only occasionally does the big "send this whole thing off for a refactor" move.
 
-The second was how he encourages people to *learn* from [Nanochat](https://github.com/karpathy/nanochat) itself. The repo—"the best ChatGPT that $100 can buy"—is framed as an educational, hackable, end-to-end LLM stack. His recommended way to study it (and his other materials) is very deliberate:
+The second was how he encourages people to *learn* from Nanochat itself. The repo is framed as an educational, hackable, end-to-end LLM stack. His recommended way to study it (and his other materials) is very deliberate:
 
 - keep the reference repo or notebook on one side of your screen;
 - on the other side, keep your own empty project;
