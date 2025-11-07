@@ -23,30 +23,39 @@ I genuinely don’t know how I feel about it.
 - My deep-focus muscle is weaker; hard problems feel harder.
 - I’m increasingly inspired by Andrej Karpathy’s "tab complete first, type it out to learn" approach and Dan Abramov’s worries about people not wanting to learn at all, and I’m trying to decide how far I want to lean into either side.
 
-## The plate-spinning version of programming
+## The Plate-Spinning Version of Programming
 
-My old "good day" looked like:
+My old "good day" looked like this:
 
-- pick one tricky problem,
-- load it fully into my head,
-- grind on it for a few hours,
-- aha moment,
-- ship a PR.
+1. load one tricky problem into my head,
+2. struggle with it,
+3. get stuck,
+4. have a small breakthrough,
+5. ship a PR.
 
-The feedback loop was long but satisfying: effort in, understanding out. The throughput wasn’t insane, but at least I felt like I owned what I shipped.
+The feedback loop was long but satisfying: effort in, understanding out. Most of the joy lived in steps 2–4; that’s where I actually learned things. The throughput wasn’t insane, but at least I felt like I owned what I shipped.
 
 Now, a typical "good" day looks more like:
 
 - write a short-to-medium-length prompt about a bug or feature;
-- let Claude Code go crazy (I haven't tried Codex yet, but maybe it's worth trying out for some A/B comparisons);
-- skim the output, fix the obviously wrong bits;
+- let Claude Code write a first pass over 3–4 files;
+- skim the output, fix the obviously wrong bits, add logging, run tests;
 - repeat that loop across a few tasks, plus reviews, plus a doc or two.
 
-By the end of the day, my GitHub looks [absolutely cracked](https://github.com/dmarticus/). Lots of green. On a good day I can crank out multiple features that are well-tested and work as soon as they hit production. But when I scroll through my own diffs, I’ll sometimes realize I can’t actually explain why I actually did X instead of Y in a given PR without re-reading the whole thing.
+By the end of the day, my GitHub looks [absolutely cracked](https://github.com/dmarticus/). Lots of green. On a good day I can crank out multiple features that are well-tested and work as soon as they hit production.
 
-The work has my name on it; it just doesn’t always feel like it has my fingerprints.
+Under the hood, though, the feedback loop has been re-sized:
 
-Intellectually, I know that programming has always been "assembly on top of other people’s abstractions." Emotionally, the gap between "I shipped this" and "I understand this" has never felt quite this wide.
+1. define the shape of what I want,
+2. write a prompt and hand it context,
+3. triage whatever comes back,
+4. iterate until it compiles / passes / looks fine.
+
+There’s still skill there —prompt design, taste, knowing what "smells wrong" — but the locus of difficulty moves. It’s less "can *I* solve this?" and more "can I supervise this?" The reward structure changes too: less "wow, I learned something deep" and more "nice, another plate spun and didn’t fall." Still satisfying, just in a more managerial way.
+
+And when the model drops a solution fully formed, part of the joy evaporates. The problem gets solved; I don’t get the same little "oh sick, *I* figured that out" hit. When I scroll through my own diffs, I’ll sometimes realize I can’t actually explain why I did X instead of Y in a given PR without re-reading the whole thing.
+
+The work has my name on it; it just doesn’t always feel like it has my fingerprints. Intellectually, I know that programming has always been "assembly on top of other people’s abstractions." Emotionally, the gap between "I shipped this" and "I understand this" has never felt quite this wide.
 
 ## Meta-work all the way down
 
@@ -65,33 +74,6 @@ and less time doing the traditional "learn new thing from first principles" grin
 It does mean my "craft" feels different. Less "I write elegant code" and more "I design systems so other things can write pretty good code."
 
 That’s defensible if you frame it as leverage. It’s just weird to wake up and realize your job has quietly shifted from "builder" to "foreman" without anyone explicitly deciding that.
-
-## Re-sized feedback loops
-
-The web development feedback loop to which I'd become accustomed to early in my career has changed too.
-
-When I write LLM-unassisted code myself, the journey looks something like:
-
-1. load the problem,
-2. struggle,
-3. get stuck,
-4. have a small breakthrough,
-5. ship.
-
-Most of the satisfaction lives in steps 2–4. That’s where understanding happens. That's the positive feedback loop that makes this job so energizing even on the hard days.
-
-With LLM-heavy work, the loop looks more like:
-
-1. define the shape of what I want,
-2. write a prompt and hand it context,
-3. triage whatever comes back,
-4. iterate until it compiles / passes / looks fine.
-
-There’s still skill there — prompt design, taste, knowing what "smells wrong" — but the locus of difficulty moves. It’s less "can *I* solve this?" and more "can I supervise this?"
-
-The reward structure changes, too. It’s less "wow, I learned something deep" and more "nice, another plate spun and didn’t fall." Still satisfying, just in a more managerial way.
-
-And when the model drops a solution fully formed, part of the joy evaporates. The problem gets solved; I don’t get the same little "oh sick, I figured that out" hit. My output graph goes up and to the right; my sense of craftsmanship kind of flattens.
 
 ## The deep work tax
 
@@ -116,9 +98,9 @@ Part of why I’m writing this is just to admit that out loud: my focus is worse
 
 I listened to the recent [interview between Dwarkesh Patel and Andrej Karpathy](https://www.dwarkesh.com/p/andrej-karpathy) while I was in the middle of all this, and I liked the whole thing, but two parts really lodged in my brain since they felt relevant to this "how do I work with LLMs without lobotomizing myself" sentiment I've been feeling.
 
-The first was how he actually *uses* them. In the section where he [talks about how he codes day-to-day](https://www.youtube.com/watch?v=lXUZvyajciY&t=2142s), walking through how he built Nanochat, he describes his workflow as almost entirely in-editor tab completion—his “sweet spot” for using LLMs—rather than giant freeform prompts in a chat box. He writes comments and partial code, lets the model fill in the rest, and only occasionally does the big “send this whole thing off for a refactor” move.
+The first was how he actually *uses* them. In the section where he [talks about how he codes day-to-day](https://www.youtube.com/watch?v=lXUZvyajciY&t=2142s), walking through how he built Nanochat, he describes his workflow as almost entirely in-editor tab completion—his "sweet spot" for using LLMs—rather than giant freeform prompts in a chat box. He writes comments and partial code, lets the model fill in the rest, and only occasionally does the big "send this whole thing off for a refactor" move.
 
-The second was how he encourages people to *learn* from [Nanochat](https://github.com/karpathy/nanochat) itself. The repo—“the best ChatGPT that $100 can buy”—is framed as an educational, hackable, end-to-end LLM stack. His recommended way to study it (and his other materials) is very deliberate:
+The second was how he encourages people to *learn* from [Nanochat](https://github.com/karpathy/nanochat) itself. The repo—"the best ChatGPT that $100 can buy"—is framed as an educational, hackable, end-to-end LLM stack. His recommended way to study it (and his other materials) is very deliberate:
 
 - keep the reference repo or notebook on one side of your screen;
 - on the other side, keep your own empty project;
