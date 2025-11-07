@@ -1,0 +1,235 @@
+<p>Over the last six months, the way I work has changed more than it did in the previous six years.</p>
+
+<p>And, afaict, that’s not just a “me” thing. Companies are loudly pushing AI-first workflows, YouTube talks and blog posts explain “how I use LLMs” as if that’s now a core part of your stack, and experienced devs keep reporting the same weird combo: they <em>feel</em> faster while also suspecting they’re learning less.</p>
+
+<p>Even as I write this, I have Claude Code spun up in another tmux pane, churning out unit tests for a chunk of code that I mostly didn’t write… but that’s probably 95% of the way to production ready.</p>
+
+<p>It’s incredible.</p>
+
+<p>I genuinely don’t know how I feel about it.</p>
+
+<h2 id="tldr">TL;DR</h2>
+
+<ul>
+  <li>LLMs turned my day into a “spinning plates” act: lots of shallow touches on many tasks instead of long focus on one.</li>
+  <li>I’m shipping more than ever, but I retain less and feel less ownership.</li>
+  <li>I now spend as much time optimizing my <em>workflow</em> (dotfiles, prompts, structure) as I do thinking about the <em>code</em> itself, and the ROI is objectively good and subjectively cursed.</li>
+  <li>My deep-focus muscle is weaker; hard problems feel harder.</li>
+  <li>I’m increasingly inspired by Andrej Karpathy’s “tab complete first, type it out to learn” approach and Dan Abramov’s worries about people not wanting to learn at all, and I’m trying to decide how far I want to lean into either side.</li>
+</ul>
+
+<h2 id="the-plate-spinning-version-of-programming">The Plate-Spinning Version of Programming</h2>
+
+<p>My old “good day” looked like:</p>
+
+<ul>
+  <li>pick one tricky problem,</li>
+  <li>load it fully into my head,</li>
+  <li>grind on it for a few hours,</li>
+  <li>hit an “ohhh <em>that’s</em> the bug” moment,</li>
+  <li>ship a PR.</li>
+</ul>
+
+<p>The feedback loop was long but satisfying: effort in, understanding out. The throughput wasn’t insane, but I felt like I <em>owned</em> what I shipped.</p>
+
+<p>Now, a typical “good” day looks more like:</p>
+
+<ul>
+  <li>write a medium-length prompt about a bug or feature;</li>
+  <li>let Claude Code rough in 3–4 files;</li>
+  <li>skim, fix the obviously wrong bits, add logging, run tests;</li>
+  <li>repeat that loop across a few tasks, plus reviews, plus a doc or two.</li>
+</ul>
+
+<p>By the end of the day, my GitHub looks absolutely cracked. Lots of green. Multiple features, tests, refactors. But when I scroll through my own diffs, I’ll sometimes realize I can’t actually explain why we did X instead of Y in <code class="language-plaintext highlighter-rouge">foo.rs</code> without re-reading the whole thing.</p>
+
+<p>The work has my name on it; it just doesn’t always feel like it has my fingerprints.</p>
+
+<p>Intellectually, I know that programming has always been “assembly on top of other people’s abstractions.” Emotionally, the gap between “I shipped this” and “I <em>understand</em> this” has never felt quite this wide.</p>
+
+<h2 id="meta-work-all-the-way-down">Meta-Work All the Way Down</h2>
+
+<p>The really cursed bit is where my effort is going.</p>
+
+<p>Over the last few months I’ve spent a <em>lot</em> of time:</p>
+
+<ul>
+  <li>tweaking shell aliases to hydrate Claude with exactly the right context,</li>
+  <li>changing my editor and dotfiles so “send this chunk + spec + failures” is one keystroke,</li>
+  <li>structuring projects in ways that are maximally legible to an LLM,</li>
+</ul>
+
+<p>and less time doing the traditional “learn new thing from first principles” grind.</p>
+
+<p>2020-me would’ve side-eyed that hard. But the annoying truth is: the ROI is <em>stupidly</em> good. Small tweaks in how I feed context into models translate into noticeably more throughput. It’s very “busting the myths of programmer productivity”: tooling and environment beat raw keystrokes. This is just an extreme version of the same idea.</p>
+
+<p>It does mean my “craft” feels different. Less “I write elegant code” and more “I design systems so other things can write pretty good code.”</p>
+
+<p>That’s defensible if you frame it as leverage. It’s just weird to wake up and realize your job has quietly shifted from “builder” to “foreman” without anyone explicitly deciding that.</p>
+
+<h2 id="broken-feedback-loops">Broken Feedback Loops</h2>
+
+<p>The feedback loop has changed too.</p>
+
+<p>When I write code myself, the journey is:</p>
+
+<ol>
+  <li>load the problem,</li>
+  <li>struggle,</li>
+  <li>get stuck,</li>
+  <li>have a small breakthrough,</li>
+  <li>ship.</li>
+</ol>
+
+<p>Most of the satisfaction lives in steps 2–4. That’s where understanding happens.</p>
+
+<p>With LLM-heavy work, the loop looks more like:</p>
+
+<ol>
+  <li>define the shape of what I want,</li>
+  <li>write a prompt and hand it context,</li>
+  <li>triage whatever comes back,</li>
+  <li>iterate until it compiles / passes / looks fine.</li>
+</ol>
+
+<p>There’s still skill there—prompt design, taste, knowing what “smells wrong”—but the locus of difficulty moves. It’s less “can <em>I</em> solve this?” and more “can I supervise this?”</p>
+
+<p>The reward structure changes, too. It’s less “wow, I learned something deep” and more “nice, another plate spun and didn’t fall.” Still satisfying, just in a more managerial way.</p>
+
+<p>And when the model drops a solution fully formed, part of the joy evaporates. The problem gets solved; I don’t get the same little “oh sick, <em>I</em> figured that out” hit. My output graph goes up and to the right; my sense of craftsmanship kind of flattens.</p>
+
+<h2 id="the-deep-work-tax">The Deep Work Tax</h2>
+
+<p>The part that actually scares me is what this is doing to my ability to go deep.</p>
+
+<p>Some problems are still very much <em>not</em> “vibe codeable”: bizarre perf issues, gnarly data modeling, pathological failure modes where you really do have to build a mental model and play it forward in your head. Those are the problems that historically made me feel like a real engineer.</p>
+
+<p>I am noticeably slower at them now.</p>
+
+<p>If I treat the LLM as a teammate—ask it questions, use it as a rubber duck, let it sketch branches I then reason about—that helps. I’m still doing the thinking; it’s just assisting. But the second I let it slide into “do the thinking for me,” my learning curve flattens. I get answers without much intuition attached.</p>
+
+<p>There’s also the raw attention issue. Dev work has been “spinning plates while someone throws more plates at you” for a while: context switching, Slack, Jira, Zoom, random interrupts. LLMs quietly make that worse:</p>
+
+<ul>
+  <li>starting a new “little task” is cheap, so it’s trivial to keep stacking plates;</li>
+  <li>you <em>can</em> make progress in shallow mode, so your brain learns it doesn’t need to fully load anything.</li>
+</ul>
+
+<p>Then, when you finally try to go deep—close everything, stare at one graph or stacktrace—your brain is like, “Sorry, we only run in short bursts now.”</p>
+
+<p>Part of why I’m writing this is just to admit that out loud: my focus is worse, and I don’t like that trend.</p>
+
+<h2 id="the-karpathy-axis">The Karpathy Axis</h2>
+
+<p>This is where Andrej Karpathy starts looming in my mental model.</p>
+
+<p>On one hand, he’s out there talking about “vibe coding,” where English is basically the new programming language and LLMs are the interpreter. His “How I Use LLMs” talk leans into the idea that you can build fairly serious systems by describing what you want and iterating.<sup id="fnref:karpathy-talk" role="doc-noteref"><a href="#fn:karpathy-talk" class="footnote" rel="footnote">1</a></sup></p>
+
+<p>On the other hand, when he talks about how <em>he</em> actually codes day-to-day, it’s more grounded:</p>
+
+<ul>
+  <li>most of his work happens via tab completion inside the editor—more like a very strong autocomplete than a chatty agent;</li>
+  <li>he writes comments and half-finished code, lets the model fill in the rest, and turns completions off when they get in the way;</li>
+  <li>big “send this whole file to the model and ask for a refactor” moments exist, but they’re not the default.</li>
+</ul>
+
+<p>Then there’s the teaching side.</p>
+
+<p>Nanochat—”the best ChatGPT that $100 can buy”—is explicitly framed as an educational, hackable, end-to-end LLM stack.<sup id="fnref:nanochat" role="doc-noteref"><a href="#fn:nanochat" class="footnote" rel="footnote">2</a></sup> His advice for learning from it (and from his courses) is basically:</p>
+
+<ul>
+  <li>keep the reference repo or notebook on one side of your screen;</li>
+  <li>on the other side, keep your own empty project;</li>
+  <li><strong>type everything in yourself</strong> when you’re learning a new concept;</li>
+  <li>no copy-paste, ideally no fancy completions, at least for the first pass.</li>
+</ul>
+
+<p>The goal is to build a real mental model instead of outsourcing it to autocomplete. It’s very “understand the thing, don’t just trust the abstraction.”</p>
+
+<p>I find that mix really compelling: high-leverage tab completion for production work, almost monastic manual typing for learning. And I keep wondering whether I should push myself in that direction—less “prompt in a side pane,” more “use completions as a compressed spec,” plus explicit “no LLMs, just type” time when I’m adding new primitives to my brain.</p>
+
+<h2 id="dan-abramov-and-the-anti-learning-vibe">Dan Abramov and the Anti-Learning Vibe</h2>
+
+<p>Contrast that with Dan Abramov, who recently wrote about feeling pessimistic about educational content: there’s this sense that people don’t actually want to <em>learn</em> anymore, they want pasteable answers and “LLM will do it” workflows instead.<sup id="fnref:dan" role="doc-noteref"><a href="#fn:dan" class="footnote" rel="footnote">3</a></sup></p>
+
+<p>That hits a little too close.</p>
+
+<p>It’s not that I don’t <em>want</em> to learn—I do—but the system I’ve built around myself makes it extremely easy to default to “Eh, I’ll just prompt it.” And in a world where content creators are noticing demand shift away from deep explanations toward “just give me the fix,” it’s very easy to let my own habits drift the same way.</p>
+
+<p>Karpathy’s “type it all out” energy feels like a deliberate counter-move to that. A personal protest: yes, I <em>could</em> vibe code this, but instead I’m going to sit here and actually understand it, line by line.</p>
+
+<p>I don’t really want to become the person Dan is worried about writing for.</p>
+
+<h2 id="when-the-plates-slow-down">When the Plates Slow Down</h2>
+
+<p>There’s also this amplitude thing: the highs are higher, the lows are lower.</p>
+
+<p>On a good plate-spinning day, I feel unstoppable. I’m:</p>
+
+<ul>
+  <li>shipping easy features end-to-end,</li>
+  <li>reviewing design docs,</li>
+  <li>giving interview feedback,</li>
+  <li>triaging bugs,</li>
+  <li>keeping up with team chatter.</li>
+</ul>
+
+<p>The bottleneck becomes “How fast can I read, parse, and respond?” and that’s always been one of my strengths, so it feels fantastic—everything aligns with what I’m good at.</p>
+
+<p>But when anything in that loop slows down—unclear spec, weird bug, flaky infra, life stuff—everything suddenly feels heavier. The plate stack is tall, and now I’m noticing how many of them are wobbling.</p>
+
+<p>It stops being “Today was kind of unproductive” and turns into “I failed to keep the system at max output,” which is a wild standard to hold myself to, and a fast path to burnout if I let it ossify.</p>
+
+<h2 id="where-i-want-to-go-from-here">Where I Want to Go from Here</h2>
+
+<p>So what do I actually do with all of this, besides write a neurotic blog post about plate metaphors?</p>
+
+<p>Here’s my current plan; future-me can come back and roast me if I bail on any of it:</p>
+
+<ol>
+  <li>
+    <p><strong>Treat LLMs like power tools, not autopilot.</strong><br />
+For routine work—CRUD, migrations, boilerplate tests, glue code—I’m fine going full plate-spinner: optimize dotfiles, chain prompts, let the machines churn as long as tests are green. For hard problems, default to “rubber duck that can autocomplete,” not “Boss, do my job.”</p>
+  </li>
+  <li>
+    <p><strong>Steal Karpathy’s split-brain approach.</strong><br />
+During normal dev, lean more into in-editor tab completion and inline comments as the primary interface, instead of bouncing to a giant chat window for everything. During learning time, pick one repo / concept, put it on one side of the screen, and type it all out manually on the other. No copy-paste, minimal autocomplete, maximal attention.</p>
+  </li>
+  <li>
+    <p><strong>Protect deep work like a real deliverable.</strong><br />
+Carve out a few hours a day where I don’t prompt at all. No “just one quick suggestion,” no “let me see what the model thinks.” Just me, the code, and my own brain. The goal isn’t purity; it’s to keep my intuition from atrophying.</p>
+  </li>
+  <li>
+    <p><strong>Optimize systems, not days.</strong><br />
+Try to evaluate weeks and months instead of chasing “max output” every single day. Did I learn anything deep? Did I move important things, or just many things? If a week has some sludgy, low-output days but a big conceptual gain, that should count as a win.</p>
+  </li>
+  <li>
+    <p><strong>Be okay with forgettable work.</strong><br />
+Not every PR needs to be a personal growth moment. Some code can just… exist. The key is being intentional about which problems I’m using to level up, and which ones I’m fine letting the machines mostly handle.</p>
+  </li>
+</ol>
+
+<p>One of my favorite arguments about programmer productivity is that leverage has always mattered more than raw keystrokes.<sup id="fnref:busting" role="doc-noteref"><a href="#fn:busting" class="footnote" rel="footnote">4</a></sup> LLMs are just leverage with the safety rails ripped off. They don’t absolve me from thinking; they just raise the stakes on choosing <em>when</em> to think deeply and when to let the plates spin.</p>
+
+<p>I don’t have a clean conclusion. I’m very much in the middle of this, same as everyone else.</p>
+
+<p>But I’m increasingly convinced that if my whole career turns into “telling a black box what to do,” I’ll burn out—even if the metrics say I’m 3x more productive.</p>
+
+<p>For the hard stuff, I want to keep taking some plates down, sitting with them, and remembering what it feels like to hold one thing still for a while.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:karpathy-talk" role="doc-endnote">
+      <p>Andrej Karpathy’s “How I Use LLMs” talk is a good overview of his workflow and philosophy: <a href="https://www.youtube.com/watch?v=EWvNQjAaOHw">https://www.youtube.com/watch?v=EWvNQjAaOHw</a> <a href="#fnref:karpathy-talk" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:nanochat" role="doc-endnote">
+      <p>Karpathy’s Nanochat repo, “the best ChatGPT that $100 can buy,” is here: <a href="https://github.com/karpathy/nanochat">https://github.com/karpathy/nanochat</a>. His suggested learning mode is split-screen, type-it-yourself, no copy-paste. <a href="#fnref:nanochat" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:dan" role="doc-endnote">
+      <p>Dan Abramov’s post about feeling pessimistic about educational content and the “against learning” vibe is here: <a href="https://bsky.app/profile/danabra.mov/post/3lzewnojls226">https://bsky.app/profile/danabra.mov/post/3lzewnojls226</a> <a href="#fnref:dan" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:busting" role="doc-endnote">
+      <p>I’m thinking of the general “busting the myths of programmer productivity”–style research: the idea that tools, process, and environment are what move the needle, not mythical 10x devs grinding harder. <a href="#fnref:busting" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>

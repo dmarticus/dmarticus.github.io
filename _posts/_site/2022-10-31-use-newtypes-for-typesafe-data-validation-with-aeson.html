@@ -1,0 +1,201 @@
+<p>This post assumes some familiarity with Haskell, JSON, and <a href="https://hackage.haskell.org/package/aeson">aeson</a>.</p>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Haskell is one of my favorite programming languages, and one of the reasons I like it so much is how nicely it supports modeling string-like data with <code class="language-plaintext highlighter-rouge">newtypes</code> when doing web programming. Much of web development involves dealing with strings (idk why exactly but I imagine mostly because JavaScript and the fact that most web communication protocols use strings as primitives), but not all strings are created equal!  Strings can be emails, or addresses, or routing numbers, or can be a range of possible enums, and just using type <code class="language-plaintext highlighter-rouge">String</code> to capture all of the variance is a poor data model: it doesn’t have the granularity needed to distinguish between different use cases.</p>
+
+<p>This is where using <a href="https://wiki.haskell.org/Newtype"><code class="language-plaintext highlighter-rouge">newtypes</code></a> can help.  Using <code class="language-plaintext highlighter-rouge">newtypes</code> (and their associated <a href="https://wiki.haskell.org/Smart_constructors">smart constructors</a>) to model string-like data is a nice approach for adding granularity to strings to help differentiate string-like types from each other.  Furthermore, the enhanced data modeling provided by newtypes can be extended (via aeson) all the way to JSON parsing, which makes it possible to write a JSON API client in Haskell that provides a type-safe parsing experience with ergonomic errors and a high degree of confidence with respect to data validation.  It’s even easy to write tests!  To explain more about what I mean, let’s dive into an example of some data modeling I’m doing for an upcoming project that takes advantage of <code class="language-plaintext highlighter-rouge">newtypes</code> smart constructors, and custom JSON parsing with aeson.</p>
+
+<h2 id="how-i-use-newtypes-and-smart-constructors">How I use newtypes and smart constructors</h2>
+
+<p>There’s a bunch of prior art on newtypes and smart constructors that’s worth reading (like <a href="https://www.parsonsmatt.org/2017/10/11/type_safety_back_and_forth.html">this one</a> from Matt Parsons), but that’s outside the scope of my example. In my case, when I talk about <code class="language-plaintext highlighter-rouge">newtypes</code> and smart constructors, I’m talking about doing something like this:</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">newtype</span> <span class="kt">RoutingNumber</span> <span class="o">=</span> <span class="kt">RoutingNumber</span> <span class="p">{</span><span class="n">unRoutingNumber</span> <span class="o">::</span> <span class="kt">Text</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>and then this</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">-- constraints on routing numbers</span>
+<span class="n">routingNumberRegex</span> <span class="o">::</span> <span class="kt">Regex</span>
+<span class="n">routingNumberRegex</span> <span class="o">=</span> <span class="o">[</span><span class="n">re</span><span class="o">|</span>^[0-9]{9}$<span class="o">|]</span>
+
+<span class="c1">-- smart constructor that makes it impossible </span>
+<span class="c1">-- to create routing numbers that don't follow the constraints</span>
+<span class="n">mkRoutingNumber</span> <span class="o">::</span> <span class="kt">Text</span> <span class="o">-&gt;</span> <span class="kt">Maybe</span> <span class="kt">RoutingNumber</span>
+<span class="n">mkRoutingNumber</span> <span class="n">t</span> <span class="o">=</span>
+  <span class="kr">if</span> <span class="n">t</span> <span class="o">=~</span> <span class="n">routingNumberRegex</span>
+    <span class="kr">then</span> <span class="kt">Just</span> <span class="p">(</span><span class="kt">RoutingNumber</span> <span class="n">t</span><span class="p">)</span>
+    <span class="kr">else</span> <span class="kt">Nothing</span>
+</code></pre></div></div>
+
+<p>Now, I can ensure that any instance of <code class="language-plaintext highlighter-rouge">RoutingNumber</code> types must obey the routing number constraints.  Using this approach, I can take an API that sends a response body that looks like this:</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">data</span> <span class="kt">BeneficiaryBankDetails</span> <span class="o">=</span> <span class="kt">BeneficiaryBankDetails</span>
+  <span class="p">{</span> <span class="n">beneficiaryBankDetailsName</span> <span class="o">::</span> <span class="kt">Text</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsSwiftCode</span> <span class="o">::</span> <span class="kt">Text</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsRoutingNumber</span> <span class="o">::</span> <span class="kt">Text</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsAccountNumber</span> <span class="o">::</span> <span class="kt">Text</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsCurrency</span> <span class="o">::</span> <span class="kt">Text</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsAddress</span> <span class="o">::</span> <span class="kt">Text</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsCity</span> <span class="o">::</span> <span class="kt">Text</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsPostalCode</span> <span class="o">::</span> <span class="kt">Text</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsCountry</span> <span class="o">::</span> <span class="kt">Text</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>and model it like this</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">data</span> <span class="kt">BeneficiaryBankDetails</span> <span class="o">=</span> <span class="kt">BeneficiaryBankDetails</span>
+  <span class="p">{</span> <span class="n">beneficiaryBankDetailsName</span> <span class="o">::</span> <span class="kt">Text</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsSwiftCode</span> <span class="o">::</span> <span class="kt">SwiftCode</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsRoutingNumber</span> <span class="o">::</span> <span class="kt">RoutingNumber</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsAccountNumber</span> <span class="o">::</span> <span class="kt">AccountNumber</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsCurrency</span> <span class="o">::</span> <span class="kt">AllowedCurrencies</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsAddress</span> <span class="o">::</span> <span class="kt">AddressLine</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsCity</span> <span class="o">::</span> <span class="kt">City</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsPostalCode</span> <span class="o">::</span> <span class="kt">PostalCode</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsCountry</span> <span class="o">::</span> <span class="kt">Country</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>by adding similar constraints to the other fields. This approach lets me modes the data in a way that is both more readable and type-safe, and any subsequent instance of me using these types in my code will require to me obey these constraints, which will make it harder for me to write bugs. As someone who enjoys guardrails in programming because I’m dumb, this is awesome.</p>
+
+<p>(Aside: For <a href="https://wiki.haskell.org/Quasiquotation"><code class="language-plaintext highlighter-rouge">Quasiquotation</code></a> fans, I can even write cool helper methods that let me write literal IDs that type-check at compile time, in case I want to use my types in tests later and avoid something unsafe like <code class="language-plaintext highlighter-rouge">fromJust</code>):</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">compileRoutingNumber</span> <span class="o">::</span> <span class="kt">QuasiQuoter</span>
+<span class="n">compileRoutingNumber</span> <span class="o">=</span>
+  <span class="kt">QuasiQuoter</span>
+    <span class="p">{</span> <span class="n">quoteExp</span> <span class="o">=</span> <span class="n">compileRoutingNumber'</span><span class="p">,</span>
+      <span class="n">quotePat</span> <span class="o">=</span> <span class="n">error</span> <span class="s">"RoutingNumber is not a pattern; use routingNumberToText instead"</span><span class="p">,</span>
+      <span class="n">quoteDec</span> <span class="o">=</span> <span class="n">error</span> <span class="s">"routingNumber is not supported at top-level"</span><span class="p">,</span>
+      <span class="n">quoteType</span> <span class="o">=</span> <span class="n">error</span> <span class="s">"routingNumber is not supported as a type"</span>
+    <span class="p">}</span>
+  <span class="kr">where</span>
+    <span class="n">compileRoutingNumber'</span> <span class="o">::</span> <span class="kt">String</span> <span class="o">-&gt;</span> <span class="kt">Q</span> <span class="kt">Exp</span>
+    <span class="n">compileRoutingNumber'</span> <span class="n">s</span> <span class="o">=</span> <span class="kr">case</span> <span class="n">mkRoutingNumber</span> <span class="p">(</span><span class="kt">T</span><span class="o">.</span><span class="n">pack</span> <span class="n">s</span><span class="p">)</span> <span class="kr">of</span>
+      <span class="kt">Nothing</span> <span class="o">-&gt;</span> <span class="n">fail</span> <span class="p">(</span><span class="s">"Invalid RoutingNumber: "</span> <span class="o">++</span> <span class="n">s</span> <span class="o">++</span> <span class="s">". Must be nine digits, with no other characters."</span><span class="p">)</span>
+      <span class="kt">Just</span> <span class="n">routingNumber</span> <span class="o">-&gt;</span> <span class="p">[</span><span class="o">|</span><span class="n">routingNumber</span><span class="o">|</span><span class="p">]</span>
+
+<span class="c1">-- and then</span>
+
+<span class="n">testWireAccountDetails</span> <span class="o">::</span> <span class="kt">WireAccountBodyParams</span>
+<span class="n">testWireAccountDetails</span> <span class="o">=</span>
+  <span class="kt">WireAccountBodyParams</span>
+    <span class="p">(</span><span class="kt">UUID</span> <span class="s">"e553417d-fe7a-4b7a-8d06-ff4de80a0d65"</span><span class="p">)</span>
+    <span class="o">[</span><span class="n">compileAccountNumber</span><span class="o">|</span>446043103366<span class="o">|]</span>
+    <span class="o">[</span><span class="n">compileRoutingNumber</span><span class="o">|</span>021000021<span class="o">|]</span>
+    <span class="p">(</span> <span class="kt">BillingDetails</span>
+        <span class="s">"Test Recipient"</span>
+        <span class="p">(</span><span class="kt">City</span> <span class="s">"Snoqualmie"</span><span class="p">)</span>
+        <span class="p">(</span><span class="kt">ISO3166Alpha2</span> <span class="n">unitedStatesOfAmerica</span><span class="p">)</span>
+        <span class="p">(</span><span class="kt">AddressLine</span> <span class="s">"6501 Railroad Avenue SE"</span><span class="p">)</span>
+        <span class="p">(</span><span class="kt">Just</span> <span class="p">(</span><span class="kt">AddressLine</span> <span class="s">"Room 315"</span><span class="p">))</span>
+        <span class="p">(</span><span class="kt">Just</span> <span class="p">(</span><span class="kt">District</span> <span class="s">"WA"</span><span class="p">))</span>
+        <span class="p">(</span><span class="kt">PostalCode</span> <span class="s">"85283"</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="p">(</span> <span class="kt">BankAddress</span>
+        <span class="p">(</span><span class="kt">Just</span> <span class="s">"Test Bank"</span><span class="p">)</span>
+        <span class="p">(</span><span class="kt">Just</span> <span class="p">(</span><span class="kt">City</span> <span class="s">"Snoqualmie"</span><span class="p">))</span>
+        <span class="p">(</span><span class="kt">Just</span> <span class="p">(</span><span class="kt">ISO3166Alpha2</span> <span class="n">unitedStatesOfAmerica</span><span class="p">))</span>
+        <span class="p">(</span><span class="kt">Just</span> <span class="p">(</span><span class="kt">AddressLine</span> <span class="s">"6501 Railroad Avenue SE"</span><span class="p">))</span>
+        <span class="p">(</span><span class="kt">Just</span> <span class="p">(</span><span class="kt">AddressLine</span> <span class="s">"Room 315"</span><span class="p">))</span>
+        <span class="p">(</span><span class="kt">Just</span> <span class="p">(</span><span class="kt">District</span> <span class="s">"WA"</span><span class="p">))</span>
+    <span class="p">)</span>
+</code></pre></div></div>
+
+<p>Okay, so this is all well and good for writing application code, but since I’m writing a JSON API and these types represent information that is going to be passed over the wire as JSON, I also want to take advantage of this type safety to when converting this data to and from JSON.  Fortunately, aeson provides extensible parser methods to make this experience excellent.</p>
+
+<h2 id="combining-newtypes-and-smart-constructors-with-aeson">Combining newtypes and smart constructors with aeson</h2>
+
+<p>Again, there’s great prior art on aeson that’s worth reading (I liked <a href="https://williamyaoh.com/posts/2019-10-19-a-cheatsheet-to-json-handling.html">this post</a> from William Yao), but in my example the main benefit of using aeson to interface with JSON APIs in Haskell is that it supports writing custom <code class="language-plaintext highlighter-rouge">ToJSON</code> and <code class="language-plaintext highlighter-rouge">FromJSON</code> instances for fine-tuned parsing.  In my case, I have a string enum that looks like this:</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">data</span> <span class="kt">PayoutErrorCode</span>
+  <span class="o">=</span> <span class="kt">InsufficientFunds</span>
+  <span class="o">|</span> <span class="kt">TransactionDenied</span>
+  <span class="o">|</span> <span class="kt">TransactionFailed</span>
+  <span class="o">|</span> <span class="kt">TransactionReturned</span>
+  <span class="o">|</span> <span class="kt">BankTransactionError</span>
+  <span class="o">|</span> <span class="kt">FiatAccountLimitExceeded</span>
+  <span class="o">|</span> <span class="kt">InvalidBankAccountNumber</span>
+  <span class="o">|</span> <span class="kt">InvalidACHRoutingTransitNumber</span>
+  <span class="o">|</span> <span class="kt">InvalidWireRoutingTransitNumber</span>
+  <span class="o">|</span> <span class="kt">VendorInactive</span>
+  <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Eq</span><span class="p">,</span> <span class="kt">Show</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>If I were derive a default <code class="language-plaintext highlighter-rouge">ToJSON</code> instance for this type, it would encode thusly</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>encode TransactionDenied
+<span class="o">&gt;&gt;&gt;</span> <span class="s2">"</span><span class="se">\"</span><span class="s2">TransactionDenied</span><span class="se">\"</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>However, the JSON API I’m working with uses snake case for their enums, so I’d need to write a custom parser to make sure that the <code class="language-plaintext highlighter-rouge">ToJSON</code> and <code class="language-plaintext highlighter-rouge">FromJSON</code> parsers work correctly.  Fortunately, I can just extend those methods thusly be writing custom instances of them for my custom types</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">instance</span> <span class="kt">ToJSON</span> <span class="kt">PayoutErrorCode</span> <span class="kr">where</span>
+  <span class="n">toJSON</span> <span class="kt">InsufficientFunds</span> <span class="o">=</span> <span class="kt">String</span> <span class="s">"insufficient_funds"</span>
+  <span class="n">toJSON</span> <span class="kt">TransactionDenied</span> <span class="o">=</span> <span class="kt">String</span> <span class="s">"transaction_denied"</span>
+  <span class="n">toJSON</span> <span class="kt">TransactionFailed</span> <span class="o">=</span> <span class="kt">String</span> <span class="s">"transaction_failed"</span>
+  <span class="n">toJSON</span> <span class="kt">TransactionReturned</span> <span class="o">=</span> <span class="kt">String</span> <span class="s">"transaction_returned"</span>
+  <span class="n">toJSON</span> <span class="kt">BankTransactionError</span> <span class="o">=</span> <span class="kt">String</span> <span class="s">"bank_transaction_error"</span>
+  <span class="n">toJSON</span> <span class="kt">FiatAccountLimitExceeded</span> <span class="o">=</span> <span class="kt">String</span> <span class="s">"fiat_account_limit_exceeded"</span>
+  <span class="n">toJSON</span> <span class="kt">InvalidBankAccountNumber</span> <span class="o">=</span> <span class="kt">String</span> <span class="s">"invalid_bank_account_number"</span>
+  <span class="n">toJSON</span> <span class="kt">InvalidACHRoutingTransitNumber</span> <span class="o">=</span> <span class="kt">String</span> <span class="s">"invalid_ach_rtn"</span>
+  <span class="n">toJSON</span> <span class="kt">InvalidWireRoutingTransitNumber</span> <span class="o">=</span> <span class="kt">String</span> <span class="s">"invalid_wire_rtn"</span>
+  <span class="n">toJSON</span> <span class="kt">VendorInactive</span> <span class="o">=</span> <span class="kt">String</span> <span class="s">"vendor_inactive"</span>
+
+<span class="kr">instance</span> <span class="kt">FromJSON</span> <span class="kt">PayoutErrorCode</span> <span class="kr">where</span>
+  <span class="n">parseJSON</span> <span class="p">(</span><span class="kt">String</span> <span class="n">s</span><span class="p">)</span> <span class="o">=</span> <span class="kr">case</span> <span class="kt">T</span><span class="o">.</span><span class="n">unpack</span> <span class="n">s</span> <span class="kr">of</span>
+    <span class="s">"insufficient_funds"</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="kt">InsufficientFunds</span>
+    <span class="s">"transaction_denied"</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="kt">TransactionDenied</span>
+    <span class="s">"transaction_failed"</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="kt">TransactionFailed</span>
+    <span class="s">"transaction_returned"</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="kt">TransactionReturned</span>
+    <span class="s">"bank_transaction_error"</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="kt">BankTransactionError</span>
+    <span class="s">"fiat_account_limit_exceeded"</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="kt">FiatAccountLimitExceeded</span>
+    <span class="s">"invalid_bank_account_number"</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="kt">InvalidBankAccountNumber</span>
+    <span class="s">"invalid_ach_rtn"</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="kt">InvalidACHRoutingTransitNumber</span>
+    <span class="s">"invalid_wire_rtn"</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="kt">InvalidWireRoutingTransitNumber</span>
+    <span class="s">"vendor_inactive"</span> <span class="o">-&gt;</span> <span class="n">return</span> <span class="kt">VendorInactive</span>
+    <span class="kr">_</span> <span class="o">-&gt;</span> <span class="n">fail</span> <span class="s">"JSON format not expected"</span>
+  <span class="n">parseJSON</span> <span class="kr">_</span> <span class="o">=</span> <span class="n">fail</span> <span class="s">"JSON format not expected"</span>
+</code></pre></div></div>
+
+<p>Now that we’ve established that aeson lets me write custom instances of its core methods for my custom types, so it makes sense that I can take advantage of my newtypes and smart constructors to write something like this</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">instance</span> <span class="kt">FromJSON</span> <span class="kt">RoutingNumber</span> <span class="kr">where</span>
+  <span class="n">parseJSON</span> <span class="o">=</span> <span class="n">withText</span> <span class="s">"RoutingNumber"</span> <span class="o">$</span> <span class="nf">\</span><span class="n">t</span> <span class="o">-&gt;</span>
+    <span class="kr">case</span> <span class="n">mkRoutingNumber</span> <span class="n">t</span> <span class="kr">of</span>
+      <span class="kt">Nothing</span> <span class="o">-&gt;</span> <span class="n">fail</span> <span class="o">$</span> <span class="s">"Invalid RoutingNumber: "</span> <span class="o">++</span> <span class="kt">T</span><span class="o">.</span><span class="n">unpack</span> <span class="n">t</span>
+      <span class="kt">Just</span> <span class="n">routingNumber</span> <span class="o">-&gt;</span> <span class="n">pure</span> <span class="n">routingNumber</span>
+</code></pre></div></div>
+
+<p>Now, my smart constructor for <code class="language-plaintext highlighter-rouge">RoutingNumber</code>s not only applies to instances in code, but also applies to parsing JSON!  Going back to my original example, I can have a request body like this</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">data</span> <span class="kt">BeneficiaryBankDetails</span> <span class="o">=</span> <span class="kt">BeneficiaryBankDetails</span>
+  <span class="p">{</span> <span class="n">beneficiaryBankDetailsName</span> <span class="o">::</span> <span class="kt">Text</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsSwiftCode</span> <span class="o">::</span> <span class="kt">SwiftCode</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsRoutingNumber</span> <span class="o">::</span> <span class="kt">RoutingNumber</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsAccountNumber</span> <span class="o">::</span> <span class="kt">AccountNumber</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsCurrency</span> <span class="o">::</span> <span class="kt">AllowedCurrencies</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsAddress</span> <span class="o">::</span> <span class="kt">AddressLine</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsCity</span> <span class="o">::</span> <span class="kt">City</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsPostalCode</span> <span class="o">::</span> <span class="kt">PostalCode</span><span class="p">,</span>
+    <span class="n">beneficiaryBankDetailsCountry</span> <span class="o">::</span> <span class="kt">Country</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<p>and when I smart constructors and custom ToJSON and FromJSON instances for every type in that payload, I ensure that not only can I have type safety when using this type in code, but I can have smart JSON parsing for every field in the response!</p>
+
+<h2 id="extra-benefit-pre-parsed-json-data-makes-testing-easy">Extra benefit: pre-parsed JSON data makes testing easy</h2>
+
+<p>As I mentioned in the intro, a nice benefit of this type of data modeling is that it make writing integration tests for this API easy.  Once I’ve modeled all of my data, I can write a test like this</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">it</span> <span class="s">"gets configuration info"</span> <span class="o">$</span> <span class="kr">do</span>
+  <span class="n">beneficiaryBankDetails</span> <span class="o">&lt;-</span> <span class="n">integrationTest</span> <span class="n">config</span> <span class="n">manager</span> <span class="n">getBeneficiaryBankDetails</span>
+  <span class="kr">let</span> <span class="kt">Right</span> <span class="kt">APIResponse</span> <span class="p">{</span><span class="o">..</span><span class="p">}</span> <span class="o">=</span> <span class="n">configurationInfo</span>
+</code></pre></div></div>
+
+<p>and <em>know</em> that my API response was parsed correctly; if anything came back from the API that didn’t obey the my various type constraints, the request would fail with a <code class="language-plaintext highlighter-rouge">Left</code>.  My takeaway here is that spending the time modeling the data upfront makes for both increased confidence in functionality <em>and</em> for easy testing.</p>
+
+<h2 id="last-words">Last words</h2>
+
+<p>I don’t have any sort of deep wisdom to impart here, I mostly just wanted to demonstrate the value of using newtypes, smart constructors, and aeson to write type-safe API client libraries in Haskell.  I think it’s worth mentioning that <code class="language-plaintext highlighter-rouge">newtypes</code> are not perfect tools for type-safe data modeling, as outlined by <a href="https://degoes.net/articles/newtypes-suck">John de Goes</a> and <a href="https://lexi-lambda.github.io/blog/2020/11/01/names-are-not-type-safety/">Alexis King</a> (and others, I’m sure), but I do think this approach feel ergonomic and safe.</p>

@@ -1,0 +1,129 @@
+<p>This post is inspired by the <a href="https://desiredpersona.com/">Desired Persona’s</a> <a href="https://desiredpersona.com/install-jekyll-on-macos/">helpful post</a> on how to install Jekyll for Mac OS Mojave.  If you’re not using Catalina and are running into Jekyll installation issues, I recommend starting with their post first.</p>
+
+<p>However, when I tried to install Jekyll on macOS Catalina, I ran into some issues that the aforementioned post did not solve – in fact, in the several hours I spent trying to debug my setup, I didn’t find any website, forum post, or StackOverflow that solved answered all of my questions in an end-to-end way.  So, dear reader, this post is for people like me: folks who want to install Jekyll on Mac OS Catalina, have run into dumb errors along the way, and just want one place where all the steps are laid out in an easy-to-follow way.</p>
+
+<h2 id="how-to-do-the-thing-the-easy-parts">How to do the thing: the easy parts</h2>
+
+<p>Chances are you’ve gotten this far because you want to install Jekyll on macOS.  If you’ve followed all of the steps outlined in the various places where this question is asked on the internet, you’ve probably already</p>
+
+<ol>
+  <li>Installed the Xcode Command Line tools via <code class="language-plaintext highlighter-rouge">xcode-select --install</code> and installed
+the macOS headers via <code class="language-plaintext highlighter-rouge">open /Library/Developer/CommandLineTools/Packages/
+macOS_SDK_headers_for_macOS_10.14.pkg</code></li>
+  <li>Installed Ruby via Homebrew<sup id="fnref:bignote" role="doc-noteref"><a href="#fn:bignote" class="footnote" rel="footnote">1</a></sup> via <code class="language-plaintext highlighter-rouge">brew install ruby</code> and then updated your shell profile
+(bash, zsh, whatever) with the following entries (don’t forget to run <code class="language-plaintext highlighter-rouge">source $PROFILE (e.g. bash_profile or zshrc)</code> or restart your terminal to save these changes)</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Ruby</span>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/opt/ruby/bin:<span class="nv">$PATH</span>
+<span class="nb">export </span><span class="nv">GEM_HOME</span><span class="o">=</span><span class="nv">$HOME</span>/gems
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$HOME</span>/gems/bin:<span class="nv">$PATH</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Checked that the <code class="language-plaintext highlighter-rouge">which ruby</code> command outputs something like <code class="language-plaintext highlighter-rouge">/usr/local/opt/ruby/bin/ruby</code>
+(this means you’re using the brew installed version of ruby, rather than system ruby, which is what we want)</li>
+  <li>Installed bundler via gem, e.g. <code class="language-plaintext highlighter-rouge">gem install bundler</code></li>
+</ol>
+
+<p>Now, if you’re like me, these steps all went relatively smoothly, and you should be full of optimism that installed Jekyll will be just as straightforward.  Unfortunately, dear reader, this is where you’d be wrong.</p>
+
+<h2 id="how-to-do-the-thing-the-hard-part">How to do the thing: the hard part</h2>
+
+<p>So you’ve installed all of your dependencies (non-system Ruby and Bundler), and all that’s left to do is run <code class="language-plaintext highlighter-rouge">gem install jekyll</code> and you’ll be ready to Jekyll your heart out.<br />
+And, there’s a distinct possibility that this command works great for you and that jekyll just installs the first time and you’ll be good to go (this is a likely outcome if you had no problems with installing the Xcode command line tools and compiling the header files).  Howeverm if you’re like me and the <code class="language-plaintext highlighter-rouge">xcode-select --install</code> command turned up something like</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xcode-select: error: <span class="nb">command </span>line tools are already installed, 
+use <span class="s2">"Software Update"</span> to <span class="nb">install </span>updates
+</code></pre></div></div>
+
+<p>then you’ll probably need this next bit.</p>
+
+<p>What will likely happen for you is that you’ll run <code class="language-plaintext highlighter-rouge">gem install jekyll</code> and then you see something like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+
+current directory:
+/Users/foobar/.rbenv/versions/2.5.1/lib/ruby/
+gems/2.5.0/gems/ffi-1.9.21/ext/ffi_c
+/Users/foobar/.rbenv/versions/2.5.1/bin/ruby -r 
+./siteconf20181118-49440-k8mjki.rb
+extconf.rb
+checking for ffi.h... no
+checking for ffi.h in /usr/local/include,/usr/include/ffi... no
+checking for shlwapi.h... no
+checking for rb_thread_blocking_region()... no
+checking for rb_thread_call_with_gvl()... yes
+checking for rb_thread_call_without_gvl()... yes
+creating extconf.h
+creating Makefile
+
+current directory:
+/Users/foobar/.rbenv/versions/2.5.1/lib/ruby/
+gems/2.5.0/gems/ffi-1.9.21/ext/ffi_c
+make "DESTDIR=" clean
+
+current directory:
+/Users/foobar/.rbenv/versions/2.5.1/lib/ruby/
+gems/2.5.0/gems/ffi-1.9.21/ext/ffi_c
+make "DESTDIR="
+Running autoreconf for libffi
+autoreconf: Entering directory .'
+autoreconf: configure.ac: not using Gettext
+autoreconf: running: aclocal -I m4 --output=aclocal.m4t
+Can't exec "aclocal": No such file or directory at
+/usr/local/Cellar/autoconf/2.69/share/autoconf/Autom4te/FileUtils.pm line 326.
+autoreconf: failed to run aclocal: No such file or directory
+make: ***
+["/Users/foobar/.rbenv/versions/2.5.1/lib/ruby/gems/2.5.0/gems/
+ffi-1.9.21/ext/ffi_c/libffi-x86_64-darwin18"/
+.libs/libffi_convenience.a]
+Error 1
+
+make failed, exit code 2
+
+Gem files will remain installed in
+/Users/foobar/.rbenv/versions/2.5.1/lib/ruby/
+gems/2.5.0/gems/ffi-1.9.21 for inspection.
+Results logged to
+/Users/foobar/.rbenv/versions/2.5.1/lib/ruby/
+gems/2.5.0/extensions/x86_64-darwin-18/
+2.5.0-static/ffi-1.9.21/gem_make.out
+
+An error occurred while installing ffi (1.9.21), and Bundler cannot continue.
+</code></pre></div></div>
+
+<p>Some of the path-specific details may not match your setup, but the root of the problem is that gem is trying to build some system-native code (in my case it was the <code class="language-plaintext highlighter-rouge">libffi</code> library) and it can’t do it because of incompatibilites between the brew-installed Ruby and the system Ruby.  If you run into any problems building these gem native extensions, here’s what I recommend:</p>
+
+<ol>
+  <li>Reinstall the native extension through brew so that the brew-install ruby can sync with it.<br />
+In the case with this issue, run <code class="language-plaintext highlighter-rouge">brew reinstall libffi</code>.</li>
+  <li>Add specific install flags to your shell that point to the brew-installed version of the new gem native extension.<br />
+To do this run the following commands in your shell:</li>
+</ol>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">"-L/usr/local/opt/libffi/lib"</span>
+<span class="nb">export </span><span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span><span class="s2">"/usr/local/opt/libffi/lib/pkgconfig"</span>
+</code></pre></div></div>
+
+<ol>
+  <li>Finally, you should be good to go!  Rerun <code class="language-plaintext highlighter-rouge">gem install jekyll</code> and you should be
+rewarded by your system finally installing jekyll.  Note that you may see some issues with that install
+re: version of themes or other jekyll dependencies being out of date, simply run <code class="language-plaintext highlighter-rouge">bundler update</code> to resolve those errors</li>
+</ol>
+
+<p>And that should do it!  I hope putting all these steps in the same place saves a future hapless Jekyll user from having to scour the internet like I did.</p>
+
+<h2 id="kudos">Kudos</h2>
+
+<p>Shoutout to @ffleming (whoever you are) for <a href="https://www.bountysource.com/issues/65069406-failed-to-build-gem-native-extension-on-macos-high-sierra">this solution</a> the the <code class="language-plaintext highlighter-rouge">libffi</code> problem, and shoutout again to Desired Persona’s <a href="https://desiredpersona.com/install-jekyll-on-macos/">original post</a> for a detailed description on all of the install steps that I glossed over here.  Also, since writing this I added a <a href="https://stackoverflow.com/questions/60807971/issues-building-the-libffi-gem-native-extension-when-trying-to-install-jekyll-on/60807981#60807981">StackOverflow</a> post that references fixing the <code class="language-plaintext highlighter-rouge">libffi</code> problem that I ran into when trying to install that gem native package.</p>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:bignote" role="doc-endnote">
+      <p>We need to install ruby via homebrew because macOS ships with system Ruby since Mojave,
+        but a lot of the system directories that the system ruby would point to are locked down, meaning
+        you’d have to do a bunch of stuff with <code class="language-plaintext highlighter-rouge">sudo</code>, which increases the possibility that
+        you can mess up your system in a bad way. <a href="#fnref:bignote" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
