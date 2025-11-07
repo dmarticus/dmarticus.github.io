@@ -23,7 +23,7 @@ I genuinely don’t know how I feel about it.
 - My deep-focus muscle is weaker; hard problems feel harder.
 - I’m increasingly inspired by Andrej Karpathy’s "tab complete first, type it out to learn" approach and Dan Abramov’s worries about people not wanting to learn at all, and I’m trying to decide how far I want to lean into each side.
 
-## The Plate-Spinning Version of Programming
+## The plate-spinning vrsion of programming
 
 My old "good day" looked like this:
 
@@ -57,7 +57,7 @@ And when the model drops a solution fully formed, part of the joy evaporates. Th
 
 The work has my name on it; it just doesn’t always feel like it has my fingerprints. Intellectually, I know that programming has always been "assembly on top of other people’s abstractions." Emotionally, the gap between "I shipped this" and "I understand this" has never felt quite this wide.
 
-## Meta-work All the Way Down
+## Meta-work all the way down
 
 The really cursed bit has been where I’ve redirected my effort in the name of plate-spinning optimization.
 
@@ -75,7 +75,7 @@ It does mean my "craft" feels different. Less "I write elegant code" and more "I
 
 That’s defensible if you frame it as leverage. It’s just weird to wake up and realize your job has quietly shifted from "builder" to "foreman" without anyone explicitly deciding that.
 
-## The Deep Work Tax
+## The deep work tax
 
 The part that actually scares me is what these changes have been doing to my ability to go deep.
 
@@ -111,7 +111,7 @@ The goal is to build a real mental model instead of outsourcing it to autocomple
 
 I find that mix really compelling: high-leverage tab completion for production work, almost monastic manual typing for learning. And I keep wondering whether I should push myself in that direction (less "prompt in a side pane", more "use completions as a compressed spec") plus explicit "no LLMs, just type" time when I’m adding new primitives to my brain.
 
-## Dan Abramov and the Anti-Learning Vibe
+## Or just learn, period
 
 Contrast that with Dan Abramov, [who recently wrote about feeling pessimistic about educational content](https://bsky.app/profile/danabra.mov/post/3lzewnojls226): there’s this sense that people don’t actually want to *learn* anymore, they want pasteable answers and "LLM will do it" workflows instead.
 
@@ -123,7 +123,7 @@ Karpathy’s "type it all out" energy feels like a deliberate counter-move to th
 
 I don’t really want to become the person Dan is worried about writing for.
 
-## When the Plates Slow Down
+## When the plates slow down
 
 There’s also this amplitude thing: the highs are higher, the lows are lower.
 
@@ -141,7 +141,7 @@ But when anything in that loop slows down unclear spec, weird bug, flaky infra, 
 
 It stops being "Today was kind of unproductive" and turns into "I failed to keep the system at max output," which is a wild standard to hold myself to, and a fast path to burnout if I let it ossify.
 
-## Where Do I Go from Here?
+## Where do I go from here?
 
 So what do I actually do with all of this, besides write a neurotic blog post about plate metaphors?
 
