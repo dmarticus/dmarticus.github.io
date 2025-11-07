@@ -19,7 +19,7 @@ I genuinely don’t know how I feel about it.
 
 - LLMs turned my day into a "spinning plates" act: lots of shallow touches on many tasks instead of long focus on one.
 - I’m shipping more than ever, but I retain less and feel less ownership.
-- I now spend as much time optimizing my workflow (dotfiles, prompts, structure) as I do thinking about the code itself, and the ROI is objectively good and subjectively cursed.
+- I now spend as much time optimizing my workflow as I do thinking about the code itself, and the ROI is objectively good and subjectively cursed.
 - My deep-focus muscle is weaker; hard problems feel harder.
 - I’m increasingly inspired by Andrej Karpathy’s "tab complete first, type it out to learn" approach and Dan Abramov’s worries about people not wanting to learn at all, and I’m trying to decide how far I want to lean into either side.
 
@@ -166,7 +166,7 @@ So what do I actually do with all of this, besides write a neurotic blog post ab
 Here’s my current plan; future-me can come back and roast me if I bail on any of it:
 
 1. Treat LLMs like power tools, not autopilot.  
-   For routine work — CRUD, migrations, boilerplate tests, glue code — I’m fine going full plate-spinner: optimize dotfiles, chain prompts, let the machines churn as long as tests are green. For hard problems, default to "rubber duck that can autocomplete," not "Boss, do my job."
+   For routine work — CRUD, migrations, boilerplate tests, glue code — I’m fine going full plate-spinner: let the machines churn as long as tests are green. For hard problems, default to "rubber duck that can autocomplete," not "Boss, do my job."
 
 2. Steal Karpathy’s split-brain approach.  
    During normal dev, lean more into in-editor tab completion and inline comments as the primary interface, instead of bouncing to a giant chat window for everything. During learning time, pick one repo / concept, put it on one side of the screen, and type it all out manually on the other. No copy-paste, minimal autocomplete, maximal attention.
