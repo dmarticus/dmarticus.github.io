@@ -53,7 +53,7 @@ Under the hood, though, the feedback loop has been re-sized:
 
 There’s still skill there—prompt design, taste, knowing what "smells wrong"—but the locus of difficulty moves. It’s less "can *I* solve this?" and more "can I supervise this?" The reward structure changes too: less "wow, I learned something deep" and more "nice, another plate spun and didn’t fall." Still satisfying, just in a more managerial way.
 
-And when the model drops a solution fully formed, part of the joy evaporates. The problem gets solved; I don’t get the same little "oh sick, *I* figured that out" hit. When I scroll through my own diffs, I’ll sometimes realize I can’t actually explain why I did X instead of Y in a given PR without re-reading the whole thing.
+And when the model drops a solution fully formed, part of the joy evaporates. The problem gets solved; I don’t get the same little "oh sick, figured that out" hit. When I scroll through my own diffs, I’ll sometimes realize I can’t actually explain why I did X instead of Y in a given PR without re-reading the whole thing.
 
 The work has my name on it; it just doesn’t always feel like it has my fingerprints. Intellectually, I know that programming has always been "assembly on top of other people’s abstractions." Emotionally, the gap between "I shipped this" and "I understand this" has never felt quite this wide.
 
