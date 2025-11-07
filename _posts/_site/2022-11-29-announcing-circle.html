@@ -1,0 +1,45 @@
+<p>I’m stoked to announce the initial release of <code class="language-plaintext highlighter-rouge">circle</code>, an unofficial but feature-complete Haskell client for <a href="https://developers.circle.com/developer/v1/docs/introducing-circle-apis">Circle’s REST API</a>.  This library (and usage guide) is available <a href="https://github.com/dmarticus/circle">on Github</a> and <a href="https://hackage.haskell.org/package/circle">on Hackage</a>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">circle</code> supports calling all of the V1 endpoints enumerated in the <a href="https://developers.circle.com/developer/v1/docs">Circle documentation</a>, and it will support all Circle’s <a href="(https://developers.circle.com/developer/docs)">V1.1 features</a> in the next release (Circle launched their V1.1 API as I was finishing this project, lol).  This project is experimental, please download it and try it out if you’re curious, and feel free to reach out to me via email or via the <a href="https://github.com/dmarticus/circle/issues">Github issues</a> if you spot anything amiss :)</p>
+
+<h2 id="usage">Usage</h2>
+
+<p>You’ll need to set the environment variable <code class="language-plaintext highlighter-rouge">CIRCLE_API_KEY</code> (or something like that) to connect to Circle’s sandbox (or production) environments.  Get your keys <a href="https://developers.circle.com/docs/api-keys">here</a>.</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">import</span> <span class="nn">Circle.Client</span>
+<span class="kr">import</span> <span class="nn">Circle.Types</span>
+<span class="kr">import</span> <span class="nn">Network.HTTP.Client</span> <span class="p">(</span><span class="nf">newManager</span><span class="p">)</span>
+<span class="kr">import</span> <span class="nn">Network.HTTP.Client.TLS</span> <span class="p">(</span><span class="nf">tlsManagerSettings</span><span class="p">)</span>
+<span class="c1">--</span>
+<span class="n">main</span> <span class="o">::</span> <span class="kt">IO</span> <span class="nb">()</span>
+<span class="n">main</span> <span class="o">=</span> <span class="kr">do</span>
+  <span class="n">manager</span> <span class="o">&lt;-</span> <span class="n">newManager</span> <span class="n">tlsManagerSettings</span>
+  <span class="n">config</span> <span class="o">&lt;-</span> <span class="n">sandboxEnvConfig</span> <span class="s">"CIRCLE_API_KEY"</span>
+  <span class="n">result</span> <span class="o">&lt;-</span> <span class="n">circle</span> <span class="n">config</span> <span class="n">manager</span> <span class="n">getConfigurationInfo</span>
+  <span class="kr">case</span> <span class="n">result</span> <span class="kr">of</span>
+    <span class="kt">Right</span> <span class="kt">CircleResponseBody</span> <span class="n">b</span> <span class="o">-&gt;</span> <span class="n">print</span> <span class="n">bs</span>
+    <span class="kt">Left</span> <span class="kt">CircleError</span> <span class="n">e</span> <span class="o">-&gt;</span> <span class="n">print</span> <span class="n">e</span>
+</code></pre></div></div>
+
+<p>More documentation on how to use this library can be found on <a href="https://github.com/dmarticus/circle#readme">Github</a></p>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>At my old job, we considered building a crypto off-ramp for our customers to convert USDC to Fiat currency, and one of the stablecoin APIs we considered for this integration was Circle.  Their REST API documentation was great, but integrating with it would require writing our own library to call it, since there weren’t any existing open-source libraries for Circle’s API that were written in Haskell (a classic conundrum in the Haskell ecosystem).  Around that time, I got the idea that such a library could be written and open-sourced and hopefully be useful to folks beyond my coworkers.</p>
+
+<p>Then, after all that, the crypto off-ramp project was shelved, other priorities took over, and I never ended up getting the chance to work on this API client.  However, now that I’ve had more time on my hands during this little career sabbatical, one of the things I wanted to do during this time off was to make this vision a reality.  I know API clients aren’t the most “hard-core” of engineering projects, but building this was a lot of fun, and I hope future Haskell users find it useful.</p>
+
+<h2 id="acknowledgements">Acknowledgements</h2>
+
+<p>I wanted to shout out a few people that were instrumental in me getting this project done (some of whom probably didn’t even know it).</p>
+
+<p>First off, I was heavily inspired by the following libraries with respect to how they implemented their API clients, and I used a similar design for mine:</p>
+
+<ul>
+  <li>(my old coworker) Alexey Zabelin’s <a href="https://www.shipwire.com/">shipwire</a> API wrapper: <a href="https://github.com/alexeyzab/ballast">ballast</a></li>
+  <li>David Johnson’s <a href="https://github.com/dmjio/stripe">stripe</a> API wrapper (from which I’m pretty sure Alexey drew his inspiration).</li>
+</ul>
+
+<p>Next, I wanted to shout out <a href="https://lobste.rs/u/janus">janus</a> from Lobste.rs for recommending that I try using <a href="https://github.com/NorfairKing/autodocodec#readme">autodocodec</a> for writing my JSON serialization instances (and I also want to thank <a href="https://github.com/NorfairKing/">NorfairKing</a> for writing that library!)</p>
+
+<p>Lastly, I wanted to shout out (another old coworker) Vaibhav Sagar for giving me a hand uploading this package to Hackage.</p>

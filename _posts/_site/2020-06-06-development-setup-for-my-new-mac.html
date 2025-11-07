@@ -1,0 +1,186 @@
+<p>I bought a new personal laptop recently and I’m starting a new job soon, which means that I’m going to have a few new Mac laptops to set up in the near future.  So, I figured it would be prudent to write my new Mac setup steps before I get the new computers and publish these steps somewhere so that I can easily get up and running with my new machine.  My configurations isn’t too crazy, but it is custom, and I think I have enough 3rd-party development and productivity tools installed that it’s worth a blog post to cover all of the bases.  On a final note, I’m primarily a backend/distributed-systems/data engineer, so my needs mostly revolve around Scala, Java, Kotlin, Go, Node, Python, and Haskell.  YMMV!</p>
+
+<p>This blog will be broken into two sections: a “Before” section that covers what to do before setting up a new Mac (it’s a shorter section that covers exporting/porting existing system settings) and an “Setup” section that covers that actual steps required to get up and running.  Finally, before we get started, I wanted to make available a <a href="https://todoist.com/API/v8.6/import/project_from_url?t_url=https%3A%2F%2Fd1aspxi4rjqbaz.cloudfront.net%2Fa09297b0f06267f2d38f384b86fc5b9f_New%2520Macbook%2520Setup.csv">todoist template</a> for all of these tasks that you can easily import into Todoist if you’d just prefer to see the steps without all of the extra explanations.  Alright, let’s get started!</p>
+
+<h2 id="before">Before</h2>
+
+<p>There’s not too many steps here, but I definitely recommend making sure that these tasks are done before configuring a new machine since my .rc files and my editor keybindings are specific and integral parts to my efficient workflow.  Here’s are the recommended tasks:</p>
+
+<ul>
+  <li>Save any custom shell configs (.bashrc, .zshrc, etc) and custom editor keybindings (VSCode, Sublime, Intellij, .vimrc, etc) in Github, Dropbox, or anywhere safe, really.</li>
+  <li>Create a <a href="https://github.com/Homebrew/homebrew-bundle">Brewfile</a> for your brew-installed packages (this will make it much easier to add all of your brew dependencies on your new machine).</li>
+  <li>Export existing secrets from LastPass to a secure cloud location (Dropbox, GDrive, etc) so that you can access them on your new machine without having to reset all of your passwords.  My secrets are located at <em>REDACTED</em> (lol nice try NSA).</li>
+  <li>Make sure any files, folders, photos, or anything else you want saved are backed up to iCloud, Google Photos, or Dropbox.</li>
+</ul>
+
+<h2 id="setup">Setup</h2>
+
+<p>These are all the tasks I recommend doing after you’ve gotten your new Mac and want to configure it so that all of the settings match the old one.</p>
+
+<h3 id="the-basics-browser-backups-and-secrets">The basics: browser, backups, and secrets</h3>
+
+<ul>
+  <li>download and install system update</li>
+  <li>turn on FileVault for encryption</li>
+  <li>download <a href="https://www.google.com/chrome/">Chrome</a> and do the following
+    <ul>
+      <li>sign into your Google account
+        <ul>
+          <li>install <a href="https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm?hl=en">uBlock origin</a></li>
+          <li>install <a href="https://chrome.google.com/webstore/detail/devtools-theme-zero-dark/bomhdjeadceaggdgfoefmpeafkjhegbo?hl=en-US">DevTools Theme</a></li>
+          <li>add the following settings:
+            <ul>
+              <li>turn on “warn before quitting”</li>
+              <li>Set theme to “Dark”</li>
+              <li>Go to <code class="language-plaintext highlighter-rouge">chrome://flags</code> and set Developer Tools Experiments to “Enabled”</li>
+              <li>Go to Experiments and select “Allow custom UI themes”</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>sign in to <a href="https://www.dropbox.com/">Dropbox</a> using Google authentication</li>
+  <li>download <a href="https://www.lastpass.com/">LastPass</a></li>
+</ul>
+
+<h3 id="terminal-ssh-github-shell-and-other-system-default-settings">Terminal, SSH, GitHub, Shell, and other System Default Settings</h3>
+
+<h4 id="terminal">Terminal</h4>
+
+<ul>
+  <li>install <a href="https://www.iterm2.com/">iTerm2</a></li>
+  <li>make any other non-default changes to your terminal:
+    <ul>
+      <li>reuse session directory</li>
+      <li>make sure home is the baseline</li>
+      <li>bold text with brighten enabled</li>
+      <li>enable bold and italic</li>
+      <li>monaco size 15 font</li>
+      <li>enable status bar and configure it to show battery, CPU, RAM, git branch, time, and network throughput</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="ssh">SSH</h4>
+
+<ul>
+  <li>simplify the process of SSHing into other boxes. Create an SSH config file via <code class="language-plaintext highlighter-rouge">mkdir ~/.ssh &amp;&amp; touch ~/.ssh/config</code></li>
+  <li>modify your ssh config so that every time you run <code class="language-plaintext highlighter-rouge">ssh &lt;command&gt;</code> it will alias to <code class="language-plaintext highlighter-rouge">ssh -i ~/.ssh/key.pem user@example.com</code></li>
+</ul>
+
+<p>Your <code class="language-plaintext highlighter-rouge">~/.ssh/config</code> file should look like this</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Host <span class="k">*</span>
+  AddKeysToAgent <span class="nb">yes
+  </span>UseKeychain <span class="nb">yes
+  </span>IdentityFile ~/.ssh/id_rsa
+
+Host myssh
+  HostName example.com
+  User user
+  IdentityFile ~/.ssh/key.pem
+</code></pre></div></div>
+
+<p>Now just run the alias (<code class="language-plaintext highlighter-rouge">ssh myssh</code>) to connect.</p>
+
+<h4 id="git">Git</h4>
+
+<ul>
+  <li>create <a href="https://help.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">new SSH key for github</a></li>
+  <li>edit your git config using the <code class="language-plaintext highlighter-rouge">.gitconfig</code> file from your dotfiles directory</li>
+</ul>
+
+<h4 id="shell">Shell</h4>
+
+<ul>
+  <li><a href="https://ohmyz.sh/">install oh-my-zsh</a> to install <code class="language-plaintext highlighter-rouge">zsh</code> (the superior Unix shell)
+    <ul>
+      <li>use your <code class="language-plaintext highlighter-rouge">.zshrc</code> from your dotfiles repo for configuring your <code class="language-plaintext highlighter-rouge">zsh</code> instance</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="system-defaults">System Defaults</h4>
+
+<ul>
+  <li>clone system customization setup scripts (<code class="language-plaintext highlighter-rouge">git clone git@github.com:dmarticus/sixarm_mac_setup.git</code>) and save them somewhere reasonable (e.g. <code class="language-plaintext highlighter-rouge">~/Personal/github/dmarticus/</code>)
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">cd</code> into that reasonable location and run <code class="language-plaintext highlighter-rouge">sh defaults-write-our-favorites.sh</code> to automatically apply a bunch of sane defaults to your computer</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="installing-3rd-party-apps">Installing 3rd-Party Apps</h3>
+
+<h4 id="install-all-3rd-party-apps-via-homebrew">Install all 3rd-party apps via Homebrew</h4>
+
+<ul>
+  <li>install <a href="https://brew.sh/">Homebrew</a> (awesome 3rd-party Mac package manager)
+    <ul>
+      <li>make sure your <a href="https://github.com/dmarticus/dotfiles/blob/master/Brewfile">Brewfile</a> is at <code class="language-plaintext highlighter-rouge">~/Brewfile</code></li>
+    </ul>
+  </li>
+  <li>run <code class="language-plaintext highlighter-rouge">brew bundle install</code> to install all relevant brew and mas depedendencies.  This will take a minute but should work great</li>
+</ul>
+
+<h4 id="install-additional-programming-languages-that-werent-handled-by-homebrew">Install Additional Programming Languages that weren’t handled by Homebrew</h4>
+
+<ul>
+  <li>install <a href="https://golang.org/doc/install">Go</a></li>
+  <li>install <a href="https://www.haskell.org/platform/mac.html">Haskell</a></li>
+  <li>install <a href="https://www.taniarascia.com/setting-up-a-brand-new-mac-for-development/#nodejs">node and NVM</a></li>
+  <li>install <a href="https://www.dylanamartin.com/2020/03/22/installing-jekyll-and-its-toolchain-on-mac-os-catalina.html">Jekyll and other blog tools</a></li>
+</ul>
+
+<h4 id="install-additional-non-programming-related-mac-apps">Install Additional Non-Programming-Related Mac Apps</h4>
+
+<ul>
+  <li>download <a href="https://www.spotify.com/us/download/mac/">Spotify</a></li>
+  <li>download <a href="https://www.spectacleapp.com/">Spectacle</a>
+    <ul>
+      <li>Configure Spectacle for your computer.  My settings look like this:
+        <ul>
+          <li>Center = ctrl+cmd+T</li>
+          <li>Fullscreen = ctrl+cmd+B</li>
+          <li>Next Display = ctrl+shift+cmd+A</li>
+          <li>Previous Display = ctrl+shift+cmd+F</li>
+          <li>Left Half = ctrl+cmd+A</li>
+          <li>Right Half = ctrl+cmd+F</li>
+          <li>Top Half = ctrl+cmd+E</li>
+          <li>Bottom Half = ctrl+cmd+C</li>
+          <li>Upper Left = ctrl+cmd+W</li>
+          <li>Lower Left = ctrl+cmd+X</li>
+          <li>Upper Right = ctrl+cmd+R</li>
+          <li>Lower Right = ctrl+cmd+V</li>
+          <li>Make Larger = ctrl+cmd+-&gt;</li>
+          <li>Make Smaller = ctrl+cmd+&lt;-</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="customize-additional-settings">Customize Additional Settings</h3>
+
+<p>Finally, we need to customize any additional settings that could not be configured with the <code class="language-plaintext highlighter-rouge">defaults-write-our-favorites.sh</code> script (Mac OS loves to make it hard to change default settings).</p>
+
+<ul>
+  <li>Add <a href="https://beebom.com/how-modify-or-create-custom-keyboard-layouts-mac/">custom keymaps</a>
+    <ul>
+      <li>command-shift-Q = Display sleep</li>
+      <li>caps lock = ESC</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>At this point, all of the essentials should be installed and ready to go.  As of writing this (6/6/2020), I’ve currently used this setup guide for one (1) of my new Macs and have updated it slightly from the original draft form to reflect the actually installation process, but now this post has officially been end-to-end tested!</p>
+
+<p>Finally, I want to give credit to the following blog posts for paving the way for mine :)</p>
+
+<ul>
+  <li><a href="http://dreynaud.fail/new-mac-setup/">http://dreynaud.fail/new-mac-setup/</a></li>
+  <li><a href="http://dreynaud.fail/new-mac-setup/">https://www.taniarascia.com/setting-up-a-brand-new-mac-for-development/</a></li>
+</ul>

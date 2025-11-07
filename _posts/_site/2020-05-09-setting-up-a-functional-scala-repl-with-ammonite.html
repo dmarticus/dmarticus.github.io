@@ -1,0 +1,89 @@
+<p>One of my favorite tools in the Scala ecosystem is <a href="https://www.lihaoyi.com/">Li Haoyi’s</a> <a href="https://github.com/lihaoyi/Ammonite">Ammonite</a>, which is a tool that enable first-class
+scripting support in Scala.  You can use Ammonite to run Scala code in the REPL, as scripts, or even as a system-level shell as a replacement to something like Bash.  It’s a great 
+tool and one I use daily when writing Scala.  My favorite thing to use it for is for advanced REPL support – Scala is my favorite language and Ammonite lets me whip up little Scala
+scripts and run them in the command line as I used to do with Python or Node.</p>
+
+<p>However, as I’ve been venturing into the functional programming world of Scala, one the challenges I ran into
+when running functional scripts in Ammonite was that I constantly had to import Cats, ScalaCheck, ZIO, Monix, etc.  What I wanted was a way to preload all of my relevant FP libraries into 
+Ammonite so that each time I ran my code it would recognize the imports.
+support.</p>
+
+<h2 id="enter-ammonite-predefs">Enter Ammonite Predefs</h2>
+
+<p>Fortunately, Li Haoyi thought of this use case, and designed Ammonite-REPL to support the concept of a “<a href="https://github.com/lihaoyi/Ammonite/blob/master/internals-docs/predef.md">predef</a>”, 
+which is code that Ammonite can run <em>before</em> entering the REPL.  Predefs enable all sorts of useful things, such as:</p>
+<ul>
+  <li>Importing implicits that are needed by the REPL to run (such as pretty-printing, type definitions, or library imports)</li>
+  <li>Loading common modules if you want them availabel at REPL runtime</li>
+  <li>Initialize any common definitions that you may want to use each time the REPL is opened</li>
+</ul>
+
+<p>Ammonite predefs are also dirt-simple to use: all you need to do is create a <em>predef file</em>, name it <code class="language-plaintext highlighter-rouge">~/.ammonite/predef.sc</code>, and add all the relevant imports into it.  For example, 
+if you want to use Cats and ZIO in your predef file, you can just add them like such:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">$ivy.</span><span class="n">`org.typelevel::cats-core:2.1.1`</span><span class="o">,</span> <span class="nv">cats</span><span class="o">.</span><span class="py">_</span><span class="o">,</span> <span class="nv">cats</span><span class="o">.</span><span class="py">implicits</span><span class="o">.</span><span class="py">_</span>
+<span class="k">import</span> <span class="nn">$ivy.</span><span class="n">`dev.zio::zio:1.0.0-RC18`</span>
+<span class="o">...</span>
+</code></pre></div></div>
+
+<h2 id="usage-example">Usage Example</h2>
+
+<p>Once these predefs have been added, you’ll be able to initialize a REPL by running <code class="language-plaintext highlighter-rouge">amm</code> (or whatever your ammonite alias is, <code class="language-plaintext highlighter-rouge">amm</code> is just the default) and all of the imports will be loaded 
+for you before you run any code.  Here’s an example of how it changed my workflow.</p>
+
+<p>Before adding predefs:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">github</span><span class="o">.</span><span class="py">com</span><span class="o">/</span><span class="n">dmarticus</span> <span class="err">»</span> <span class="n">amm</span>
+<span class="nc">Loading</span><span class="o">...</span>
+<span class="nc">Welcome</span> <span class="n">to</span> <span class="n">the</span> <span class="nc">Ammonite</span> <span class="nc">Repl</span> <span class="mf">1.6</span><span class="o">.</span><span class="mi">9</span>
+<span class="o">(</span><span class="nc">Scala</span> <span class="mf">2.12</span><span class="o">.</span><span class="mi">8</span> <span class="nc">Java</span> <span class="mf">12.0</span><span class="o">.</span><span class="mi">2</span><span class="o">)</span>
+<span class="nc">If</span> <span class="n">you</span> <span class="n">like</span> <span class="nc">Ammonite</span><span class="o">,</span> <span class="n">please</span> <span class="n">support</span> <span class="n">our</span> <span class="n">development</span> <span class="n">at</span> <span class="nv">www</span><span class="o">.</span><span class="py">patreon</span><span class="o">.</span><span class="py">com</span><span class="o">/</span><span class="n">lihaoyi</span>
+<span class="k">@</span> <span class="k">val</span> <span class="nv">optionString</span> <span class="k">=</span> <span class="s">"string"</span><span class="o">.</span><span class="py">some</span>
+<span class="nv">cmd0</span><span class="o">.</span><span class="py">sc</span><span class="k">:</span><span class="err">1</span><span class="kt">:</span> <span class="kt">value</span> <span class="kt">some</span> <span class="kt">is</span> <span class="kt">not</span> <span class="kt">a</span> <span class="kt">member</span> <span class="kt">of</span> <span class="kt">String</span>
+<span class="k">val</span> <span class="nv">optionString</span> <span class="k">=</span> <span class="s">"string"</span><span class="o">.</span><span class="py">some</span>
+                            <span class="o">^</span>
+<span class="nc">Compilation</span> <span class="nc">Failed</span>
+
+<span class="c1">// RAGE RAGE RAGE</span>
+
+<span class="k">@</span> <span class="k">import</span> <span class="nn">$ivy.</span><span class="n">`org.typelevel::cats-core:2.1.1`</span><span class="o">,</span> <span class="nv">cats</span><span class="o">.</span><span class="py">_</span><span class="o">,</span> <span class="nv">cats</span><span class="o">.</span><span class="py">implicits</span><span class="o">.</span><span class="py">_</span>
+<span class="k">import</span> <span class="nn">$ivy.$</span>                               <span class="o">,</span> <span class="nv">cats</span><span class="o">.</span><span class="py">_</span><span class="o">,</span> <span class="nv">cats</span><span class="o">.</span><span class="py">implicits</span><span class="o">.</span><span class="py">_</span>
+
+<span class="k">@</span> <span class="k">val</span> <span class="nv">optionString</span> <span class="k">=</span> <span class="s">"string"</span><span class="o">.</span><span class="py">some</span>
+<span class="n">optionString</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="s">"string"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>After created a <code class="language-plaintext highlighter-rouge">predef</code> file:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">github</span><span class="o">.</span><span class="py">com</span><span class="o">/</span><span class="n">dmarticus</span> <span class="err">»</span> <span class="n">amm</span>
+<span class="nc">Loading</span><span class="o">...</span>
+<span class="nc">Compiling</span> <span class="o">/</span><span class="nc">Users</span><span class="o">/</span><span class="n">dmarticus</span><span class="o">/.</span><span class="py">ammonite</span><span class="o">/</span><span class="nv">predef</span><span class="o">.</span><span class="py">sc</span>
+<span class="nc">Welcome</span> <span class="n">to</span> <span class="n">the</span> <span class="nc">Ammonite</span> <span class="nc">Repl</span> <span class="mf">1.6</span><span class="o">.</span><span class="mi">9</span>
+<span class="o">(</span><span class="nc">Scala</span> <span class="mf">2.12</span><span class="o">.</span><span class="mi">8</span> <span class="nc">Java</span> <span class="mf">12.0</span><span class="o">.</span><span class="mi">2</span><span class="o">)</span>
+<span class="nc">If</span> <span class="n">you</span> <span class="n">like</span> <span class="nc">Ammonite</span><span class="o">,</span> <span class="n">please</span> <span class="n">support</span> <span class="n">our</span> <span class="n">development</span> <span class="n">at</span> <span class="nv">www</span><span class="o">.</span><span class="py">patreon</span><span class="o">.</span><span class="py">com</span><span class="o">/</span><span class="n">lihaoyi</span>
+<span class="k">@</span> <span class="k">val</span> <span class="nv">optionString</span> <span class="k">=</span> <span class="s">"string"</span><span class="o">.</span><span class="py">some</span>
+<span class="n">optionString</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">]</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="s">"string"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>Pretty cool!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This is a short post, but hopefully it’ll help provide insights into the best way of avoiding manual imports of useful code every time you want to use the Ammonite REPL.  Also, if you want to see
+an example of my <code class="language-plaintext highlighter-rouge">~/.ammonite/predef.sc</code> file, I’ll provide it here:</p>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">$ivy.</span><span class="n">`org.typelevel::cats-core:2.1.1`</span><span class="o">,</span> <span class="nv">cats</span><span class="o">.</span><span class="py">_</span><span class="o">,</span> <span class="nv">cats</span><span class="o">.</span><span class="py">implicits</span><span class="o">.</span><span class="py">_</span>
+<span class="k">import</span> <span class="nn">$ivy.</span><span class="n">`org.scalatest::scalatest:3.0.8`</span><span class="o">,</span><span class="nv">org</span><span class="o">.</span><span class="py">scalatest</span><span class="o">.</span><span class="py">_</span>
+<span class="k">import</span> <span class="nn">$ivy.</span><span class="n">`org.scalacheck::scalacheck:1.14.0`</span>
+<span class="k">import</span> <span class="nn">$ivy.</span><span class="n">`io.monix::monix:3.1.0`</span>
+<span class="k">import</span> <span class="nn">$ivy.</span><span class="n">`dev.zio::zio:1.0.0-RC18`</span>
+<span class="k">import</span> <span class="nn">$ivy.</span><span class="n">`org.typelevel::cats-effect:2.1.2`</span>
+<span class="k">import</span> <span class="nn">$ivy.</span><span class="n">`com.github.chocpanda::scalacheck-magnolia:0.3.1`</span>
+<span class="k">import</span> <span class="nn">$ivy.</span><span class="n">`io.chrisdavenport::cats-scalacheck:0.2.0`</span>
+<span class="k">import</span> <span class="nn">scala.concurrent.ExecutionContext.Implicits.global</span>
+<span class="k">import</span> <span class="nn">scala.concurrent.duration._</span>
+<span class="k">import</span> <span class="nn">scala.concurrent.Future</span>
+<span class="k">import</span> <span class="nn">scala.util.</span><span class="o">{</span><span class="nc">Failure</span><span class="o">,</span> <span class="nc">Success</span><span class="o">}</span>
+<span class="k">import</span> <span class="nn">scala.concurrent.Await</span>
+<span class="k">import</span> <span class="nn">org.scalacheck.</span><span class="o">{</span><span class="nc">Arbitrary</span><span class="o">,</span> <span class="nc">Gen</span><span class="o">}</span>
+<span class="k">import</span> <span class="nn">org.scalacheck.magnolia._</span>
+<span class="k">def</span> <span class="nf">randomObj</span><span class="o">[</span><span class="kt">T:</span> <span class="kt">Arbitrary</span><span class="o">]</span> <span class="k">=</span> <span class="n">implicitly</span><span class="o">[</span><span class="kt">Arbitrary</span><span class="o">[</span><span class="kt">T</span><span class="o">]].</span><span class="py">arbitrary</span><span class="o">.</span><span class="py">sample</span><span class="o">.</span><span class="py">get</span>
+</code></pre></div></div>
+
+<p>I also have my <code class="language-plaintext highlighter-rouge">predef</code> file saved as a <a href="https://gist.github.com/dmarticus/c31102dfd39d32fb492eb06a84080941">gist</a>.  I hope this helps somebody!</p>

@@ -1,0 +1,253 @@
+<h2 id="introduction">Introduction</h2>
+
+<p>In my <a href="http://www.dylanamartin.com/2022/10/31/use-newtypes-for-typesafe-data-validation-with-aeson.html">last post</a>, I talked about how Haskell <code class="language-plaintext highlighter-rouge">newtypes</code> are great tools for modeling JSON data when writing API clients in Haskell, and I included some examples on how to write custom <code class="language-plaintext highlighter-rouge">ToJSON</code> and <code class="language-plaintext highlighter-rouge">FromJSON</code> methods that incorporated these <code class="language-plaintext highlighter-rouge">newtypes</code>.  That post generated <a href="https://lobste.rs/s/ulqssr/data_validation_haskell_with_newtypes">some discussion on Lobsters</a>, from which I learned about this interesting library called <a href="https://github.com/NorfairKing/autodocodec#readme">autodocodec</a>.  Given the advantages laid out in that discussion, I decided to give that library a try on my project’s codebase, and it worked so well that, so I ended up refactoring basically all of my types to use autodocodec to generate JSON parsers for my types.  In fact, I enjoyed the experience of using autodocodec so much that I thought it was worth blogging about.</p>
+
+<p>The subsequent code examples will probably make more sense if you have some familiarity with Haskell, JSON, and <a href="https://hackage.haskell.org/package/aeson">aeson</a>.</p>
+
+<h2 id="rewriting-haskell-types-with-autodocodec">Rewriting Haskell types with autodocodec</h2>
+
+<p>As <a href="https://lobste.rs/s/ulqssr/data_validation_haskell_with_newtypes#c_nhn8oj">janus mentioned</a>, the big benefit of autodocodec is that it generates <em>bidirectional</em> parsers; rather than requiring the user to write both <code class="language-plaintext highlighter-rouge">ToJSON</code> and <code class="language-plaintext highlighter-rouge">FromJSON</code> instances, autodocodec lets you specify a single <code class="language-plaintext highlighter-rouge">HasCodec</code> instance for a given type, and then you can generate <code class="language-plaintext highlighter-rouge">ToJSON</code> and <code class="language-plaintext highlighter-rouge">FromJSON</code> instances from that type through the <a href="https://ghc.gitlab.haskell.org/ghc/doc/users_guide/exts/deriving_via.html">DerivingVia</a> language extension.  This feature let me rewrite code that looks like this:</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">data</span> <span class="kt">CreatePayment</span> <span class="o">=</span> <span class="kt">CreatePayment</span>
+  <span class="p">{</span> <span class="n">createPaymentIdempotencyKey</span> <span class="o">::</span> <span class="o">!</span><span class="kt">UUID</span><span class="p">,</span>
+    <span class="n">createPaymentKeyId</span> <span class="o">::</span> <span class="o">!</span><span class="kt">UUID</span><span class="p">,</span>
+    <span class="n">createPaymentMetadata</span> <span class="o">::</span> <span class="o">!</span><span class="kt">CreatePaymentMetadata</span><span class="p">,</span>
+    <span class="n">createPaymentAmount</span> <span class="o">::</span> <span class="o">!</span><span class="kt">MoneyAmount</span><span class="p">,</span>
+    <span class="n">createPaymentAutoCapture</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">Maybe</span> <span class="kt">Bool</span><span class="p">),</span>
+    <span class="n">createPaymentVerification</span> <span class="o">::</span> <span class="o">!</span><span class="kt">VerificationType</span><span class="p">,</span>
+    <span class="n">createPaymentVerificationSuccessUrl</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">Maybe</span> <span class="kt">URI</span><span class="p">),</span>
+    <span class="n">createPaymentVerificationFailureUrl</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">Maybe</span> <span class="kt">URI</span><span class="p">),</span>
+    <span class="n">createPaymentSource</span> <span class="o">::</span> <span class="o">!</span><span class="kt">PaymentSource</span><span class="p">,</span>
+    <span class="n">createPaymentDescription</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">Maybe</span> <span class="kt">Text</span><span class="p">),</span>
+    <span class="n">createPaymentEncryptedData</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">Maybe</span> <span class="kt">EncryptedData</span><span class="p">),</span>
+    <span class="n">createPaymentChannel</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">Maybe</span> <span class="kt">Text</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Eq</span><span class="p">,</span> <span class="kt">Show</span><span class="p">)</span>
+
+<span class="kr">instance</span> <span class="kt">FromJSON</span> <span class="kt">CreatePayment</span> <span class="kr">where</span>
+  <span class="n">parseJSON</span> <span class="o">=</span> <span class="n">withObject</span> <span class="s">"CreatePayment"</span> <span class="n">parse</span>
+    <span class="kr">where</span>
+      <span class="n">parse</span> <span class="n">o</span> <span class="o">=</span>
+        <span class="kt">CreatePayment</span>
+          <span class="o">&lt;$&gt;</span> <span class="n">o</span> <span class="o">.:</span> <span class="s">"idempotencyKey"</span>
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:</span> <span class="s">"keyId"</span> 
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:</span> <span class="s">"metadata"</span> 
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:</span> <span class="s">"amount"</span> 
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:?</span> <span class="s">"autoCapture"</span> 
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:</span> <span class="s">"verification"</span> 
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:?</span> <span class="s">"verificationSuccessfulUrl"</span> 
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:?</span> <span class="s">"verificationFailureUrl"</span> 
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:</span> <span class="s">"source"</span> 
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:?</span> <span class="s">"description"</span> 
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:?</span> <span class="s">"encryptedData"</span> 
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:?</span> <span class="s">"channel"</span>
+
+<span class="kr">instance</span> <span class="kt">ToJSON</span> <span class="kt">CreatePayment</span> <span class="kr">where</span>
+  <span class="n">toJSON</span> <span class="kt">CreatePayment</span> <span class="p">{</span><span class="o">..</span><span class="p">}</span> <span class="o">=</span> 
+    <span class="n">omitNulls</span> <span class="p">[</span>
+      <span class="s">"idempotencyKey"</span> <span class="o">.=</span> <span class="n">createPaymentIdempotencyKey</span><span class="p">,</span>
+      <span class="s">"keyId"</span> <span class="o">.=</span> <span class="n">createPaymentKeyId</span><span class="p">,</span>
+      <span class="s">"metadata"</span> <span class="o">.=</span> <span class="n">createPaymentMetadata</span><span class="p">,</span> 
+      <span class="s">"amount"</span> <span class="o">.=</span> <span class="n">createPaymentAmount</span><span class="p">,</span> 
+      <span class="s">"autoCapture"</span> <span class="o">.=</span> <span class="n">createPaymentAutoCapture</span><span class="p">,</span>
+      <span class="s">"verification"</span> <span class="o">.=</span> <span class="n">createPaymentVerification</span><span class="p">,</span>
+      <span class="s">"verificationSuccessfulUrl"</span> <span class="o">.=</span> <span class="n">createPaymentSuccessfulUrl</span><span class="p">,</span>
+      <span class="s">"verificationFailureUrl"</span> <span class="o">.=</span> <span class="n">createPaymentFailureUrl</span><span class="p">,</span>
+      <span class="s">"source"</span> <span class="o">.=</span> <span class="n">createPaymentSource</span><span class="p">,</span>
+      <span class="s">"description"</span> <span class="o">.=</span> <span class="n">createPaymentDescription</span><span class="p">,</span>
+      <span class="s">"encryptedData"</span> <span class="o">.=</span> <span class="n">createPaymentEncryptedData</span><span class="p">,</span> 
+      <span class="s">"channel"</span> <span class="o">.=</span> <span class="n">createPaymentChannel</span><span class="p">,</span>
+    <span class="p">]</span>
+</code></pre></div></div>
+
+<p>into this:</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">data</span> <span class="kt">CreatePayment</span> <span class="o">=</span> <span class="kt">CreatePayment</span>
+  <span class="p">{</span> <span class="n">createPaymentIdempotencyKey</span> <span class="o">::</span> <span class="o">!</span><span class="kt">UUID</span><span class="p">,</span>
+    <span class="n">createPaymentKeyId</span> <span class="o">::</span> <span class="o">!</span><span class="kt">UUID</span><span class="p">,</span>
+    <span class="n">createPaymentMetadata</span> <span class="o">::</span> <span class="o">!</span><span class="kt">CreatePaymentMetadata</span><span class="p">,</span>
+    <span class="n">createPaymentAmount</span> <span class="o">::</span> <span class="o">!</span><span class="kt">MoneyAmount</span><span class="p">,</span>
+    <span class="n">createPaymentAutoCapture</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">Maybe</span> <span class="kt">Bool</span><span class="p">),</span>
+    <span class="n">createPaymentVerification</span> <span class="o">::</span> <span class="o">!</span><span class="kt">VerificationType</span><span class="p">,</span>
+    <span class="n">createPaymentVerificationSuccessUrl</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">Maybe</span> <span class="kt">URI</span><span class="p">),</span>
+    <span class="n">createPaymentVerificationFailureUrl</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">Maybe</span> <span class="kt">URI</span><span class="p">),</span>
+    <span class="n">createPaymentSource</span> <span class="o">::</span> <span class="o">!</span><span class="kt">PaymentSource</span><span class="p">,</span>
+    <span class="n">createPaymentDescription</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">Maybe</span> <span class="kt">Text</span><span class="p">),</span>
+    <span class="n">createPaymentEncryptedData</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">Maybe</span> <span class="kt">EncryptedData</span><span class="p">),</span>
+    <span class="n">createPaymentChannel</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">Maybe</span> <span class="kt">Text</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Eq</span><span class="p">,</span> <span class="kt">Show</span><span class="p">)</span>
+  <span class="kr">deriving</span>
+    <span class="p">(</span> <span class="kt">FromJSON</span><span class="p">,</span>
+      <span class="kt">ToJSON</span>
+    <span class="p">)</span>
+    <span class="n">via</span> <span class="p">(</span><span class="kt">Autodocodec</span> <span class="kt">CreatePayment</span><span class="p">)</span>
+
+<span class="kr">instance</span> <span class="kt">HasCodec</span> <span class="kt">CreatePayment</span> <span class="kr">where</span>
+  <span class="n">codec</span> <span class="o">=</span>
+    <span class="n">object</span> <span class="s">"CreatePayment"</span> <span class="o">$</span>
+      <span class="kt">CreatePayment</span>
+        <span class="o">&lt;$&gt;</span> <span class="n">requiredField'</span> <span class="s">"idempotencyKey"</span> <span class="o">.=</span> <span class="n">createPaymentIdempotencyKey</span>
+        <span class="o">&lt;*&gt;</span> <span class="n">requiredField'</span> <span class="s">"keyId"</span> <span class="o">.=</span> <span class="n">createPaymentKeyId</span>
+        <span class="o">&lt;*&gt;</span> <span class="n">requiredField'</span> <span class="s">"metadata"</span> <span class="o">.=</span> <span class="n">createPaymentMetadata</span>
+        <span class="o">&lt;*&gt;</span> <span class="n">requiredField'</span> <span class="s">"amount"</span> <span class="o">.=</span> <span class="n">createPaymentAmount</span>
+        <span class="o">&lt;*&gt;</span> <span class="n">optionalField'</span> <span class="s">"autoCapture"</span> <span class="o">.=</span> <span class="n">createPaymentAutoCapture</span>
+        <span class="o">&lt;*&gt;</span> <span class="n">requiredField'</span> <span class="s">"verification"</span> <span class="o">.=</span> <span class="n">createPaymentVerification</span>
+        <span class="o">&lt;*&gt;</span> <span class="n">optionalField'</span> <span class="s">"verificationSuccessfulUrl"</span> <span class="o">.=</span> <span class="n">createPaymentVerificationSuccessUrl</span>
+        <span class="o">&lt;*&gt;</span> <span class="n">optionalField'</span> <span class="s">"verificationFailureUrl"</span> <span class="o">.=</span> <span class="n">createPaymentVerificationFailureUrl</span>
+        <span class="o">&lt;*&gt;</span> <span class="n">requiredField'</span> <span class="s">"source"</span> <span class="o">.=</span> <span class="n">createPaymentSource</span>
+        <span class="o">&lt;*&gt;</span> <span class="n">optionalField'</span> <span class="s">"description"</span> <span class="o">.=</span> <span class="n">createPaymentDescription</span>
+        <span class="o">&lt;*&gt;</span> <span class="n">optionalField'</span> <span class="s">"encryptedData"</span> <span class="o">.=</span> <span class="n">createPaymentEncryptedData</span>
+        <span class="o">&lt;*&gt;</span> <span class="n">optionalField'</span> <span class="s">"channel"</span> <span class="o">.=</span> <span class="n">createPaymentChannel</span>
+</code></pre></div></div>
+
+<p>15 fewer lines of code, with no loss of functionality!  And, <a href="https://lobste.rs/s/ulqssr/data_validation_haskell_with_newtypes#c_jzco7g">as mentioned by danidiaz</a>, I don’t have to worry about forgetting a constructor.  I also enjoyed the type hints for matching the type of my <code class="language-plaintext highlighter-rouge">codec</code> to my original type:</p>
+
+<p><img src="../../../media/autodocodec_constructor_error.png" alt="autodocodec constructor error" width="740px" /></p>
+
+<p>In addition to <code class="language-plaintext highlighter-rouge">object</code>, autodocodec has many other methods to generate JSON without needing to hand-write the derivations.  One such example is <code class="language-plaintext highlighter-rouge">shownBoundedEnumCodec</code>, which lets you generate a codec for a bounded enum type that just takes advantage of existing encoding and decoding behavior provided by a <code class="language-plaintext highlighter-rouge">Show</code> instance.  Here’s how that code looks:</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">data</span> <span class="kt">SupportedCurrencies</span> <span class="o">=</span> <span class="kt">USD</span> <span class="o">|</span> <span class="kt">EUR</span> <span class="o">|</span> <span class="kt">BTC</span> <span class="o">|</span> <span class="kt">ETH</span>
+  <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Eq</span><span class="p">,</span> <span class="kt">Show</span><span class="p">,</span> <span class="kt">Enum</span><span class="p">,</span> <span class="kt">Bounded</span><span class="p">)</span>
+  <span class="kr">deriving</span>
+    <span class="p">(</span> <span class="kt">FromJSON</span><span class="p">,</span>
+      <span class="kt">ToJSON</span>
+    <span class="p">)</span>
+    <span class="n">via</span> <span class="p">(</span><span class="kt">Autodocodec</span> <span class="kt">SupportedCurrencies</span><span class="p">)</span>
+
+<span class="kr">instance</span> <span class="kt">HasCodec</span> <span class="kt">SupportedCurrencies</span> <span class="kr">where</span>
+  <span class="n">codec</span> <span class="o">=</span> <span class="n">shownBoundedEnumCodec</span>
+</code></pre></div></div>
+
+<p>(NB: given the the <code class="language-plaintext highlighter-rouge">SupportedCurrencies</code> type just uses the default <code class="language-plaintext highlighter-rouge">Show</code> encodings, I could’ve also just derived a <code class="language-plaintext highlighter-rouge">ToJSON</code> and <code class="language-plaintext highlighter-rouge">FromJSON</code> instance for it instead of deriving <code class="language-plaintext highlighter-rouge">ToJSON</code> and <code class="language-plaintext highlighter-rouge">FromJSON</code> from the <code class="language-plaintext highlighter-rouge">HasCodec</code> instance.  However, since many of my other types use the <code class="language-plaintext highlighter-rouge">SupportedCurrencies</code> type, I need to define a <code class="language-plaintext highlighter-rouge">HasCodec</code> instance for <code class="language-plaintext highlighter-rouge">SupportedCurrencies</code> so that I can then define <code class="language-plaintext highlighter-rouge">HasCodec</code> for the types that <em>use</em> <code class="language-plaintext highlighter-rouge">SupportedCurrencies</code>.)</p>
+
+<p>(Finally, I just want to note that while I only am working with JSON (via aeson) in my example, autodocodec also supports OpenAPI, Swagger, JSON Schema, and YAML.  It’s a great library; thanks <a href="https://github.com/NorfairKing">NorfairKing</a>!)</p>
+
+<h2 id="bifunctor-types-for-parsing-more-complex-json-types">Bifunctor types for parsing more complex JSON types</h2>
+
+<p>In addition to taking advantage of various encodings that autodocodec gives me, I also implemented a few other helpers to work with JSON, inspired by my time at <a href="https://mercury.com/">Mercury</a> (we worked with JSON a lot there and wrote a ton of aeson utilities to make life easier).  I can’t remember all of the utils that we wrote a Mercury, but I’d saved one specific type<sup id="fnref:bignote" role="doc-noteref"><a href="#fn:bignote" class="footnote" rel="footnote">1</a></sup> from my time there (I remember saving it the day I learned about it since I enjoyed it so much!) that I reused in my library: <code class="language-plaintext highlighter-rouge">ThisOrThat</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">ThisOrThat</code> is defined thusly</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cd">-- | Similar to 'Either' but with different 'ToJSON' and 'FromJSON' instances.</span>
+<span class="c1">-- 'ToJSON' will serialize the payload without adding any kind of tag.</span>
+<span class="c1">-- 'FromJSON' will first attempt to parse JSON as the first type parameter,</span>
+<span class="c1">-- and if that fails will then attempt to parse as the second type parameter.</span>
+<span class="c1">--</span>
+<span class="c1">-- NB: The order of type parameters make a huge difference!</span>
+<span class="c1">-- In @'ThisOrThat' A B@, if @A@ is structurally a subtype of @B@, then the</span>
+<span class="c1">-- parser can never produce a 'That' result! For example, with types</span>
+<span class="c1">--</span>
+<span class="c1">-- @</span>
+<span class="c1">--   data A = A {foo :: String, bar :: Scientific}</span>
+<span class="c1">--   data B = B {foo :: String, bar :: Scientific, baz :: Bool}</span>
+<span class="c1">-- @</span>
+<span class="c1">--</span>
+<span class="c1">-- @'FromJSON' ('ThisOrThat' A B)@ can never parse a @B@. Any JSON object</span>
+<span class="c1">-- that includes properties @foo: &lt;string&gt;@ and @bar: &lt;number&gt;@ will parse</span>
+<span class="c1">-- as an @A@, whether or not the property @baz: &lt;boolean&gt;@ is present. You</span>
+<span class="c1">-- can fix this by instead using @'ThisOrThat' B A@.</span>
+<span class="kr">data</span> <span class="kt">ThisOrThat</span> <span class="n">a</span> <span class="n">b</span> <span class="o">=</span> <span class="kt">This</span> <span class="n">a</span> <span class="o">|</span> <span class="kt">That</span> <span class="n">b</span>
+  <span class="kr">deriving</span> <span class="n">stock</span> <span class="p">(</span><span class="kt">Eq</span><span class="p">)</span>
+
+<span class="kr">instance</span> <span class="p">(</span><span class="kt">ToJSON</span> <span class="n">a</span><span class="p">,</span> <span class="kt">ToJSON</span> <span class="n">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kt">ToJSON</span> <span class="p">(</span><span class="kt">ThisOrThat</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span> <span class="kr">where</span>
+  <span class="n">toJSON</span> <span class="p">(</span><span class="kt">This</span> <span class="n">a</span><span class="p">)</span> <span class="o">=</span> <span class="n">toJSON</span> <span class="n">a</span>
+  <span class="n">toJSON</span> <span class="p">(</span><span class="kt">That</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="n">toJSON</span> <span class="n">b</span>
+  <span class="n">toEncoding</span> <span class="p">(</span><span class="kt">This</span> <span class="n">a</span><span class="p">)</span> <span class="o">=</span> <span class="n">toEncoding</span> <span class="n">a</span>
+  <span class="n">toEncoding</span> <span class="p">(</span><span class="kt">That</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="n">toEncoding</span> <span class="n">b</span>
+
+<span class="kr">instance</span> <span class="p">(</span><span class="kt">FromJSON</span> <span class="n">a</span><span class="p">,</span> <span class="kt">FromJSON</span> <span class="n">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kt">FromJSON</span> <span class="p">(</span><span class="kt">ThisOrThat</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span> <span class="kr">where</span>
+  <span class="n">parseJSON</span> <span class="n">val</span> <span class="o">=</span> <span class="kr">do</span>
+    <span class="kr">let</span> <span class="n">parsedA</span> <span class="o">=</span> <span class="n">fromJSON</span> <span class="n">val</span>
+        <span class="n">parsedB</span> <span class="o">=</span> <span class="n">fromJSON</span> <span class="n">val</span>
+    <span class="kr">case</span> <span class="p">(</span><span class="n">parsedA</span><span class="p">,</span> <span class="n">parsedB</span><span class="p">)</span> <span class="kr">of</span>
+      <span class="p">(</span><span class="kt">Success</span> <span class="n">a</span><span class="p">,</span> <span class="kr">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pure</span> <span class="o">$</span> <span class="kt">This</span> <span class="n">a</span>
+      <span class="p">(</span><span class="kr">_</span><span class="p">,</span> <span class="kt">Success</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pure</span> <span class="o">$</span> <span class="kt">That</span> <span class="n">b</span>
+      <span class="p">(</span><span class="kt">Error</span> <span class="n">thisError</span><span class="p">,</span> <span class="kt">Error</span> <span class="n">thatError</span><span class="p">)</span> <span class="o">-&gt;</span>
+        <span class="n">fail</span> <span class="o">$</span>
+          <span class="n">fold</span>
+            <span class="p">[</span> <span class="s">"Failed when parsing a ThisOrThat from JSON.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+              <span class="s">"Error on the This: "</span> <span class="o">&lt;&gt;</span> <span class="n">thisError</span> <span class="o">&lt;&gt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+              <span class="s">"Error on the That: "</span> <span class="o">&lt;&gt;</span> <span class="n">thatError</span>
+            <span class="p">]</span>
+
+<span class="kr">instance</span> <span class="kt">Bifunctor</span> <span class="kt">ThisOrThat</span> <span class="kr">where</span>
+  <span class="n">bimap</span> <span class="n">f</span> <span class="kr">_</span> <span class="p">(</span><span class="kt">This</span> <span class="n">a</span><span class="p">)</span> <span class="o">=</span> <span class="kt">This</span> <span class="p">(</span><span class="n">f</span> <span class="n">a</span><span class="p">)</span>
+  <span class="n">bimap</span> <span class="kr">_</span> <span class="n">g</span> <span class="p">(</span><span class="kt">That</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="kt">That</span> <span class="p">(</span><span class="n">g</span> <span class="n">b</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Once defined, I can then use to model JSON data that could be an <code class="language-plaintext highlighter-rouge">Either</code>, only without needing to pattern match against that behavior.</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">data</span> <span class="kt">TransferData</span> <span class="o">=</span> <span class="kt">TransferData</span>
+  <span class="p">{</span> <span class="n">transferDataId</span> <span class="o">::</span> <span class="o">!</span><span class="kt">UUID</span><span class="p">,</span>
+    <span class="n">transferDataSource</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">ThisOrThat</span> <span class="kt">SourceWallet</span> <span class="kt">SourceBlockchain</span><span class="p">),</span>
+    <span class="n">transferDataDestination</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">ThisOrThat</span> <span class="kt">DestinationWallet</span> <span class="kt">DestinationBlockchain</span><span class="p">),</span>
+    <span class="n">transferDataAmount</span> <span class="o">::</span> <span class="o">!</span><span class="kt">MoneyAmount</span><span class="p">,</span>
+    <span class="n">transferDataFees</span> <span class="o">::</span> <span class="o">!</span><span class="kt">MoneyAmount</span><span class="p">,</span>
+    <span class="n">transferDataTransactionHash</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">Maybe</span> <span class="kt">HexString</span><span class="p">),</span>
+    <span class="n">transferDataStatus</span> <span class="o">::</span> <span class="o">!</span><span class="kt">Status</span><span class="p">,</span>
+    <span class="n">transferDataTransferErrorCode</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">Maybe</span> <span class="kt">TransferErrorCode</span><span class="p">),</span>
+    <span class="n">transferDataCreateDate</span> <span class="o">::</span> <span class="o">!</span><span class="p">(</span><span class="kt">Maybe</span> <span class="kt">UTCTime</span><span class="p">)</span>
+  <span class="p">}</span>
+  <span class="kr">deriving</span> <span class="p">(</span><span class="kt">Eq</span><span class="p">,</span> <span class="kt">Show</span><span class="p">)</span>
+
+<span class="c1">-- NB: this doesn't use autodocodec for deriving ToJSON and FromJSON since I'm using the hand-rolled</span>
+<span class="c1">-- ThisOrThat helper for smartly parsing types.</span>
+<span class="kr">instance</span> <span class="kt">FromJSON</span> <span class="kt">TransferData</span> <span class="kr">where</span>
+  <span class="n">parseJSON</span> <span class="o">=</span> <span class="n">withObject</span> <span class="s">"TransferData"</span> <span class="n">parse</span>
+    <span class="kr">where</span>
+      <span class="n">parse</span> <span class="n">o</span> <span class="o">=</span>
+        <span class="kt">TransferData</span>
+          <span class="o">&lt;$&gt;</span> <span class="n">o</span> <span class="o">.:</span> <span class="s">"id"</span>
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:</span> <span class="s">"source"</span>
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:</span> <span class="s">"destination"</span>
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:</span> <span class="s">"amount"</span>
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:</span> <span class="s">"fees"</span>
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:?</span> <span class="s">"transactionHash"</span>
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:</span> <span class="s">"status"</span>
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:?</span> <span class="s">"errorCode"</span>
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:?</span> <span class="s">"riskEvaluation"</span>
+          <span class="o">&lt;*&gt;</span> <span class="n">o</span> <span class="o">.:?</span> <span class="s">"createDate"</span>
+</code></pre></div></div>
+
+<p>Okay, so it’s relatively straightforward, but I think it’s neat.  The parser errors you get when working with it are pretty great, too.</p>
+
+<h2 id="future-work">Future Work</h2>
+
+<p>I’d love to figure out how to get this custom <code class="language-plaintext highlighter-rouge">ThisOrThat</code> type working with autodocodec so that I can replace this</p>
+
+<div class="language-hs highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">instance</span> <span class="p">(</span><span class="kt">ToJSON</span> <span class="n">a</span><span class="p">,</span> <span class="kt">ToJSON</span> <span class="n">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kt">ToJSON</span> <span class="p">(</span><span class="kt">ThisOrThat</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span> <span class="kr">where</span>
+  <span class="n">toJSON</span> <span class="p">(</span><span class="kt">This</span> <span class="n">a</span><span class="p">)</span> <span class="o">=</span> <span class="n">toJSON</span> <span class="n">a</span>
+  <span class="n">toJSON</span> <span class="p">(</span><span class="kt">That</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="n">toJSON</span> <span class="n">b</span>
+  <span class="n">toEncoding</span> <span class="p">(</span><span class="kt">This</span> <span class="n">a</span><span class="p">)</span> <span class="o">=</span> <span class="n">toEncoding</span> <span class="n">a</span>
+  <span class="n">toEncoding</span> <span class="p">(</span><span class="kt">That</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="n">toEncoding</span> <span class="n">b</span>
+
+<span class="kr">instance</span> <span class="p">(</span><span class="kt">FromJSON</span> <span class="n">a</span><span class="p">,</span> <span class="kt">FromJSON</span> <span class="n">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="kt">FromJSON</span> <span class="p">(</span><span class="kt">ThisOrThat</span> <span class="n">a</span> <span class="n">b</span><span class="p">)</span> <span class="kr">where</span>
+  <span class="n">parseJSON</span> <span class="n">val</span> <span class="o">=</span> <span class="kr">do</span>
+    <span class="kr">let</span> <span class="n">parsedA</span> <span class="o">=</span> <span class="n">fromJSON</span> <span class="n">val</span>
+        <span class="n">parsedB</span> <span class="o">=</span> <span class="n">fromJSON</span> <span class="n">val</span>
+    <span class="kr">case</span> <span class="p">(</span><span class="n">parsedA</span><span class="p">,</span> <span class="n">parsedB</span><span class="p">)</span> <span class="kr">of</span>
+      <span class="p">(</span><span class="kt">Success</span> <span class="n">a</span><span class="p">,</span> <span class="kr">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pure</span> <span class="o">$</span> <span class="kt">This</span> <span class="n">a</span>
+      <span class="p">(</span><span class="kr">_</span><span class="p">,</span> <span class="kt">Success</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pure</span> <span class="o">$</span> <span class="kt">That</span> <span class="n">b</span>
+      <span class="p">(</span><span class="kt">Error</span> <span class="n">thisError</span><span class="p">,</span> <span class="kt">Error</span> <span class="n">thatError</span><span class="p">)</span> <span class="o">-&gt;</span>
+        <span class="n">fail</span> <span class="o">$</span>
+          <span class="n">fold</span>
+            <span class="p">[</span> <span class="s">"Failed when parsing a ThisOrThat from JSON.</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+              <span class="s">"Error on the This: "</span> <span class="o">&lt;&gt;</span> <span class="n">thisError</span> <span class="o">&lt;&gt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span>
+              <span class="s">"Error on the That: "</span> <span class="o">&lt;&gt;</span> <span class="n">thatError</span>
+            <span class="p">]</span>
+</code></pre></div></div>
+
+<p>and any hand-rolled aeson parsers that reference types that use <code class="language-plaintext highlighter-rouge">ThisOrThat</code> (such as <code class="language-plaintext highlighter-rouge">TransferData</code>) with an approach that uses codecs instead.  However, I tried it once, coded myself into a circle, and then Gave Up to work on more pressing stuff.  If anyone has defined <code class="language-plaintext highlighter-rouge">HasCodec</code> instances for a bifunctor before, let me know if you have opinions on how to do this!</p>
+
+<h2 id="final-note">Final Note</h2>
+
+<p>If you’re wondering what all this JSON parsing is for, stay tuned for a library announcement dropping next week!  I’m almost done with the project that uses all of this code and I hope to throw it up on Hackage once I’m done.  It’ll have an accompanying blog post, too :)</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:bignote" role="doc-endnote">
+      <p>Please don’t sue me for saving this, Mercury legal.  There’s no business logic in the code and this kind of bifunctor instance already exists all over Github. <a href="#fnref:bignote" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>

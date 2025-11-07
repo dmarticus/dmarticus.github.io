@@ -1,0 +1,282 @@
+<h3 id="part-two--building-the-user-interface-to-assist-with-real-time-drafting">Part Two – building the user interface to assist with real-time drafting</h3>
+
+<p>In <a href="/2020/11/13/building-a-fantasy-football-draft-assistance-algorithm-part-1.html">part one</a>, I collected and prepared a bunch of data that I needed to create a fantasy football draft assistant (DAsHA), and exported all of that data to a <code class="language-plaintext highlighter-rouge">.csv</code> file.  Now that I had all the data, it was time to implement the user interface for DAsHA – I wanted to make a tool into which I could feed (a) the current draft position and (b) players already picked, and return as much data as possible for me to pick the best player per position.</p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>First, I did a bit of data cleanup so that the player scores could be displayed in a user-friend way.  I also had to import all the necessary libraries to run my model.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="n">sm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">statsmodels.distributions.mixture_rvs</span> <span class="kn">import</span> <span class="n">mixture_rvs</span>
+
+<span class="c1"># import the csv file
+</span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'./prepared_data/2020_ffl_df.csv'</span><span class="p">)</span>
+
+<span class="c1"># clean up the kde_icdf column
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)):</span>
+    <span class="n">df</span><span class="p">[</span><span class="s">'kde_icdf'</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'kde_icdf'</span><span class="p">][</span><span class="n">i</span><span class="p">].</span><span class="n">replace</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">,</span><span class="s">' '</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">'['</span><span class="p">,</span><span class="s">''</span><span class="p">).</span><span class="n">replace</span><span class="p">(</span><span class="s">']'</span><span class="p">,</span><span class="s">''</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s">'kde_icdf'</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s">'kde_icdf'</span><span class="p">][</span><span class="n">i</span><span class="p">].</span><span class="n">split</span><span class="p">()]</span>
+
+<span class="c1"># more data cleanup for the position names
+</span><span class="n">df</span><span class="p">[</span><span class="s">'POS'</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s">'POS'</span><span class="p">].</span><span class="nb">str</span><span class="p">.</span><span class="n">strip</span><span class="p">()</span>
+
+<span class="c1"># add drafted column to track drafted players
+</span><span class="n">df</span><span class="p">[</span><span class="s">'drafted'</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+</code></pre></div></div>
+
+<p>Now that my data was ready, it was time to figure out what information I wanted to display.</p>
+
+<p>The idea here is that DAsHA would return a panel of players at each position with the highest projected points and provide context as to which ones would be the best to pick that round.  This was done in two ways:</p>
+
+<ol>
+  <li>DAsHA calculated the “marginal” score for each player, with this score representing how many more points this player is expected to generate compared to the best player at the same position who will be available in the next round.<sup id="fnref:bignote" role="doc-noteref"><a href="#fn:bignote" class="footnote" rel="footnote">1</a></sup></li>
+  <li>DAsHA constructed a series of confidence intervals for each player.  These confidence intervals would let me select players based on variance as well as projected points.<sup id="fnref:bignote2" role="doc-noteref"><a href="#fn:bignote2" class="footnote" rel="footnote">2</a></sup></li>
+</ol>
+
+<p>Finally, since I had to <em>act</em> on all information, I needed DAsHA to generate charts and graphs that displayed all of these comparisons.  Since I wanted DAsHA to be a heuristic helper (as compared to an out-and-out predictive tool), my goal was to provide as much data for myself to make an informed decision based on the variance/distribution of point projections in addition to the raw point totals.</p>
+
+<h2 id="comparing-the-players">Comparing the players</h2>
+
+<p>DAsHA needed three different arrays to accomplish my goals, namely</p>
+
+<ol>
+  <li>The list of best players per position for the round</li>
+  <li>The list of the best players per position for the next round (to calculate the marginal score)</li>
+  <li>The list of the second best players for each position, to provide more information for my draft decision.</li>
+</ol>
+
+<p>I wrote each collection as a separate method in my Jupyter notebook so it could be easier to extend in the future.  Below is my implementation of each method.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">### BEST PLAYERS ###
+</span><span class="k">def</span> <span class="nf">compare_best_players</span><span class="p">(</span><span class="n">positions</span><span class="p">):</span>
+    <span class="n">best_players</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">positions</span><span class="p">)):</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'drafted'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'drafted'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'POS'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">best_players</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">j</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'pts'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">best_players</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">]:</span>
+                            <span class="n">best_players</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'POS'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span>
+                                <span class="n">df</span><span class="p">[</span><span class="s">'pts'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Draft Position'</span><span class="p">][</span><span class="n">k</span><span class="p">]]</span>
+                            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'pts'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">best_players</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">]:</span>
+                            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">best_players</span><span class="p">)</span><span class="o">&lt;=</span><span class="n">j</span><span class="p">:</span>
+                        <span class="n">best_players</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">df</span><span class="p">[</span><span class="s">'POS'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span>
+                            <span class="n">df</span><span class="p">[</span><span class="s">'pts'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span><span class="n">df</span><span class="p">[</span><span class="s">'Draft Position'</span><span class="p">][</span><span class="n">k</span><span class="p">]])</span>
+                        <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">best_players</span>
+
+<span class="c1">### BEST PLAYERS IN THE NEXT ROUND ###
+</span><span class="k">def</span> <span class="nf">compare_best_players_next_round</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">next_available_pick</span><span class="p">):</span>
+    <span class="n">best_players_next_round</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">positions</span><span class="p">)):</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'drafted'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'drafted'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'POS'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">best_players_next_round</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">j</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'Draft Position'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">next_available_pick</span><span class="p">:</span>
+                            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'pts'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">best_players_next_round</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">]:</span>
+                                <span class="n">best_players_next_round</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'POS'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'pts'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Draft Position'</span><span class="p">][</span><span class="n">k</span><span class="p">]]</span>
+                                <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+                            <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'pts'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">best_players_next_round</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">]:</span>
+                                <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">best_players_next_round</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">j</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'Draft Position'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">next_available_pick</span><span class="p">:</span>
+                            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">best_players_next_round</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">df</span><span class="p">[</span><span class="s">'POS'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'pts'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Draft Position'</span><span class="p">][</span><span class="n">k</span><span class="p">]])</span>
+                            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="n">best_players_next_round</span>
+
+<span class="c1">### SECOND BEST PLAYERS ###
+</span><span class="k">def</span> <span class="nf">compare_second_best_players</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">best_players</span><span class="p">):</span>
+    <span class="n">second_best_players</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">positions</span><span class="p">)):</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'drafted'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'drafted'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'POS'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">positions</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">second_best_players</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">j</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">best_players</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+                            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'pts'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">second_best_players</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">]:</span>
+                                <span class="n">second_best_players</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span>
+                                    <span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'POS'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span>
+                                        <span class="n">df</span><span class="p">[</span><span class="s">'pts'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Draft Position'</span><span class="p">][</span><span class="n">k</span><span class="p">]]</span>
+                                <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+                            <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'pts'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">second_best_players</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">]:</span>
+                                <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">second_best_players</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">j</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">best_players</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+                            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">second_best_players</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="n">df</span><span class="p">[</span><span class="s">'POS'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span>
+                                <span class="n">df</span><span class="p">[</span><span class="s">'pts'</span><span class="p">][</span><span class="n">k</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Draft Position'</span><span class="p">][</span><span class="n">k</span><span class="p">]])</span>
+                            <span class="n">k</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">second_best_players</span>
+</code></pre></div></div>
+
+<p>Now that I had the methods for populating the three arrays, I could put them all together like this:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># generate the current draft position
+</span><span class="n">current_draft_number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">current_draft_number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">df</span><span class="p">[</span><span class="s">'drafted'</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">current_draft_number</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'Draft Position'</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+
+<span class="c1"># threshold for next available picks
+</span><span class="n">next_available_pick</span> <span class="o">=</span> <span class="n">current_draft_number</span> <span class="o">+</span> <span class="n">turns_to_next_pick</span>
+
+<span class="c1"># List of possible positions to draft for
+</span><span class="n">positions</span> <span class="o">=</span> <span class="p">[</span><span class="s">'QB'</span><span class="p">,</span><span class="s">'RB'</span><span class="p">,</span><span class="s">'WR'</span><span class="p">,</span><span class="s">'TE'</span><span class="p">,</span><span class="s">'K'</span><span class="p">,</span><span class="s">'DEF'</span><span class="p">]</span>
+
+<span class="c1"># identify best choices at each position
+</span><span class="n">best_players</span> <span class="o">=</span> <span class="n">compare_best_players</span><span class="p">(</span><span class="n">positions</span><span class="p">)</span>
+
+<span class="c1"># collect the second-best choices for each round
+</span><span class="n">second_best_players</span> <span class="o">=</span> <span class="n">compare_second_best_players</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">best_players</span><span class="p">)</span>
+
+<span class="c1"># identify best choice in next round at each position
+</span><span class="n">best_players_next_round</span> <span class="o">=</span> <span class="n">compare_best_players_next_round</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">next_available_pick</span><span class="p">)</span>
+
+<span class="c1"># make marginal comparisons and append them to the best_players list
+</span><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">positions</span><span class="p">)):</span>
+    <span class="n">marg</span> <span class="o">=</span> <span class="n">best_players</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">best_players_next_round</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">best_players</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">marg</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>(If you’re curious, the full code for DAsHA’s UI can be found on Github <a href="https://github.com/dmarticus/dasha/blob/master/DAsHA_user_interface.ipynb">here</a>).</p>
+
+<h2 id="visualizing-the-results">Visualizing the results</h2>
+
+<p>Now that I had my player comparison information, it was time to build the scaffolding to visualize these results in a user interface!  Since I wanted the most important information to help me draft first (I only have 90 seconds per round), I started off just showing a table of the top players:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># print recommendations menu
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">positions</span><span class="p">)):</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">best_players</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:{</span><span class="mi">5</span><span class="si">}}</span><span class="s"> - </span><span class="si">{</span><span class="n">best_players</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">:{</span><span class="mi">20</span><span class="si">}}</span><span class="s"> - </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">best_players</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span><span class="si">:{</span><span class="mi">6</span><span class="si">}}</span><span class="s">, margin: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">best_players</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">4</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="../../../media/best_players_menu.png" alt="Best Players Menu" width="740px" /></p>
+
+<p>Then, I visualized the scores and confidence intervals for these top players.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># identify index values (based off Yahoo! draft position) to create the boxplots
+</span><span class="n">DEF</span> <span class="o">=</span> <span class="n">best_players</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">K</span> <span class="o">=</span> <span class="n">best_players</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">TE</span> <span class="o">=</span> <span class="n">best_players</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">WR</span> <span class="o">=</span> <span class="n">best_players</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">RB</span> <span class="o">=</span> <span class="n">best_players</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">QB</span> <span class="o">=</span> <span class="n">best_players</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="c1"># boxplots of recommendations
+</span><span class="n">box_plot_data</span><span class="o">=</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'kde_icdf'</span><span class="p">][</span><span class="n">QB</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'kde_icdf'</span><span class="p">][</span><span class="n">RB</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'kde_icdf'</span><span class="p">][</span><span class="n">WR</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'kde_icdf'</span><span class="p">][</span><span class="n">TE</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'kde_icdf'</span><span class="p">][</span><span class="n">K</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'kde_icdf'</span><span class="p">][</span><span class="n">DEF</span><span class="p">]]</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">box_plot_data</span><span class="p">,</span> <span class="n">vert</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">QB</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">RB</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">WR</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">TE</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">K</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">DEF</span><span class="p">]</span> <span class="p">])</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="../../../media/best_players_boxplot.png" alt="Best Players Boxplot" width="740px" /></p>
+
+<p>And finally, I grouped the second-best players by position,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># find the top two second-best
+</span><span class="n">top_seconds</span> <span class="o">=</span> <span class="p">[</span><span class="n">second_best_players</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">second_best_players</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">second_best_players</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">second_best_players</span><span class="p">[</span><span class="mi">3</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span><span class="n">second_best_players</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span><span class="n">second_best_players</span><span class="p">[</span><span class="mi">5</span><span class="p">][</span><span class="mi">2</span><span class="p">],]</span>
+
+<span class="n">first_comparison</span> <span class="o">=</span> <span class="n">top_seconds</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">top_seconds</span><span class="p">))</span>
+
+<span class="n">top_seconds</span><span class="p">[</span><span class="n">first_comparison</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">second_comparison</span> <span class="o">=</span> <span class="n">top_seconds</span><span class="p">.</span><span class="n">index</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">top_seconds</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>and made box plots for each of them.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># create boxplot of second best recommendations
+</span><span class="n">first_best_first</span> <span class="o">=</span> <span class="n">best_players</span><span class="p">[</span><span class="n">first_comparison</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">second_best_first</span> <span class="o">=</span> <span class="n">second_best_players</span><span class="p">[</span><span class="n">first_comparison</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">first_best_second</span> <span class="o">=</span> <span class="n">best_players</span><span class="p">[</span><span class="n">second_comparison</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">second_best_second</span> <span class="o">=</span> <span class="n">second_best_players</span><span class="p">[</span><span class="n">second_comparison</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="n">box_plot_data</span><span class="o">=</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'kde_icdf'</span><span class="p">][</span><span class="n">second_best_first</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'kde_icdf'</span><span class="p">][</span><span class="n">first_best_first</span><span class="p">]]</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">box_plot_data</span><span class="p">,</span> <span class="n">vert</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">second_best_first</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">first_best_first</span><span class="p">]])</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">box_plot_data</span><span class="o">=</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'kde_icdf'</span><span class="p">][</span><span class="n">second_best_second</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'kde_icdf'</span><span class="p">][</span><span class="n">first_best_second</span><span class="p">]]</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">box_plot_data</span><span class="p">,</span> <span class="n">vert</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">second_best_second</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">][</span><span class="n">first_best_second</span><span class="p">]])</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="../../../media/second_best_boxplot.png" alt="Second Best Boxplot" width="740px" /></p>
+
+<p>Tying all of these visualizations together led to a final output that looked something like this:</p>
+
+<p><img src="../../../media/UI_demo.PNG" alt="UI Demo" width="740px" /></p>
+
+<h2 id="running-dasha-in-real-time">Running DAsHA in real-time</h2>
+
+<p>I’ll admit, I definitely hacked together this part, but when I was writing it the draft was only 20 minutes away!  Basically, what I did was take advantage of my format; since DAsHA ran inside a Jupyter Notebook, I wrote little while loop to return <code class="language-plaintext highlighter-rouge">True</code> unless it was my turn.  This way, I could run DAsHA live and feed it inputs while my draft was going:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">your_turn</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="k">while</span> <span class="n">your_turn</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">new_draft</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">'Who was the last pick?'</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">new_draft</span> <span class="o">!=</span> <span class="s">''</span><span class="p">:</span>
+        <span class="n">temp_index</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'Name'</span><span class="p">].</span><span class="nb">str</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">new_draft</span><span class="p">.</span><span class="n">strip</span><span class="p">()))</span>
+        <span class="n">temp_no</span> <span class="o">=</span> <span class="n">temp_index</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">argmax</span><span class="p">()</span>
+        <span class="n">df</span><span class="p">[</span><span class="s">'drafted'</span><span class="p">][</span><span class="n">temp_no</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">new_draft</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="n">your_turn_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">'Is it your turn?'</span><span class="p">)</span>
+    <span class="n">no_set</span> <span class="o">=</span> <span class="p">{</span><span class="s">'no'</span><span class="p">,</span> <span class="s">'n'</span><span class="p">,</span> <span class="s">'N'</span><span class="p">,</span> <span class="s">'No'</span><span class="p">}</span>
+    <span class="k">if</span> <span class="n">your_turn_input</span> <span class="ow">in</span> <span class="n">no_set</span><span class="p">:</span>
+        <span class="n">your_turn</span> <span class="o">=</span> <span class="bp">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">your_turn</span> <span class="o">=</span> <span class="bp">True</span>
+</code></pre></div></div>
+
+<p>Now that I had a rudimentary system for tracking state, I could run DAsHA live during my draft!  All I had to do was feed it the (a) draft number and (b) the player taken, and when it was my turn it would show me the various visualizations that I put together earlier in this post.  Pretty nifty!</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>While I hadn’t really set a concrete goal for DAsHA other than “beat ESPN’s player projections so that I could draft more shrewdly than my friends”, I’d say this project was a rousing success.  On top of having the best draft out of all my friends (my team is the one on the top in the below image that has sadly taken a turn for the worse),</p>
+
+<p><img src="../../../media/draft_rankings.png" alt="Draft Rankings" width="740px" /></p>
+
+<p>I learned a lot about estimating probability distributions using Gaussian KDEs (read <a href="/2020/11/13/building-a-fantasy-football-draft-assistance-algorithm-part-1.html">part one</a> for more details on that) and I had fun hacking a Jupyter notebook into a UI that I could use to help me draft in real-time.</p>
+
+<p>Unfortunately, the end of this story is not a happy one; despite my excellent draft, my record this season is only 5-5.  Perhaps for my next project I’ll use some data science to help me with my week over week player projections so I stop leaving my good players on the bench!</p>
+
+<h4 id="footnotes">Footnotes</h4>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:bignote" role="doc-endnote">
+      <p>For example, if the top RB available now is projected to get 150 points, but the top RB that will be available during your next pick is projected to get 100 points, the marginal score will be 50. However, if the top kicker available this round will also be available next round, the marginal score for drafting that kicker will be 0. <strong><em>In general, you should draft the player with the highest marginal score.</em></strong> <a href="#fnref:bignote" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:bignote2" role="doc-endnote">
+      <p>I wanted to include a confidence interval for each player so to represent the upside / downside potential. Depending on my draft position, I could be willing to accept a player with a lower median projection but higher upside as opposed to locking in a player with a higher median point projection, but very low variance. <a href="#fnref:bignote2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
