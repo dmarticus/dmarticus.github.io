@@ -23,7 +23,7 @@ I genuinely don’t know how I feel about it.
 - My deep-focus muscle is weaker; hard problems feel harder.
 - I’m increasingly inspired by Andrej Karpathy’s "tab complete first, type it out to learn" approach and Dan Abramov’s worries about people not wanting to learn at all, and I’m trying to decide how far I want to lean into each side.
 
-## The plate-spinning version of programming
+## My new model of programming
 
 My old "good day" looked like this:
 
