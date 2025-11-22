@@ -29,13 +29,13 @@ I feel this. I can ship more working code in an afternoon than I used to ship in
 
 ## LLMs as connective tissue, not output machines
 
-The biggest surprise of the last six months is how useful LLM-based tools have been as navigational aids rather than generators. They each fill a different gap. [Greptile](https://www.greptile.com/) gives me a second set of eyes on my own PRs and catches the sort of high-level issues that are easy to gloss over when you’ve stared at the same diff all day. [0github](https://0github.com/) is now my default view when I’m reviewing someone else’s changes; its heat-map diff and "risk" slider show me exactly where I should slow down and think. And I've been trying to use Claude Code primarily as a codebase-*navigation* assistant. When I’m exploring a new subsystem, I’ll ask it to outline the key files and invariants so I can jump straight to the real entry points instead of wandering through directories and guessing.
+That said, the work around these bottlenecks has changed. The tools are not solving the hard parts, but they are making it easier to get to them. One of the most important things I have internalized in the last six months is how useful LLM-based tools have become as navigational aids rather than generators. They each fill a different gap. [Greptile](https://www.greptile.com/) gives me a second set of eyes on my own PRs and catches the sort of high-level issues that are easy to gloss over when you have stared at the same diff all day. [0github](https://0github.com/) is now my default view when I am reviewing someone else’s changes; its heat-map diff and “risk” slider show me exactly where I should slow down and think. And I have been trying to use Claude Code primarily as a codebase navigation assistant. When I am exploring a new subsystem, I will ask it to outline the key files and invariants so I can jump straight to the real entry points instead of wandering through directories and guessing.
 
-All of these tools make the same promise: less time digging for context, more time doing actual engineering work. I spend far less energy scanning and far more energy evaluating. They don’t replace the difficult parts, but they shorten the warm-up. They don’t think for me, but they make it easier to reach the place where thinking starts. That’s the shift I didn’t see coming, and the one I keep returning to whenever people talk about "the bottleneck."
+All of these tools make the same promise: less time digging for context, more time doing actual engineering work. I spend far less energy scanning and far more energy evaluating. They do not replace the difficult parts, but they shorten the warm-up. They do not think for me, but they make it easier to reach the place where thinking starts. This is the part I did not expect — that the bottlenecks stayed put, but the road leading to them got smoother.
 
 ## Naming the tension
 
-My dad also sent me a long message after he read the post. He’s a [professor of evolutionary biology](https://www.colorado.edu/ebio/andrew-martin), and his note was very him: part philosophy, part evolutionary metaphor, with a knack for zooming out. He wrote a series of questions and observations:
+The smoother road comes with its own tradeoffs, though. My dad also replied to my last blog and sent me a long message that helped me put words to the tension I had been circling. He is a [professor of evolutionary biology](https://www.colorado.edu/ebio/andrew-martin), and his note was very him: part philosophy, part evolutionary metaphor, with a knack for pulling the camera back. He wrote a series of questions and observations:
 
 > Where is the balance?  
 > … Is there a shifting baseline?  
@@ -44,11 +44,11 @@ My dad also sent me a long message after he read the post. He’s a [professor o
 > … Being intentional about what you want to learn is a daily practice.  
 > … This is an adaptationist mindset.
 
-That last phrase stuck with me. This moment doesn’t feel like a revolution or a handoff. It feels like a renegotiation: a shifting line between what I let machines handle and what I want my own brain to stay good at. If I use these tools to remove the clerical overhead, great. If I let them smooth over the reasoning, that’s drift. Drift starts quiet, then accelerates, and the bill always comes due.
+That last line stuck with me. The more the tools help me reach the real work, the more I need to pay attention to how I arrive there. The moment I let them shortcut the reasoning itself, the learning curve flattens. Drift is quiet until it is not, and once it starts, it is hard to undo. The bills are always due.
 
-## What responsible use looks like for me
+## Paying the bills
 
-The boundary I try to hold is simple enough. I use LLMs to accelerate navigation, mapping,, risk-surfacing, tracing, onboarding, interpreting test failures, and spotting suspicious patterns. Basically: anything that helps me figure out where to look and what deserves attention. I avoid using them to speed up correctness, design, invariants, architecture, root-cause debugging, or tradeoff decisions. Those are the parts of the job that only get better through direct repetition and deliberate attention. I’m not aiming for purity; I just don’t want to weaken the muscles that matter. If a tool helps shrink the search space, great. If it tempts me to ignore the search space entirely, that’s where I step back.
+All of this raised a practical question for me: if the road to the bottlenecks is smoother, how do I make sure I am still doing the part of the work that actually builds skill? That is where I started drawing a line for myself. I use LLMs to accelerate navigation, mapping, summarization, risk-surfacing, tracing, onboarding, interpreting test failures, and spotting suspicious patterns. In other words, anything that helps me figure out where to look and what deserves attention. I avoid using them to speed up correctness, design, invariants, architecture, root-cause debugging, or tradeoff decisions. Those parts only improve through repetition and deliberate attention. I am not chasing purity here; I just do not want to weaken the muscles that matter. If a tool helps shrink the search space, I am happy to use it. If it tempts me to ignore the search space entirely, that is where I step back.
 
 ## The way has never felt faster
 
