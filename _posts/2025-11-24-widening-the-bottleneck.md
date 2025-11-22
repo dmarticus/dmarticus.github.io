@@ -44,9 +44,9 @@ The smoother road comes with its own tradeoffs, though. My dad also replied to m
 > … Being intentional about what you want to learn is a daily practice.  
 > … This is an adaptationist mindset.
 
-That last line stuck with me. The more the tools help me reach the real work, the more I need to pay attention to how I arrive there. The moment I let them shortcut the reasoning itself, the learning curve flattens. Drift is quiet until it is not, and once it starts, it is hard to undo. The bills are always due.
+That last line stuck with me. The more the tools help me reach the real work, the more I need to pay attention to how I arrive there. The moment I let them shortcut the reasoning itself, the learning curve flattens. Drift is quiet until it is not, and once it starts, it is hard to undo.
 
-## Paying the bills
+## What responsible use looks like for me
 
 All of this raised a practical question for me: if the road to the bottlenecks is smoother, how do I make sure I am still doing the part of the work that actually builds skill? That is where I started drawing a line for myself. I use LLMs to accelerate navigation, mapping, summarization, risk-surfacing, tracing, onboarding, interpreting test failures, and spotting suspicious patterns. In other words, anything that helps me figure out where to look and what deserves attention. I avoid using them to speed up correctness, design, invariants, architecture, root-cause debugging, or tradeoff decisions. Those parts only improve through repetition and deliberate attention. I am not chasing purity here; I just do not want to weaken the muscles that matter. If a tool helps shrink the search space, I am happy to use it. If it tempts me to ignore the search space entirely, that is where I step back.
 
