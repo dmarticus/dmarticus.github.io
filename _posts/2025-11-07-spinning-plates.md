@@ -130,7 +130,7 @@ There’s also this amplitude thing: the highs are higher, the lows are lower.
 On a good plate-spinning day, I feel unstoppable. I’m:
 
 - shipping easy features end-to-end,
-- reviewing design docs,
+- reviewing pull requests,
 - giving interview feedback,
 - triaging bugs,
 - keeping up with team chatter.
