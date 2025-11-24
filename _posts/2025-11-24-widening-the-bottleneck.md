@@ -35,16 +35,16 @@ All of these tools make the same promise: less time digging for context, more ti
 
 ## Naming the tension
 
-The smoother road comes with its own tradeoffs, though. My dad also replied to my last blog and sent me a long message that helped me put words to the tension I had been circling. He is a [professor of evolutionary biology](https://www.colorado.edu/ebio/andrew-martin), and his note was very him: part philosophy, part evolutionary metaphor. He wrote a series of questions and observations:
+The smoother road comes with its own tradeoffs, though. After I posted last time, my dad wrote me a long note that helped me put words to the thing I had been circling. He is a [professor of evolutionary biology](https://www.colorado.edu/ebio/andrew-martin), and his message was very him: part philosophy, part evolutionary metaphor. He sent a series of questions and observations:
 
-> "Where is the balance?  
+> Where is the balance?  
 > Is there a shifting baseline?  
 > Drift is easy; drift erodes capacity.  
 > You’re describing a moving human–machine interface.  
 > Being intentional about what you want to learn is a daily practice.  
-> This is an adaptationist mindset."
+> This is an adaptationist mindset.
 
-That last line stuck with me. The more the tools help me reach the real work, the more I need to pay attention to how I arrive there. The moment I let them shortcut the reasoning itself, the learning curve flattens. Drift is quiet until it is not, and once it starts, it is hard to undo.
+That last line made the whole thing click. If the environment is shifting under my feet, then my habits have to adapt with it. The tools make it easier to reach the real work, but they also make it easier to skip the parts that build intuition. The moment I let them shortcut the reasoning, the learning curve flattens. Drift is quiet at first, then it accelerates, and once it starts, it is hard to undo.
 
 ## What responsible use looks like for me
 
