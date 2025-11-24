@@ -16,7 +16,7 @@ Around the same time, I’d been revisiting Ordep's [Writing Code was Never the 
 
 Right. Exactly. That’s been the shape of the job for decades. When writing becomes nearly free, all the work you can’t automate steps out of the shadows.
 
-And yetsomething *has* shifted for me. Not the bottlenecks themselves, but the work wrapped around them. That’s what this post is trying to unpack.
+And yet something *has* shifted for me. Not the bottlenecks themselves, but the work wrapped around them. That’s what this post is trying to unpack.
 
 ## The bottlenecks are still the bottlenecks
 
