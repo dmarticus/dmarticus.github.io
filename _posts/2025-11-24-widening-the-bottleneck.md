@@ -16,7 +16,7 @@ Around the same time, I’d been revisiting Ordep's [Writing Code was Never the 
 
 Right. Exactly. That’s been the shape of the job for decades. When writing becomes nearly free, all the work you can’t automate steps out of the shadows.
 
-And yet… something *has* shifted for me. Not the bottlenecks themselves, but the work wrapped around them. That’s what this post is trying to unpack.
+And yetsomething *has* shifted for me. Not the bottlenecks themselves, but the work wrapped around them. That’s what this post is trying to unpack.
 
 ## The bottlenecks are still the bottlenecks
 
@@ -38,11 +38,11 @@ All of these tools make the same promise: less time digging for context, more ti
 The smoother road comes with its own tradeoffs, though. My dad also replied to my last blog and sent me a long message that helped me put words to the tension I had been circling. He is a [professor of evolutionary biology](https://www.colorado.edu/ebio/andrew-martin), and his note was very him: part philosophy, part evolutionary metaphor. He wrote a series of questions and observations:
 
 > "Where is the balance?  
-> … Is there a shifting baseline?  
-> … Drift is easy; drift erodes capacity.  
-> … You’re describing a moving human–machine interface.  
-> … Being intentional about what you want to learn is a daily practice.  
-> … This is an adaptationist mindset."
+> Is there a shifting baseline?  
+> Drift is easy; drift erodes capacity.  
+> You’re describing a moving human–machine interface.  
+> Being intentional about what you want to learn is a daily practice.  
+> This is an adaptationist mindset."
 
 That last line stuck with me. The more the tools help me reach the real work, the more I need to pay attention to how I arrive there. The moment I let them shortcut the reasoning itself, the learning curve flattens. Drift is quiet until it is not, and once it starts, it is hard to undo.
 
