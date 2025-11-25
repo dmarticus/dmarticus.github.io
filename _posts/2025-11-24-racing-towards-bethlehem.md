@@ -3,6 +3,7 @@ title: "Racing towards Bethlehem"
 layout: post
 tags: [ai, reflection, work]
 post_summary: "We haven't removed the bottlenecks in software engineering, but LLM-assisted tools are reshaping the work surrounding them. Code review, reading comprehension, and shared understanding still cost what they cost, but the difference is that reaching those bottlenecks is getting faster, the necks themselves are getting wider, and all of that changes how I want to work."
+redirect_from: /2025/11/24/widening-the-bottleneck.html
 ---
 
 After I published [Spinning Plates](/2025/11/07/spinning-plates.html), my old coworker [Daniel](https://danielbachhuber.com/) left [a comment](https://www.linkedin.com/feed/update/urn:li:activity:7393663853852557312?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A7393663853852557312%2C7393672175381045248%29&dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287393672175381045248%2Curn%3Ali%3Aactivity%3A7393663853852557312%29) I couldn’t stop thinking about:
