@@ -18,11 +18,12 @@ In New York, walking is how the day moves. And because you're on foot, you exper
 That matters more than I expected. Walking makes time feel contiguous. You get little hits of texture: a new storefront, a poster for a show, a line outside a place you didn't know existed, weather that forces you to actually notice the season.
 
 In Seattle it's too easy to turn life into teleportation. Efficient, private, slightly dead.
+
 So I'm trying to walk more as a way to keep the city "on." If it's plausibly walkable, I want my default to be: fine, I'll walk.
 
 ## Passive transit is goated
 
-In New York, I never had to be "on" just to get somewhere. Subway, bus, whatever — I'd show up, ride, arrive. I could read, write, play Balatro, or just stare out the window and let my brain idle. That's time you don't get back when you're driving.
+In New York, the whole city felt 30 minutes away. I know it's the most tired take of all time, but I found the subway really incredible — I'd show up, ride, arrive. I could read, write, play Balatro, or just stare into the middle distance and let my brain idle. That's time you don't get back when you're driving.
 
 And it wasn't just commuting. Going out at night, meeting someone across town, running errands — it was all the same. You just... go. No parking, no route decisions, no low-level vigilance. I didn't realize how much I liked that until I had it constantly.
 
@@ -55,6 +56,7 @@ I've never been one to shy away from going out, and I've been accused of being "
 Seattle is quieter, and the city's energy doesn't exactly do you favors here. In New York, it's easy to get swept along — there's always something happening, and it feels like the default setting is "sure, why not." In Seattle, you can blink and it's 9pm and you're still on the couch, perfectly comfortable (and the bars close in 2 hours anyway so what's the point).
 
 Rain also makes that feel rational. "Cozy" becomes ideology. And sometimes staying in is correct. But sometimes it's just inertia that's learned how to speak softly.
+
 The thing is, the biggest hurdle isn't the weather or the city — it's me. If I actually decide to go out, there are always places in Seattle that are a good time. Despite my flippancy, there's always a bar with a vibe, a restaurant that hits, a show somewhere, a friend who's down.
 
 One thing I liked about myself in New York is that I didn't feel that complacency as much. I'd just decide the night was happening. Pick a place. Go. I'm trying to keep that: put on real clothes, make the plan, leave the house.
@@ -65,7 +67,7 @@ Our place in New York was small and tasteful, but lacking in many of the creatur
 
 More clothes, more objects, more "just in case" adds up. Physical clutter and attention debt.
 
-This is extra true because my Seattle setup is already great. My wife and I love our place. It's beautiful, it's great for entertaining, the view is good. My eight sleep mattress has ruined all other beds for me. But like anything else, stuff accumulates, and it's weirdly hard to let things go once they've been added to the fold.
+I was surprised to notice this because my Seattle setup felt perfect to me before I left. My wife and I love our place. It's beautiful, it's great for entertaining, the view is good. My eight sleep mattress has ruined all other beds for me. But like anything else, stuff accumulates, and it's weirdly hard to let things go once they've been added to the fold. Living with less helped me notice the accumulation.
 
 I want my place to feel light enough that it doesn't pre-tire me, and nice enough that I’m not collecting stuff just to compensate for anything.
 
