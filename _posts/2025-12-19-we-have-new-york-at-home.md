@@ -22,7 +22,7 @@ So I'm trying to walk more as a way to keep the city "on." If it's plausibly wal
 
 ## Passive transit is goated
 
-In New York, I never had to be "on" just to get somewhere. Subway, bus, whatever — I'd show up, ride, arrive. I could read, mess around with Strands, or just stare out the window and let my brain idle. That's time you don't get back when you're driving.
+In New York, I never had to be "on" just to get somewhere. Subway, bus, whatever — I'd show up, ride, arrive. I could read, write, play Balatro, or just stare out the window and let my brain idle. That's time you don't get back when you're driving.
 
 And it wasn't just commuting. Going out at night, meeting someone across town, running errands — it was all the same. You just... go. No parking, no route decisions, no low-level vigilance. I didn't realize how much I liked that until I had it constantly.
 
