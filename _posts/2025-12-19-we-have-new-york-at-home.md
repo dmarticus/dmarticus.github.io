@@ -65,7 +65,7 @@ One thing I liked about myself in New York is that I didn't feel that complacenc
 
 Our place in New York was small and tasteful, but lacking in many of the creature comforts of home. By the end it felt more like a feature than a bug though, turns out living with fewer things exposed yet another obvious truth: extra stuff is mostly maintenance.
 
-More clothes, more objects, more "just in case" adds up. Physical clutter and attention debt.
+More clothes, more objects, more "just in case" adds up. Physical clutter; attention debt.
 
 I was surprised to notice this because my Seattle setup felt perfect to me before I left. My wife and I love our place. It's beautiful, it's great for entertaining, the view is good. My eight sleep mattress has ruined all other beds for me. But like anything else, stuff accumulates, and it's weirdly hard to let things go once they've been added to the fold. Living with less helped me notice the accumulation.
 
