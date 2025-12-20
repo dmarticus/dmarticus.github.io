@@ -23,7 +23,7 @@ So I'm trying to walk more as a way to keep the city "on." If it's plausibly wal
 
 ## Passive transit is goated
 
-In New York, the whole city felt 30 minutes away. I know it's the most tired take of all time, but I found the subway really incredible — I'd show up, ride, arrive. I could read, write, play Balatro, or just stare into the middle distance and let my brain idle. That's time you don't get back when you're driving.
+In New York, the whole city felt 30 minutes away. I know it's the most tired take of all time, but the ubiquity and consistency of the subway was perpetually delightful — I'd show up basically anywhere, ride, arrive. I could read, write, play Balatro, or just stare into the middle distance and let my brain idle. That's time you don't get back when you're driving.
 
 And it wasn't just commuting. Going out at night, meeting someone across town, running errands — it was all the same. You just... go. No parking, no route decisions, no low-level vigilance. I didn't realize how much I liked that until I had it constantly.
 
