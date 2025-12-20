@@ -9,7 +9,7 @@ I spent a month living and working in New York recently, and I loved it — not 
 
 What I'm trying to keep is the state it put me in: leaving the house at any opportunity, walking places by default, keeping a running backlog of things to try, and treating any day like it might be worth doing something.
 
-I've lived in Seattle for more than 8 years and I still love it here — the nature access is world class, and I find the city beautiful. But it's easy to settle into a routine and stop exploring. I'm writing this down partly so I don't spend the winter wishing I was still in New York, and partly to see if I can make these behaviors stick.
+I've lived in Seattle for more than 8 years and I still love it here — the nature access is world class, and I find the city beautiful. But after living here for so long (the longest I've ever lived somewhere since before I went to college), I've noticed that it's easy to settle into a routine and stop exploring. So, I'm writing this down partly so I don't spend the winter wishing I was still in New York, and partly to see if I can make these behaviors stick.
 
 ## Walking as continuity
 
