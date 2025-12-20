@@ -7,7 +7,7 @@ post_summary: "I spent a month living and working in New York recently, and I wa
 
 I spent a month living and working in New York recently, and I loved it — not for any one specific high, but for how much better my day-to-day life felt. The shape of my days wasn't even that different from Seattle: I still worked, grabbed coffee, ran errands, met up with friends. It just felt easier to be out in it. More "let's hit the town tonight" baked into a random Tuesday.
 
-What I'm trying to keep is the state it put me in: leaving the house at any opportunity, walking places by default, keeping a running backlog of things to try, and treating a random Tuesday like it might be worth doing something.
+What I'm trying to keep is the state it put me in: leaving the house at any opportunity, walking places by default, keeping a running backlog of things to try, and treating any day like it might be worth doing something.
 
 I've lived in Seattle for more than 8 years and I still love it here — the nature access is world class, and I find the city beautiful. But it's easy to settle into a routine and stop exploring. I'm writing this down partly so I don't spend the winter wishing I was still in New York, and partly to see if I can make these behaviors stick.
 
