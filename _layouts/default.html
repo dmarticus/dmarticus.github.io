@@ -74,5 +74,40 @@
       {{ content }}
       {% include footer.html %}
     </div>
+    <script>
+      (function() {
+        var toggle = document.getElementById('theme-toggle');
+        var html = document.documentElement;
+
+        function getSystemTheme() {
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        function applyTheme(theme) {
+          html.setAttribute('data-theme', theme);
+          toggle.textContent = theme === 'dark' ? '\u263C' : '\u263E';
+        }
+
+        var stored = localStorage.getItem('theme');
+        if (stored) {
+          applyTheme(stored);
+        } else {
+          applyTheme(getSystemTheme());
+        }
+
+        toggle.addEventListener('click', function() {
+          var current = html.getAttribute('data-theme');
+          var next = current === 'dark' ? 'light' : 'dark';
+          localStorage.setItem('theme', next);
+          applyTheme(next);
+        });
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+          if (!localStorage.getItem('theme')) {
+            applyTheme(e.matches ? 'dark' : 'light');
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

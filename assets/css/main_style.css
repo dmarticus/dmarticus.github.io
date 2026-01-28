@@ -74,6 +74,33 @@
   }
 }
 
+/* Explicit theme overrides (toggle) */
+[data-theme="light"] {
+  --bg: #fafaf8;
+  --bg-secondary: #f0f0ec;
+  --text: #1a1a2e;
+  --text-secondary: #6b6b80;
+  --accent: #3d5af1;
+  --accent-hover: #2a45d4;
+  --accent-visited: #7c5cbf;
+  --border: #d0d0d0;
+  --border-strong: #1a1a2e;
+  --code-bg: #f0f0ec;
+}
+
+[data-theme="dark"] {
+  --bg: #111118;
+  --bg-secondary: #1a1a24;
+  --text: #e0e0e8;
+  --text-secondary: #8888a0;
+  --accent: #6b8aff;
+  --accent-hover: #8da4ff;
+  --accent-visited: #a78bfa;
+  --border: #2a2a3a;
+  --border-strong: #e0e0e8;
+  --code-bg: #1a1a24;
+}
+
 /* --- Reset & Base --- */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -168,6 +195,7 @@ a:hover {
   flex-direction: column;
   gap: 1.25rem;
   padding-top: 0.5rem;
+  text-align: left;
 }
 
 /* --- Navigation --- */
@@ -182,7 +210,7 @@ a:hover {
   padding: 0;
   display: flex;
   gap: 1.75rem;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 }
 
@@ -450,7 +478,12 @@ img {
   }
 
   .site-nav ul {
-    gap: 1rem;
+    gap: 0.6rem 0.75rem;
+  }
+
+  .site-nav li a {
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
   }
 
   .styled-table {
@@ -536,4 +569,85 @@ img {
   embed[type="application/pdf"] {
     filter: invert(90%);
   }
+}
+
+[data-theme="dark"] .pdfViewer,
+[data-theme="dark"] embed[type="application/pdf"] {
+  filter: invert(90%);
+}
+
+[data-theme="light"] .pdfViewer,
+[data-theme="light"] embed[type="application/pdf"] {
+  filter: none;
+}
+
+/* Explicit light theme syntax highlighting */
+[data-theme="light"] .highlight, [data-theme="light"] .highlight .w { color: #586e75; background-color: transparent; }
+[data-theme="light"] .highlight .err { color: #002b36; background-color: #dc322f; }
+[data-theme="light"] .highlight .c, [data-theme="light"] .highlight .cd, [data-theme="light"] .highlight .cm, [data-theme="light"] .highlight .c1, [data-theme="light"] .highlight .cs { color: #657b83; }
+[data-theme="light"] .highlight .cp { color: #b58900; }
+[data-theme="light"] .highlight .nt { color: #b58900; }
+[data-theme="light"] .highlight .o, [data-theme="light"] .highlight .ow { color: #93a1a1; }
+[data-theme="light"] .highlight .p, [data-theme="light"] .highlight .pi { color: #93a1a1; }
+[data-theme="light"] .highlight .gi { color: #859900; }
+[data-theme="light"] .highlight .gd { color: #dc322f; }
+[data-theme="light"] .highlight .gh { color: #268bd2; font-weight: bold; }
+[data-theme="light"] .highlight .k, [data-theme="light"] .highlight .kn, [data-theme="light"] .highlight .kp, [data-theme="light"] .highlight .kr, [data-theme="light"] .highlight .kv { color: #6c71c4; }
+[data-theme="light"] .highlight .kc { color: #cb4b16; }
+[data-theme="light"] .highlight .kt { color: #cb4b16; }
+[data-theme="light"] .highlight .kd { color: #cb4b16; }
+[data-theme="light"] .highlight .s, [data-theme="light"] .highlight .sb, [data-theme="light"] .highlight .sc, [data-theme="light"] .highlight .sd, [data-theme="light"] .highlight .s2, [data-theme="light"] .highlight .sh, [data-theme="light"] .highlight .sx, [data-theme="light"] .highlight .s1 { color: #859900; }
+[data-theme="light"] .highlight .sr { color: #2aa198; }
+[data-theme="light"] .highlight .si { color: #d33682; }
+[data-theme="light"] .highlight .se { color: #d33682; }
+[data-theme="light"] .highlight .nn { color: #b58900; }
+[data-theme="light"] .highlight .nc { color: #b58900; }
+[data-theme="light"] .highlight .no { color: #b58900; }
+[data-theme="light"] .highlight .na { color: #268bd2; }
+[data-theme="light"] .highlight .m, [data-theme="light"] .highlight .mf, [data-theme="light"] .highlight .mh, [data-theme="light"] .highlight .mi, [data-theme="light"] .highlight .il, [data-theme="light"] .highlight .mo, [data-theme="light"] .highlight .mb, [data-theme="light"] .highlight .mx { color: #859900; }
+[data-theme="light"] .highlight .ss { color: #859900; }
+
+/* Explicit dark theme syntax highlighting */
+[data-theme="dark"] .highlight, [data-theme="dark"] .highlight .w { color: #93a1a1; background-color: #002b36; }
+[data-theme="dark"] .highlight .err { color: #002b36; background-color: #dc322f; }
+[data-theme="dark"] .highlight .c, [data-theme="dark"] .highlight .cd, [data-theme="dark"] .highlight .cm, [data-theme="dark"] .highlight .c1, [data-theme="dark"] .highlight .cs { color: #657b83; }
+[data-theme="dark"] .highlight .cp { color: #b58900; }
+[data-theme="dark"] .highlight .nt { color: #b58900; }
+[data-theme="dark"] .highlight .o, [data-theme="dark"] .highlight .ow { color: #93a1a1; }
+[data-theme="dark"] .highlight .p, [data-theme="dark"] .highlight .pi { color: #93a1a1; }
+[data-theme="dark"] .highlight .gi { color: #859900; }
+[data-theme="dark"] .highlight .gd { color: #dc322f; }
+[data-theme="dark"] .highlight .gh { color: #268bd2; background-color: #002b36; font-weight: bold; }
+[data-theme="dark"] .highlight .k, [data-theme="dark"] .highlight .kn, [data-theme="dark"] .highlight .kp, [data-theme="dark"] .highlight .kr, [data-theme="dark"] .highlight .kv { color: #6c71c4; }
+[data-theme="dark"] .highlight .kc { color: #cb4b16; }
+[data-theme="dark"] .highlight .kt { color: #cb4b16; }
+[data-theme="dark"] .highlight .kd { color: #cb4b16; }
+[data-theme="dark"] .highlight .s, [data-theme="dark"] .highlight .sb, [data-theme="dark"] .highlight .sc, [data-theme="dark"] .highlight .sd, [data-theme="dark"] .highlight .s2, [data-theme="dark"] .highlight .sh, [data-theme="dark"] .highlight .sx, [data-theme="dark"] .highlight .s1 { color: #859900; }
+[data-theme="dark"] .highlight .sr { color: #2aa198; }
+[data-theme="dark"] .highlight .si { color: #d33682; }
+[data-theme="dark"] .highlight .se { color: #d33682; }
+[data-theme="dark"] .highlight .nn { color: #b58900; }
+[data-theme="dark"] .highlight .nc { color: #b58900; }
+[data-theme="dark"] .highlight .no { color: #b58900; }
+[data-theme="dark"] .highlight .na { color: #268bd2; }
+[data-theme="dark"] .highlight .m, [data-theme="dark"] .highlight .mf, [data-theme="dark"] .highlight .mh, [data-theme="dark"] .highlight .mi, [data-theme="dark"] .highlight .il, [data-theme="dark"] .highlight .mo, [data-theme="dark"] .highlight .mb, [data-theme="dark"] .highlight .mx { color: #859900; }
+[data-theme="dark"] .highlight .ss { color: #859900; }
+
+/* --- Theme Toggle --- */
+.theme-toggle {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  vertical-align: middle;
+  position: relative;
+  top: -0.05rem;
+}
+
+.theme-toggle:hover {
+  color: var(--text);
 }

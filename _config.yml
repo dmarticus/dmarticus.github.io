@@ -12,13 +12,13 @@ url: "https://www.dylanamartin.com"
 future: true
 
 collections:
-  reading:
+  digest:
     output: true
 
 feed:
   collections:
-    reading:
-      path: "/reading.xml"
+    digest:
+      path: "/digest.xml"
     posts:
       path: "/blog.xml"
 
