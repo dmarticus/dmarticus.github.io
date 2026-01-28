@@ -3,15 +3,45 @@ layout: default
 ---
 
 {% assign post = page %}
-<h1>{{ post.title }}</h1>
-{{ content }}
 
-<div class="PageNavigation">
-  {% if page.previous.url %}
-  <a class="prev" href="{{page.previous.url}}"
-    >&laquo; {{page.previous.title}}</a
-  >
-  {% endif %} {% if page.next.url %}
-  <a class="next" href="{{page.next.url}}">{{page.next.title}} &raquo;</a>
-  {% endif %}
+<div class="page-content with-sidebar">
+  <div class="main-content">
+    <h1>{{ post.title }}</h1>
+    {{ content }}
+
+    <div class="PageNavigation">
+      {% if page.previous.url %}
+      <a class="prev" href="{{page.previous.url}}">&laquo; {{page.previous.title}}</a>
+      {% endif %}
+      {% if page.next.url %}
+      <a class="next" href="{{page.next.url}}">{{page.next.title}} &raquo;</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="sidebar-section">
+      <h4 class="sidebar-heading">Info</h4>
+      <table class="meta-table">
+        <tr>
+          <td>Published</td>
+          <td>{{ post.date | date: "%B %Y" }}</td>
+        </tr>
+        <tr>
+          <td>Words</td>
+          <td>{{ content | number_of_words }}</td>
+        </tr>
+        <tr>
+          <td>Slug</td>
+          <td>{{ post.url }}</td>
+        </tr>
+        {% if post.categories.size > 0 %}
+        <tr>
+          <td>Category</td>
+          <td>{{ post.categories | join: ", " }}</td>
+        </tr>
+        {% endif %}
+      </table>
+    </div>
+  </div>
 </div>
