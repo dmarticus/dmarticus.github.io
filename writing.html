@@ -1,0 +1,52 @@
+---
+layout: default
+title: Writing
+redirect_from: /blog.html
+---
+
+<div class="page-content with-sidebar">
+    <div class="main-content">
+        <h1>Writing</h1>
+        <p>
+            Long-form posts, updated over time. Subscribe via the
+            <a href="/blog.xml">Atom feed</a>.
+        </p>
+
+        <ul class="post-list">
+            {% for post in site.posts %}
+            <li>
+                <a href="{{ post.url }}" title="{{ post.title }}"
+                    >{{ post.title }}</a
+                >
+                <span class="post-date">{{ post.date | date: "%b %Y" }}</span>
+                <span class="post-date">&middot; {{ post.content | number_of_words }} words</span>
+                {% if post.post_summary %}
+                <span class="post-summary">{{ post.post_summary }}</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="sidebar">
+        <div class="sidebar-section">
+            <h4 class="sidebar-heading">Stats</h4>
+            {% assign total_words = 0 %}
+            {% for post in site.posts %}
+                {% assign post_words = post.content | number_of_words %}
+                {% assign total_words = total_words | plus: post_words %}
+            {% endfor %}
+            <ul>
+                <li><strong>{{ site.posts | size }}</strong> posts</li>
+                <li><strong>{{ total_words }}</strong> words</li>
+            </ul>
+        </div>
+
+        <div class="sidebar-section">
+            <h4 class="sidebar-heading">Subscribe</h4>
+            <ul>
+                <li><a href="/blog.xml">Atom feed</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

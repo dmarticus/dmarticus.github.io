@@ -3,104 +3,229 @@ layout: default
 title: Projects
 ---
 
-<h1>Projects</h1>
+<div class="page-content">
+    <div class="main-content">
+        <h1>Projects</h1>
+        <p>
+            Open source software I've built, maintained, or contributed to.
+            Mostly developer tools, language infrastructure, and the occasional
+            side project.
+        </p>
 
-Author/Maintainer
-<ul>
-  <li>
-    <a href="https://arxplore.xyz" target="_blank">ArXplore.</a> Random walks
-    through research papers.  Think StumbleUpon for ArXiv.
-  </li>
-  <li>
-    <a href="https://github.com/dmarticus/circle" target="_blank">Circle.</a>
-    The unofficial Haskell API client for
-    <a
-      href="https://developers.circle.com/developer/v1/reference/"
-      target="_blank"
-      >Circle's public API</a
-    >. See the
-    <a href="https://hackage.haskell.org/package/circle-0.1.0.0"
-      >package description</a
-    >
-    for more information.
-  </li>
-  <li>
-    <a
-      href="https://github.com/dmarticus/sentiment-analyzer-cli"
-      target="_blank"
-      >Sentiment analysis CLI.</a
-    >
-    This tool lets you the sentiment of a given phrase from the command line.
-    Under the hood it's implemented using a naive Bayes classifier with Laplace
-    smoothing.
-  </li>
-  <li>
-    <a href="https://github.com/dmarticus/monkey" target="_blank">Monkey.</a> A
-    compiler for an example, JS-like programming language. It's my first foray
-    into thinking about how compilers do things!
-  </li>
-</ul>
+        <h2>Author/Maintainer</h2>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <a
+                            href="https://github.com/PostHog/posthog"
+                            target="_blank"
+                            >PostHog</a
+                        >
+                    </td>
+                    <td>
+                        Open source product analytics, feature flags, session
+                        replay, and more. Maintainer of
+                        <a
+                            href="https://github.com/PostHog/posthog"
+                            target="_blank"
+                            >posthog/posthog</a
+                        >,
+                        <a
+                            href="https://github.com/PostHog/posthog-js"
+                            target="_blank"
+                            >posthog-js</a
+                        >,
+                        <a
+                            href="https://github.com/PostHog/posthog-python"
+                            target="_blank"
+                            >posthog-python</a
+                        >, and other SDKs.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="https://arxplore.xyz" target="_blank"
+                            >ArXplore</a
+                        >
+                    </td>
+                    <td>
+                        Random walks through research papers. StumbleUpon for
+                        ArXiv.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a
+                            href="https://github.com/dmarticus/circle"
+                            target="_blank"
+                            >Circle</a
+                        >
+                    </td>
+                    <td>
+                        Unofficial Haskell API client for
+                        <a
+                            href="https://developers.circle.com/developer/v1/reference/"
+                            target="_blank"
+                            >Circle's API</a
+                        >.
+                        <a
+                            href="https://hackage.haskell.org/package/circle-0.1.0.0"
+                            >Hackage.</a
+                        >
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a
+                            href="https://github.com/dmarticus/sentiment-analyzer-cli"
+                            target="_blank"
+                            >Sentiment CLI</a
+                        >
+                    </td>
+                    <td>
+                        Command-line sentiment analysis using naive Bayes with
+                        Laplace smoothing.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a
+                            href="https://github.com/dmarticus/monkey"
+                            target="_blank"
+                            >Monkey</a
+                        >
+                    </td>
+                    <td>A compiler for a JS-like programming language.</td>
+                </tr>
+            </tbody>
+        </table>
 
-Committer
-<ul>
-  <li>
-    <a href="https://github.com/higherkindness/mu-scala" target="_blank"
-      >mu-scala.</a
-    >
-    Mu RPC is a purely functional library for building RPC endpoint-based
-    services with support for RPC and HTTP/2.
-  </li>
-  <li>
-    <a href="https://github.com/higherkindness/skeuomorph" target="_blank"
-      >skeuomorph.</a
-    >
-    A library for transforming different schemas in Scala. It provides schema
-    definitions as non-recursive ADTs, and transformations & optimizations via
-    recursion schemes.
-  </li>
-  <li>
-    <a href="https://github.com/higherkindness/sbt-mu-srcgen/" target="_blank"
-      >sbt-mu-srcgen.</a
-    >
-    An sbt plugin that brings the ability to generate mu-scala protocols,
-    services, and clients into your Scala program as part of the build.
-  </li>
-  <li>
-    <a
-      href="https://github.com/higherkindness/mu-scala-examples"
-      target="_blank"
-      >mu-scala-examples.</a
-    >
-    Demo implementations for
-    <a href="https://higherkindness.io/mu/" target="_blank">Mu,</a> a purely
-    functional microservice library.
-  </li>
-</ul>
+        <h2>Committer</h2>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <a
+                            href="https://github.com/higherkindness/mu-scala"
+                            target="_blank"
+                            >mu-scala</a
+                        >
+                    </td>
+                    <td>
+                        Purely functional RPC endpoint-based services with
+                        HTTP/2 support.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a
+                            href="https://github.com/higherkindness/skeuomorph"
+                            target="_blank"
+                            >skeuomorph</a
+                        >
+                    </td>
+                    <td>
+                        Schema transformations in Scala via recursion schemes.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a
+                            href="https://github.com/higherkindness/sbt-mu-srcgen/"
+                            target="_blank"
+                            >sbt-mu-srcgen</a
+                        >
+                    </td>
+                    <td>
+                        sbt plugin for generating mu-scala protocols and
+                        clients.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a
+                            href="https://github.com/higherkindness/mu-scala-examples"
+                            target="_blank"
+                            >mu-scala-examples</a
+                        >
+                    </td>
+                    <td>
+                        Demo implementations for
+                        <a href="https://higherkindness.io/mu/" target="_blank"
+                            >Mu</a
+                        >.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
-Contributor
+        <h2>Contributor</h2>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Project</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <a
+                            href="https://github.com/scala-exercises/"
+                            target="_blank"
+                            >Scala Exercises</a
+                        >
+                    </td>
+                    <td>Open source learning platform for Scala.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="https://github.com/ormolu/" target="_blank"
+                            >Ormolu</a
+                        >
+                    </td>
+                    <td>A formatter for Haskell source code.</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="https://github.com/fourmolu" target="_blank"
+                            >Fourmolu</a
+                        >
+                    </td>
+                    <td>
+                        Opinionated Ormolu fork with 4-space default indent.
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a
+                            href="https://github.com/persistent-/"
+                            target="_blank"
+                            >Persistent</a
+                        >
+                    </td>
+                    <td>Backend-agnostic Haskell datastore.</td>
+                </tr>
+            </tbody>
+        </table>
 
-<ul>
-  <li>
-    <a href="https://github.com/scala-exercises/" target="_blank"
-      >Scala Exercises.</a
-    >
-    An Open Source project for learning different technologies based in the
-    Scala Programming Language
-  </li>
-  <li>
-    <a href="https://github.com/ormolu/" target="_blank">Ormolu.</a> A formatter
-    for Haskell source code.
-  </li>
-  <li>
-    <a href="https://github.com/fourmolu" target="_blank">Fourmolu.</a> A more
-    opinionated and configurable fork of Ormolu that supports 4 spaces by
-    default instead of 2.
-  </li>
-  <li>
-    <a href="https://github.com/persistent-/" target="_blank">Persistent.</a> A
-    backend-agnostic Haskell datastore
-  </li>
-</ul>
-
-Check out my
-<a href="https://github.com/dmarticus/" targeting="_blank">Github</a> for more.
+        <p>
+            Check out my
+            <a href="https://github.com/dmarticus/" target="_blank">Github</a>
+            for more.
+        </p>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+---
+layout: default
+title: Digest
+redirect_from: /reading.html
+---
+
+<div class="page-content with-sidebar">
+    <div class="main-content">
+        <h1>Digest</h1>
+        <p>
+            A curated reading list, updated occasionally. Subscribe via the
+            <a href="/reading.xml">Atom feed</a>.
+        </p>
+
+        {% assign sorted_entries = site.reading | sort: collection | reverse %}
+        {% for entry in sorted_entries %}
+        <p>
+            <strong
+                ><a href="{{ entry.url }}" title="{{ entry.title }}"
+                    >{{ entry.title }}</a
+                ></strong
+            ><br />
+            <small>{{ entry.summary }}</small>
+        </p>
+        {% endfor %}
+    </div>
+
+    <div class="sidebar">
+        <div class="sidebar-section">
+            <h4 class="sidebar-heading">Subscribe</h4>
+            <ul>
+                <li><a href="/reading.xml">Atom feed</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
