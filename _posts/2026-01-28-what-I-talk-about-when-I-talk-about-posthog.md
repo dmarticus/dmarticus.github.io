@@ -29,7 +29,7 @@ In late 2025, we had a series of incidents. Four outages in October alone, total
 
 Those weeks were some of the hardest of my career. I wasn't sleeping well. The feeling of letting customers down was awful; these are developers who depend on our service to ship their own products, and we were failing them. I took some time off. I seriously considered whether I wanted to keep doing this kind of work.
 
-What got me through was the team and the culture. PostHog practices blameless post-mortems. After each incident, the question was never "who screwed up?" but "what allowed this to happen?" My rockstar coworker Phil Haack [wrote about this](https://haacked.com/archive/2026/01/06/one-year-at-posthog/) in his own reflection on his first year. That approach made it possible to actually learn from the failures instead of just feeling bad about them.
+What got me through was the team and the culture. Folks from the leadership team reached out to me directly to check in and offer support – I typically don't hear much from them, but they all reached out when I needed it, and that affected me more than I expected it would. PostHog practices blameless post-mortems, and they really mean it. After each incident, the question was never "who screwed up?" but "what allowed this to happen?" My coworker Phil Haack [wrote about this](https://haacked.com/archive/2026/01/06/one-year-at-posthog/) in his own reflection on his first year. That approach made it possible to actually learn from the failures instead of just feeling bad about them.
 
 The incidents also forced us to rethink our team structure. Before, we had one feature flags team with a sprawling scope: SDKs, product UI, platform infrastructure. After, we split into two focused teams. Phil now leads the Flags Platform team, laser-focused on performance, reliability, and architecture. I lead the Feature Flags product team, focused on the configuration UI, cohorts, early access features, and SDKs. The split lets each team go deep on their domain without feeling pulled in competing directions.
 
@@ -41,7 +41,7 @@ For my first eighteen months, I was hired as a product engineer but spent most o
 
 I'm shifting my focus toward product engineering. I want to get closer to our users and think more directly about business impact. Feature flags is already a sticky product, which is solid for something that isn't a daily-use feature. But our activation rate is lower than I'd like. There's a gap between people who express interest during onboarding and people who actually end up using the product. That gap feels like an opportunity.
 
-I want to understand why people bounce. I want to make the product so good that trying it feels effortless. I want PostHog to be the obvious choice when someone thinks "I need a feature flagging solution that's robust, has useful features, and is easy to work with." There's real business upside if we can close the gap between interest and adoption, and I'm excited to focus on it directly.
+I want to understand why people bounce. I want to make the product so good that trying it feels effortless. I want PostHog to be the obvious choice for teams who care about feature flags and want to understand what those flags actually do.
 
 This is different work than writing Rust services. It's more ambiguous, more user-facing, more tied to metrics I can't fully control. I'm excited to learn how to be good at it.
 
