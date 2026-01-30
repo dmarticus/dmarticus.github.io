@@ -7,7 +7,7 @@ post_summary: "I stopped resisting. The tools got too good. Now I'm fully in, sp
 
 A few months ago I wrote about [spinning plates](/2025/11/07/spinning-plates.html) and [racing toward bottlenecks](/2025/11/24/racing-towards-bethlehem.html). The gist was: LLMs had changed how I work, I was faster but learning less, and I was trying to find a balance between leverage and atrophy.
 
-I'm done trying to find balance. I'm in.
+I've stopped trying to find balance. I'm all in.
 
 Over the holidays I tinkered with [Conductor](https://www.conductor.build/), switched editors to [Zed](https://zed.dev/), refined my [Claude Code setup](https://github.com/dmarticus/dotfiles/tree/main/ai), and kept iterating. The models got better. The tooling caught up. And somewhere in there, I crossed a threshold. Now most of my work happens through agents. I'm living in Claude Code, spinning up sessions, watching them churn, merging the output. The 80/20 flip that Karpathy described happened to me too: 80% agent coding, 20% edits and touchups.[^karpathy]
 
