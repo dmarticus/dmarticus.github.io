@@ -25,7 +25,7 @@ And then there's "comprehension debt" – the tendency for the code in your code
 
 ## The fun
 
-Here's the thing though: work has never felt this fun.
+But boy, work has never felt this fun.
 
 I've always believed that energy management matters more than time management. If the work drains you, it doesn't matter how many hours you have. And these tools have changed the energy equation. The drudgery is gone. The copying and pasting of compiler warnings, the boilerplate, the fill-in-the-blanks tedium – I just don't do that anymore. What's left is the creative part: deciding what to build, figuring out the shape of the solution, reviewing whether the output is good.
 
