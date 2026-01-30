@@ -49,7 +49,7 @@ The other thing I've noticed: domain expertise matters more, not less. The bette
 
 My days have started to split into two modes. There's contemplative time: defining goals, thinking through edge cases, building the reward function. That part is slow and focused. Then there's execution time: spinning up agents, running them in parallel, triaging output. That part is fast and frenetic – caffeine-fueled, multi-stream, casino-mode.
 
-The contemplative work is what makes the casino work productive instead of just fun. Without it, I'm just pulling levers and hoping.
+The contemplative work is what makes the casino work productive instead of just fun. Without it, I'm just pulling levers and hoping. Maybe I _still_ am! None of us really know where this is going. Maybe we're all just spinning our wheels.
 
 ## The question I can't answer
 
