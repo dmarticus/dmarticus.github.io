@@ -9,7 +9,7 @@ A few months ago I wrote about [spinning plates](/2025/11/07/spinning-plates.htm
 
 I've stopped trying to find balance. I'm all in.
 
-Over the holidays I tinkered with [Conductor](https://www.conductor.build/), switched editors to [Zed](https://zed.dev/), refined my [Claude Code setup](https://github.com/dmarticus/dotfiles/tree/main/ai), and kept iterating. The models got better. The tooling caught up. And somewhere in there, I crossed a threshold. Now most of my work happens through agents. I'm living in Claude Code, spinning up sessions, watching them churn, merging the output. The 80/20 flip that Karpathy described happened to me too: 80% agent coding, 20% edits and touchups.[^karpathy]
+Over the holidays I tinkered with [Conductor](https://www.conductor.build/), switched editors to [Zed](https://zed.dev/), refined my [Claude Code setup](https://github.com/dmarticus/dotfiles/tree/main/ai), and kept iterating. The models got better. The tooling caught up. And somewhere in there, I crossed a threshold. Now most of my work happens through agents. I'm living in Claude Code & Conductor, spinning up sessions, watching them churn, merging the output. The 80/20 flip that Karpathy described happened to me too: 80% agent coding, 20% edits and touchups.[^karpathy]
 
 It feels incredible. It feels like cheating. It feels like gambling.
 
@@ -17,15 +17,19 @@ It feels incredible. It feels like cheating. It feels like gambling.
 
 There's a moment after you send a prompt where you're just… waiting. The agent is running. You can see it thinking, reading files, making decisions. And there's this little hit of anticipation: *what's it going to do?* It's the same dopamine loop as pulling a slot machine lever. Low effort, variable reward, endlessly repeatable.
 
-Someone on Hacker News called it "doom tabbing": the AI is already running, the bar to seeing what it does next is so low, so you just… watch.[^doomtab] One of my coworkers put it differently: it's like gambling. Pull the lever, spin the wheel, see what happens. The reward gets front-loaded; the difficult part—understanding what you built, debugging it six months later—gets pushed further out in time.
+Someone on Hacker News called it "doom tabbing": the AI is already running, the bar to seeing what it does next is so low, so you just… watch.[^doomtab] A coworker described the opposite problem: you *can't* just sit there, so you open Slack or try to multitask during the dead time. Either way you lose — watching keeps you in the dopamine loop, switching fragments your focus. Fifty times a day, both add up to a strange kind of fatigue. Pull the lever, spin the wheel, see what happens. The reward gets front-loaded; the difficult part—understanding what you built, debugging it six months later—gets pushed further out in time.
 
 Ryan Broderick went even darker, calling generative AI an "edging machine": it charges you for the thrill of feeling like you're building something while caring more about the monetizable loop of engagement than the finished product.[^garbageday] I don't cosign his full doom take, but the framing stuck with me. There *is* something seductive about the loop. It simulates progress. It feels like making.
 
-And then there's "comprehension debt" – the tendency for the code in your codebase to become less and less understood over time because the AI one-shotted it and you just moved on.[^comprehension] It's so tempting to just accept something that seems to work. That's the tax. The casino is fun. The casino is fast. But the casino doesn't care whether you understand what you built.
+And then there's "comprehension debt" – the tendency for the code in your codebase to become less and less understood over time because the AI one-shotted it and you just moved on.[^comprehension] People counter that AI actually helps you *learn* — you can ask it to explain things, build mental models. I do this too. But when I ask for an explanation and then let it do the implementation, the understanding doesn't stick the way it would if I'd written the code myself. It feels like learning in the moment. Whether it compounds into something durable, I'm not sure.
+
+Recent research backs this up. A randomized experiment from Anthropic studying how developers learned a new programming library found that AI assistance impaired conceptual understanding, code reading, and debugging abilities – without even delivering significant efficiency gains on average.[^anthropic-skills] The participants who fully delegated coding tasks did see some productivity improvements, but at the cost of actually learning. The researchers identified six distinct AI interaction patterns, and only the three that involved genuine cognitive engagement preserved learning outcomes, and concluded that "AI-enhanced productivity is not a shortcut to competence."
+
+The casino is fun. When you're on a heater, it really feels like you're doing something. But the casino doesn't care whether you understand what you built.
 
 ## The fun
 
-But boy, work has never felt this fun.
+And yet — work has never felt this fun.
 
 I've always believed that energy management matters more than time management. If the work drains you, it doesn't matter how many hours you have. And these tools have changed the energy equation. The drudgery is gone. The copying and pasting of compiler warnings, the boilerplate, the fill-in-the-blanks tedium – I just don't do that anymore. What's left is the creative part: deciding what to build, figuring out the shape of the solution, reviewing whether the output is good.
 
@@ -35,21 +39,27 @@ I also feel less stuck. When I hit a wall, I don't have to grind through it alon
 
 And the tenacity thing is real. Watching an agent relentlessly work at something—never tired, never demoralized, just trying approach after approach—is genuinely inspiring. I've seen Claude struggle with a problem for thirty minutes and then crack it. That stamina was always a bottleneck for me. Now it's not.
 
-## What I'm doing about it
+## How I'm adapting
 
 I don't have a clean answer to the "is this cheating?" question. But I have a working theory about how to stay a craftsman in the casino.
 
 The shift I've made is this: I spend more time defining success criteria and less time doing the mechanical work of achieving them. Karpathy's framing helped here. "Don't tell it what to do, give it success criteria and watch it go." The leverage comes from being declarative instead of imperative.
 
+Boris Cherny, who created Claude Code, recently shared how his team uses the tool: start every complex task in plan mode, and pour your energy into the plan so Claude can one-shot the implementation.[^bcherny] One person on his team has one Claude write the plan, then spins up a second Claude to review it as a staff engineer. Another says the moment something goes sideways, they switch back to plan mode and re-plan — don't keep pushing. The pattern is the same: front-load the thinking, let the machine handle the doing.
+
+My days have started to split into two modes. There's contemplative time: defining goals, thinking through edge cases, building the reward function. That part is slow and focused. Then there's execution time: spinning up agents, running them in parallel, triaging output. That part is fast and frenetic – caffeine-fueled, multi-stream, casino-mode.
+
+## What still matters
+
+The contemplative work is what makes the casino work productive instead of just fun. Without it, I'm just pulling levers and hoping.
+
 For frontend work, this means developing strong taste. Can I look at the output and *feel* whether it's right? Does the UI make sense? Are the interactions smooth? I've been spending more time on what Jim Nielsen calls "sanding the UI" – the patient, iterative work of smoothing rough edges until something feels right.[^sanding] The agent can generate a component, but I'm the one who has to sand it.
 
 For backend work, it means building robust test harnesses. Types that encode invariants. Property-based testing has been great for this – instead of writing specific test cases, I describe properties the code should always satisfy, and the framework generates hundreds of edge cases to throw at it. If the tests pass and the invariants hold, the code is probably fine. The work shifts from *writing* the code to *specifying* what correct code looks like. I build the acceptance criteria first—the tests, the types, the "what does correct look like?"—and only then let the agent loose against it.
 
-The other thing I've noticed: domain expertise matters more, not less. The better I understand the problem space, the earlier I can catch the agent going down a wrong path. When I'm working in code I know well, I can interrupt a bad approach in the first few seconds. When I'm in unfamiliar territory, I might not realize something's off until it's been spinning for ten minutes. The models still make mistakes – subtle conceptual errors that a hasty junior dev might make, wrong assumptions they run with instead of checking.[^karpathy-mistakes] You have to watch them like a hawk. It ends up looking like pattern-matching on failure modes before they compound.
+And domain expertise matters more, not less. There's a popular narrative that AI helps you upskill quickly in unfamiliar domains — and that's true when you're _learning_. But for this modality, for being genuinely productive with these tools, your existing expertise is what makes it work. The better I understand the problem space, the earlier I can catch the agent going down a wrong path. When I'm working in code I know well, I can interrupt a bad approach in the first few seconds. When I'm in unfamiliar territory, I might not realize something's off until it's been spinning for ten minutes. The models still make mistakes – subtle conceptual errors that a hasty junior dev might make, wrong assumptions they run with instead of checking.[^karpathy-mistakes] You have to watch them like a hawk. It ends up looking like pattern-matching on failure modes before they compound.
 
-My days have started to split into two modes. There's contemplative time: defining goals, thinking through edge cases, building the reward function. That part is slow and focused. Then there's execution time: spinning up agents, running them in parallel, triaging output. That part is fast and frenetic – caffeine-fueled, multi-stream, casino-mode.
-
-The contemplative work is what makes the casino work productive instead of just fun. Without it, I'm just pulling levers and hoping. Maybe I _still_ am! None of us really know where this is going. Maybe we're all just spinning our wheels.
+These are the things I'm holding onto – taste, rigor, expertise. The parts that feel like they might still be craft. Whether they're enough to keep it that way, I'm not sure.
 
 ## The question I can't answer
 
@@ -63,13 +73,13 @@ Craft implies understanding. It implies that the maker could explain every decis
 
 There's a comforting story I could tell myself here: that craft is evolving, that the new skill is knowing what to ask for and how to evaluate the output, that judgment is the new execution. Maybe that's true. But I notice how convenient it is. It's exactly the kind of thing you'd say to avoid sitting with the harder question.
 
-What if the answer is actually no? What if I'm slowly trading away the thing that made me good at this—the deep, hard-won understanding—for speed and fun? What if the speed is the bribe that makes the trade feel worth it?
+What if the answer is actually no? What if I'm slowly trading away the thing that made me good at this — the deep, hard-won understanding — for speed and fun? What if the speed is the bribe?
 
-I don't have an answer. I'm in the casino. The games are good. I'm watching myself play, and I'm trying my hardest to pay attention.
+I don't have an answer. A friend texted me yesterday: "What a time to be alive and programming, eh?" It really is. I'm locked in at the casino, the games are as good as they've ever been, and I'm watching myself play more than ever. The best I can do is pay attention.
 
 ---
 
-*This is the third post in an unplanned series about AI-assisted development. Previously: [Spinning Plates](/2025/11/07/spinning-plates.html), [Racing Towards Bethlehem](/2025/11/24/racing-towards-bethlehem.html).*
+*Thanks to [Juraj Majerik](https://jurajmajerik.com/) for reading a draft of this and for feedback. This is the third post in an unplanned series about AI-assisted development. Previously: [Spinning Plates](/2025/11/07/spinning-plates.html), [Racing Towards Bethlehem](/2025/11/24/racing-towards-bethlehem.html).*
 
 [^karpathy]: Andrej Karpathy's [thread on AI-assisted coding](https://x.com/karpathy/status/2015883857489522876) (January 2026) captures a lot of what I've been experiencing. The whole thing is worth reading.
 
@@ -77,10 +87,14 @@ I don't have an answer. I'm in the casino. The games are good. I'm watching myse
 
 [^garbageday]: Ryan Broderick, "[Generative AI is an expensive edging machine](https://www.garbageday.email/p/generative-ai-is-an-expensive-edging-machine)," Garbage Day. His take is darker than mine, but the "edging machine" framing is vivid.
 
-[^comprehension]: Jeremy Wei [coined the term](https://x.com/jeremytwei/status/1883271959850811620) in a reply to Karpathy, who responded: "Love the word 'comprehension debt,' haven't encountered it so far, it's very accurate."
+[^comprehension]: Jeremy Wei [coined the term](https://x.com/jeremytwei/status/2015886793955229705) in a reply to Karpathy, who responded: "Love the word 'comprehension debt,' haven't encountered it so far, it's very accurate."
+
+[^anthropic-skills]: Judy Hanwen Shen and Alex Tamkin, "[How AI Assistance Impacts the Formation of Coding Skills](https://www.anthropic.com/research/AI-assistance-coding-skills)," Anthropic, January 2026. The full [paper](https://arxiv.org/abs/2601.20245) is worth reading if you're thinking about how to preserve skill formation while using AI tools.
 
 [^sanding]: Jim Nielsen, "[Sanding UI](https://blog.jim-nielsen.com/2024/sanding-ui/)." The metaphor is perfect: you can't sand in one pass, you have to keep coming back with finer grit.
 
 [^karpathy-mistakes]: Karpathy again: "The mistakes have changed a lot – they are not simple syntax errors anymore, they are subtle conceptual errors that a slightly sloppy, hasty junior dev might do. The most common category is that the models make wrong assumptions on your behalf and just run along with them without checking."
+
+[^bcherny]: Boris Cherny, "[Tips for using Claude Code](https://x.com/bcherny/status/2017742741636321619)," January 2026.
 
 [^thompson]: Derek Thompson, "[The Monks in the Casino](https://www.derekthompson.org/p/the-monks-in-the-casino)," November 2025.
