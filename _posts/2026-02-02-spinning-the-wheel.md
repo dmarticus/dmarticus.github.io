@@ -5,11 +5,11 @@ tags: [ai, reflection, work]
 post_summary: "I stopped resisting. The tools got too good. Now I'm fully in, spinning Claude Code sessions like slot machines, and trying to figure out whether what I'm doing still counts as craft."
 ---
 
-A few months ago I wrote about [spinning plates](/2025/11/07/spinning-plates.html) and [racing toward bottlenecks](/2025/11/24/racing-towards-bethlehem.html). The gist was: LLMs had changed how I work, I was faster but learning less, and I was trying to find a balance between leverage and atrophy.
+A few months ago I wrote about [spinning plates](/2025/11/07/spinning-plates.html) and [racing toward bottlenecks](/2025/11/24/racing-towards-bethlehem.html). The gist was that LLMs had changed how I work, I was faster but learning less, and I was trying to find a balance between leverage and atrophy.
 
 I've stopped trying to find balance. I'm all in.
 
-Over the holidays I tinkered with [Conductor](https://www.conductor.build/), switched editors to [Zed](https://zed.dev/), refined my [Claude Code setup](https://github.com/dmarticus/dotfiles/tree/main/ai), and kept iterating. The models got better. The tooling caught up. And somewhere in there, I crossed a threshold. Now most of my work happens through agents. I'm living in Claude Code & Conductor, spinning up sessions, watching them churn, merging the output. The 80/20 flip that Karpathy described happened to me too: 80% agent coding, 20% edits and touchups.[^karpathy]
+Over the holidays I refined my [Claude Code setup](https://github.com/dmarticus/dotfiles/tree/main/ai), went full-bore into multi-worktree setups with [Conductor](https://www.conductor.build/), and spent a lot of time iterating on my work process. On top of tht, the models got better. The tooling caught up. And somewhere in there, I personally crossed a threshold. Now most of my work happens through agents. I'm living in Claude Code & Conductor, spinning up sessions, watching them churn, merging the output. The 80/20 flip that Karpathy described happened to me too: 80% agent coding, 20% edits and touchups.[^karpathy]
 
 It feels incredible. It feels like cheating. It feels like gambling.
 
@@ -33,7 +33,7 @@ And yet — work has never felt this fun.
 
 I've always believed that energy management matters more than time management. If the work drains you, it doesn't matter how many hours you have. And these tools have changed the energy equation. The drudgery is gone. The copying and pasting of compiler warnings, the boilerplate, the fill-in-the-blanks tedium – I just don't do that anymore. What's left is the creative part: deciding what to build, figuring out the shape of the solution, reviewing whether the output is good.
 
-Karpathy, my coworkers, basically every engineer I've talked to who uses these tools – they've all noticed the same thing: programming feels *more* fun now because the fill-in-the-blanks drudgery is removed and what remains is the creative part.
+Karpathy, my coworkers, basically every engineer I've talked to who uses these tools – they've all noticed the same thing. Programming feels *more* fun now because the fill-in-the-blanks drudgery is removed and what remains is the creative part.
 
 I also feel less stuck. When I hit a wall, I don't have to grind through it alone. I can throw the problem at Claude, watch it try things, learn from what it attempts. There's almost always a way to make some positive progress. That changes the emotional texture of the day. Less frustration, more momentum.
 
@@ -45,13 +45,13 @@ I don't have a clean answer to the "is this cheating?" question. But I have a wo
 
 The shift I've made is this: I spend more time defining success criteria and less time doing the mechanical work of achieving them. Karpathy's framing helped here. "Don't tell it what to do, give it success criteria and watch it go." The leverage comes from being declarative instead of imperative.
 
-Boris Cherny, who created Claude Code, recently shared how his team uses the tool: start every complex task in plan mode, and pour your energy into the plan so Claude can one-shot the implementation.[^bcherny] One person on his team has one Claude write the plan, then spins up a second Claude to review it as a staff engineer. Another says the moment something goes sideways, they switch back to plan mode and re-plan — don't keep pushing. The pattern is the same: front-load the thinking, let the machine handle the doing.
+Boris Cherny, who created Claude Code, recently shared how his team uses the tool: start every complex task in plan mode, and pour your energy into the plan so Claude can one-shot the implementation.[^bcherny] One person on his team has one Claude write the plan, then spins up a second Claude to review it as a staff engineer. Another says the moment something goes sideways, they switch back to plan mode and re-plan — don't keep pushing. The pattern is the same — front-load the thinking, let the machine handle the doing.
 
-My days have started to split into two modes. There's contemplative time: defining goals, thinking through edge cases, building the reward function. That part is slow and focused. Then there's execution time: spinning up agents, running them in parallel, triaging output. That part is fast and frenetic – caffeine-fueled, multi-stream, casino-mode.
+My days have started to split into two modes. There's contemplative time—defining goals, thinking through edge cases, building the reward function. That part is slow and focused. Then there's execution time—spinning up agents, running them in parallel, triaging output. That part is fast and frenetic, caffeine-fueled, multi-stream.
 
 ## What still matters
 
-The contemplative work is what makes the casino work productive instead of just fun. Without it, I'm just pulling levers and hoping.
+The contemplative work is what makes the execution productive instead of just fun. Without it, I'm just pulling levers and hoping.
 
 For frontend work, this means developing strong taste. Can I look at the output and *feel* whether it's right? Does the UI make sense? Are the interactions smooth? I've been spending more time on what Jim Nielsen calls "sanding the UI" – the patient, iterative work of smoothing rough edges until something feels right.[^sanding] The agent can generate a component, but I'm the one who has to sand it.
 
@@ -67,7 +67,7 @@ Derek Thompson wrote a piece called "The Monks in the Casino" about young men wh
 
 I keep thinking about how that logic spreads. Engineering used to feel like one of the more contemplative corners of work – long stretches of focused thought, deep understanding as the goal. Now the casino has arrived here too. The tools are incredible, and they're also slot machines. The dopamine loop is built into the workflow. And I'm not sure how vigilant I need to be, or whether vigilance is even the right frame.
 
-The question I keep asking myself: is this still craft?
+The question I keep asking myself is whether this is still craft.
 
 Craft implies understanding. It implies that the maker could explain every decision, could reproduce the work, could teach someone else how to do it. When I ship something Claude mostly wrote, can I say that? Sometimes yes. Sometimes I'm not sure.
 
