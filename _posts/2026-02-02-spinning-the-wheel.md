@@ -17,7 +17,7 @@ It feels incredible. It feels like cheating. It feels like gambling.
 
 There's a moment after you send a prompt where you're just… waiting. The agent is running. You can see it thinking, reading files, making decisions. And there's this little hit of anticipation: *what's it going to do?* It's the same dopamine loop as pulling a slot machine lever. Low effort, variable reward, endlessly repeatable.
 
-Someone on Hacker News called it "doom tabbing": the AI is already running, the bar to seeing what it does next is so low that you just… watch.[^doomtab] A coworker described the opposite problem: you *can't* just sit there, so you open Slack or try to multitask during the dead time. Either way you lose — watching keeps you in the dopamine loop, switching fragments your focus. Fifty times a day, both add up to a strange kind of fatigue. Pull the lever, spin the wheel, see what happens. The reward gets front-loaded; the difficult part—understanding what you built, debugging it six months later—gets pushed further out in time.
+Someone on Hacker News called it "doom tabbing": the AI is already running, the bar to seeing what it does next is so low that you just… watch.[^doomtab] A coworker described the opposite problem: you *can't* just sit there, so you open Slack or try to multitask during the dead time. Either way you lose — watching keeps you in the dopamine loop, switching fragments your focus. Fifty times a day, both add up to a strange kind of fatigue. Pull the lever, spin the wheel, see what happens. The reward gets front-loaded; the difficult part – understanding what you built, debugging it six months later – gets pushed further out in time.
 
 Ryan Broderick went even darker, calling generative AI an "edging machine": it charges you for the thrill of feeling like you're building something while caring more about the monetizable loop of engagement than the finished product.[^garbageday] I don't cosign his full doom take, but the framing stuck with me. There *is* something seductive about the loop. It simulates progress. It feels like making.
 
@@ -31,11 +31,11 @@ And yet — work has never felt this fun.
 
 I've always believed that energy management matters more than time management. If the work drains you, it doesn't matter how many hours you have. And these tools have changed the energy equation. The drudgery is gone. The copying and pasting of compiler warnings, the boilerplate, the fill-in-the-blanks tedium – I just don't do that anymore. What's left is the creative part: deciding what to build, figuring out the shape of the solution, reviewing whether the output is good.
 
-Karpathy, my coworkers, basically every engineer I've talked to who uses these tools – they've all noticed the same thing. Programming feels *more* fun now because the fill-in-the-blanks drudgery is removed and what remains is the creative part.
+Karpathy, my coworkers, all the engineers I've talked to who use these tools – they've all noticed the same thing. Programming feels *more* fun now because the fill-in-the-blanks drudgery is removed and what remains is the creative part.
 
 I also feel less stuck. When I hit a wall, I don't have to grind through it alone. I can throw the problem at Claude, watch it try things, learn from what it attempts. There's almost always a way to make some positive progress. That changes the emotional texture of the day. Less frustration, more momentum.
 
-And the tenacity thing is real. Watching an agent relentlessly work at something—never tired, never demoralized, just trying approach after approach—is genuinely inspiring. I've seen Claude struggle with a problem for thirty minutes and then crack it. That stamina was always a bottleneck for me. Now it's not.
+And the tenacity thing is real. Watching an agent relentlessly work at something – never tired, never demoralized, just trying approach after approach – is genuinely inspiring. I've seen Claude struggle with a problem for thirty minutes and then crack it. That stamina was always a bottleneck for me. Now it's not.
 
 ## How I'm adapting
 
@@ -45,7 +45,7 @@ The shift I've made is this: I spend more time defining success criteria and les
 
 Boris Cherny, who created Claude Code, recently shared how his team uses the tool: start every complex task in plan mode, and pour your energy into the plan so Claude can one-shot the implementation.[^bcherny] One person on his team has one Claude write the plan, then spins up a second Claude to review it as a staff engineer. Another says the moment something goes sideways, they switch back to plan mode and re-plan — don't keep pushing. The pattern is the same — front-load the thinking, let the machine handle the doing.
 
-My days have started to split into two modes. There's contemplative time—defining goals, thinking through edge cases, building the reward function. That part is slow and focused. Then there's execution time—spinning up agents, running them in parallel, triaging output. That part is fast and frenetic, caffeine-fueled, multi-stream.
+My days have started to split into two modes. There's contemplative time — defining goals, thinking through edge cases, building the reward function. That part is slow and focused. Then there's execution time — spinning up agents, running them in parallel, triaging output. That part is fast and frenetic, caffeine-fueled, multi-stream.
 
 ## What still matters
 
@@ -53,7 +53,7 @@ The contemplative work is what makes the execution productive instead of just fu
 
 For frontend work, this means developing strong taste. Can I look at the output and *feel* whether it's right? Does the UI make sense? Are the interactions smooth? I've been spending more time on what Jim Nielsen calls "sanding the UI" – the patient, iterative work of smoothing rough edges until something feels right.[^sanding] The agent can generate a component, but I'm the one who has to sand it.
 
-For backend work, it means building robust test harnesses. Types that encode invariants. Property-based testing has been great for this – instead of writing specific test cases, I describe properties the code should always satisfy, and the framework generates hundreds of edge cases to throw at it. If the tests pass and the invariants hold, the code is probably fine. The work shifts from *writing* the code to *specifying* what correct code looks like. I build the acceptance criteria first—the tests, the types, the "what does correct look like?"—and only then let the agent loose against it.
+For backend work, it means building robust test harnesses. Types that encode invariants. Property-based testing has been great for this – instead of writing specific test cases, I describe properties the code should always satisfy, and the framework generates hundreds of edge cases to throw at it. If the tests pass and the invariants hold, the code is probably fine. The work shifts from *writing* the code to *specifying* what correct code looks like. I build the acceptance criteria first – the tests, the types, the "what does correct look like?" – and only then let the agent loose against it.
 
 And domain expertise matters more, not less. There's a popular narrative that AI helps you upskill quickly in unfamiliar domains — and that's true when you're _learning_. But for this modality, for being genuinely productive with these tools, your existing expertise is what makes it work. The better I understand the problem space, the earlier I can catch the agent going down a wrong path. When I'm working in code I know well, I can interrupt a bad approach in the first few seconds. When I'm in unfamiliar territory, I might not realize something's off until it's been spinning for ten minutes. The models still make mistakes – subtle conceptual errors that a hasty junior dev might make, wrong assumptions they run with instead of checking.[^karpathy-mistakes] You have to watch them like a hawk. It ends up looking like pattern-matching on failure modes before they compound.
 
@@ -73,9 +73,9 @@ There's a comforting story I could tell myself here — that craft is evolving, 
 
 What if the answer is actually no? What if I'm slowly trading away the thing that made me good at this — the deep, hard-won understanding — for speed and fun? What if the speed is the bribe?
 
-Recent research suggests this isn't just paranoia. A randomized experiment from Anthropic found that AI assistance impaired developers' conceptual understanding, code reading, and debugging abilities—without even delivering significant efficiency gains on average.[^anthropic-skills] Only the interaction patterns that involved genuine cognitive engagement preserved learning outcomes. Their conclusion: "AI-enhanced productivity is not a shortcut to competence."
+Recent research suggests this isn't just paranoia. A randomized experiment from Anthropic found that AI assistance impaired developers' conceptual understanding, code reading, and debugging abilities – without even delivering significant efficiency gains on average.[^anthropic-skills] Only the interaction patterns that involved genuine cognitive engagement preserved learning outcomes. Their conclusion: "AI-enhanced productivity is not a shortcut to competence."
 
-But knowing that doesn't tell me what to do. I don't want to stop using these tools—they're too good, and the work is too fun. A friend texted me yesterday: "What a time to be alive and programming, eh?" It really is. I'm locked in at the casino, the games are as good as they've ever been, and I'm watching myself play more than ever. The best I can do is pay attention.
+But knowing that doesn't tell me what to do. I don't want to stop using these tools – they're too good, and the work is too fun. A friend texted me yesterday: "What a time to be alive and programming, eh?" It really is. I'm locked in at the casino, the games are as good as they've ever been, and I'm watching myself play more than ever. The best I can do is pay attention.
 
 ---
 
