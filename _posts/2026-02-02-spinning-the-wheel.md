@@ -23,8 +23,6 @@ Ryan Broderick went even darker, calling generative AI an "edging machine": it c
 
 And then there's "comprehension debt" – the tendency for the code in your codebase to become less and less understood over time because the AI one-shotted it and you just moved on.[^comprehension] People counter that AI actually helps you *learn* — you can ask it to explain things, build mental models. I do this too. But when I ask for an explanation and then let it do the implementation, the understanding doesn't stick the way it would if I'd written the code myself. It feels like learning in the moment. Whether it compounds into something durable, I'm not sure.
 
-Recent research backs this up. A randomized experiment from Anthropic studying how developers learned a new programming library found that AI assistance impaired conceptual understanding, code reading, and debugging abilities – without even delivering significant efficiency gains on average.[^anthropic-skills] The participants who fully delegated coding tasks did see some productivity improvements, but at the cost of actually learning. The researchers identified six distinct AI interaction patterns, and only the three that involved genuine cognitive engagement preserved learning outcomes. They concluded that "AI-enhanced productivity is not a shortcut to competence."
-
 The casino is fun. When you're on a heater, it really feels like you're doing something. But the casino doesn't care whether you understand what you built.
 
 ## The fun
@@ -75,7 +73,9 @@ There's a comforting story I could tell myself here — that craft is evolving, 
 
 What if the answer is actually no? What if I'm slowly trading away the thing that made me good at this — the deep, hard-won understanding — for speed and fun? What if the speed is the bribe?
 
-I don't have an answer. A friend texted me yesterday: "What a time to be alive and programming, eh?" It really is. I'm locked in at the casino, the games are as good as they've ever been, and I'm watching myself play more than ever. The best I can do is pay attention.
+Recent research suggests this isn't just paranoia. A randomized experiment from Anthropic found that AI assistance impaired developers' conceptual understanding, code reading, and debugging abilities—without even delivering significant efficiency gains on average.[^anthropic-skills] Only the interaction patterns that involved genuine cognitive engagement preserved learning outcomes. Their conclusion: "AI-enhanced productivity is not a shortcut to competence."
+
+But knowing that doesn't tell me what to do. I don't want to stop using these tools—they're too good, and the work is too fun. A friend texted me yesterday: "What a time to be alive and programming, eh?" It really is. I'm locked in at the casino, the games are as good as they've ever been, and I'm watching myself play more than ever. The best I can do is pay attention.
 
 ---
 
