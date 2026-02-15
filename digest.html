@@ -12,8 +12,8 @@ redirect_from: /reading.html
             <a href="/digest.xml">Atom feed</a>.
         </p>
 
-        {% assign sorted_entries = site.digest | reverse %}
-        {% for entry in sorted_entries %}
+        {% assign sorted_entries = site.digest | reverse %} {% for entry in
+        sorted_entries %}
         <p>
             <strong
                 ><a href="{{ entry.url }}" title="{{ entry.title }}"
@@ -26,6 +26,17 @@ redirect_from: /reading.html
     </div>
 
     <div class="sidebar">
+        <div class="sidebar-section">
+            <h4 class="sidebar-heading">Stats</h4>
+            {% assign total_words = 0 %} {% for entry in site.digest %} {%
+            assign entry_words = entry.content | number_of_words %} {% assign
+            total_words = total_words | plus: entry_words %} {% endfor %}
+            <ul>
+                <li><strong>{{ site.digest | size }}</strong> entries</li>
+                <li><strong>{{ total_words }}</strong> words</li>
+            </ul>
+        </div>
+
         <div class="sidebar-section">
             <h4 class="sidebar-heading">Subscribe</h4>
             <ul>
