@@ -1,8 +1,8 @@
 ---
-title: "Contra Yang, et al (I guess)"
+title: "Contra Yang, et al"
 layout: post
 tags: [ai, reflection, work, predictions, business]
-post_summary: ""
+post_summary: "Andrew Yang's viral AI displacement piece gets some the broad strokes right but the timelines and emotional engineering wrong. I dig into the actual data on job losses, explain why AI evals are the real bottleneck, and argue that the structural shift is real but more nuanced than what he (and many other thought leaders) are claiming"
 ---
 
 _This morning I woke up to a text from my dad, who was asking for my opinion on [this piece](https://blog.andrewyang.com/p/the-end-of-the-office) from Andrew Yang. I wrote him a shorter response that contained a decent chunk of what I'm about to say, but it turns out I had a lot more to say about the topic, and when I finally got done writing it all down, I had what almost looked like a blog post. I went digging for some more numbers and eventually came up with what you're about to read._
