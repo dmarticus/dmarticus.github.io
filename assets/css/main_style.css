@@ -181,6 +181,24 @@ a:hover {
     text-decoration: underline;
 }
 
+/* --- External Link Indicator --- */
+/* Add arrow icon to external links (those starting with http) */
+/* Target main content areas but exclude navigation, footer, and image-only links */
+.page-content a[href^="http"]::after,
+.author-bio a[href^="http"]::after {
+    content: "⧉";
+    font-size: 0.85em;
+    vertical-align: 0.1em;
+    opacity: 0.7;
+    margin-left: 0.2em;
+}
+
+/* Remove indicator for links that wrap only images */
+.page-content a[href^="http"]:has(> img:only-child)::after,
+.author-bio a[href^="http"]:has(> img:only-child)::after {
+    content: none;
+}
+
 /* --- Layout --- */
 .site-wrapper {
     max-width: var(--max-width);
