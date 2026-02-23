@@ -215,6 +215,73 @@ a:hover {
 .site-nav {
     padding: 1.25rem 0;
     border-bottom: 2px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.site-title {
+    position: fixed;
+    top: 1.25rem;
+    left: var(--gap);
+    font-size: 0.925rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+    z-index: 1000;
+    background: var(--bg);
+    padding: 0.25rem 0;
+}
+
+.site-title:visited {
+    color: var(--accent);
+}
+
+.site-title:hover {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.site-logo {
+    height: 1.25rem;
+    width: auto;
+    vertical-align: middle;
+    margin-right: 0.125rem;
+}
+
+/* Light mode: show light logo, hide dark logo */
+.site-logo-dark {
+    display: none;
+}
+.site-logo-light {
+    display: inline;
+}
+
+/* Dark mode via media query */
+@media (prefers-color-scheme: dark) {
+    .site-logo-light {
+        display: none;
+    }
+    .site-logo-dark {
+        display: inline;
+    }
+}
+
+/* Explicit theme overrides */
+[data-theme="light"] .site-logo-light {
+    display: inline;
+}
+[data-theme="light"] .site-logo-dark {
+    display: none;
+}
+[data-theme="dark"] .site-logo-light {
+    display: none;
+}
+[data-theme="dark"] .site-logo-dark {
+    display: inline;
 }
 
 .site-nav ul {
@@ -538,6 +605,12 @@ img {
     .site-nav li a {
         font-size: 0.7rem;
         letter-spacing: 0.04em;
+    }
+
+    .site-title {
+        font-size: 0.75rem;
+        top: 1rem;
+        left: 1rem;
     }
 
     .styled-table {
