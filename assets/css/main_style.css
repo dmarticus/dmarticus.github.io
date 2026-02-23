@@ -221,9 +221,6 @@ a:hover {
 }
 
 .site-title {
-    position: fixed;
-    top: 1.25rem;
-    left: var(--gap);
     font-size: 0.925rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -231,9 +228,9 @@ a:hover {
     color: var(--accent);
     text-decoration: none;
     white-space: nowrap;
-    z-index: 1000;
-    background: var(--bg);
-    padding: 0.25rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
 }
 
 .site-title:visited {
@@ -252,36 +249,57 @@ a:hover {
     margin-right: 0.125rem;
 }
 
+.site-logo-link {
+    position: fixed;
+    top: 1.85rem;
+    left: var(--gap);
+    z-index: 1000;
+    line-height: 0;
+}
+
+.site-logo-fixed {
+    height: 1.25rem;
+    width: auto;
+}
+
 /* Light mode: show light logo, hide dark logo */
-.site-logo-dark {
+.site-logo-dark,
+.site-logo-fixed.site-logo-dark {
     display: none;
 }
-.site-logo-light {
-    display: inline;
+.site-logo-light,
+.site-logo-fixed.site-logo-light {
+    display: block;
 }
 
 /* Dark mode via media query */
 @media (prefers-color-scheme: dark) {
-    .site-logo-light {
+    .site-logo-light,
+    .site-logo-fixed.site-logo-light {
         display: none;
     }
-    .site-logo-dark {
-        display: inline;
+    .site-logo-dark,
+    .site-logo-fixed.site-logo-dark {
+        display: block;
     }
 }
 
 /* Explicit theme overrides */
-[data-theme="light"] .site-logo-light {
-    display: inline;
+[data-theme="light"] .site-logo-light,
+[data-theme="light"] .site-logo-fixed.site-logo-light {
+    display: block;
 }
-[data-theme="light"] .site-logo-dark {
+[data-theme="light"] .site-logo-dark,
+[data-theme="light"] .site-logo-fixed.site-logo-dark {
     display: none;
 }
-[data-theme="dark"] .site-logo-light {
+[data-theme="dark"] .site-logo-light,
+[data-theme="dark"] .site-logo-fixed.site-logo-light {
     display: none;
 }
-[data-theme="dark"] .site-logo-dark {
-    display: inline;
+[data-theme="dark"] .site-logo-dark,
+[data-theme="dark"] .site-logo-fixed.site-logo-dark {
+    display: block;
 }
 
 .site-nav ul {
@@ -598,6 +616,14 @@ img {
         grid-template-columns: 1fr;
     }
 
+    .page-content {
+        margin-left: 1rem;
+    }
+
+    .site-nav {
+        margin-left: 1rem;
+    }
+
     .site-nav ul {
         gap: 0.6rem 0.75rem;
     }
@@ -609,8 +635,15 @@ img {
 
     .site-title {
         font-size: 0.75rem;
-        top: 1rem;
+    }
+
+    .site-logo-link {
+        top: 1.85rem;
         left: 1rem;
+    }
+
+    .site-title-text {
+        display: none;
     }
 
     .styled-table {
@@ -623,13 +656,28 @@ img {
     }
 }
 
+@media (min-width: 769px) and (max-width: 1024px) {
+    .page-content {
+        margin-left: 3.5rem;
+    }
+
+    .site-nav {
+        margin-left: 3.5rem;
+    }
+}
+
 @media (max-width: 480px) {
     .site-wrapper {
-        padding: 0 1rem;
+        padding: 0 1rem 0 3.5rem;
     }
 
     h1 {
         font-size: 1.5rem;
+    }
+
+    .site-logo-link {
+        top: 1.85rem;
+        left: 1rem;
     }
 }
 

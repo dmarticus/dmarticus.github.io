@@ -1,17 +1,15 @@
+<a href="/" class="site-logo-link">
+    <img src="/logo_light.png" alt="Home" class="site-logo-fixed site-logo-light">
+    <img src="/logo_dark.png" alt="Home" class="site-logo-fixed site-logo-dark">
+</a>
 <nav class="site-nav">
-    <a href="/" class="site-title">
-        <img src="/logo_light.png" alt="" class="site-logo site-logo-light">
-        <img src="/logo_dark.png" alt="" class="site-logo site-logo-dark">
-        Compacted Context
-    </a>
     <ul>
-        <li><a href="/" {% if page.url == '/' %}class="active"{% endif %}>Home</a></li>
+        <li><a href="/" {% if page.url == '/' %}class="active"{% endif %}>Compacted Context</a></li>
         <li><a href="/writing.html" {% if page.url == '/writing.html' %}class="active"{% endif %}>Writing</a></li>
         <li><a href="/digest.html" {% if page.url == '/digest.html' %}class="active"{% endif %}>Digest</a></li>
         <li><a href="/projects.html" {% if page.url == '/projects.html' %}class="active"{% endif %}>Projects</a></li>
         <li><a href="/speaking.html" {% if page.url == '/speaking.html' %}class="active"{% endif %}>Speaking</a></li>
         <li><a href="/media.html" {% if page.url == '/media.html' %}class="active"{% endif %}>Media</a></li>
         <li><a href="/uses.html" {% if page.url == '/uses.html' %}class="active"{% endif %}>Uses</a></li>
-        <li class="nav-theme-toggle"><button class="theme-toggle" id="nav-theme-toggle" aria-label="Toggle theme"></button></li>
     </ul>
 </nav>
