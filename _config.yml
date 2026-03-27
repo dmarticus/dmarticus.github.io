@@ -8,7 +8,7 @@ exclude: ["README.md", "Gemfile", "Gemfile.lock"]
 title: "Dylan Martin"
 author: "Dylan"
 description: "Compacted Context is the personal website of Dylan Martin, where I publish essays about software engineering, career reflections, or whatever else I'm thinking about, and digests of what I'm reading (or occasionally watching)."
-url: "https://www.dylanamartin.com"
+url: "https://compactedcontext.com"
 future: true
 
 collections:
