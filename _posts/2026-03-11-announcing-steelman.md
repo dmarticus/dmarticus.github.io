@@ -9,7 +9,7 @@ I've been thinking a lot about how I make decisions; especially the hard ones, w
 
 That experience of having your position challenged well and coming out the other side with something sharper is genuinely valuable.  But it doesn't scale.  You can't always find the right person to push back on your thinking at the right time.  And most of us don't seek out that kind of friction voluntarily.  What we *do* instead, increasingly, is reach for an AI — and the AI mostly tells us we're right.  It validates, polishes, and helps us build on assumptions we never examined.  We walk away feeling sharper when really we just feel more comfortable.  I wanted something that would make me *less* comfortable with my position before I committed to it.
 
-So I built [Steelman](https://steelman.dylanamartin.com/).
+So I built [Steelman](https://steelman.cloud/).
 
 ## What it does
 
@@ -35,7 +35,7 @@ For the folks who care about this kind of thing: it's a Next.js app using Claude
 
 ## Try it out
 
-Steelman is currently in closed beta.  If you're interested, you can [sign up for the waitlist](https://steelman.dylanamartin.com/).
+Steelman is currently in closed beta.  If you're interested, you can [sign up for the waitlist](https://steelman.cloud/).
 
 I'm especially curious to hear from people who make a lot of high-stakes decisions — engineering managers, staff+ engineers, architects, but also founders, policy folks, anyone who writes arguments for a living — about whether this maps to how they actually think through problems.  The adversarial personas currently skew toward infrastructure and systems decisions, but Steelman works on any kind of argument, and I'd like to expand the persona set to cover more domains.
 
