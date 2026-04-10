@@ -7,8 +7,8 @@
                 "budget": 5000
             },
             {
-                "metric": "first-meaningful-paint",
-                "budget": 3000
+                "metric": "largest-contentful-paint",
+                "budget": 4000
             }
         ],
         "resourceSizes": [
