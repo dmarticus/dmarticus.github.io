@@ -38,10 +38,16 @@ layout: default
                     <td>Slug</td>
                     <td>{{ post.url }}</td>
                 </tr>
-                {% if post.categories.size > 0 %}
+                {% if post.tags.size > 0 %}
                 <tr>
-                    <td>Category</td>
-                    <td>{{ post.categories | join: ", " }}</td>
+                    <td>Tags</td>
+                    <td>
+                        <span class="tag-list">
+                            {% for tag in post.tags %}
+                            <a href="/writing?tag={{ tag | url_encode }}" class="tag">{{ tag }}</a>
+                            {% endfor %}
+                        </span>
+                    </td>
                 </tr>
                 {% endif %}
             </table>

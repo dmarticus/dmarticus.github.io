@@ -473,6 +473,79 @@ a:hover {
     margin-top: 0.2rem;
 }
 
+/* --- Tags --- */
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    padding: 0.1rem 0.4rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.tag:visited {
+    color: var(--text-secondary);
+}
+
+.tag:hover {
+    color: var(--text);
+    border-color: var(--text-secondary);
+    text-decoration: none;
+}
+
+.tag-active,
+.tag-active:visited {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+}
+
+.tag-active:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    color: var(--bg);
+}
+
+.tag-filter {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    padding: 0.5rem 0;
+    margin-bottom: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+#tag-filter-tags {
+    display: inline-flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.tag-filter-clear {
+    margin-left: 0.25rem;
+    font-size: 0.85rem;
+}
+
+.post-tags {
+    display: block;
+    margin-top: 0.3rem;
+}
+
+.post-tags .tag {
+    font-size: 0.7rem;
+    margin-right: 0.15rem;
+}
+
 /* --- Author Bio --- */
 .author-bio {
     margin-top: 3rem;
