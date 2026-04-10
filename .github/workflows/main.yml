@@ -4,9 +4,9 @@ jobs:
   lighthouse:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Audit URLs using Lighthouse
-        uses: treosh/lighthouse-ci-action@v3
+        uses: treosh/lighthouse-ci-action@v12
         with:
           urls: |
             https://www.dylanamartin.com/
@@ -14,6 +14,6 @@ jobs:
             https://www.dylanamartin.com/projects.html
             https://www.dylanamartin.com/talks.html
             https://www.dylanamartin.com/media.html
-          budgetPath: ./budget.json # test performance budgets
-          uploadArtifacts: true # save results as an action artifacts
-          temporaryPublicStorage: true # upload lighthouse report to the temporary storage
+          budgetPath: ./budget.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
