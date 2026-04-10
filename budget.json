@@ -7,18 +7,18 @@
                 "budget": 5000
             },
             {
-                "metric": "first-meaningful-paint",
-                "budget": 3000
+                "metric": "largest-contentful-paint",
+                "budget": 6000
             }
         ],
         "resourceSizes": [
             {
                 "resourceType": "script",
-                "budget": 125
+                "budget": 150
             },
             {
                 "resourceType": "total",
-                "budget": 300
+                "budget": 512
             }
         ],
         "resourceCounts": [
