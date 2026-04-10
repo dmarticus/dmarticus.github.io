@@ -12,20 +12,130 @@ redirect_from: /blog.html
             <a href="/blog.xml">Atom feed</a>.
         </p>
 
-        <ul class="post-list">
+        <div class="tag-filter" id="tag-filter" style="display: none;">
+            Filtered by <span id="tag-filter-tags"></span>
+            <a href="/writing" class="tag-filter-clear">(clear all)</a>
+        </div>
+
+        <ul class="post-list" id="post-list">
             {% for post in site.posts %}
-            <li>
+            <li data-tags="{{ post.tags | join: ',' | downcase }}">
                 <a href="{{ post.url }}" title="{{ post.title }}"
                     >{{ post.title }}</a
                 >
                 <span class="post-date">{{ post.date | date: "%b %Y" }}</span>
                 <span class="post-date">&middot; {{ post.content | number_of_words }} words</span>
+                {% if post.tags.size > 0 %}
+                <span class="post-tags">
+                    {% for tag in post.tags %}
+                    <a href="#" class="tag" data-tag="{{ tag | downcase }}">{{ tag }}</a>
+                    {% endfor %}
+                </span>
+                {% endif %}
                 {% if post.post_summary %}
                 <span class="post-summary">{{ post.post_summary }}</span>
                 {% endif %}
             </li>
             {% endfor %}
         </ul>
+
+        <script>
+        (function () {
+            var activeTags = [];
+
+            function getTagsFromURL() {
+                var params = new URLSearchParams(window.location.search);
+                var raw = params.get("tag");
+                if (!raw) return [];
+                return raw.split(",").map(function (t) { return t.trim().toLowerCase(); }).filter(Boolean);
+            }
+
+            function updateURL() {
+                var params = new URLSearchParams(window.location.search);
+                if (activeTags.length > 0) {
+                    params.set("tag", activeTags.join(","));
+                } else {
+                    params.delete("tag");
+                }
+                var newURL = window.location.pathname + (params.toString() ? "?" + params.toString() : "");
+                history.replaceState(null, "", newURL);
+            }
+
+            function filterPosts() {
+                var items = document.querySelectorAll("#post-list li");
+                items.forEach(function (li) {
+                    if (activeTags.length === 0) {
+                        li.style.display = "";
+                        return;
+                    }
+                    var postTags = li.getAttribute("data-tags").split(",");
+                    var match = activeTags.every(function (t) { return postTags.indexOf(t) !== -1; });
+                    li.style.display = match ? "" : "none";
+                });
+            }
+
+            function updateFilterBar() {
+                var filter = document.getElementById("tag-filter");
+                var tagsContainer = document.getElementById("tag-filter-tags");
+                if (activeTags.length === 0) {
+                    filter.style.display = "none";
+                    return;
+                }
+                filter.style.display = "block";
+                tagsContainer.innerHTML = "";
+                activeTags.forEach(function (tag) {
+                    var span = document.createElement("a");
+                    span.href = "#";
+                    span.className = "tag tag-active";
+                    span.textContent = tag + " \u00d7";
+                    span.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        toggleTag(tag);
+                    });
+                    tagsContainer.appendChild(span);
+                });
+            }
+
+            function updateTagHighlights() {
+                document.querySelectorAll("#post-list .tag").forEach(function (el) {
+                    if (activeTags.indexOf(el.getAttribute("data-tag")) !== -1) {
+                        el.classList.add("tag-active");
+                    } else {
+                        el.classList.remove("tag-active");
+                    }
+                });
+            }
+
+            function toggleTag(tag) {
+                var idx = activeTags.indexOf(tag);
+                if (idx === -1) {
+                    activeTags.push(tag);
+                } else {
+                    activeTags.splice(idx, 1);
+                }
+                updateURL();
+                filterPosts();
+                updateFilterBar();
+                updateTagHighlights();
+            }
+
+            // Initialize from URL
+            activeTags = getTagsFromURL();
+            if (activeTags.length > 0) {
+                filterPosts();
+                updateFilterBar();
+                updateTagHighlights();
+            }
+
+            // Handle tag clicks
+            document.getElementById("post-list").addEventListener("click", function (e) {
+                var tagEl = e.target.closest(".tag");
+                if (!tagEl) return;
+                e.preventDefault();
+                toggleTag(tagEl.getAttribute("data-tag"));
+            });
+        })();
+        </script>
     </div>
 
     <div class="sidebar">
