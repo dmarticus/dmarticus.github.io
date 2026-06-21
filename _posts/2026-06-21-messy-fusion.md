@@ -73,13 +73,11 @@ Refactoring helps inside a boundary. Fusion crosses boundaries. Breaking it requ
 
 This is the software version of the British cases. Hardware lock-in moves atoms. Software lock-in moves dependencies. Once users, state, contracts, and processes have to move together, the system has lost the ability to adapt incrementally.
 
-Finally, this all brings me to CUDA. CUDA[^cuda] is the edge case. Chips are physical, but the control point is the information architecture above them: the programming model, libraries, compiler, driver contract, and developer expectations that decide where workloads can run.
+CUDA[^cuda] is the hybrid case: physical chips underneath, information architecture above, lock-in created by the way the two are fused.
 
 ---
 
-CUDA is this pattern at ecosystem scale, sitting on the boundary between atoms and information.
-
-The chips matter: performance, memory bandwidth, supply, and export controls are real physical constraints. But CUDA's durable advantage comes from the stack wrapped around the hardware: the programming model, optimized libraries, compiler tooling, and driver contract developed over nearly twenty years. The switching cost is in the developer surface and the ecosystem behind it.
+At the bottom of the software engineering stack, the chips matter. Performance, memory bandwidth, supply, and export controls are real physical constraints. But CUDA's durable advantage comes from the stack wrapped around the hardware: the programming model, optimized libraries, compiler tooling, and driver contract developed over nearly twenty years. The switching cost is in the developer surface and the ecosystem behind it.
 
 And NVIDIA's behavior reflects that structure. It treats hardware as an implementation detail beneath a durable interface. Each generation changes the silicon underneath CUDA while the programming surface stays stable enough for existing users to remain in place. That gives NVIDIA the software property hardware normally lacks: implementation flexibility below the contract and continuity above it. Competitors face the inverse. They cannot legally reproduce the same interface: the CUDA license has barred translation layers since the 11.6 docs,[^cuda-eula] and ZLUDA was pulled down after demonstrating CUDA code running on non-NVIDIA hardware.[^zluda]
 
