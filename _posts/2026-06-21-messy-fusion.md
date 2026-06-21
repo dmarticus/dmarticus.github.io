@@ -11,7 +11,7 @@ In 2023, Britain built zero commercial ships.[^uk-shipbuilding]
 
 Britain's nuclear story follows the same pattern. By 1965 Britain had more operating reactors than the United States, the Soviet Union, and France combined.[^uk-nuclear] It had, more or less, helped create the nuclear power industry. Today its flagship project is Hinkley Point C: the most expensive power plant ever built, roughly six times the cost of an equivalent Korean reactor,[^uk-nuclear] thirteen-plus years into construction before delivering a single watt.
 
-My initial read was that this was purely technological lock-in: a bad decision made early, compounded for decades. I was reading these cases through the "one-way door" vs. "two-way door" framework popularized by Amazon, and assumed the accumulated debt could be explained by technical mistakes. That lens is too narrow. The more interesting failure mode is how technical decisions gather dependencies until changing the decision requires changing the surrounding system.
+My initial read was that both collapses were cases of technological lock-in: a bad decision made early, compounded for decades. I was reading British shipbuilding and nuclear power through the "one-way door" vs. "two-way door" framework popularized by Amazon, and assumed the accumulated debt could be explained by technical mistakes. That lens is too narrow. The more interesting failure mode is how technical decisions gather dependencies until changing the decision requires changing the surrounding system.
 
 ---
 
