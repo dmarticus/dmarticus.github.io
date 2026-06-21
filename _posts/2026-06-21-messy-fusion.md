@@ -11,11 +11,15 @@ In 2023, Britain built zero commercial ships.[^uk-shipbuilding]
 
 Britain's nuclear story follows the same pattern. By 1965 Britain had more operating reactors than the United States, the Soviet Union, and France combined.[^uk-nuclear] It had, more or less, helped create the nuclear power industry. Today its flagship project is Hinkley Point C: the most expensive power plant ever built, roughly six times the cost of an equivalent Korean reactor,[^uk-nuclear] thirteen-plus years into construction before delivering a single watt.
 
-My initial read was that both collapses were cases of technological lock-in: a bad decision made early, compounded for decades. I was reading these stories through the "one-way door" vs. "two-way door" framework popularized by Amazon, and assumed the accumulated debt could be explained by technical mistakes. That lens is too narrow. The more interesting failure mode is how technical decisions gather dependencies until changing the decision requires changing the surrounding system.
+So how did Britain manage to fumble this multi-generational industrial engineering bag?
+
+The easy explanation is that Britain made bad technical choices and then got stuck with them. That is partly true, but it misses the mechanism. A technical choice becomes hard to reverse when the rest of the system starts to organize around it. A production method shapes the yard built to use it. A reactor design shapes the approval process around it. Customers, regulators, capital, and workers begin to treat the choice as fixed.
+
+The real lock-in starts when changing the technical choice means changing everything built around it.
 
 ---
 
-The usual explanation for Britain's nuclear decline centers on reactor design. In the 1960s, Britain chose to build its next plant as an AGR (Advanced Gas-cooled Reactor), instead of the American PWR (Pressurized Water Reactor) that much of the rest of the world standardized on. The AGR was more complex, and the early builds were riddled with defects. The result was Dungeness B: years late, far over budget, and still used as shorthand for the failure of the whole program.[^uk-nuclear]
+The narrow version of Britain's nuclear story blames the reactor. In the 1960s, Britain backed the AGR (Advanced Gas-cooled Reactor) for its next generation of plants, while much of the rest of the world standardized on the American PWR (Pressurized Water Reactor). The AGR was more complex, and the early builds were defect-prone. Dungeness B became the emblem: years late, far over budget, and still used as shorthand for the failure of the whole program.[^uk-nuclear]
 
 However, while AGR made individual projects harder, it didn't have to make a nuclear program impossible. The evidence is that Britain got better at building AGRs once it repeated the design – Heysham 2 and Torness were built in roughly eight years and came in within about five percent of estimate.[^uk-nuclear] Several earlier AGRs also settled into capacity factors in the high seventies and became profitable under better management.[^uk-nuclear] The decisive change was repetition: Britain stopped treating each station as a bespoke project, and the construction consortia converged on a common design. The same difficult reactor became more manageable once the build system could learn.
 
