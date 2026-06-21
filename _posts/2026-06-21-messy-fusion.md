@@ -109,8 +109,6 @@ LLMs don't meaningfully move the needle on this constraint. Faster implementatio
 
 CUDA is the same lesson at strategic scale. The chips set the physical floor, but the developer interface decides which chips workloads can realistically use. Whoever owns that seam owns the system around it.
 
-I think there is more to say about these seams, but that is a future post. Thanks for reading!
-
 ---
 
 [^uk-shipbuilding]: Brian Potter, Construction Physics, ["How the UK Lost its Shipbuilding Industry."](https://www.construction-physics.com/p/how-the-uk-lost-its-shipbuilding) Source for the UK shipbuilding figures and the Lorenz account of the industry's labor-intensive production model.
