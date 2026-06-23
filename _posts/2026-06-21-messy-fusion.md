@@ -2,7 +2,7 @@
 title: "Messy Fusion"
 layout: post
 tags: [engineering, software, ai, geopolitics, systems]
-post_summary: "Britain’s shipbuilding and nuclear collapses show how technology choices become hard to reverse. Technical decisions accumulate dependencies until reversal requires changing the surrounding system. The same pattern shows up in software: contracts define safe change, LLMs mostly accelerate implementation, and CUDA’s power comes from the ecosystem around the chip."
+post_summary: "How did Britain go from launching most of the world’s ships and reactors to building neither? Bad technology choices are survivable; what sinks you is the system around them hardening until every correction becomes a system-wide one. I trace that failure mode from British industry into software rewrites, the real ceiling on LLM productivity, and the CUDA moat."
 ---
 
 At the turn of the 20th century, British shipyards launched something close to eighty percent of worldwide shipping tonnage.[^uk-shipbuilding] Yards like John Brown, Swan Hunter, and Harland & Wolff supplied much of the world's merchant fleet.
@@ -15,21 +15,19 @@ So how did Britain manage to fumble this multi-generational industrial engineeri
 
 The easy answer is that Britain made bad technical choices and then got stuck with them: the wrong reactor, the wrong production model. But wrong choices are survivable when the system around them can still learn. Britain's failure was that the systems around those choices hardened.
 
-That hardening is the pattern I want to trace from British shipyards and reactors to software architecture, LLMs, and CUDA.
+In other words, interfaces, state boundaries, and deployment boundaries are where dependencies accumulate. A bad architecture with clean seams can be replaced. A decent architecture with fused seams can become permanent.
 
 ---
 
 In the 1960s, Britain backed the AGR (Advanced Gas-cooled Reactor) for its next generation of plants, while much of the rest of the world standardized on the American PWR (Pressurized Water Reactor). The AGR was more complex, and the early builds were defect-prone. Dungeness B became the emblem: years late, far over budget, and still used as shorthand for the failure of the whole program.[^uk-nuclear]
 
-However, while AGR made individual projects harder, it didn't have to make a nuclear program impossible. The evidence is that Britain got better at building AGRs once it repeated the design – Heysham 2 and Torness were built in roughly eight years and came in within about five percent of estimate.[^uk-nuclear] Several earlier AGRs also settled into capacity factors in the high seventies and became profitable under better management.[^uk-nuclear] The decisive change was repetition: Britain stopped treating each station as a bespoke project, and the construction consortia converged on a common design. The same difficult reactor became more manageable once the build system could learn.
+However, while AGR made individual projects harder, it didn't have to make a nuclear program impossible. The evidence is that Britain got better at building AGRs once it repeated the design – Heysham 2 and Torness were built in roughly eight years and came in within about five percent of estimate.[^uk-nuclear] The decisive change was repetition: Britain stopped treating each station as a bespoke project, and the construction consortia converged on a common design. The same difficult reactor became more manageable once the build system could learn.
 
 Sizewell B shows the inverse. It was Britain's lone PWR, the design the rest of the world had already de-risked. If reactor type were the main constraint, moving from AGR to PWR should have fixed more than it did. Instead, Britain's nuclear buildout deteriorated around the supposedly correct design.[^uk-nuclear] Reactor design changed the difficulty of the work; repeatable delivery determined whether the program could survive.
 
 Shipbuilding shows the same pattern from the other direction. British yards are often described as backward: labor-intensive, undercapitalized, and slow to mechanize.[^uk-shipbuilding] That description is true but incomplete. The labor-intensive model was a rational adaptation for decades. It matched Britain's custom-order market, cramped yards, and limited capital. These manufacturers built familiar ships for familiar owners in a cyclical market where keeping fixed costs low mattered.
 
-The problem was that the market changed. Postwar shipbuilding moved toward larger standardized vessels, welded prefabricated blocks, heavier equipment, and tighter production planning. Between 1947 and 1957, British output rose only 18 percent while worldwide output rose more than 300 percent.[^uk-shipbuilding] Modernization meant rebuilding the production system, not just buying better tools.
-
-A modern yard needed a different industrial model. That was exactly where Britain was constrained: many yards were physically cramped, labor was organized around craft demarcations, and the commercial model still depended on custom orders from British shipowners. The old production architecture was tied into the whole business.
+The problem was that the market changed. Postwar shipbuilding moved toward larger standardized vessels, welded prefabricated blocks, heavier equipment, and tighter production planning. Between 1947 and 1957, British output rose only 18 percent while worldwide output rose more than 300 percent.[^uk-shipbuilding] Modernization meant rebuilding the production system, not just buying better tools — and that was exactly where Britain was constrained: many yards were physically cramped, labor was organized around craft demarcations, and the commercial model still depended on custom orders from British shipowners. The old production architecture was tied into the whole business.
 
 These two cases point to the same conclusion. Technology choices matter, but they become lock-in through the systems that form around them. In nuclear, reactor design became entangled with delivery and legitimacy. In shipbuilding, production methods became entangled with yards, labor, finance, and demand.
 
@@ -37,23 +35,17 @@ The useful insight is in what makes that entanglement reversible or irreversible
 
 ---
 
-Hardware engineering makes this mechanism explicit because hardware has a physical floor that software usually does not. Change means moving atoms, money, and lead time.
+Hardware engineering shows this collapse happening at a specific, scheduled moment called a Critical Design Review (CDR). A CDR is the point in a hardware project when the open design choices get fixed enough to build against. Before it, the layers are still separable: architecture, implementation, interfaces, supply. At the review they get locked together. Parts are ordered against the current geometry, tooling is cut for the current tolerances, and interface assumptions harden into physical constraints. After the CDR you can't move one layer without paying to move the others, because the budget, the lead times, and the procurement schedule have all been committed to a single shape.
 
-A Critical Design Review (CDR) is the point in a hardware project when open design choices become fixed enough to build against. Before the CDR, the project still has separable layers: architecture, implementation, interfaces, supply. At the CDR, those layers are reviewed together. Parts are ordered. Tooling decisions are made. Interface assumptions become physical constraints. Geometry, budgets, and procurement stop being independent choices.
+That coupling isn't a failure of the process; it is the process. In physical systems the implementation and the interface tend to be the same thing. A robot's reach, its battery life, its runtime target, and its enclosure aren't independent knobs — they're dimensions, tolerances, heat, wiring, and mass that constrain one another. Change the motor and you may have to change the chassis, the power budget, and the price.
 
-In hardware, this coupling is part of the build process. A robotics company has to close the loop between the mechanism, the battery, the runtime target, and the product requirements. In physical systems, the implementation and the interface often collapse into the same thing: dimensions, tolerances, heat, wiring, lead times.
+This is fusion in its most literal form — but fusion isn't yet _lock-in_. A CDR couples the layers on purpose: changing the geometry now means re-cutting tooling and re-running the budget, and you accept that because it's the price of building a real object. Coupling like this is bounded. You can see what moves with what, and you can pay for it.
 
-This is fusion in its most literal form. Lock-in emerges when the layers around an artifact become coupled tightly enough that changing one requires changing the others. The practical question shifts from whether a decision was right at the time to whether the system preserves a path for changing it later.
+Lock-in is coupling that has lost its edges. The dependencies keep spreading past the artifact until there's no bounded change left to make — every correction becomes a change to the whole system, and the bill is one nobody can pay. The useful question stops being whether a decision was right when it was made, and becomes whether the system still leaves a path to change it.
 
-The British cases failed that test in different ways.
+The British cases failed that test in opposite directions. Shipbuilding fused inward: the production model was bound up with the yards, labor, finance, and customers around it, so it could only change as a whole. Nuclear fused outward: the Sizewell B inquiry ran 340 days[^uk-nuclear] and expanded a single reactor decision into a referendum on safety, legitimacy, and the whole enterprise. In both, the technical choice mattered, but the irreversibility came from the coupling around it.
 
-British shipbuilding fused inward. The labor-intensive production model was tied to craft-union demarcations, cramped Victorian yards, custom orders, and limited capital. Welded-hull mass production required changing the yard, the labor model, the financing, and the customer relationship together. Each dependency reinforced the others, so the production model could only change as a whole.
-
-British nuclear fused outward. The Sizewell B public inquiry ran 340 days.[^uk-nuclear] It began as a decision about whether to build a specific reactor, then expanded into nuclear safety, political legitimacy, and colonial land-rights questions.[^uk-nuclear] The reactor decision became attached to issues no engineering review could resolve. Approval of a plant became approval of the enterprise around it.
-
-These are two forms of the same lock-in pattern. Shipbuilding accumulated dependencies inward until the production system could only be changed as a whole. Nuclear accumulated dependencies outward until a single project became a referendum on the entire enterprise. In both cases, the technical decision mattered, but the irreversibility came from the coupling around it.
-
-Software starts from a different baseline.
+Software is supposed to be the exception.
 
 ---
 
@@ -101,9 +93,7 @@ The narrower point is enough: export controls supplied demand and a captive user
 
 ---
 
-The pattern is the same across the cases: the question is not just whether a technical choice is right; it's what has to move if it turns out wrong. A decision is still reversible when it can be changed locally, but it becomes lock-in when the surrounding system has to move with it.
-
-This ansatz makes seams the real one-way doors in software. Interfaces, state boundaries, and deployment boundaries are where dependencies accumulate. A bad architecture with clean seams can be replaced. A decent architecture with fused seams can become permanent.
+The question is the same at every scale: not just whether a technical choice is right, but what has to move if it turns out wrong. A decision stays reversible when it can be changed locally. It becomes lock-in when the surrounding system has to move with it.
 
 LLMs don't meaningfully move the needle on this constraint. Faster implementation helps, but code is only one layer – the hard work is preserving correctness and compatibility while changing the system underneath active users. If anything, faster implementation raises the stakes: teams can now create coupling faster than they can understand it.
 
