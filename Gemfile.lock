@@ -59,7 +59,6 @@ GEM
       safe_yaml (~> 1.0)
       terminal-table (>= 1.8, < 4.0)
       webrick (~> 1.7)
-    jekyll-analytics (0.1.14)
     jekyll-feed (0.17.0)
       jekyll (>= 3.7, < 5.0)
     jekyll-redirect-from (0.16.0)
@@ -119,7 +118,6 @@ PLATFORMS
 DEPENDENCIES
   csv (~> 3.3)
   jekyll (~> 4.4)
-  jekyll-analytics (~> 0.1)
   jekyll-feed (~> 0.17)
   jekyll-redirect-from (~> 0.16)
   webrick (~> 1.8)

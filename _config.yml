@@ -26,8 +26,3 @@ repository: dmarticus/dmarticus.github.io
 plugins:
   - jekyll-redirect-from
   - jekyll-feed
-  - jekyll-analytics
-
-Matomo:
-  url: https://dylanamartin.matomo.cloud
-  siteId: "1"
