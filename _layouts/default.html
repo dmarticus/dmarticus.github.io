@@ -80,6 +80,26 @@
             })(document, window.posthog || []);
             posthog.init("phc_lff2mSdTzwXBjrFxsB4A4SVa9avouSP09dbTG5QjefC", {
                 api_host: "https://s.dylanamartin.com",
+                // By default posthog-js drops every event when navigator.webdriver
+                // is true or the user agent matches its built-in bot list, which
+                // hides agent and browser-automation sessions entirely. Capture
+                // them instead; each event gets $browser_type: 'bot' | 'browser'.
+                opt_out_useragent_filter: true,
+                before_send: function (event) {
+                    if (!event) return event;
+                    var nav = window.navigator;
+                    event.properties = event.properties || {};
+                    // $browser_type alone conflates a headless agent with an SEO
+                    // crawler, so record which signal flagged this event.
+                    if (nav && nav.webdriver) {
+                        event.properties.agent_signal = "webdriver";
+                    } else if (event.properties.$browser_type === "bot") {
+                        event.properties.agent_signal = "ua_blocklist";
+                    } else {
+                        event.properties.agent_signal = "none";
+                    }
+                    return event;
+                },
             });
         </script>
         <!-- End PostHog -->
