@@ -1,0 +1,47 @@
+name: Weekly reading log
+
+on:
+  schedule:
+    # Sundays at 16:00 UTC (~8-9am Pacific)
+    - cron: "0 16 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: read
+
+jobs:
+  weekly-log:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Collect log issues
+        run: gh issue list -R "$GITHUB_REPOSITORY" -l log --state open --limit 100 --json number,title,body,createdAt > /tmp/issues.json
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Build archive entries and digest draft
+        id: build
+        run: ruby scripts/weekly-log.rb /tmp/issues.json
+
+      - name: Open PR
+        if: steps.build.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COUNT: ${{ steps.build.outputs.count }}
+          CLOSES: ${{ steps.build.outputs.closes }}
+          DIGEST_PATH: ${{ steps.build.outputs.digest_path }}
+        run: |
+          branch="reading-log/$(date -u +%Y-%m-%d)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add _data/log.yml "$DIGEST_PATH"
+          git commit -m "Weekly reading log: $COUNT entries"
+          git push -u origin "$branch"
+          gh pr create \
+            --title "Weekly reading log: $(date -u +'%B %-d')" \
+            --body "$(printf 'Adds %s logged items to the archive and seeds this week'\''s digest draft (`%s`).\n\nCuration checklist:\n- [ ] Trim the digest draft to the favorites and punch up the notes (or delete the file to skip this week)\n- [ ] Replace the TODO summary\n\nMerging closes the logged issues: %s' "$COUNT" "$DIGEST_PATH" "$CLOSES")"

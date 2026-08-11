@@ -1,0 +1,1 @@
+{% if include.rating %}{% assign full = include.rating | floor %}{% for i in (1..full) %}★{% endfor %}{% assign half = include.rating | minus: full %}{% if half >= 0.5 %}<span class="star-half" aria-label="half star">☆<span aria-hidden="true">★</span></span>{% endif %}{% endif %}

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Log something you read/watched to the reading-log inbox (GitHub issues).
+#
+#   log <url> [note...]
+#   log "book: Blood Meridian — Cormac McCarthy" [note...]
+#   log "movie: Sinners — Ryan Coogler" finally saw it, incredible
+#   log "movie: Heat — Michael Mann" "4.5/5 the diner scene alone"   <- leading rating is parsed out
+#
+# A weekly GitHub Action turns open `log` issues into an archive PR.
+set -euo pipefail
+
+if [ $# -lt 1 ]; then
+  echo "usage: log <url | \"type: Title — Creator\"> [note...]" >&2
+  exit 1
+fi
+
+thing="$1"
+shift
+
+gh issue create -R dmarticus/dmarticus.github.io --label log --title "$thing" --body "${*:-}"
