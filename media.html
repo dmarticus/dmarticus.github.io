@@ -71,15 +71,6 @@ redirect_from:
     .media-review.clampable {
         cursor: pointer;
     }
-    .review-more {
-        display: none;
-        color: var(--text-secondary);
-        font-size: 0.8em;
-        user-select: none;
-    }
-    .media-review.clampable .review-more {
-        display: inline;
-    }
     .media-no-results {
         color: var(--text-secondary);
         display: none;
@@ -176,7 +167,6 @@ redirect_from:
                             {% if reviewed.size > 0 %}
                             <td class="media-review">
                                 <span class="review-text">{{ entry.note }}</span>
-                                <span class="review-more">⋯</span>
                             </td>
                             {% endif %}
                         </tr>
@@ -215,7 +205,6 @@ redirect_from:
                             {% if reviewed.size > 0 %}
                             <td class="media-review">
                                 <span class="review-text">{{ entry.note }}</span>
-                                <span class="review-more">⋯</span>
                             </td>
                             {% endif %}
                         </tr>
