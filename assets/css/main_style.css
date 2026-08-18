@@ -696,7 +696,7 @@ img {
 /* --- Responsive --- */
 @media (max-width: 768px) {
     html {
-        font-size: 14px;
+        font-size: 16px;
     }
 
     h1 {
@@ -724,7 +724,10 @@ img {
     }
 
     .site-nav li a {
-        font-size: 0.7rem;
+        display: inline-flex;
+        align-items: center;
+        min-height: 48px;
+        font-size: 0.75rem;
         letter-spacing: 0.04em;
     }
 
@@ -733,8 +736,30 @@ img {
     }
 
     .site-logo-link {
-        top: 1.85rem;
-        left: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        top: 0.85rem;
+        left: 0.35rem;
+    }
+
+    .tag {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 48px;
+        min-height: 48px;
+        font-size: 0.75rem;
+    }
+
+    .post-list a,
+    .PageNavigation a,
+    .site-footer a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 48px;
     }
 
     .site-title-text {
@@ -771,8 +796,8 @@ img {
     }
 
     .site-logo-link {
-        top: 1.85rem;
-        left: 1rem;
+        top: 0.85rem;
+        left: 0.35rem;
     }
 }
 
@@ -1221,6 +1246,8 @@ img {
     font-family: var(--font-mono);
     font-size: 1.15rem;
     line-height: 1;
+    min-width: 48px;
+    min-height: 48px;
     padding: 0;
     cursor: pointer;
     vertical-align: middle;
