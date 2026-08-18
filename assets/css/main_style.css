@@ -37,6 +37,7 @@
 
 /* --- CSS Custom Properties --- */
 :root {
+    color-scheme: light;
     --font-mono:
         "Berkeley Mono", "TX-02", "JetBrains Mono", "SF Mono", "Fira Code",
         "Cascadia Code", monospace;
@@ -65,6 +66,7 @@
 /* Dark mode */
 @media (prefers-color-scheme: dark) {
     :root {
+        color-scheme: dark;
         --bg: #111118;
         --bg-secondary: #1a1a24;
         --text: #e0e0e8;
@@ -80,6 +82,7 @@
 
 /* Explicit theme overrides (toggle) */
 [data-theme="light"] {
+    color-scheme: light;
     --bg: #fafaf8;
     --bg-secondary: #f0f0ec;
     --text: #1a1a2e;
@@ -93,6 +96,7 @@
 }
 
 [data-theme="dark"] {
+    color-scheme: dark;
     --bg: #111118;
     --bg-secondary: #1a1a24;
     --text: #e0e0e8;

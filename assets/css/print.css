@@ -1,0 +1,43 @@
+@page {
+    margin: 1.5cm;
+}
+
+body {
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+}
+
+.site-logo-link,
+.site-nav,
+.site-footer,
+.sidebar,
+.PageNavigation,
+.theme-toggle {
+    display: none;
+}
+
+.site-wrapper,
+.page-content,
+.main-content {
+    display: block;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #000;
+    text-decoration: underline;
+}
+
+pre,
+blockquote,
+img,
+table {
+    break-inside: avoid;
+}
+
+pre {
+    white-space: pre-wrap;
+}
