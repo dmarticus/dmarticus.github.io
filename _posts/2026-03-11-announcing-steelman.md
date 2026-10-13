@@ -5,6 +5,8 @@ tags: [AI, decision-making, reasoning, tools, announcement]
 post_summary: "Announcing Steelman, a tool I built to help you stress-test your arguments before anyone else does.  State a position, defend it against escalating AI-generated counterarguments, and walk away with a structured Decision Record.  In a world where the default AI interaction is to validate your thinking, Steelman is designed to challenge it.  Currently in closed beta — sign up if you're interested."
 ---
 
+_UPDATE 10/13/26: As of today, Steelman is in maintenance mode. It was an interesting project, and my first proper foray into building AI products, but I'm no longer maintaining it. Thanks to everyone who tried it out!_
+
 I've been thinking a lot about how I make decisions; especially the hard ones, where I have a strong opinion and I'm not totally sure if it's right.  The kind where you walk into a meeting, lay out your case, and someone asks a question you hadn't considered, and suddenly you're on your back foot, revising your argument in real time.
 
 That experience of having your position challenged well and coming out the other side with something sharper is genuinely valuable.  But it doesn't scale.  You can't always find the right person to push back on your thinking at the right time.  And most of us don't seek out that kind of friction voluntarily.  What we *do* instead, increasingly, is reach for an AI — and the AI mostly tells us we're right.  It validates, polishes, and helps us build on assumptions we never examined.  We walk away feeling sharper when really we just feel more comfortable.  I wanted something that would make me *less* comfortable with my position before I committed to it.

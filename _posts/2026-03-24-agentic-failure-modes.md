@@ -5,9 +5,9 @@ tags: [ai, work, software engineering]
 post_summary: "LLM-assisted work fails in two distinct ways — at the last mile and at the foundation — and they need opposite responses."
 ---
 
-After hundreds of agent-assisted sessions, two failure modes keep showing up. They look different, feel different, and need different responses.
+I took some time to reflect on hundreds of agent-assisted sessions and noticed that two failure modes keep showing up in my work: (1) long tail implementation thrash, and (2) being gaslit by plans. Here's a few words on how I try and solve for each.
 
-## Failure mode 1: the last-mile problem
+## Failure mode 1: long tail churn
 
 Anyone who's worked with coding agents knows this one — the agent gets me 90% of the way there, especially for UI work and well-specified features. The output compiles, the tests pass, the shape is right. But something's off — a button three pixels too close to the edge, a sluggish loading state, an error message that reads like it was written by a robot (because it was).
 
@@ -19,7 +19,7 @@ So what I've started to do is treat the agent's output as rough framing. Get it 
 
 In short: let the agent run, accept the 90%, and budget time for human finishing. Don't over-specify. Don't try to prompt your way to perfection.
 
-## Failure mode 2: the convincing-but-wrong plan
+## Failure mode 2: being gaslit by plans
 
 This one is scarier because the failure mode doesn't rear its head until much later; sometimes it can be too late.
 

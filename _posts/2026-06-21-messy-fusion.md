@@ -5,6 +5,8 @@ tags: [engineering, software, ai, geopolitics, systems]
 post_summary: "How did Britain go from launching most of the world’s ships and reactors to building neither? Bad technology choices are survivable; what sinks you is the system around them hardening until every correction becomes a system-wide one. I trace that failure mode from British industry into software rewrites, the real ceiling on LLM productivity, and the CUDA moat."
 ---
 
+_This post was inspired by Brian Potter's "Construction Physics" newsletter, and Stripe Press' "Works in Progress" magazine from April 2026_
+
 At the turn of the 20th century, British shipyards launched something close to eighty percent of worldwide shipping tonnage.[^uk-shipbuilding] Yards like John Brown, Swan Hunter, and Harland & Wolff supplied much of the world's merchant fleet.
 
 In 2023, Britain built zero commercial ships.[^uk-shipbuilding]
