@@ -13,7 +13,7 @@ Even as I write this, I have Claude Code spun up in another terminal pane, churn
 
 It’s incredible.
 
-I genuinely don’t know how I feel about it.
+And I have no idea how to feel about it.
 
 ## TL;DR
 
@@ -51,7 +51,7 @@ Under the hood, though, the feedback loop has been re-sized:
 3. triage whatever comes back,
 4. iterate until it compiles / passes / looks fine.
 
-There’s still skill there—prompt design, taste, knowing what "smells wrong" — but the locus of difficulty moves. It’s less "can *I* solve this?" and more "can I supervise this?" The reward structure changes too: less "wow, I learned something deep" and more "nice, another plate spun and didn’t fall." Still satisfying, just in a more managerial way.
+There’s still skill there (prompt design, taste, knowing what "smells wrong") but the locus of difficulty moves. It’s less "can *I* solve this?" and more "can I supervise this?" The reward structure changes too: less "wow, I learned something deep" and more "nice, I was able to shard my focus to the point where I can multitask efficiently." Still satisfying, just in a more managerial way.
 
 And when the model drops a solution fully formed, part of the joy evaporates. The problem gets solved; I don’t get the same little "oh sick, I figured that out" hit. When I scroll through my own diffs, I’ll sometimes realize I can’t actually explain why I did X instead of Y in a given PR without re-reading the whole thing.
 
@@ -164,7 +164,7 @@ Here’s my current plan; future-me can come back and roast me if I bail on any 
 
 Beyond these steps, I don’t really have a clean conclusion. I’m very much in the middle of this, same as everyone else.
 
-But I’m increasingly convinced that if my whole career turns into "telling a black box what to do," I’ll burn out — even if the metrics say I’m 3x more productive.
+But I’m increasingly convinced that if my whole career turns into "telling a black box what to do," I’ll burn out (even if the metrics say I’m 3x more productive).
 
 For the hard stuff, I want to keep taking some plates down, sitting with them, and remembering what it feels like to hold one thing still for a while.
 
