@@ -207,7 +207,7 @@ redirect_from:
                     <tbody>
                         {% for entry in movies %}
                         <tr>
-                            <td>{{ entry.title }}</td>
+                            <td>{% if entry.letterboxd %}<a href="{{ entry.letterboxd }}" rel="noreferrer" target="_blank">{{ entry.title }}</a>{% else %}{{ entry.title }}{% endif %}{% if entry.year %} <span class="num dim">{{ entry.year }}</span>{% endif %}</td>
                             <td>{{ entry.creator }}</td>
                             {% if rated.size > 0 %}
                             <td class="media-stars">{% include stars.html rating=entry.rating %}</td>
