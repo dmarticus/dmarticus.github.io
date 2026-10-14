@@ -45,9 +45,9 @@ title: Home
     {% include post-list.html posts=recent more="All 32 essays" %}
 </section>
 
-<section class="row g" id="reading">
+<section class="row g" id="media">
     <div class="row-label">
-        <h2>Reading</h2>
+        <h2><a href="/media.html">Media</a></h2>
     </div>
     {% assign recent_log = site.data.log | sort: "date" | reverse | slice: 0, 6 %}
     <div class="reading">
