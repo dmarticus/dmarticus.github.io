@@ -44,7 +44,7 @@ I've noticed my useful thinking now mostly happens in three places:
 2. Writing. Prose makes vague intuitions concrete and cooks half-baked ideas. If I can't explain the idea in a document, I probably don't understand it. It's also become my primary form of focused work, i.e. the place where I get closest to the flow state I used to find in coding.
 3. Walks (and talks). I frequently talk into [Wispr Flow](https://wisprflow.ai/) while walking (which probably looks like an insane, one-sided phone call), which helps me keep a record of my thought process without polluting it with any sort of AI summarization.[^raw-thoughts]
 
-In light of (1), I've also become much more willing to pull a coworker into an ad hoc jam session when I'm stuck on an idea (sorry in advance to my coworkers). In the past (when coding required keeping systems in our heads), these unplanned conversations carried a real context-switching cost. But now that agents carry more of that context, I've found these conversations are cheaper to say yes to—and disproportionately good at producing ideas.[^quick-call]
+In light of (1), I've also become much more willing to pull a coworker into an ad hoc jam session when I'm stuck on an idea (sorry in advance to my coworkers). In the past (when coding required keeping systems in our heads), these unplanned conversations were maligned as context-switching nightmares, and had a measurable productivity cost. But now that agents carry more of that context, I've found these conversations are cheaper to say yes to _and_ disproportionately good at producing ideas.[^quick-call]
 
 ## But isn't the point of engineering to produce wisdom? What are you even doing?
 
@@ -74,18 +74,18 @@ For a lot of product/SaaS companies, I think the advantage is the ability to run
 3. talk to customers about it
 4. repeat
 
-Agentic coding speeds up the launch and iteration steps, but it doesn't always supply the judgment that makes the loop useful: deciding what to launch, interpreting product signals, figuring out which pieces of feedback matter, and assessing which things to keep and which things to throw away.
+Farming off coding to agents speeds up the launch and iteration steps, but it doesn't always supply the judgment that makes the loop useful: deciding what to launch, interpreting product signals, figuring out which pieces of feedback matter, and assessing which things to keep and which things to throw away.
 
-If I'm not writing the code myself, I need to build that wisdom more deliberately. Product wisdom comes from talking to customers, interrogating metrics, and intentionally reflecting on what happens after we ship. Codebase wisdom can come from conversations with domain experts, targeted code reviews, writing and reading system design documents without AI[^no-ai-design], and paying attention when the systems fail.
+If I'm not writing the code myself, then I still need a process to build that wisdom deliberately. I'm talking about product wisdom (which comes from talking to customers, interrogating metrics, and intentionally reflecting on what happens after we ship) _and_ codebase wisdom (which can come from conversations with domain experts, targeted code reviews, writing and reading system design documents without AI[^no-ai-design], and paying attention when the systems fail).
 
-In my experience, the understanding I'm trying to preserve—the kind I used to acquire mostly by writing code—is:
+In my experience, the understanding I'm trying to preserve (the kind that formerly happened more frequently during the code writing process) is to identify:
 
 - where the load-bearing constraints are
 - which assumptions are expensive to reverse
 - when local code context is insufficient and I need to widen the frame
 - who holds the missing context
 
-These judgments remain super important: the faster implementation gets, the more expensive a bad frame becomes. This is where the concept of "slop" comes from, I think: agents moving quickly within a frame that nobody involved had enough context or wisdom to challenge.
+These judgments are still important, maybe more so than ever. The faster implementation gets, the more expensive a bad frame of reference becomes. To me, this is the origin of "slop": agents moving quickly within a frame that nobody involved had enough context or wisdom to challenge.
 
 ## My wisdom-preserving loop
 
@@ -112,4 +112,4 @@ If software is disposable, wisdom can't be. When everyone has access to the same
 
 [^technical-moat]: I haven't worked at enough companies where the technical system itself is the moat to opine on this thoroughly, although clean-room reimplementations of popular services that once seemed too technical to duplicate have me wondering how durable those moats really are.
 
-[^no-ai-design]: The logic, as I understand it, is that the point of these documents is not just the artifact. Writing one forces the author to reason through tradeoffs, and reviewing one gives other people a chance to challenge that reasoning. Letting AI generate the document would short-circuit the part of the process intended to build shared understanding.
+[^no-ai-design]: The rationale is that the point of these documents is to do thinking, doing writing is the process that promotes thinking, and one of the downstream effects of producing a design doc is also producing proof of cogitation. Plus, we want to avoid spamming our coworkers with [slop grenades](https://noslopgrenade.com/).
