@@ -9,14 +9,13 @@ I've been thinking about [this thread](https://x.com/ArtirKel/status/20825480908
 
 > As far as I can tell the answer is something like LLMs are smart but not wise; they don't induce that many of those "Aha!" moments that seem to be best mined through other means (or often, just doing nothing and pondering stuff on walks)
 
-These days, most of my "coding" work happens by me steering agents, and these agents are generally very good at making progress once I've framed the problem. But (as I've [written about](/2025/11/07/spinning-plates.html) [in the past](/2026/02/02/spinning-the-wheel.html)) delegating the implementation work means I no longer get the automatic, prolonged immersion that used to create opportunities for the kind of *aha* moment described in the thread.
+These days, most of my "coding" work consists of me steering agents, and these agents are generally very good at making progress once I've framed the problem. But (as I've [written about](/2025/11/07/spinning-plates.html) [in the past](/2026/02/02/spinning-the-wheel.html)) delegating the implementation work means I no longer get the automatic, prolonged immersion that used to create opportunities for the kind of *aha* moment described in the thread.
 
-Moments where you realized:
+Moments when you realize:
 
 - I've been trying to solve the wrong problem
 - our customers don't actually care about this
 - we tried something similar a few years ago and never encoded that understanding into the codebase 
-- and so on...
 
 In other words, agentic coding isn't especially good at producing these moments, but they're clearly valuable, and it feels really important to identify and hold onto practices that promote wisdom and deep thinking without becoming a [meat proxy](https://simonwillison.net/2026/Aug/3/dont-be-a-meat-proxy/). I wanted to talk about some of those practices I've been adopting.
 
@@ -42,7 +41,7 @@ I've noticed my useful thinking now mostly happens in three places:
 2. Writing. Prose makes vague intuitions concrete and cooks half-baked ideas. If I can't explain the idea in a document, I probably don't understand it. It's also become my primary form of focused work, i.e. the place where I get closest to the flow state I used to find in coding.
 3. Walks (and talks). I frequently talk into [Wispr Flow](https://wisprflow.ai/) while walking (which probably looks like an insane, one-sided phone call), which helps me keep a record of my thought process without polluting it with any sort of AI summarization.[^raw-thoughts]
 
-In light of (1), I've also become much more willing to pull a coworker into an ad hoc jam session when I'm stuck on an idea (sorry in advance to my coworkers). In the past (when coding required keeping systems in our heads), these unplanned conversations were maligned as context-switching nightmares, and had a measurable productivity cost. But now that agents carry more of that context, I've found these conversations are cheaper to say yes to _and_ disproportionately good at producing ideas.[^quick-call]
+In light of (1), I've also become much more willing to pull a coworker into an ad hoc jam session when I'm stuck on an idea (sorry in advance to my coworkers). In the past (when coding required keeping systems in our heads), these unplanned conversations were oft-maligned as context-switching nightmares, and had a measurable productivity cost. But now that agents carry more of that context, I've found these conversations are cheaper to say yes to _and_ disproportionately good at producing ideas.[^quick-call]
 
 ## But isn't the point of engineering to produce wisdom? What are you even doing?
 
@@ -59,7 +58,7 @@ His framing, roughly:
 
 I buy most of this. Humans can be wiser about a codebase than an LLM. Better yet, humans can transfer that wisdom quickly. I was recently at an offsite in London with my whole team, and my coworker was able to explain our [self-driving](https://posthog.com/self-driving) signal ingestion pipeline more completely in 30 minutes than my agents and I had been able to figure out in like 2 weeks.
 
-## The implementation isn't the durable advantage
+## The implementation isn't always the durable advantage
 
 For some companies, sure, the technical system is the advantage.[^technical-moat]
 
@@ -72,11 +71,11 @@ For a lot of product/SaaS companies, I think the advantage is the ability to run
 3. talk to customers about it
 4. repeat
 
-Farming off the implementation process to agents speeds up the launch and iteration steps, but the other parts of this loop still require wisdom for the flywheel to really work. For example: deciding what to launch, interpreting product signals, figuring out which pieces of feedback matter, and assessing which parts of your app/workflow/agent/etc to keep or toss – all of these decisions aren't things that agents do well without intentional steering, and that intentional steering requires wisdom.
+Delegating implementation speeds up launch and iteration, but it doesn't yet include the wisdom makes the full loop work: deciding what to launch, interpreting product signals, determining which feedback matters, and knowing what to preserve or discard. Those decisions still require intentional human steering.
 
 If I'm not writing the code myself, then I still need a process to build that wisdom deliberately. I'm talking about product wisdom (which comes from talking to customers, interrogating metrics, and intentionally reflecting on what happens after we ship) _and_ codebase wisdom (which can come from conversations with domain experts, targeted code reviews, writing and reading system design documents without AI[^no-ai-design], and paying attention when the systems fail).
 
-In my experience, the understanding I'm trying to preserve (the kind that formerly happened more frequently during the code writing process) is to identify:
+In my experience, the understanding I'm trying to preserve (the kind that formerly happened more frequently during the code writing process) consists of knowing:
 
 - where the load-bearing constraints are
 - which assumptions are expensive to reverse
@@ -110,4 +109,4 @@ If software is disposable, wisdom can't be. When everyone has access to the same
 
 [^technical-moat]: I haven't worked at enough companies where the technical system itself is the moat to opine on this thoroughly, although clean-room reimplementations of popular services that once seemed too technical to duplicate have me wondering how durable those moats really are.
 
-[^no-ai-design]: The rationale is that the point of these documents is to do thinking, doing writing is the process that promotes thinking, and one of the downstream effects of producing a design doc is also producing proof of cogitation. Plus, we want to avoid spamming our coworkers with [slop grenades](https://noslopgrenade.com/).
+[^no-ai-design]: The rationale is that writing these documents by hand _is_ the thinking, and one of the downstream effects of producing a design doc is also producing proof of cogitation. Plus, we want to avoid spamming our coworkers with [slop grenades](https://noslopgrenade.com/).
