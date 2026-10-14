@@ -379,8 +379,8 @@ a:hover {
     text-wrap: pretty;
 }
 
-.list:hover a:not(:hover):not(.is-current),
-.list:hover a:not(:hover):not(.is-current) .num {
+.list:has(a[data-summary]:hover) a[data-summary]:not(:hover),
+.list:has(a[data-summary]:hover) a[data-summary]:not(:hover) .num {
     color: var(--text-tertiary);
 }
 
