@@ -10,8 +10,7 @@ redirect_from:
         width: 100%;
         padding: 0.5rem 0.75rem;
         margin: 1rem 0;
-        font-family: var(--font-mono);
-        font-size: 0.9rem;
+        font: inherit;
         color: var(--text);
         background: var(--code-bg);
         border: 1px solid var(--border);
@@ -70,17 +69,7 @@ redirect_from:
     }
     .media-review.clampable {
         cursor: pointer;
-    }
-    .review-more {
-        display: none;
-        color: var(--text-secondary);
-        font-size: 0.8em;
-        user-select: none;
-    }
-    .media-review.clampable .review-more {
-        display: inline;
-    }
-    .media-no-results {
+    }    .media-no-results {
         color: var(--text-secondary);
         display: none;
         margin: 2rem 0;
@@ -176,7 +165,6 @@ redirect_from:
                             {% if reviewed.size > 0 %}
                             <td class="media-review">
                                 <span class="review-text">{{ entry.note }}</span>
-                                <span class="review-more">⋯</span>
                             </td>
                             {% endif %}
                         </tr>
@@ -215,7 +203,6 @@ redirect_from:
                             {% if reviewed.size > 0 %}
                             <td class="media-review">
                                 <span class="review-text">{{ entry.note }}</span>
-                                <span class="review-more">⋯</span>
                             </td>
                             {% endif %}
                         </tr>

@@ -1,7 +1,7 @@
 /* ============================================
    Dylan Martin — Personal Site
    "Drawing set": one grotesk, a four-column grid,
-   hairline rules, Berkeley Mono for dates and figures.
+   hairline rules, tabular figures for dates and counts.
    ============================================ */
 
 /* --- Fonts --- */
@@ -21,46 +21,12 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: "Berkeley Mono";
-    src: url("/assets/fonts/BerkeleyMono-Regular.otf") format("opentype");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Berkeley Mono";
-    src: url("/assets/fonts/BerkeleyMono-Bold.otf") format("opentype");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Berkeley Mono";
-    src: url("/assets/fonts/BerkeleyMono-Italic.otf") format("opentype");
-    font-weight: 400;
-    font-style: italic;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: "Berkeley Mono";
-    src: url("/assets/fonts/BerkeleyMono-BoldItalic.otf") format("opentype");
-    font-weight: 700;
-    font-style: italic;
-    font-display: swap;
-}
-
 /* --- Tokens --- */
 :root {
     color-scheme: light;
     --font-body:
         "Hanken Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --font-mono:
-        "Berkeley Mono", "JetBrains Mono", "SF Mono", Menlo, Consolas,
-        monospace;
+    --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
     --max-width: 1400px;
     --gutter: 24px;
     --gap: 24px;
@@ -196,10 +162,8 @@ p {
 }
 
 .num {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0;
     font-variant-numeric: tabular-nums;
+    font-size: 13px;
 }
 
 .dim {
@@ -249,12 +213,22 @@ a:hover {
 .page-content a[href^="http"]::after,
 .row a[href^="http"]::after,
 .author-bio a[href^="http"]::after {
-    content: "\2197";
-    font-size: 0.85em;
-    margin-left: 0.2em;
-    color: var(--text-tertiary);
-    text-decoration: none;
+    content: "";
     display: inline-block;
+    width: 0.6em;
+    height: 0.6em;
+    margin-left: 0.3em;
+    vertical-align: 0.05em;
+    background-color: var(--text-tertiary);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 12 12%27 fill=%27none%27 stroke=%27black%27 stroke-width=%271.5%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M5 1.5H1.5v9h9V7M7 1.5h3.5V5M10.5 1.5 5.5 6.5%27/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 12 12%27 fill=%27none%27 stroke=%27black%27 stroke-width=%271.5%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27%3E%3Cpath d=%27M5 1.5H1.5v9h9V7M7 1.5h3.5V5M10.5 1.5 5.5 6.5%27/%3E%3C/svg%3E") center / contain no-repeat;
+    transition: background-color 160ms ease-out;
+}
+
+.page-content a[href^="http"]:hover::after,
+.row a[href^="http"]:hover::after,
+.author-bio a[href^="http"]:hover::after {
+    background-color: currentColor;
 }
 
 .page-content a[href^="http"]:has(> img:only-child)::after,
@@ -319,14 +293,6 @@ a:hover {
 
 .bar .clock {
     white-space: nowrap;
-}
-
-.theme-toggle {
-    color: var(--text-secondary);
-}
-
-.theme-toggle:hover {
-    color: var(--accent);
 }
 
 /* --- Rows (index pages) --- */
@@ -652,8 +618,7 @@ a:hover {
 }
 
 .tag {
-    font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: 13px;
     color: var(--text-secondary);
     text-decoration: none;
 }
@@ -846,6 +811,27 @@ a:hover {
     font-size: inherit;
 }
 
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-secondary);
+    line-height: 0;
+}
+
+.theme-toggle svg {
+    width: 16px;
+    height: 16px;
+}
+
+.theme-toggle .icon-sun,
+[data-theme="dark"] .theme-toggle .icon-moon {
+    display: none;
+}
+
+[data-theme="dark"] .theme-toggle .icon-sun {
+    display: block;
+}
+
 /* --- Lists (outside .prose) --- */
 ul,
 ol {
@@ -921,8 +907,6 @@ blockquote {
     position: absolute;
     inset-inline-start: 0;
     color: var(--text-secondary);
-    font-family: var(--font-mono);
-    font-size: 12px;
     font-variant-numeric: tabular-nums;
 }
 
@@ -940,8 +924,8 @@ blockquote {
     text-decoration-line: underline;
     text-decoration-style: dotted;
     text-underline-offset: 0.18em;
-    font-family: var(--font-mono);
     font-size: 0.8em;
+    vertical-align: super;
 }
 
 .main-content a.footnote:hover {
