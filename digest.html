@@ -13,11 +13,7 @@ redirect_from: /reading.html
 <section class="row g">
     <div class="row-label">
         <h1>Digest <small>{{ site.digest | size }} entries, {{ total_words }} words</small></h1>
-        <p class="dim" style="margin-top: 18px">
-            Curated reading, written up occasionally. Subscribe via the
-            <a href="/digest.xml">Atom feed</a>. The complete log is on the
-            <a href="/media.html">media page</a>.
-        </p>
+        <p class="dim" style="margin-top: 18px"><a href="/digest.xml">Atom feed</a></p>
     </div>
 
     {% assign sorted_entries = site.digest | reverse %}

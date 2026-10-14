@@ -1079,3 +1079,208 @@ blockquote {
         transition: none !important;
     }
 }
+
+/* --- Media shelves --- */
+.shelves {
+    padding: 28px 0 48px;
+}
+
+.shelves-side h1 {
+    font: inherit;
+    font-weight: 500;
+}
+
+.shelves-side {
+    grid-column: 1;
+    position: sticky;
+    top: calc(var(--bar-height) + 12px);
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.shelf-search {
+    width: 100%;
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--border-strong);
+    border-radius: 0;
+    padding: 4px 0;
+}
+
+.shelf-search::placeholder {
+    color: var(--text-tertiary);
+}
+
+.shelf-search:focus {
+    outline: none;
+    border-bottom-color: var(--accent);
+}
+
+.shelf-stats {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.shelf-stats li {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 2px 0;
+}
+
+.shelf {
+    min-width: 0;
+}
+
+.shelf.is-wide {
+    grid-column: 2 / span 3;
+}
+
+.shelf.is-tucked {
+    display: none;
+}
+
+.shelf-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border-strong);
+}
+
+.shelf-head h2 {
+    font: inherit;
+    font-weight: 500;
+}
+
+.shelf-expand {
+    color: var(--text-tertiary);
+    line-height: 0;
+    align-self: center;
+}
+
+.shelf-expand:hover {
+    color: var(--accent);
+}
+
+.shelf-expand svg {
+    width: 12px;
+    height: 12px;
+}
+
+.shelf-expand .col,
+.is-wide .shelf-expand .exp {
+    display: none;
+}
+
+.is-wide .shelf-expand .col {
+    display: block;
+}
+
+.shelf-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.shelf-year {
+    padding: 18px 0 2px;
+    color: var(--text-secondary);
+}
+
+.shelf-list .item {
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.shelf-list .item[hidden],
+.shelf-year[hidden],
+.shelves:not(.is-searching) .shelf:not(.is-all):not(.is-wide) [data-extra] {
+    display: none;
+}
+
+.item-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: baseline;
+}
+
+.item-t {
+    min-width: 0;
+}
+
+.item-by {
+    display: block;
+    color: var(--text-secondary);
+}
+
+.stars {
+    color: var(--text-secondary);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+}
+
+.item-note {
+    display: none;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    max-width: 40rem;
+}
+
+.item.has-note {
+    cursor: pointer;
+}
+
+.item.is-open .item-note,
+.is-wide .item-note {
+    display: block;
+}
+
+.shelf-list:hover .item:not(:hover):not(.is-open),
+.shelf-list:hover .item:not(:hover):not(.is-open) .item-by,
+.shelf-list:hover .item:not(:hover):not(.is-open) .stars {
+    color: var(--text-tertiary);
+}
+
+.item:hover .item-t > a {
+    color: var(--accent);
+}
+
+.shelf-all {
+    margin-top: 12px;
+    color: var(--text-secondary);
+}
+
+.shelf-all:hover {
+    color: var(--accent);
+}
+
+.shelves.is-searching .shelf-all {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .shelves-side {
+        position: static;
+    }
+
+    .shelves-side,
+    .shelf,
+    .shelf.is-wide {
+        grid-column: 1;
+    }
+
+    .shelf.is-tucked {
+        display: block;
+    }
+
+    .shelf-expand {
+        display: none;
+    }
+}

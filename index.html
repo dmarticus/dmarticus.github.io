@@ -9,9 +9,7 @@ title: Home
         I'm Dylan Martin, a product-minded tech lead who builds things
         end-to-end, from user research to system design to shipping code. I
         care about solving the right problems <em>and</em> solving those
-        problems right. This is where I publish essays about software
-        engineering, careers, and whatever else I'm thinking about, plus a
-        running log of what I'm reading and watching. Seattle, mostly.
+        problems right. Seattle, mostly.
     </p>
     <div class="aside">
         <span class="label">Currently</span>
@@ -41,7 +39,7 @@ title: Home
 
 <section class="row g" id="writing">
     <div class="row-label">
-        <h2>Writing <small>Long-form, updated over time</small></h2>
+        <h2>Writing</h2>
     </div>
     {% assign recent = site.posts | slice: 0, 10 %}
     {% include post-list.html posts=recent more="All 32 essays" %}
@@ -49,7 +47,7 @@ title: Home
 
 <section class="row g" id="reading">
     <div class="row-label">
-        <h2>Reading <small>From the log, latest first</small></h2>
+        <h2>Reading</h2>
     </div>
     {% assign recent_log = site.data.log | sort: "date" | reverse | slice: 0, 6 %}
     <div class="reading">
