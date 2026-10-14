@@ -1284,3 +1284,17 @@ blockquote {
         display: none;
     }
 }
+
+/* --- Half stars: a filled star clipped to its left half over an outline --- */
+.star-half {
+    position: relative;
+    display: inline-block;
+}
+
+.star-half > span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%;
+    overflow: hidden;
+}
