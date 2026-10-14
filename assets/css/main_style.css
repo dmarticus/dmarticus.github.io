@@ -687,6 +687,135 @@ blockquote {
     font-style: italic;
 }
 
+/* --- Footnotes --- */
+.main-content .footnotes {
+    margin-top: 3.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.65;
+}
+
+.main-content .footnotes > hr {
+    display: none;
+}
+
+.main-content .footnotes > ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: footnote;
+}
+
+.main-content .footnotes > ol > li {
+    position: relative;
+    margin: 0 0 1.5rem;
+    padding-inline-start: 3rem;
+    counter-increment: footnote;
+}
+
+.main-content .footnotes > ol > li:last-child {
+    margin-bottom: 0;
+}
+
+.main-content .footnotes > ol > li::before {
+    content: counter(footnote);
+    position: absolute;
+    inset-inline-start: 0;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.main-content .footnotes p {
+    margin: 0;
+}
+
+.main-content .footnotes .reversefootnote {
+    margin-inline-start: 0.25rem;
+    text-decoration: none;
+}
+
+.main-content .footnotes .reversefootnote:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+/* --- Footnote Previews --- */
+.main-content a.footnote {
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 0.18em;
+}
+
+.main-content a.footnote:hover {
+    text-decoration-style: solid;
+}
+
+.main-content a.footnote:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.footnote-preview {
+    position: fixed;
+    z-index: 1000;
+    width: max-content;
+    max-width: min(24rem, calc(100vw - 1.5rem));
+    max-height: calc(100vh - 1.5rem);
+    overflow: auto;
+    overscroll-behavior: contain;
+    padding: 0.75rem 0.875rem;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+    pointer-events: auto;
+    opacity: 0;
+    transform: translateY(0.25rem);
+    transition:
+        opacity 120ms ease-out,
+        transform 120ms ease-out;
+}
+
+.footnote-preview[data-placement="bottom"] {
+    transform: translateY(-0.25rem);
+}
+
+.footnote-preview.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.footnote-preview[hidden] {
+    display: none;
+}
+
+.footnote-preview p {
+    margin: 0;
+}
+
+.footnote-preview p + p {
+    margin-top: 0.65em;
+}
+
+.footnote-preview ul,
+.footnote-preview ol {
+    margin: 0;
+    padding-inline-start: 1.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .footnote-preview {
+        transition: none;
+    }
+}
+
 /* --- Images --- */
 img {
     max-width: 100%;

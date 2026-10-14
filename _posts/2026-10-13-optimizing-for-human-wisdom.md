@@ -9,16 +9,16 @@ I've been thinking about [this thread](https://x.com/ArtirKel/status/20825480908
 
 > As far as I can tell the answer is something like LLMs are smart but not wise; they don't induce that many of those "Aha!" moments that seem to be best mined through other means (or often, just doing nothing and pondering stuff on walks)
 
-When I steer (read: delegate work to) an LLM, it's generally very good at making progress once I've framed the problem. But (as I've [written about](/2025/11/07/spinning-plates.html) [in the past](/2026/02/02/spinning-the-wheel.html)) delegating the implementation means I no longer get the automatic, prolonged immersion that used to create opportunities for the kind of *aha* moment described in the thread.
+These days, most of my "coding" work happens by me steering agents, and these agents are generally very good at making progress once I've framed the problem. But (as I've [written about](/2025/11/07/spinning-plates.html) [in the past](/2026/02/02/spinning-the-wheel.html)) delegating the implementation work means I no longer get the automatic, prolonged immersion that used to create opportunities for the kind of *aha* moment described in the thread.
 
-Moments where you realize:
+Moments where you realized:
 
-- we're trying to solve the wrong problem
+- I've been trying to solve the wrong problem
 - our customers don't actually care about this
-- we tried this two years ago and it failed for a non-obvious reason
-- this seemingly unrelated failure is connected to a different service I worked on in the past
+- we tried something similar a few years ago and never encoded that understanding into the codebase 
+- and so on...
 
-In my experience, steering LLMs isn't especially good at producing these moments. Since I've basically handed over all of my coding work to agents these days, it feels really important to identify and hold onto practices that promote wisdom and deep thinking without becoming a [meat proxy](https://simonwillison.net/2026/Aug/3/dont-be-a-meat-proxy/).
+In other words, agentic coding isn't especially good at producing these moments, but they're clearly valuable, and it feels really important to identify and hold onto practices that promote wisdom and deep thinking without becoming a [meat proxy](https://simonwillison.net/2026/Aug/3/dont-be-a-meat-proxy/). I wanted to talk about some of those practices I've been adopting.
 
 ## Coding as wisdom-building
 
@@ -30,13 +30,11 @@ In the process of loading the problem into my head and struggling with it, I wou
 - where it would break
 - which abstractions made sense
 
-I don't do this as much any more. Most of my "coding" work is really agent delegation work, and agents are much more tireless than I am at repeatedly retrieving and processing local context.
-
-Like many others in the industry, this has largely been good for my work. I ship more software and spend less time on drudgery. I am increasingly bound by my ambition and creativity, rather than my ability to produce working software.
+I don't do this as much any more, and in most cases that leads to improved outcomes for my work – agents are much more tireless than I am at repeatedly retrieving and processing local context. I ship more software and spend less time on drudgery. I am increasingly bound by my ambition and creativity, rather than my ability to produce working software.
 
 But the downside is that implementation work used to produce understanding as a side effect. As I do less implementation work, I've been thinking about how to create opportunities for that same kind of wisdom-building in ways that are less time-intensive and less fragile than coding.[^coding-more]
 
-## Thought sites
+## Thinking sites
 
 I've noticed my useful thinking now mostly happens in three places:
 
@@ -61,7 +59,7 @@ His framing, roughly:
 
 I buy most of this. Humans can be wiser about a codebase than an LLM. Better yet, humans can transfer that wisdom quickly. I was recently at an offsite in London with my whole team, and my coworker was able to explain our [self-driving](https://posthog.com/self-driving) signal ingestion pipeline more completely in 30 minutes than my agents and I had been able to figure out in like 2 weeks.
 
-## The implementation isn't always the durable advantage
+## The implementation isn't the durable advantage
 
 For some companies, sure, the technical system is the advantage.[^technical-moat]
 
@@ -74,7 +72,7 @@ For a lot of product/SaaS companies, I think the advantage is the ability to run
 3. talk to customers about it
 4. repeat
 
-Farming off coding to agents speeds up the launch and iteration steps, but it doesn't always supply the judgment that makes the loop useful: deciding what to launch, interpreting product signals, figuring out which pieces of feedback matter, and assessing which things to keep and which things to throw away.
+Farming off the implementation process to agents speeds up the launch and iteration steps, but the other parts of this loop still require wisdom for the flywheel to really work. For example: deciding what to launch, interpreting product signals, figuring out which pieces of feedback matter, and assessing which parts of your app/workflow/agent/etc to keep or toss – all of these decisions aren't things that agents do well without intentional steering, and that intentional steering requires wisdom.
 
 If I'm not writing the code myself, then I still need a process to build that wisdom deliberately. I'm talking about product wisdom (which comes from talking to customers, interrogating metrics, and intentionally reflecting on what happens after we ship) _and_ codebase wisdom (which can come from conversations with domain experts, targeted code reviews, writing and reading system design documents without AI[^no-ai-design], and paying attention when the systems fail).
 
@@ -104,9 +102,9 @@ And once the direction is good, I want all the leverage I can get! Let the agent
 
 If software is disposable, wisdom can't be. When everyone has access to the same tools, I think the comparative advantage is in how efficiently we accumulate wisdom and how well we preserve it across implementations.
 
-[^coding-more]: Yes, I know I could just write more code. But the point is to adapt to this new way of working without giving up the wisdom the old one produced—not to preserve manual coding for its own sake.
+[^coding-more]: Yes, I know I could just write more code by hand, no agents. But the point is to adapt to this new way of working without giving up the wisdom the old one produced—not to preserve manual coding for its own sake.
 
-[^raw-thoughts]: Summarization is useful when the goal is compression. Here the goal is the opposite: to preserve half-formed thoughts, tangents, and unexpected connections before a model decides which parts matter.
+[^raw-thoughts]: Summarization is useful when the goal is compression (and even then, there's [no such thing as lossless text compression](https://sophiebits.com/2026/06/25/there-are-no-lossless-transformations-of-natural-language-text)). Here the goal is the opposite: to preserve half-formed thoughts and orthogonal connections before a model decides which parts matter.
 
 [^quick-call]: I plan on pointing at this post whenever my coworkers ask why I want them to jump on a quick call. I bet it'll help them, too ;)
 

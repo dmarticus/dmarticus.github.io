@@ -13,7 +13,8 @@ body {
 .site-footer,
 .sidebar,
 .PageNavigation,
-.theme-toggle {
+.theme-toggle,
+.footnote-preview {
     display: none;
 }
 
@@ -30,6 +31,14 @@ a {
     color: #000;
     text-decoration: underline;
 }
+
+.footnotes {
+    margin-top: 1.5cm;
+    padding-top: 0.5cm;
+    background: none;
+    border-top: 1px solid #000;
+}
+
 
 pre,
 blockquote,
