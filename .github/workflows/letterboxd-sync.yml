@@ -1,0 +1,51 @@
+name: Letterboxd sync
+
+on:
+  schedule:
+    # Daily at 15:00 UTC (~7-8am Pacific)
+    - cron: "0 15 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: letterboxd-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ".ruby-version"
+
+      - name: Pull new diary entries
+        id: sync
+        run: ruby scripts/letterboxd-sync.rb
+
+      - name: Commit to master
+        if: steps.sync.outputs.count != '0'
+        env:
+          COUNT: ${{ steps.sync.outputs.count }}
+          TITLES: ${{ steps.sync.outputs.titles }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _data/log.yml
+          git commit -m "Letterboxd: $COUNT new entries" -m "$TITLES"
+          git push
+
+      # Pushes made with GITHUB_TOKEN don't trigger `on: push` workflows, so
+      # kick the Pages deploy explicitly (workflow_dispatch is the exception).
+      - name: Deploy
+        if: steps.sync.outputs.count != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref master -R "$GITHUB_REPOSITORY"
