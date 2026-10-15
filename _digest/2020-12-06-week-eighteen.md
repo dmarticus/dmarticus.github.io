@@ -1,5 +1,5 @@
 ---
-title: "11/30 - 12/06"
+title: "November 30–December 6, 2020"
 layout: post
 tags: ["culture", "fashion", "work", "haskell", "functional programming", "language servers"]
 summary: "Ugh, slow again this week. I started my new role at Mercury this week and have been super fired up on my work, but I couldn't find the time or energy to put my newsletter together.  I'll try and be back on my game next week!  Anyway, this week I mostly had some great reads from some friends of mine in the Techwriters.dev group and some technical observations about Haskell and functional languages in general.  And there were a few cultural gems this week, too."

@@ -1298,3 +1298,33 @@ blockquote {
     width: 50%;
     overflow: hidden;
 }
+
+/* --- Digest list --- */
+.digest-list {
+    grid-column: 2 / span 3;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.digest-list li {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    column-gap: 16px;
+    padding: 6px 0;
+}
+
+.digest-list li > .num {
+    padding-top: 2px;
+}
+
+.digest-summary {
+    display: block;
+    max-width: 40rem;
+}
+
+@media (max-width: 900px) {
+    .digest-list {
+        grid-column: 1;
+    }
+}

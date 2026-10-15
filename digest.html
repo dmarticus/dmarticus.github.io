@@ -17,13 +17,13 @@ redirect_from: /reading.html
     </div>
 
     {% assign sorted_entries = site.digest | reverse %}
-    <ul class="list" style="grid-column: 2 / span 3">
+    <ul class="digest-list">
         {% for entry in sorted_entries %}
-        <li style="padding: 4px 0; display: grid; grid-template-columns: 72px 1fr; column-gap: 16px">
-            <span class="num dim" style="padding-top: 2px">{{ entry.date | date: "%b %Y" }}</span>
+        <li>
+            <span class="num dim">{{ entry.date | date: "%b %Y" }}</span>
             <span>
                 <a href="{{ entry.url }}">{{ entry.title }}</a>
-                {% if entry.summary %}<span class="dim" style="display: block; max-width: 40rem">{{ entry.summary }}</span>{% endif %}
+                {% if entry.summary %}<span class="dim digest-summary">{{ entry.summary }}</span>{% endif %}
             </span>
         </li>
         {% endfor %}

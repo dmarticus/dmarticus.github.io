@@ -1,5 +1,5 @@
 ---
-title: "12/07 - 12/13"
+title: "December 7–13, 2020"
 layout: post
 tags: ["culture", "work", "haskell", "documentation", "reading", "tech IPOs", "covid-19", "hustle culture","programming", "language servers"]
 summary: "Back on the timely release schedule!  This week I read some excellent pieces, including one on reading in the meta, and I am really excited to share them.  They cover the wildness in tech IPOs, interesting reads on performance and dev tooling, some papers on examining bias and approximating species diversity, and some killer nature photographer.  Enjoy!"
