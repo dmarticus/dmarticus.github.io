@@ -32,38 +32,33 @@
         return seed / 0x7fffffff;
     }
 
-    var GRID = 24;              // the compacted block is GRID x GRID cells
+    var GRID = 28;              // the compacted block is GRID x GRID cells
     var CELL = 2;               // pixels per cell
     var KEPT = GRID * GRID;     // points that survive compaction
-    var N = Math.round(KEPT * 1.75); // the rest get dropped
-    var cx = W / 2, cy = H / 2;
-    var R = Math.min(W, H) / 2 - 4;
+    var N = Math.round(KEPT * 1.6); // the rest get dropped
+    // The block sits in the canvas's top-left corner so it lines up with the
+    // first line of text and the column edge; the cloud fills the whole square.
+    var bx = 0, by = 0;
+    var cx = bx + (GRID * CELL) / 2, cy = by + (GRID * CELL) / 2;
+    var maxD = Math.sqrt(W * W + H * H);
 
     var pts = [];
     for (var i = 0; i < N; i++) {
-        // Scatter: uniform over a disc, biased slightly outward so the edge reads.
-        var a = rand() * Math.PI * 2;
-        var r = Math.sqrt(rand()) * R;
-        var p = { sx: cx + Math.cos(a) * r, sy: cy + Math.sin(a) * r, d: r / R };
-        if (i < KEPT) {
-            // Fill the block from its center outward so compaction reads as gathering.
-            p.gx = cx - (GRID * CELL) / 2 + (i % GRID) * CELL + CELL / 2;
-            p.gy = cy - (GRID * CELL) / 2 + Math.floor(i / GRID) * CELL + CELL / 2;
-        }
-        pts.push(p);
+        var sx = 1 + rand() * (W - 2), sy = 1 + rand() * (H - 2);
+        var dx = sx - cx, dy = sy - cy;
+        pts.push({ sx: sx, sy: sy, d: Math.sqrt(dx * dx + dy * dy) / maxD });
     }
-    // Assign grid slots to the points nearest the center first.
-    var kept = pts.slice().sort(function (a, b) { return a.d - b.d; });
+    // Grid slots fill from the block's center outward; the nearest points take them.
     var slots = [];
     for (var g = 0; g < KEPT; g++) {
-        slots.push([cx - (GRID * CELL) / 2 + (g % GRID) * CELL + CELL / 2, cy - (GRID * CELL) / 2 + Math.floor(g / GRID) * CELL + CELL / 2]);
+        slots.push([bx + (g % GRID) * CELL + CELL / 2, by + Math.floor(g / GRID) * CELL + CELL / 2]);
     }
     slots.sort(function (a, b) {
         var da = (a[0] - cx) * (a[0] - cx) + (a[1] - cy) * (a[1] - cy);
         var db = (b[0] - cx) * (b[0] - cx) + (b[1] - cy) * (b[1] - cy);
         return da - db;
     });
-    pts.forEach(function (p) { delete p.gx; delete p.gy; });
+    var kept = pts.slice().sort(function (a, b) { return a.d - b.d; });
     for (var k = 0; k < N; k++) {
         if (k < KEPT) { kept[k].gx = slots[k][0]; kept[k].gy = slots[k][1]; }
         else { kept[k].drop = true; }

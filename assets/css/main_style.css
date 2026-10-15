@@ -1356,7 +1356,7 @@ blockquote {
     display: block;
     width: 144px;
     height: 144px;
-    margin-top: -4px;
+    margin-top: 3px;
     max-width: 100%;
     image-rendering: pixelated;
     image-rendering: crisp-edges;
