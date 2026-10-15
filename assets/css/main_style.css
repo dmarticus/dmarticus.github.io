@@ -481,11 +481,29 @@ a:hover {
 }
 
 .cols li {
-    padding: 2px 0;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.cols .label {
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border-strong);
+    margin-bottom: 0;
+}
+
+.row-open .aside .label {
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border-strong);
+    margin-bottom: 0;
+}
+
+.row-open .aside li {
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
 }
 
 .cols .block + .block {
-    margin-top: 18px;
+    margin-top: 28px;
 }
 
 /* --- Generic pages (projects, speaking, media, uses, digest) --- */
