@@ -6,32 +6,57 @@ title: Home
 <section class="row row-open g">
     <div class="row-label dim">Compacted Context</div>
     <p class="intro">
-        I'm Dylan Martin, a product-minded tech lead who builds things
-        end-to-end, from user research to system design to shipping code. I
-        care about solving the right problems <em>and</em> solving those
-        problems right. Seattle, mostly.
+        I'm Dylan Martin, an AI product engineer who builds end-to-end
+        solutions: from user research to system design to shipping code. I care
+        about solving the right problems <em>and</em> solving those problems
+        right.
     </p>
     <div class="aside">
         <span class="label">Currently</span>
         <ul class="cols-list" style="list-style: none; padding: 0">
             <li>
                 Working on
-                <a href="https://posthog.com/teams/self-driving" rel="noreferrer" target="_blank">self-driving software</a>
+                <a
+                    href="https://posthog.com/teams/self-driving"
+                    rel="noreferrer"
+                    target="_blank"
+                    >self-driving products</a
+                >
                 at
-                <a href="https://www.posthog.com/" rel="noreferrer" target="_blank">PostHog</a>
+                <a
+                    href="https://www.posthog.com/"
+                    rel="noreferrer"
+                    target="_blank"
+                    >PostHog</a
+                >
             </li>
             <li>
                 Writing
-                <a href="https://github.com/dmarticus/" rel="noreferrer" target="_blank">open source</a>
+                <a
+                    href="https://github.com/dmarticus/"
+                    rel="noreferrer"
+                    target="_blank"
+                    >open source software</a
+                >
                 and <a href="/writing.html">essays</a>
             </li>
             <li>
                 Playing lots of
-                <a href="https://lichess.org/@/dmarticus" rel="noreferrer" target="_blank">chess</a>
+                <a
+                    href="https://lichess.org/@/dmarticus"
+                    rel="noreferrer"
+                    target="_blank"
+                    >chess</a
+                >
             </li>
             <li>
                 Trying to join the
-                <a href="https://www.menshealth.com/fitness/a37989261/1000-pound-club/" rel="noreferrer" target="_blank">1000 club</a>
+                <a
+                    href="https://www.menshealth.com/fitness/a37989261/1000-pound-club/"
+                    rel="noreferrer"
+                    target="_blank"
+                    >1000 club</a
+                >
             </li>
         </ul>
     </div>
@@ -41,32 +66,42 @@ title: Home
     <div class="row-label">
         <h2><a href="/writing.html">Writing</a></h2>
     </div>
-    {% assign recent = site.posts | slice: 0, 10 %}
-    {% include post-list.html posts=recent more="All 32 essays" %}
+    {% assign recent = site.posts | slice: 0, 10 %} {% include post-list.html
+    posts=recent more="All 32 essays" %}
 </section>
 
 <section class="row g" id="media">
     <div class="row-label">
         <h2><a href="/media.html">Media</a></h2>
     </div>
-    {% assign recent_log = site.data.log | sort: "date" | reverse | slice: 0, 6 %}
+    {% assign recent_log = site.data.log | sort: "date" | reverse | slice: 0, 6
+    %}
     <div class="reading">
         {% for entry in recent_log %}
         <article>
             <span class="num dim">
-                {% if entry.date.size > 4 %}{{ entry.date | date: "%b %Y" }}{% else %}{{ entry.date }}{% endif %}
-                &middot; {{ entry.type | capitalize }}
+                {% if entry.date.size > 4 %}{{ entry.date | date: "%b %Y" }}{%
+                else %}{{ entry.date }}{% endif %} &middot; {{ entry.type |
+                capitalize }}
             </span>
             {% if entry.url %}
-            <a href="{{ entry.url }}" rel="noreferrer" target="_blank">{{ entry.title }}</a>
+            <a href="{{ entry.url }}" rel="noreferrer" target="_blank"
+                >{{ entry.title }}</a
+            >
             {% elsif entry.letterboxd %}
-            <a href="{{ entry.letterboxd }}" rel="noreferrer" target="_blank">{{ entry.title }}{% if entry.year %} ({{ entry.year }}){% endif %}</a>
+            <a href="{{ entry.letterboxd }}" rel="noreferrer" target="_blank"
+                >{{ entry.title }}{% if entry.year %} ({{ entry.year }}){% endif
+                %}</a
+            >
             {% else %}
             <span>{{ entry.title }}</span>
-            {% endif %}
-            {% if entry.creator %}<span class="dim">{{ entry.creator }}</span>{% endif %}
-            {% if entry.rating %}<span class="rating num">{% include stars.html rating=entry.rating %}</span>{% endif %}
-            {% if entry.note %}<span class="note">{{ entry.note | strip_html | truncate: 140 }}</span>{% endif %}
+            {% endif %} {% if entry.creator %}<span class="dim"
+                >{{ entry.creator }}</span
+            >{% endif %} {% if entry.rating %}<span class="rating num"
+                >{% include stars.html rating=entry.rating %}</span
+            >{% endif %} {% if entry.note %}<span class="note"
+                >{{ entry.note | strip_html | truncate: 140 }}</span
+            >{% endif %}
         </article>
         {% endfor %}
     </div>
@@ -81,18 +116,56 @@ title: Home
             <div class="block">
                 <span class="label">Contact</span>
                 <ul>
-                    <li>Seattle, WA</li>
-                    <li><a href="mailto:me@dylanamartin.com">me@dylanamartin.com</a></li>
+                    <li>
+                        <a href="mailto:me@dylanamartin.com"
+                            >me@dylanamartin.com</a
+                        >
+                    </li>
                 </ul>
             </div>
             <div class="block">
                 <span class="label">Elsewhere</span>
                 <ul>
-                    <li><a href="https://github.com/dmarticus/" rel="noreferrer" target="_blank">GitHub</a></li>
-                    <li><a href="https://www.x.com/dmarticus/" rel="noreferrer" target="_blank">X / Twitter</a></li>
-                    <li><a href="https://www.linkedin.com/in/dmarticus/" rel="noreferrer" target="_blank">LinkedIn</a></li>
-                    <li><a href="https://letterboxd.com/dmarticus/" rel="noreferrer" target="_blank">Letterboxd</a></li>
-                    <li><a href="https://lichess.org/@/dmarticus" rel="noreferrer" target="_blank">Lichess</a></li>
+                    <li>
+                        <a
+                            href="https://github.com/dmarticus/"
+                            rel="noreferrer"
+                            target="_blank"
+                            >GitHub</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="https://www.x.com/dmarticus/"
+                            rel="noreferrer"
+                            target="_blank"
+                            >X / Twitter</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="https://www.linkedin.com/in/dmarticus/"
+                            rel="noreferrer"
+                            target="_blank"
+                            >LinkedIn</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="https://letterboxd.com/dmarticus/"
+                            rel="noreferrer"
+                            target="_blank"
+                            >Letterboxd</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="https://lichess.org/@/dmarticus"
+                            rel="noreferrer"
+                            target="_blank"
+                            >Lichess</a
+                        >
+                    </li>
                 </ul>
             </div>
             <div class="block">
@@ -107,14 +180,83 @@ title: Home
             <div class="block">
                 <span class="label">Previously</span>
                 <ul>
-                    <li>Led the <a href="https://posthog.com/teams/feature-flags" rel="noreferrer" target="_blank">feature flags team</a> at PostHog</li>
-                    <li>Founding engineer at <a href="https://brincdrones.com/" rel="noreferrer" target="_blank">BRINC</a>, building the web app and data platform for first responders</li>
-                    <li>Board member at <a href="https://lundquist.org/" rel="noreferrer" target="_blank">The Lundquist Institute</a></li>
-                    <li>Founding engineer at <a href="https://www.cercle.ai/" rel="noreferrer" target="_blank">Cercle</a> (AI and healthcare)</li>
-                    <li>Early engineer at <a href="https://mercury.com/about" rel="noreferrer" target="_blank">Mercury</a> (international payments)</li>
-                    <li>Open source and consulting at <a href="https://xebia.com/digital-products-platforms/functional-programming/" rel="noreferrer" target="_blank">47 Degrees</a>, acquired by Xebia (Haskell and Scala)</li>
-                    <li>Five years at <a href="https://www.qualtrics.com/qualtrics-life/why-qualtrics-dylan-martin-software-engineer-seattle-wa/" rel="noreferrer" target="_blank">Qualtrics</a> (test tooling, distributed systems)</li>
-                    <li>Physics, CS, math, film, and music at <a href="https://www.whitman.edu/" rel="noreferrer" target="_blank">Whitman College</a></li>
+                    <li>
+                        Led the
+                        <a
+                            href="https://posthog.com/teams/feature-flags"
+                            rel="noreferrer"
+                            target="_blank"
+                            >feature flags team</a
+                        >
+                        at PostHog
+                    </li>
+                    <li>
+                        Founding engineer at
+                        <a
+                            href="https://brincdrones.com/"
+                            rel="noreferrer"
+                            target="_blank"
+                            >BRINC</a
+                        >, building the web app and data platform for first
+                        responders
+                    </li>
+                    <li>
+                        Founding corporate board member at
+                        <a
+                            href="https://lundquist.org/"
+                            rel="noreferrer"
+                            target="_blank"
+                            >The Lundquist Institute</a
+                        >
+                    </li>
+                    <li>
+                        Founding engineer at
+                        <a
+                            href="https://www.cercle.ai/"
+                            rel="noreferrer"
+                            target="_blank"
+                            >Cercle</a
+                        >
+                        (AI and healthcare)
+                    </li>
+                    <li>
+                        Early engineer at
+                        <a
+                            href="https://mercury.com/about"
+                            rel="noreferrer"
+                            target="_blank"
+                            >Mercury</a
+                        >
+                        (international payments)
+                    </li>
+                    <li>
+                        Open source and consulting at
+                        <a
+                            href="https://xebia.com/digital-products-platforms/functional-programming/"
+                            rel="noreferrer"
+                            target="_blank"
+                            >47 Degrees</a
+                        >, acquired by Xebia (Haskell and Scala)
+                    </li>
+                    <li>
+                        Five years at
+                        <a
+                            href="https://www.qualtrics.com/qualtrics-life/why-qualtrics-dylan-martin-software-engineer-seattle-wa/"
+                            rel="noreferrer"
+                            target="_blank"
+                            >Qualtrics</a
+                        >
+                        (test tooling, distributed systems)
+                    </li>
+                    <li>
+                        Physics, CS, math, film, and music at
+                        <a
+                            href="https://www.whitman.edu/"
+                            rel="noreferrer"
+                            target="_blank"
+                            >Whitman College</a
+                        >
+                    </li>
                 </ul>
             </div>
         </div>
@@ -124,13 +266,17 @@ title: Home
                 <ul>
                     <li>Building products end-to-end</li>
                     <li>Performant software</li>
-                    <li>Developer tools and making engineers more productive</li>
+                    <li>
+                        Developer tools and making engineers more productive
+                    </li>
                     <li>Compilers, interpreters, and languages</li>
                     <li>LLM-assisted workflows</li>
                     <li>Skiing, rock climbing, hiking, running</li>
                     <li>Powerlifting</li>
                     <li>Playing, writing, and producing music</li>
-                    <li>Fashion, architecture, and intentional aesthetic design</li>
+                    <li>
+                        Fashion, architecture, and intentional aesthetic design
+                    </li>
                     <li>Ergonomic keyboards</li>
                 </ul>
             </div>
@@ -138,10 +284,19 @@ title: Home
                 <span class="label">Fun facts</span>
                 <ul>
                     <li>Skied on four continents</li>
-                    <li>Climbed the tallest mountains in Colorado and Washington</li>
+                    <li>
+                        Climbed the tallest mountains in Colorado and Washington
+                    </li>
                     <li>Left-handed</li>
                     <li>Dual citizen of Panama and the United States</li>
-                    <li><a href="https://www.independent.ie/style/fashion/fashion-news/shes-done-it-again-designer-laura-jayne-halton-wins-another-best-dressed-lady-prize-at-leopardstown-34430892.html" rel="noreferrer" target="_blank">Accidentally won a fashion contest in Dublin</a></li>
+                    <li>
+                        <a
+                            href="https://www.independent.ie/style/fashion/fashion-news/shes-done-it-again-designer-laura-jayne-halton-wins-another-best-dressed-lady-prize-at-leopardstown-34430892.html"
+                            rel="noreferrer"
+                            target="_blank"
+                            >Accidentally won a fashion contest in Dublin</a
+                        >
+                    </li>
                 </ul>
             </div>
         </div>
