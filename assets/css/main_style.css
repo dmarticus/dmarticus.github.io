@@ -400,14 +400,26 @@ a:hover {
     color: var(--accent);
 }
 
+/* The panel lives in a column that is out of flow, so its height can
+   never change the row's. It stays sticky within that column. */
+.row {
+    position: relative;
+}
+
+.panel-col {
+    position: absolute;
+    top: 28px;
+    bottom: 40px;
+    left: calc(3 * ((100% - 3 * var(--gap)) / 4 + var(--gap)));
+    width: calc((100% - 3 * var(--gap)) / 4);
+}
+
 .panel {
-    grid-column: 4;
     position: sticky;
     top: calc(var(--bar-height) + 12px);
     background: var(--bg-secondary);
     padding: 18px;
-    height: 300px;
-    overflow: hidden;
+    min-height: 240px;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -416,10 +428,6 @@ a:hover {
 
 .panel p {
     margin: 0;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 7;
-    overflow: hidden;
 }
 
 .panel.is-swapping {
@@ -1077,7 +1085,6 @@ blockquote {
         grid-column: 1;
     }
 
-    .panel,
     .post-label,
     .post-meta,
     .sidebar {
@@ -1085,7 +1092,7 @@ blockquote {
         min-height: 0;
     }
 
-    .panel {
+    .panel-col {
         display: none;
     }
 

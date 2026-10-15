@@ -31,6 +31,7 @@
     <li class="more"><a href="/writing.html">{{ include.more }} &rarr;</a></li>
     {% endif %}
 </ul>
+<div class="panel-col">
 <aside class="panel" id="panel" aria-live="polite">
     <div class="meta num">
         <span>Published</span><b data-field="date">{{ first.date | date: "%B %Y" }}</b>
@@ -42,3 +43,4 @@
     </div>
     <a href="{{ first.url }}" class="cta" data-field="link">Read the essay &rarr;</a>
 </aside>
+</div>
