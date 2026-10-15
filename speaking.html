@@ -8,9 +8,32 @@ redirect_from: /talks.html
     <div class="main-content">
         <h1>Speaking</h1>
         <p>
-            Talks about programming, working, or whatever else. Sharing things I
-            learn to solidify my own knowledge.
+            Various talks I've given. Boy do I love to yap.
         </p>
+
+        <h2>Bio</h2>
+        <div class="bio-switcher" data-bio-switcher>
+            <div class="bio-tabs" role="tablist" aria-label="Bio length">
+                <button type="button" class="bio-tab" id="bio-tab-one-liner" role="tab" aria-controls="bio-one-liner" aria-selected="true">One-liner</button>
+                <button type="button" class="bio-tab" id="bio-tab-short" role="tab" aria-controls="bio-short" aria-selected="false" tabindex="-1">Short</button>
+                <button type="button" class="bio-tab" id="bio-tab-session" role="tab" aria-controls="bio-session" aria-selected="false" tabindex="-1">Conference</button>
+            </div>
+
+            <div class="bio-panel" id="bio-one-liner" role="tabpanel" aria-labelledby="bio-tab-one-liner">
+                <h3 class="bio-panel-label">One-liner</h3>
+                <p>Dylan Martin is an AI product engineer at PostHog, where he led the feature flags team and now works on self-driving software.</p>
+            </div>
+
+            <div class="bio-panel" id="bio-short" role="tabpanel" aria-labelledby="bio-tab-short">
+                <h3 class="bio-panel-label">Short</h3>
+                <p>Dylan Martin is an AI product engineer working on self-driving software at PostHog. Before that he led the feature flags team, where he wore many product hats and rewrote the evaluation platform from Python into Rust. He’s spent his career at startups like Mercury, Qualtrics, and BRINC. Off the clock he skis, hikes, bikes, lifts heavy things, shops for rare jawnz, and plays jazz piano.</p>
+            </div>
+
+            <div class="bio-panel" id="bio-session" role="tabpanel" aria-labelledby="bio-tab-session">
+                <h3 class="bio-panel-label">Conference</h3>
+                <p>Dylan Martin is an AI product engineer at PostHog, where he works on self-driving software. Previously, he led the feature flags team, wearing various product and SDK hats while rewriting its evaluation platform from Python into Rust. Before PostHog, Dylan worked across startups including Mercury, Qualtrics, and BRINC, with work spanning robotics, payments, developer tools, and distributed systems. He cares about turning ambitious ideas into reliable software and explaining the tradeoffs involved along the way. Away from work, Dylan skis, hikes, bikes, lifts heavy things, shops for rare jawnz, and plays jazz piano.</p>
+            </div>
+        </div>
 
         <h2>Work-adjacent</h2>
         <table class="styled-table">
@@ -186,3 +209,5 @@ redirect_from: /talks.html
         </table>
     </div>
 </div>
+
+<script src="/assets/js/speaker-bios.js?v={{ site.time | date: '%s' }}" defer></script>

@@ -580,6 +580,57 @@ a:hover {
     margin-top: 12px;
 }
 
+.bio-tabs {
+    display: none;
+}
+
+.bio-switcher.is-enhanced .bio-tabs {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 18px;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--border);
+}
+
+.bio-tab {
+    position: relative;
+    min-height: 44px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.bio-tab[aria-selected="true"] {
+    color: var(--text);
+}
+
+.bio-tab[aria-selected="true"]::after {
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: 1px;
+    background: var(--border-strong);
+    content: "";
+}
+
+.bio-panel {
+    max-width: 40rem;
+}
+
+.bio-panel + .bio-panel {
+    margin-top: 18px;
+}
+
+.bio-panel-label {
+    margin-bottom: 6px;
+    color: var(--text-secondary);
+    font: inherit;
+}
+
+.bio-switcher.is-enhanced .bio-panel-label {
+    display: none;
+}
+
 .sidebar {
     grid-column: 4;
     position: sticky;
