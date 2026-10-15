@@ -1350,3 +1350,20 @@ blockquote {
         grid-column: 1;
     }
 }
+
+/* --- Fractal in the intro row --- */
+.fractal {
+    display: block;
+    width: 224px;
+    height: 224px;
+    max-width: 100%;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+@media (max-width: 900px) {
+    .fractal {
+        width: 112px;
+        height: 112px;
+    }
+}
