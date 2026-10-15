@@ -400,18 +400,12 @@ a:hover {
     color: var(--accent);
 }
 
-/* The panel lives in a column that is out of flow, so its height can
-   never change the row's. It stays sticky within that column. */
-.row {
-    position: relative;
-}
-
+/* The panel column stretches the row's full height so the panel can stay
+   sticky inside it. The script sizes the panel to the tallest summary in
+   the list once, so hovering never changes the row's height. */
 .panel-col {
-    position: absolute;
-    top: 28px;
-    bottom: 40px;
-    left: calc(3 * ((100% - 3 * var(--gap)) / 4 + var(--gap)));
-    width: calc((100% - 3 * var(--gap)) / 4);
+    grid-column: 4;
+    align-self: stretch;
 }
 
 .panel {

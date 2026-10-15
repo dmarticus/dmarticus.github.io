@@ -15,6 +15,29 @@
     var current = list.querySelector("a.is-current");
     var timer = null;
 
+    // Size the panel to the tallest summary in the list, once, so hovering
+    // never changes the row's height.
+    function fill(link) {
+        var d = link.dataset;
+        if (date) date.textContent = d.date || "";
+        if (words) words.textContent = d.words || "";
+        if (summary) summary.textContent = d.summary || "";
+        if (tags) {
+            tags.innerHTML = "";
+            (d.tags || "").split(",").filter(Boolean).forEach(function (t) { tags.appendChild(tagLink(t.trim())); });
+        }
+    }
+    function lockHeight() {
+        var links = list.querySelectorAll("a[data-summary]");
+        var tallest = 0;
+        panel.style.minHeight = "";
+        links.forEach(function (a) { fill(a); tallest = Math.max(tallest, panel.offsetHeight); });
+        if (current) fill(current);
+        if (tallest) panel.style.minHeight = tallest + "px";
+    }
+    lockHeight();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(lockHeight);
+
     function tagLink(tag) {
         var a = document.createElement("a");
         a.className = "tag";
