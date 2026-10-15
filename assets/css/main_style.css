@@ -655,21 +655,28 @@ a:hover {
     gap: 6px;
 }
 
+/* Tags are small outlined chips: square corners, hairline border, no fill. */
 .tag {
-    font-size: 13px;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1.4;
+    padding: 1px 6px;
+    border: 1px solid var(--border);
     color: var(--text-secondary);
     text-decoration: none;
+    white-space: nowrap;
+    transition: color 160ms ease-out, border-color 160ms ease-out;
 }
 
 .tag:hover {
-    color: var(--accent);
+    color: var(--text);
+    border-color: var(--text-secondary);
 }
 
 .tag-active,
 .tag-active:hover {
     color: var(--accent);
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    border-color: var(--accent);
 }
 
 .tag-filter {
