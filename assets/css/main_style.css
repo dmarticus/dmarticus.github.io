@@ -414,6 +414,14 @@ a:hover {
     transition: opacity 160ms ease-out;
 }
 
+.panel p {
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 7;
+    overflow: hidden;
+}
+
 .panel.is-swapping {
     opacity: 0.35;
 }
