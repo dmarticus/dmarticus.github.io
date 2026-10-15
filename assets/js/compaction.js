@@ -76,23 +76,24 @@
         return 1 - ease((t - 0.66) / 0.34);
     }
 
+    // The cloud shrinks toward the corner as one body (uniform scale about the
+    // corner), getting denser as it goes; in the last stretch the surviving
+    // points snap onto the lattice. Dropped points vanish along the way.
+    var RATIO = (GRID * CELL) / W;
     function draw(c) {
         for (var q = 0; q < data.length; q += 4) data[q + 3] = 0;
+        var scale = 1 - c * (1 - RATIO);
+        var snap = ease(clamp((c - 0.55) / 0.45));
         for (var i = 0; i < N; i++) {
             var p = pts[i];
-            // Outer points start moving later, so the cloud collapses from the inside.
-            var local = clamp((c - p.d * 0.35) / (1 - p.d * 0.35));
-            var x, y, on = true;
+            var x = bx + (p.sx - bx) * scale;
+            var y = by + (p.sy - by) * scale;
             if (p.drop) {
-                // Dropped points drift a little inward, then wink out.
-                x = p.sx + (cx - p.sx) * local * 0.3;
-                y = p.sy + (cy - p.sy) * local * 0.3;
-                on = local < 0.55 + ((i * 7919) % 13) / 40; // staggered cutoff
+                if (c > 0.45 + ((i * 7919) % 17) / 40) continue; // staggered vanishing
             } else {
-                x = p.sx + (p.gx - p.sx) * local;
-                y = p.sy + (p.gy - p.sy) * local;
+                x += (p.gx - x) * snap;
+                y += (p.gy - y) * snap;
             }
-            if (!on) continue;
             var px = Math.round(x), py = Math.round(y);
             if (px < 0 || py < 0 || px >= W || py >= H) continue;
             var o = (py * W + px) * 4;
