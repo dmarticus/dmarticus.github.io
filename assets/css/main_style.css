@@ -406,7 +406,8 @@ a:hover {
     top: calc(var(--bar-height) + 12px);
     background: var(--bg-secondary);
     padding: 18px;
-    min-height: 240px;
+    height: 300px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: 14px;
