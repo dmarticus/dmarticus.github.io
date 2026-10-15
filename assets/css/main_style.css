@@ -655,6 +655,29 @@ a:hover {
     white-space: nowrap;
 }
 
+.copy-slug {
+    display: block;
+    width: 100%;
+    color: inherit;
+    line-height: inherit;
+    text-align: left;
+    overflow-wrap: anywhere;
+    cursor: copy;
+}
+
+.copy-slug-status:not(:empty) {
+    display: inline-block;
+    margin-left: 8px;
+    color: var(--text-secondary);
+    font-size: 0.85em;
+    white-space: nowrap;
+    transform: translateY(-0.08em);
+}
+
+.copy-slug.is-copied .copy-slug-status {
+    color: var(--accent);
+}
+
 /* --- Tags --- */
 .tag-list {
     display: flex;

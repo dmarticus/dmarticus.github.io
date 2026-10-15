@@ -17,7 +17,7 @@ Moments when you realize:
 - our customers don't actually care about this
 - we tried something similar a few years ago and never encoded that understanding into the codebase 
 
-In other words, agentic coding isn't especially good at producing these moments, but they're clearly valuable, and it feels really important to identify and hold onto practices that promote wisdom and deep thinking without becoming a [meat proxy](https://simonwillison.net/2026/Aug/3/dont-be-a-meat-proxy/). I wanted to talk about some of those practices I've been adopting.
+Agentic coding isn't especially good at producing these moments, but they're clearly valuable, and it feels really important to identify and hold onto practices that promote wisdom and deep thinking without becoming a [meat proxy](https://simonwillison.net/2026/Aug/3/dont-be-a-meat-proxy/). I wanted to talk about some of those practices I've been adopting.
 
 ## Coding as wisdom-building
 

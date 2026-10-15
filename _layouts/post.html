@@ -44,7 +44,11 @@ layout: default
             </tr>
             <tr>
                 <td>Slug</td>
-                <td>{{ post.url }}</td>
+                <td>
+                    <button type="button" class="copy-slug" data-copy-url="{{ post.url | absolute_url | escape }}" aria-label="Copy full URL {{ post.url | absolute_url | escape }}">
+                        <span class="copy-slug-value">{{ post.url }}</span><span class="copy-slug-status" aria-live="polite"></span>
+                    </button>
+                </td>
             </tr>
             {% if post.tags.size > 0 %}
             <tr>
@@ -63,3 +67,4 @@ layout: default
 </article>
 
 <script src="/assets/js/footnote-previews.js?v={{ site.time | date: '%s' }}" defer></script>
+<script src="/assets/js/copy-slug.js?v={{ site.time | date: '%s' }}" defer></script>
