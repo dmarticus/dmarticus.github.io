@@ -424,8 +424,10 @@ a:hover {
 .panel p {
     margin: 0;
     display: -webkit-box;
+    flex-shrink: 0;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 7;
+    -webkit-line-clamp: 6;
+    line-clamp: 6;
     overflow: hidden;
 }
 
@@ -479,6 +481,11 @@ a:hover {
 .reading .note {
     color: var(--text-secondary);
     text-wrap: pretty;
+}
+
+.reading .more {
+    grid-column: 1 / -1;
+    margin-top: 4px;
 }
 
 /* Three-up columns (about, projects, speaking on the index) */
@@ -1058,6 +1065,10 @@ blockquote {
         gap: 14px;
     }
 
+    .site-footer {
+        align-items: center;
+    }
+
     .bar nav a,
     .theme-toggle,
     .list a,
@@ -1105,6 +1116,51 @@ blockquote {
     .reading,
     .cols {
         grid-template-columns: 1fr;
+    }
+
+    .row.has-disclosure {
+        padding: 6px 0;
+        row-gap: 8px;
+    }
+
+    .row.has-disclosure.is-expanded {
+        padding-bottom: 28px;
+    }
+
+    .row.has-disclosure > [hidden] {
+        display: none;
+    }
+
+    .row.has-disclosure .row-label {
+        display: flex;
+        width: 100%;
+        min-height: 44px;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .section-toggle {
+        display: inline-flex;
+        width: 44px;
+        height: 44px;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-secondary);
+        flex: none;
+    }
+
+    .section-toggle::after {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-right: 1px solid currentColor;
+        border-bottom: 1px solid currentColor;
+        content: "";
+        transform: rotate(45deg) translate(-0.1rem, -0.1rem);
+        transition: transform 160ms ease-out;
+    }
+
+    .section-toggle[aria-expanded="true"]::after {
+        transform: rotate(225deg) translate(-0.1rem, -0.1rem);
     }
 
     .page-content > .main-content > h2 + * {
@@ -1385,8 +1441,11 @@ blockquote {
 }
 
 @media (max-width: 900px) {
-    .compaction {
-        width: 112px;
-        height: 112px;
+    .row-open > .row-label {
+        display: none;
+    }
+
+    .row-open .aside {
+        margin-top: 24px;
     }
 }

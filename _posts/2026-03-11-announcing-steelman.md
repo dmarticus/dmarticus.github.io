@@ -1,7 +1,7 @@
 ---
 title: "Steelman: an adversarial reasoning tool for decision-making"
 layout: post
-tags: [AI, decision-making, reasoning, tools, announcement]
+tags: [ai, decision-making, reasoning, tools, announcement]
 post_summary: "Announcing Steelman, a tool I built to help you stress-test your arguments before anyone else does.  State a position, defend it against escalating AI-generated counterarguments, and walk away with a structured Decision Record.  In a world where the default AI interaction is to validate your thinking, Steelman is designed to challenge it.  Currently in closed beta — sign up if you're interested."
 ---
 
