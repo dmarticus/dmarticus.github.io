@@ -401,8 +401,8 @@ a:hover {
 }
 
 /* The panel column stretches the row's full height so the panel can stay
-   sticky inside it. The script sizes the panel to the tallest summary in
-   the list once, so hovering never changes the row's height. */
+   sticky inside it. The panel itself is a fixed size; a summary that does
+   not fit is cut with an ellipsis. */
 .panel-col {
     grid-column: 4;
     align-self: stretch;
@@ -413,7 +413,8 @@ a:hover {
     top: calc(var(--bar-height) + 12px);
     background: var(--bg-secondary);
     padding: 18px;
-    min-height: 240px;
+    height: 300px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -422,6 +423,10 @@ a:hover {
 
 .panel p {
     margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 7;
+    overflow: hidden;
 }
 
 .panel.is-swapping {
