@@ -2058,70 +2058,87 @@
   type: movie
   title: A Clockwork Orange
   creator: Stanley Kubrick
+  letterboxd: https://letterboxd.com/film/a-clockwork-orange/
 - date: '2023'
   type: movie
   title: French Dispatch
   creator: Wes Anderson
+  letterboxd: https://letterboxd.com/film/the-french-dispatch-of-the-liberty-kansas/
 - date: '2023'
   type: movie
   title: C'mon C'mon!
   creator: Michael Mills
+  letterboxd: https://letterboxd.com/film/cmon-cmon/
 - date: '2023'
   type: movie
   title: The Royal Tenenbaums
   creator: Wes Anderson
+  letterboxd: https://letterboxd.com/film/the-royal-tenenbaums/
 - date: '2023'
   type: movie
   title: The Florida Project
   creator: Sean Baker
+  letterboxd: https://letterboxd.com/film/the-florida-project/
 - date: '2023'
   type: movie
   title: The Life Aquatic with Steven Zissou
   creator: Wes Anderson
+  letterboxd: https://letterboxd.com/film/the-life-aquatic-with-steve-zissou/
 - date: '2023'
   type: movie
   title: The Power of the Dog
   creator: Jane Campion
+  letterboxd: https://letterboxd.com/film/the-power-of-the-dog/
 - date: '2023'
   type: movie
   title: We Need to Talk About Cosby
   creator: W Kamau Bell
+  letterboxd: https://letterboxd.com/film/we-need-to-talk-about-cosby/
 - date: '2023'
   type: movie
   title: Call Jane
   creator: Phyllis Nagy
+  letterboxd: https://letterboxd.com/film/call-jane/
 - date: '2023'
   type: movie
   title: Babysitter
   creator: Monia Chokri
+  letterboxd: https://letterboxd.com/film/babysitter/
 - date: '2023'
   type: movie
   title: Freedom Swimmer
   creator: Olivia Martin-Mcguire
+  letterboxd: https://letterboxd.com/film/freedom-swimmer/
 - date: '2023'
   type: movie
   title: A Thousand Ways to Kiss the Ground
   creator: Henna Taylor
+  letterboxd: https://letterboxd.com/film/a-thousand-ways-to-kiss-the-ground/
 - date: '2023'
   type: movie
   title: Can't Beat This Place For Fun
   creator: Dawn Kish
+  letterboxd: https://letterboxd.com/film/cant-beat-this-place-for-fun/
 - date: '2023'
   type: movie
   title: Learning to Drown
   creator: Ben Knight
+  letterboxd: https://letterboxd.com/film/learning-to-drown/
 - date: '2023'
   type: movie
   title: The Batman
   creator: Matt Reeves
+  letterboxd: https://letterboxd.com/film/the-batman/
 - date: '2023'
   type: movie
   title: 3 Idiots
   creator: Rajkumar Hirani
+  letterboxd: https://letterboxd.com/film/3-idiots/
 - date: '2023'
   type: movie
   title: Another Round
   creator: Thomas Vinterberg
+  letterboxd: https://letterboxd.com/film/another-round/
 - date: '2023'
   type: book
   title: Play It As It Lays
@@ -2178,22 +2195,27 @@
   type: movie
   title: Asteroid City
   creator: Wes Anderson
+  letterboxd: https://letterboxd.com/film/asteroid-city/
 - date: '2024'
   type: movie
   title: Past Lives
   creator: Celine Song
+  letterboxd: https://letterboxd.com/film/past-lives/
 - date: '2024'
   type: movie
   title: Poor Things
   creator: Yorgos Lanthimos
+  letterboxd: https://letterboxd.com/film/poor-things/
 - date: '2024'
   type: movie
   title: The Holdovers
   creator: Alexander Payne
+  letterboxd: https://letterboxd.com/film/the-holdovers/
 - date: '2024'
   type: movie
   title: Dune 2
   creator: Denis Villeneuve
+  letterboxd: https://letterboxd.com/film/dune-part-two/
 - date: '2024'
   type: book
   title: Demon Copperhead
@@ -2233,6 +2255,7 @@
   rating: 3.5
   note: Banging soundtrack, lynchian as hell, pacing was sometimes a bit wonky but
     it really picked up steam for the last half hour.
+  letterboxd: https://letterboxd.com/dmarticus/film/i-saw-the-tv-glow/
 - date: '2025-05-16'
   type: movie
   title: A Real Pain
@@ -2241,30 +2264,35 @@
   note: |-
     Kieran Culkin is goated at playing broken, brutally honest characters.
     Enjoyed this more than I expected; it’s carried by the performance of the leads (especially Culkin), and I enjoyed the character development — plenty of depth and context, but also space for the viewer to fill in the blanks with their imagination.
+  letterboxd: https://letterboxd.com/dmarticus/film/a-real-pain/
 - date: '2025-05-17'
   type: movie
   title: Anora
   creator: Sean Baker
   rating: 4.5
   note: Great plane movie
+  letterboxd: https://letterboxd.com/dmarticus/film/anora/
 - date: '2025-06-09'
   type: movie
   title: Friendship
   creator: Andrew DeYoung
   rating: 3.5
   note: We never should’ve left Afghanistan
+  letterboxd: https://letterboxd.com/dmarticus/film/friendship-2024/
 - date: '2025-06-23'
   type: movie
   title: Palm Springs
   creator: Max Barbakow
   rating: 4.0
   note: All those days and he never put his dick in a box
+  letterboxd: https://letterboxd.com/dmarticus/film/palm-springs-2020/
 - date: '2025-06-28'
   type: movie
   title: The Phoenician Scheme
   creator: Wes Anderson
   rating: 3.5
   note: Man took a bullet for his friend and the dude still wouldn’t kick in 15% smh.
+  letterboxd: https://letterboxd.com/dmarticus/film/the-phoenician-scheme/
 - date: '2025-07-20'
   type: movie
   title: Joe Dirt
@@ -2273,12 +2301,14 @@
   note: Feels like the kind of movie that gets better on the 100th rewatch because
     you can quote the whole thing and spend the movie doing that instead of watching
     it
+  letterboxd: https://letterboxd.com/dmarticus/film/joe-dirt/
 - date: '2025-08-07'
   type: movie
   title: Whiplash
   creator: Damien Chazelle
   rating: 4.0
   note: Starbucks jazz is better than the shit Fletcher was playing at the club
+  letterboxd: https://letterboxd.com/dmarticus/film/whiplash-2014/
 - date: '2025-08-07'
   type: movie
   title: Mickey 17
@@ -2286,6 +2316,7 @@
   rating: 3.5
   note: I wonder if the director asked Pattinson to just do the opposite voice as
     he did in Batman
+  letterboxd: https://letterboxd.com/dmarticus/film/mickey-17/
 - date: '2025-08-09'
   type: movie
   title: Longlegs
@@ -2294,6 +2325,7 @@
   note: Okay this probably isn’t actually as good as I ranked it but I fuckin loved
     this. Sure it’s predictable and a bit of a played-out genre but man what a good
     time
+  letterboxd: https://letterboxd.com/dmarticus/film/longlegs/
 - date: '2025-08-11'
   type: movie
   title: The Fall Guy
@@ -2301,6 +2333,7 @@
   rating: 2.5
   note: I got this mixed up with Free Guy and spent most of the movie wondering when
     Ryan Reynolds would show up
+  letterboxd: https://letterboxd.com/dmarticus/film/the-fall-guy-2024/
 - date: '2025-08-11'
   type: movie
   title: Rudy
@@ -2308,23 +2341,27 @@
   rating: 3.5
   note: You can tell Rudy really leaned into his Notre dame degree because he got
     convicted of securities fraud recently
+  letterboxd: https://letterboxd.com/dmarticus/film/rudy/
 - date: '2025-08-21'
   type: movie
   title: Weapons
   creator: Zach Cregger
   rating: 3.5
+  letterboxd: https://letterboxd.com/dmarticus/film/weapons-2025/
 - date: '2025-10-27'
   type: movie
   title: Sinners
   creator: Ryan Coogler
   rating: 4.0
   note: Probably the best ultra panavision movie I’ve ever seen
+  letterboxd: https://letterboxd.com/dmarticus/film/sinners-2025/
 - date: '2025-10-27'
   type: movie
   title: Blood Simple
   creator: Joel Coen
   rating: 4.0
   note: I’ve heard that men are bad at communicating but this is ridiculous!
+  letterboxd: https://letterboxd.com/dmarticus/film/blood-simple/
 - date: '2025-10-27'
   type: movie
   title: One Battle After Another
@@ -2333,18 +2370,21 @@
   note: I want to write something glib but honestly I just had a fucking blast. What
     a treat. Shoutout to Jonny Greenwood for the Zelda dungeon-ass music during the
     Latino Harriet Tubman scene
+  letterboxd: https://letterboxd.com/dmarticus/film/one-battle-after-another/
 - date: '2025-10-30'
   type: movie
   title: Bugonia
   creator: Yorgos Lanthimos
   rating: 3.5
   note: No one told me this was gonna be a documentary!
+  letterboxd: https://letterboxd.com/dmarticus/film/bugonia/
 - date: '2025-12-29'
   type: movie
   title: Eddington
   creator: Ari Aster
   rating: 4.0
   note: I would’ve loved to have seen Joe Cross in the CHOP
+  letterboxd: https://letterboxd.com/dmarticus/film/eddington/
 - date: '2026-01-31'
   type: tweet
   title: Karpathy on the coding workflow shift
@@ -2518,6 +2558,7 @@
     - can adults have fun without flirting? is there more fun than flirting? bleak inquiry
     - watched this right after a jet-lagged trip to London where i felt zero mystique, only fatigue. pretending is better
     - one of my favorite depictions of work travel: not glamorous, just a quiet urge to disappear
+  letterboxd: https://letterboxd.com/dmarticus/film/lost-in-translation/
 - date: '2026-04-27'
   type: movie
   title: Casino
@@ -2527,29 +2568,34 @@
     - the exact length of my flight to vegas so it was kind of perfect to set the vibes for that trip
     - people are always like "oh joe pesci is so good" and like he is but he's the same guy in every movie
     - pretty predictable plot but still pretty fun
+  letterboxd: https://letterboxd.com/dmarticus/film/casino/
 - date: '2026-04-27'
   type: movie
   title: Heat
   creator: Michael Mann
   rating: 5.0
   note: this movie is fucking sick.
+  letterboxd: https://letterboxd.com/dmarticus/film/heat-1995/
 - date: '2026-08-06'
   type: movie
   title: Burning
   creator: Lee Chang-dong
   rating: 4.0
+  letterboxd: https://letterboxd.com/dmarticus/film/burning-2018/
 - date: '2026-08-06'
   type: movie
   title: Bodies Bodies Bodies
   creator: Halina Reijn
   rating: 3.0
   note: Least dramatic rich kid party
+  letterboxd: https://letterboxd.com/dmarticus/film/bodies-bodies-bodies/
 - date: '2026-08-06'
   type: movie
   title: TÁR
   creator: Todd Field
   rating: 4.0
   note: 4 stars for the outfits and interior design alone
+  letterboxd: https://letterboxd.com/dmarticus/film/tar-2022/
 - date: '2026-08-06'
   type: movie
   title: Saltburn
@@ -2557,6 +2603,7 @@
   rating: 3.5
   note: As slutty TikTok movies go I was actually pretty fond of this one. Can’t believe
     The Talented Mr. Ripley (1999) ripped this off
+  letterboxd: https://letterboxd.com/dmarticus/film/saltburn/
 - date: '2026-08-06'
   type: movie
   title: Monkey Man
@@ -2564,6 +2611,7 @@
   rating: 3.5
   note: I like the part where he yelled “it’s Monkin’ time!” and then punched the
     guy
+  letterboxd: https://letterboxd.com/dmarticus/film/monkey-man/
 - date: '2026-08-06'
   type: movie
   title: Dìdi (弟弟)
@@ -2571,12 +2619,14 @@
   rating: 4.0
   note: I’ve never wanted to yell at a kid more in my life so I feel like they nailed
     the experience of being a teenager
+  letterboxd: https://letterboxd.com/dmarticus/film/didi-2024/
 - date: '2026-08-06'
   type: movie
   title: Bone Tomahawk
   creator: S. Craig Zahler
   rating: 4.0
   note: This movie was a fuckin blast I don’t care if it’s derivative
+  letterboxd: https://letterboxd.com/dmarticus/film/bone-tomahawk/
 - date: '2026-08-06'
   type: movie
   title: Dragged Across Concrete
@@ -2585,12 +2635,14 @@
   note: |-
     My favorite part of Zahler movies is that he cuts away from the gore because I’m squeamish.
     Can’t wait to watch bone tomahawk next; I’ve heard it’s a campy western!
+  letterboxd: https://letterboxd.com/dmarticus/film/dragged-across-concrete/
 - date: '2026-08-06'
   type: movie
   title: The Talented Mr. Ripley
   creator: Anthony Minghella
   rating: 4.5
   note: They went into the future and ripped off Saltburn (2022) smh
+  letterboxd: https://letterboxd.com/dmarticus/film/the-talented-mr-ripley/
 - date: '2026-08-06'
   type: movie
   title: 'Master and Commander: The Far Side of the World'
@@ -2599,3 +2651,41 @@
   note: |-
     I’m writing this review from the perspective of 13-year old me and my dad got me this movie for my birthday and we watched it together and he had to explain the lesser of two weevils joke and we had a wonderful evening together so yeah one of the best movies in my head canon.
     I should watch it again though and see how it holds up.
+  letterboxd: https://letterboxd.com/dmarticus/film/master-and-commander-the-far-side-of-the-world/
+- date: '2026-08-17'
+  type: movie
+  title: The Invite
+  year: 2026
+  creator: Olivia Wilde
+  rating: 4.5
+  note: |-
+    /uj what a beautiful movie about love, relationships, the fullness of life, and the ways that we can all disappear into ourselves. An emotional ride in the best way. Excellently cast and every actor played their role to the hilt. Hat tip to the SF mise en scene.
+
+    /rj the way that Seth Rogen attempted to have sex with Penelope Cruz is the exact way I expected him to have sex with anybody
+  letterboxd: https://letterboxd.com/dmarticus/film/the-invite-2026/
+- date: '2026-08-22'
+  type: movie
+  title: She's the Man
+  year: 2006
+  creator: Andy Fickman
+  rating: 2.5
+  note: This whole thing smacks of gender
+  letterboxd: https://letterboxd.com/dmarticus/film/shes-the-man/
+- date: '2026-10-13'
+  type: movie
+  title: Digger
+  year: 2026
+  creator: Alejandro G. Iñárritu
+  rating: 4.0
+  note: |-
+    i think i liked this even more after leaving the theater than i did while watching it.
+
+    the whole actors-playing-actors-performing-a-biography-of-their-own-world device really worked for me. all the little hints that the play takes place in the same world as its audience (the hurricanes, the futuristic phones, the contrast with the antiquated theater) were so well done. and the visual language was gorgeous. i remember thinking some of the landscapes looked like literal paintings, so the moment the tree falls over and someone comes out to repair the set was an incredible reveal.
+
+    cruise is fantastic (digger is a great character), john goodman is wonderfully sinister (he’s always had that darkness in him; reminded me of o brother where art thou), and I loved every scene with riz ahmed. the whole testimony in the collapsing building sequence was fucking fantastic.
+
+    yes, the environmental satire is pretty unsubtle, but i don’t think it’s nearly as ham-fisted as something like don’t look up or whatever. there’s something bleakly funny about a civilization staging a comedy about how it destroyed itself, with the audience presumably going home to the same collapsing world. and then there’s us in the audience, watching a movie ostensibly about people doing exactly what we’re doing. it’s a clever bit of recursive self-indictment.
+
+    it’s loud, stressful, overwhelming, and was super enjoyable without necessarily being “fun”. loved it.
+  letterboxd: https://letterboxd.com/dmarticus/film/digger-2026/
+  spoilers: true

@@ -1,5 +1,5 @@
 ---
-title: "09/14 - 09/20"
+title: "September 14–20, 2020"
 layout: post
 tags: [security, AI, wildfires, functional programming, capitalism, haskell, types, scala]
 summary: "This week I cover security vulnerabilities, AI, functional programming, and a mixed bag of other things."

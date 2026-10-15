@@ -5,328 +5,131 @@ redirect_from:
     - /links.html
 ---
 
-<style>
-    .media-search {
-        width: 100%;
-        padding: 0.5rem 0.75rem;
-        margin: 1rem 0;
-        font-family: var(--font-mono);
-        font-size: 0.9rem;
-        color: var(--text);
-        background: var(--code-bg);
-        border: 1px solid var(--border);
-        border-radius: 4px;
-    }
-    .media-search:focus {
-        outline: none;
-        border-color: var(--accent);
-    }
-    .media-year > summary,
-    .media-section > summary {
-        cursor: pointer;
-        list-style-position: outside;
-    }
-    .media-year > summary h2 {
-        display: inline-block;
-        margin: 0.75em 0 0.25em;
-    }
-    .media-section > summary h3 {
-        display: inline-block;
-        margin: 0.75em 0 0.25em;
-    }
-    .media-year > summary small,
-    .media-section > summary small {
-        color: var(--text-secondary);
-        margin-left: 0.5em;
-    }
-    .media-section {
-        margin-left: 1rem;
-    }
-    .media-date,
-    .media-stars {
-        white-space: nowrap;
-    }
-    .star-half {
-        position: relative;
-        display: inline-block;
-    }
-    .star-half > span {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 50%;
-        overflow: hidden;
-    }
-    .media-review .review-text {
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-    .media-review.expanded .review-text {
-        display: block;
-        -webkit-line-clamp: unset;
-        overflow: visible;
-    }
-    .media-review.clampable {
-        cursor: pointer;
-    }
-    .review-more {
-        display: none;
-        color: var(--text-secondary);
-        font-size: 0.8em;
-        user-select: none;
-    }
-    .media-review.clampable .review-more {
-        display: inline;
-    }
-    .media-no-results {
-        color: var(--text-secondary);
-        display: none;
-        margin: 2rem 0;
-    }
-</style>
+{% assign films = site.data.log | where: "type", "movie" | sort: "date" | reverse %}
+{% assign books = site.data.log | where: "type", "book" | sort: "date" | reverse %}
+{% assign links = site.data.log | where_exp: "e", "e.url" | sort: "date" | reverse %}
+{% assign shelves = "films,books,links" | split: "," %}
 
-<div class="page-content">
-    <div class="main-content">
+<section class="shelves g">
+    <aside class="shelves-side">
         <h1>Media</h1>
-        <p>
-            Everything I've read, watched, and otherwise engaged with —
-            articles, books, movies, and whatever else — organized by year.
-            Logged as I go; the highlights get written up in the
-            <a href="/digest.html">digest</a>.
-        </p>
-
         <input
             type="search"
-            class="media-search"
+            class="shelf-search"
             id="media-search"
-            placeholder="Search titles, creators, notes…"
-            aria-label="Search the media archive"
+            placeholder="Search"
+            aria-label="Search the media log"
         />
-        <p class="media-no-results" id="media-no-results">
-            Nothing matches that search.
-        </p>
+        <ul class="shelf-stats num">
+            <li><span>Films</span><span class="dim">{{ films | size }}</span></li>
+            <li><span>Books</span><span class="dim">{{ books | size }}</span></li>
+            <li><span>Links</span><span class="dim">{{ links | size }}</span></li>
+        </ul>
+        <p class="dim" id="media-no-results" hidden>Nothing matches.</p>
+    </aside>
 
-        {% assign by_year = site.data.log | group_by_exp: "item", "item.date | slice: 0, 4" | sort: "name" | reverse %}
-        {% for year in by_year %}
-        <details class="media-year" {% if forloop.first %}open{% endif %}>
-            <summary>
-                <h2>{{ year.name }}</h2>
-                <small>{{ year.items | size }} entries</small>
-            </summary>
-
-            {% assign links = year.items | where_exp: "item", "item.url" %}
-            {% if links.size > 0 %}
-            <details class="media-section" open>
-                <summary>
-                    <h3>Links</h3>
-                    <small>{{ links.size }}</small>
-                </summary>
-                <table class="styled-table">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% assign sorted_links = links | sort: "date" | reverse %}
-                        {% for entry in sorted_links %}
-                        <tr>
-                            <td>
-                                <a href="{{ entry.url }}">{{ entry.title }}</a>
-                            </td>
-                            <td class="media-date">
-                                {% if entry.date.size > 4 %}{{ entry.date | date: "%b %-d" }}{% endif %}
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </details>
+    {% for shelf in shelves %}
+    {% case shelf %}
+    {% when "films" %}{% assign entries = films %}{% assign heading = "Films" %}
+    {% when "books" %}{% assign entries = books %}{% assign heading = "Books" %}
+    {% else %}{% assign entries = links %}{% assign heading = "Links" %}
+    {% endcase %}
+    <div class="shelf" id="shelf-{{ shelf }}">
+        <div class="shelf-head">
+            <h2>{{ heading }}</h2>
+            <button class="shelf-expand" type="button" aria-expanded="false" aria-label="Expand {{ shelf }}">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="exp" d="M7 1.5h3.5V5M5 10.5H1.5V7M10.5 1.5 7 5M1.5 10.5 5 7"/><path class="col" d="M10.5 5H7V1.5M1.5 7H5v3.5M7 5l3.5-3.5M5 7l-3.5 3.5"/></svg>
+            </button>
+        </div>
+        <ul class="shelf-list">
+            {% assign last_year = "" %}
+            {% for entry in entries %}
+            {% assign year = entry.date | slice: 0, 4 %}
+            {% if year != last_year %}
+            <li class="shelf-year num"{% if forloop.index > 15 %} data-extra{% endif %}>{{ year }}</li>
+            {% assign last_year = year %}
             {% endif %}
-
-            {% assign books = year.items | where: "type", "book" %}
-            {% if books.size > 0 %}
-            {% assign rated = books | where_exp: "item", "item.rating" %}
-            {% assign reviewed = books | where_exp: "item", "item.note" %}
-            <details class="media-section" open>
-                <summary>
-                    <h3>Books</h3>
-                    <small>{{ books.size }}</small>
-                </summary>
-                <table class="styled-table">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Author</th>
-                            {% if rated.size > 0 %}<th>Rating</th>{% endif %}
-                            {% if reviewed.size > 0 %}<th>Review</th>{% endif %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for entry in books %}
-                        <tr>
-                            <td>{{ entry.title }}</td>
-                            <td>{{ entry.creator }}</td>
-                            {% if rated.size > 0 %}
-                            <td class="media-stars">{% include stars.html rating=entry.rating %}</td>
-                            {% endif %}
-                            {% if reviewed.size > 0 %}
-                            <td class="media-review">
-                                <span class="review-text">{{ entry.note }}</span>
-                                <span class="review-more">⋯</span>
-                            </td>
-                            {% endif %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </details>
+            {% if entry.url %}
+            {% assign parts = entry.url | split: "/" %}
+            {% assign by = parts[2] | remove_first: "www." %}
+            {% else %}
+            {% assign by = entry.creator %}
             {% endif %}
-
-            {% assign movies = year.items | where: "type", "movie" %}
-            {% if movies.size > 0 %}
-            {% assign rated = movies | where_exp: "item", "item.rating" %}
-            {% assign reviewed = movies | where_exp: "item", "item.note" %}
-            <details class="media-section" open>
-                <summary>
-                    <h3>Movies</h3>
-                    <small>{{ movies.size }}</small>
-                </summary>
-                <table class="styled-table">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Director</th>
-                            {% if rated.size > 0 %}<th>Rating</th>{% endif %}
-                            {% if reviewed.size > 0 %}<th>Review</th>{% endif %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for entry in movies %}
-                        <tr>
-                            <td>{{ entry.title }}</td>
-                            <td>{{ entry.creator }}</td>
-                            {% if rated.size > 0 %}
-                            <td class="media-stars">{% include stars.html rating=entry.rating %}</td>
-                            {% endif %}
-                            {% if reviewed.size > 0 %}
-                            <td class="media-review">
-                                <span class="review-text">{{ entry.note }}</span>
-                                <span class="review-more">⋯</span>
-                            </td>
-                            {% endif %}
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </details>
-            {% endif %}
-
-            {% assign other = year.items | where_exp: "item", "item.url == nil and item.type != 'book' and item.type != 'movie'" %}
-            {% if other.size > 0 %}
-            <details class="media-section" open>
-                <summary>
-                    <h3>Other</h3>
-                    <small>{{ other.size }}</small>
-                </summary>
-                <table class="styled-table">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Creator</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for entry in other %}
-                        <tr>
-                            <td>{{ entry.title }}</td>
-                            <td>{{ entry.creator }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </details>
-            {% endif %}
-        </details>
-        {% endfor %}
+            <li class="item{% if entry.note %} has-note{% endif %}"{% if forloop.index > 15 %} data-extra{% endif %} data-s="{{ entry.title | append: ' ' | append: by | append: ' ' | append: entry.note | downcase | escape }}">
+                <div class="item-row">
+                    <span class="item-t">
+                        {% if entry.url %}<a href="{{ entry.url }}" rel="noreferrer" target="_blank">{{ entry.title }}</a>
+                        {% elsif entry.letterboxd %}<a href="{{ entry.letterboxd }}" rel="noreferrer" target="_blank">{{ entry.title }}</a>
+                        {% else %}{{ entry.title }}{% endif %}
+                        {% if entry.year %}<span class="dim num">{{ entry.year }}</span>{% endif %}
+                        {% if by %}<span class="item-by{% if entry.url %} num{% endif %}">{{ by }}</span>{% endif %}
+                    </span>
+                    {% if entry.rating %}<span class="stars num">{% include stars.html rating=entry.rating %}</span>{% endif %}
+                </div>
+                {% if entry.note %}<div class="item-note">{{ entry.note | newline_to_br }}</div>{% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% if entries.size > 15 %}<button class="shelf-all" type="button">All {{ entries | size }} {{ shelf }}</button>{% endif %}
     </div>
-</div>
+    {% endfor %}
+</section>
 
 <script>
     (function () {
+        var root = document.querySelector(".shelves");
+        var shelves = Array.prototype.slice.call(root.querySelectorAll(".shelf"));
         var input = document.getElementById("media-search");
-        var noResults = document.getElementById("media-no-results");
-        var years = Array.prototype.slice.call(
-            document.querySelectorAll(".media-year")
-        );
-        document
-            .querySelectorAll(".media-year, .media-section")
-            .forEach(function (el) {
-                el.dataset.defaultOpen = el.open ? "1" : "";
-            });
+        var empty = document.getElementById("media-no-results");
 
-        input.addEventListener("input", function () {
-            var query = input.value.trim().toLowerCase();
-            var anyMatch = false;
-
-            years.forEach(function (year) {
-                var yearMatches = 0;
-                year.querySelectorAll(".media-section").forEach(function (
-                    section
-                ) {
-                    var sectionMatches = 0;
-                    section
-                        .querySelectorAll("tbody tr")
-                        .forEach(function (item) {
-                            var hit =
-                                !query ||
-                                item.textContent
-                                    .toLowerCase()
-                                    .indexOf(query) !== -1;
-                            item.hidden = !hit;
-                            if (hit) sectionMatches++;
-                        });
-                    section.hidden = sectionMatches === 0;
-                    section.open = query
-                        ? sectionMatches > 0
-                        : section.dataset.defaultOpen === "1";
-                    yearMatches += sectionMatches;
+        // Expand a shelf to the full width; the same control collapses it.
+        shelves.forEach(function (shelf) {
+            shelf.querySelector(".shelf-expand").addEventListener("click", function () {
+                var wide = !shelf.classList.contains("is-wide");
+                shelves.forEach(function (s) {
+                    s.classList.toggle("is-wide", wide && s === shelf);
+                    s.classList.toggle("is-tucked", wide && s !== shelf);
+                    s.querySelector(".shelf-expand").setAttribute("aria-expanded", wide && s === shelf ? "true" : "false");
                 });
-                year.hidden = query && yearMatches === 0;
-                year.open = query
-                    ? yearMatches > 0
-                    : year.dataset.defaultOpen === "1";
-                if (yearMatches > 0) anyMatch = true;
             });
-
-            noResults.style.display = query && !anyMatch ? "block" : "none";
+            var all = shelf.querySelector(".shelf-all");
+            if (all) {
+                all.addEventListener("click", function () {
+                    shelf.classList.add("is-all");
+                    all.hidden = true;
+                });
+            }
         });
 
-        function detectClamps(root) {
-            root.querySelectorAll(".media-review").forEach(function (cell) {
-                if (cell.classList.contains("clampable")) return;
-                var text = cell.querySelector(".review-text");
-                if (text && text.scrollHeight > text.clientHeight + 1) {
-                    cell.classList.add("clampable");
-                }
-            });
-        }
-        detectClamps(document);
-        document
-            .querySelectorAll(".media-year, .media-section")
-            .forEach(function (el) {
-                el.addEventListener("toggle", function () {
-                    if (el.open) detectClamps(el);
+        // A note opens on click; links in the row still navigate.
+        root.addEventListener("click", function (e) {
+            if (e.target.closest("a, button")) return;
+            var item = e.target.closest(".item.has-note");
+            if (item) item.classList.toggle("is-open");
+        });
+
+        input.addEventListener("input", function () {
+            var q = input.value.trim().toLowerCase();
+            var any = false;
+            root.classList.toggle("is-searching", q.length > 0);
+            shelves.forEach(function (shelf) {
+                var hits = 0;
+                shelf.querySelectorAll(".item").forEach(function (item) {
+                    var hit = !q || item.getAttribute("data-s").indexOf(q) !== -1;
+                    item.hidden = !hit;
+                    if (hit) hits++;
                 });
+                shelf.querySelectorAll(".shelf-year").forEach(function (y) {
+                    var n = y.nextElementSibling, shown = false;
+                    while (n && !n.classList.contains("shelf-year")) {
+                        if (!n.hidden) shown = true;
+                        n = n.nextElementSibling;
+                    }
+                    y.hidden = !shown;
+                });
+                if (hits) any = true;
             });
-        document.addEventListener("click", function (e) {
-            var cell =
-                e.target.closest &&
-                e.target.closest(".media-review.clampable");
-            if (cell) cell.classList.toggle("expanded");
+            empty.hidden = !q || any;
         });
     })();
 </script>

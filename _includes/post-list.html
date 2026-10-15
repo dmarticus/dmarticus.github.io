@@ -1,0 +1,46 @@
+{% comment %}
+  Renders essays as the index list plus the summary panel.
+  include.posts  — the posts to render (already sorted newest first)
+  include.years  — "true" to group with year labels
+  include.more   — optional text for a trailing link to /writing.html
+{% endcomment %}
+{% assign first = include.posts | first %}
+<ul class="list" id="post-list" data-panel="panel">
+    {% assign last_year = "" %}
+    {% for post in include.posts %}
+    {% assign year = post.date | date: "%Y" %}
+    {% if include.years == "true" and year != last_year %}
+    <li class="year num">{{ year }}</li>
+    {% assign last_year = year %}
+    {% endif %}
+    <li data-tags="{{ post.tags | join: ',' | downcase }}">
+        <a
+            href="{{ post.url }}"
+            {% if forloop.first %}class="is-current"{% endif %}
+            data-date="{{ post.date | date: '%B %Y' }}"
+            data-words="{{ post.content | number_of_words }} words"
+            data-summary="{{ post.post_summary | default: post.summary | strip_html | normalize_whitespace | escape }}"
+            data-tags="{{ post.tags | join: ',' }}"
+        >
+            <span class="num">{{ post.date | date: "%b %d" }}</span>
+            <span class="t">{{ post.title }}</span>
+        </a>
+    </li>
+    {% endfor %}
+    {% if include.more %}
+    <li class="more"><a href="/writing.html">{{ include.more }} &rarr;</a></li>
+    {% endif %}
+</ul>
+<div class="panel-col">
+<aside class="panel" id="panel" aria-live="polite">
+    <div class="meta num">
+        <span>Published</span><b data-field="date">{{ first.date | date: "%B %Y" }}</b>
+        <span>Length</span><b data-field="words">{{ first.content | number_of_words }} words</b>
+    </div>
+    <p data-field="summary">{{ first.post_summary | default: first.summary | strip_html | normalize_whitespace }}</p>
+    <div class="tags" data-field="tags">
+        {% for tag in first.tags %}<a class="tag" href="/writing.html?tag={{ tag | url_encode }}" data-tag="{{ tag | downcase }}">{{ tag }}</a>{% endfor %}
+    </div>
+    <a href="{{ first.url }}" class="cta" data-field="link">Read the essay &rarr;</a>
+</aside>
+</div>

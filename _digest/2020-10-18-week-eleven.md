@@ -1,5 +1,5 @@
 ---
-title: "10/12 - 10/18"
+title: "October 12–18, 2020"
 layout: post
 tags: [communication, haskell, scala, open-source, interviewing, fun, fashion]
 summary: "The list is shorter this week -- I was on vacation and kinda stayed away from tech and the internet in general as possible (I did, however, go on a lot of hikes, I read 2 books, and ate a bunch of good food!)  There were still a few pieces that I read from the tech world, though, so I figured I'd share them :)  They're mostly about Scala and Haskell, with a few fun pieces (including Aphyr's latest technical interview satire).  Enjoy!"

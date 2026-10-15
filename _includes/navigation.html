@@ -1,14 +1,15 @@
-<a href="/" class="site-logo-link">
-    <img src="/logo_light.png" alt="Home" class="site-logo-fixed site-logo-light">
-    <img src="/logo_dark.png" alt="Home" class="site-logo-fixed site-logo-dark">
-</a>
-<nav class="site-nav">
-    <ul>
-        <li><a href="/" {% if page.url == '/' %}class="active"{% endif %}>Compacted Context</a></li>
-        <li><a href="/writing.html" {% if page.url == '/writing.html' %}class="active"{% endif %}>Writing</a></li>
-        <li><a href="/digest.html" {% if page.url == '/digest.html' %}class="active"{% endif %}>Digest</a></li>
-        <li><a href="/projects.html" {% if page.url == '/projects.html' %}class="active"{% endif %}>Projects</a></li>
-        <li><a href="/speaking.html" {% if page.url == '/speaking.html' %}class="active"{% endif %}>Speaking</a></li>
-        <li><a href="/media.html" {% if page.url == '/media.html' %}class="active"{% endif %}>Media</a></li>
-    </ul>
-</nav>
+<header class="bar g">
+    <div class="bar-name"><a href="/">Compacted Context</a></div>
+    <div class="bar-desc">Reading, writing, and<br />software engineering</div>
+    <nav class="site-nav" aria-label="Sections">
+        <ul>
+            <li><a href="/writing.html" {% if page.url == '/writing.html' or page.collection == 'posts' %}class="active"{% endif %}>Writing</a></li>
+            <li><a href="/digest.html" {% if page.url == '/digest.html' or page.collection == 'digest' %}class="active"{% endif %}>Digest</a></li>
+            <li><a href="/media.html" {% if page.url == '/media.html' %}class="active"{% endif %}>Media</a></li>
+            <li><a href="/projects.html" {% if page.url == '/projects.html' %}class="active"{% endif %}>Projects</a></li>
+            <li><a href="/speaking.html" {% if page.url == '/speaking.html' %}class="active"{% endif %}>Speaking</a></li>        </ul>
+    </nav>
+    <div class="bar-right">
+        <span class="num dim clock" id="clock"></span>
+    </div>
+</header>

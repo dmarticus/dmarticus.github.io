@@ -1,5 +1,5 @@
 ---
-title: "11/23 - 11/29"
+title: "November 23–29, 2020"
 layout: post
 tags: ["politics", "postgres", "haskell", "scala", "accessibility", "distributed systems", "career"]
 summary: "Sorry I'm late!  This week I took a road trip down the Oregon coastline with my partner and I mostly unplugged.  As a result, though, I forgot to post my reading!  My bad!  This week, I read some great pieces on careers, a hodgepodge of technical content, and an interesting piece on the intersection of politics and big tech.  Enjoy!"
