@@ -396,6 +396,10 @@ a:hover {
     display: inline;
 }
 
+.list .more a:hover {
+    color: var(--accent);
+}
+
 .panel {
     grid-column: 4;
     position: sticky;
