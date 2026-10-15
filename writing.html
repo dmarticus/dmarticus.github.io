@@ -24,7 +24,7 @@ redirect_from: /blog.html
     {% include post-list.html posts=site.posts years="true" %}
 </section>
 
-<script src="/assets/js/list-panel.js" defer></script>
+<script src="/assets/js/list-panel.js?v={{ site.time | date: '%s' }}" defer></script>
 <script>
     (function () {
         var activeTags = [];

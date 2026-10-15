@@ -39,9 +39,9 @@
             rel="stylesheet"
             id="CSS"
             type="text/css"
-            href="/assets/css/main_style.css"
+            href="/assets/css/main_style.css?v={{ site.time | date: '%s' }}"
         />
-        <link rel="stylesheet" href="/assets/css/print.css" media="print" />
+        <link rel="stylesheet" href="/assets/css/print.css?v={{ site.time | date: '%s' }}" media="print" />
         {% feed_meta %}
         <title>{{ page.title }} · {{ site.title }}</title>
         <!-- PostHog -->
