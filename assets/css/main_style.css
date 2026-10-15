@@ -318,7 +318,7 @@ a:hover {
 }
 
 .row-open {
-    padding: 36px 0 44px;
+    padding: 28px 0 32px;
 }
 
 .row-open .intro {
@@ -1354,8 +1354,9 @@ blockquote {
 /* --- Compaction animation in the intro row --- */
 .compaction {
     display: block;
-    width: 224px;
-    height: 224px;
+    width: 144px;
+    height: 144px;
+    margin-top: -4px;
     max-width: 100%;
     image-rendering: pixelated;
     image-rendering: crisp-edges;

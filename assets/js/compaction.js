@@ -32,7 +32,7 @@
         return seed / 0x7fffffff;
     }
 
-    var GRID = 20;              // the compacted block is GRID x GRID cells
+    var GRID = 24;              // the compacted block is GRID x GRID cells
     var CELL = 2;               // pixels per cell
     var KEPT = GRID * GRID;     // points that survive compaction
     var N = Math.round(KEPT * 1.75); // the rest get dropped
