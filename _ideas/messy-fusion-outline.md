@@ -3,16 +3,14 @@
 ## Core claim
 
 - Bad technical choices are survivable when surrounding systems can still learn and change
-- Lock-in emerges when dependencies spread across boundaries
-  - interfaces
-  - state
-  - deployment
-  - institutions
-  - labor
-  - finance
-  - customers
-- Clean seams let one layer change while others remain stable
-- Fused seams turn local correction into system-wide transformation
+- Lock-in emerges when dependencies spread until boundaries stop containing change
+- Relevant boundaries separate
+  - implementation from public interface
+  - state from service behavior
+  - one deployment unit from another
+  - technology from institutions, labor, finance, and customers
+- Boundaries that hold let one layer change while others remain stable
+- Collapsed boundaries turn local correction into system-wide transformation
 - The decisive question
   - not only whether a choice is correct
   - what else must move if the choice becomes wrong
@@ -82,7 +80,7 @@
   - demand still centered on custom British orders
 - Implication
   - tools alone could not modernize the industry
-  - production architecture had fused with the business around it
+  - the boundary between production architecture and the surrounding business had collapsed
 
 ## Shared lesson from the British cases
 
@@ -96,9 +94,10 @@
   - labor
   - finance
   - demand
-- Reversibility depends on separability
-  - one layer can move while others hold still
-- Irreversibility grows through fusion
+- Reversibility depends on boundaries that hold
+  - one layer can move while others remain stable
+- Irreversibility grows as boundaries collapse
+  - dependencies propagate from one layer into the next
   - every correction requires coordinated movement across the system
 
 ## Coupling, fusion, and lock-in
@@ -110,7 +109,7 @@
   - boundaries between layers collapse
   - changes propagate beyond their original layer
 - Lock-in
-  - fusion loses a bounded edge
+  - fusion becomes lock-in when dependencies spread beyond any affordable boundary
   - dependencies extend past the artifact
   - no affordable local correction remains
 - Evaluation shift
@@ -139,14 +138,14 @@
   - reach, battery, runtime, enclosure, heat, wiring, mass, and price interact
   - implementation and interface often occupy the same physical form
 
-## How the British cases lost the boundary
+## How boundaries collapsed in the British cases
 
-- Shipbuilding fused inward
-  - production method tied to yard, labor, finance, and customers
+- Shipbuilding lost internal separability
+  - production method, yard layout, labor model, finance, and customers could no longer change independently
   - modernization required whole-system replacement
-- Nuclear fused outward
-  - Sizewell B inquiry lasted 340 days
+- Nuclear lost external containment
   - one reactor decision expanded into safety, legitimacy, and enterprise-wide debate
+  - Sizewell B inquiry lasted 340 days
 - Shared failure
   - technical decisions became social and institutional commitments without a bounded correction path
 
@@ -158,8 +157,8 @@
   - state
   - expectations
 - Most changes move symbols and behavior
-- Stable boundaries preserve local change
-  - implementation changes behind an interface
+- Boundaries that hold preserve local change
+  - implementation changes behind a stable interface
   - callers continue working
   - state moves without breaking consumers
 - Difference from hardware
@@ -178,7 +177,7 @@
 
 ## Constraint on LLM acceleration
 
-- Models reduce implementation cost inside an existing boundary
+- Models reduce implementation cost inside a boundary that already holds
 - Models help less with
   - deciding which contract may change
   - proving compatibility
@@ -189,14 +188,15 @@
   - Django service moved to Rust in about seven months
   - current models could likely accelerate code production
   - dominant work was preserving externally visible behavior
-- Clean-boundary effect
+- When boundaries hold
   - faster implementation creates larger gains
-- Fused-boundary effect
-  - faster implementation can accelerate the creation of coupling
+- When boundaries collapse
+  - faster implementation can accelerate the spread of coupling
 
 ## Software failure patterns
 
-- Fused schema
+- Data boundary collapse
+  - schema, service behavior, and rollout can no longer change independently
   - database migration expands into service rewrite and rollout
 - Hyrum’s Law
   - every observable behavior can become a dependency
@@ -236,7 +236,7 @@
 - Result
   - hardware gains a software-like durable interface
 
-## How NVIDIA protects the seam
+## How NVIDIA protects the interface
 
 - Competitor path 1
   - preserve CUDA compatibility
@@ -291,7 +291,7 @@
   - NVIDIA access became less attractive when it threatened domestic ecosystem formation
   - China’s rival-stack policy moved from aspiration to active preference
 
-## The abstraction seam may be moving
+## The target abstraction may be moving upward
 
 - Current moat
   - CUDA remains real and load-bearing
@@ -305,7 +305,7 @@
   - compiler-level work defends the interface above the traditional driver surface
 - Forecasting constraint
   - outcome depends on which abstraction developers ultimately target
-  - current CUDA dominance does not prove permanent control of the relevant seam
+  - current CUDA dominance does not prove permanent control of the developer-facing interface
 
 ## Reversibility test
 
@@ -338,7 +338,7 @@
 
 ### Use LLMs where they create leverage
 
-- implementation within clean boundaries
+- implementation within boundaries that already hold
 - refactoring that does not cross contracts
 - code production after migration constraints are understood
 
@@ -366,7 +366,7 @@
 
 - Technical quality alone does not determine long-term adaptability
 - Architecture should be judged by the cost and scope of reversing it
-- The most valuable seams let implementations change without moving the whole surrounding system
+- The most valuable boundaries contain change: they let implementations change without moving the whole surrounding system
 - LLM productivity remains bounded by migration, compatibility, and operational coordination
 - Control of the interface that workloads target creates strategic power
 - Preserve reversibility before dependencies harden beyond the artifact

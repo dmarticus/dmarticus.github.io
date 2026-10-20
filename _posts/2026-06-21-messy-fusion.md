@@ -17,7 +17,7 @@ So how did Britain manage to fumble this multi-generational industrial engineeri
 
 The easy answer is that Britain made bad technical choices and then got stuck with them: the wrong reactor, the wrong production model. But wrong choices are survivable when the system around them can still learn. Britain's failure was that the systems around those choices hardened.
 
-In other words, interfaces, state boundaries, and deployment boundaries are where dependencies accumulate. A bad architecture with clean seams can be replaced. A decent architecture with fused seams can become permanent.
+In other words, lock-in emerges when dependencies spread until boundaries stop containing change. A bad architecture with boundaries that hold can be replaced. A decent architecture with collapsed boundaries can become permanent.
 
 ---
 
@@ -29,23 +29,23 @@ Sizewell B shows the inverse. It was Britain's lone PWR, the design the rest of 
 
 Shipbuilding shows the same pattern from the other direction. British yards are often described as backward: labor-intensive, undercapitalized, and slow to mechanize.[^uk-shipbuilding] That description is true but incomplete. The labor-intensive model was a rational adaptation for decades. It matched Britain's custom-order market, cramped yards, and limited capital. These manufacturers built familiar ships for familiar owners in a cyclical market where keeping fixed costs low mattered.
 
-The problem was that the market changed. Postwar shipbuilding moved toward larger standardized vessels, welded prefabricated blocks, heavier equipment, and tighter production planning. Between 1947 and 1957, British output rose only 18 percent while worldwide output rose more than 300 percent.[^uk-shipbuilding] Modernization meant rebuilding the production system, not just buying better tools — and that was exactly where Britain was constrained: many yards were physically cramped, labor was organized around craft demarcations, and the commercial model still depended on custom orders from British shipowners. The old production architecture was tied into the whole business.
+The problem was that the market changed. Postwar shipbuilding moved toward larger standardized vessels, welded prefabricated blocks, heavier equipment, and tighter production planning. Between 1947 and 1957, British output rose only 18 percent while worldwide output rose more than 300 percent.[^uk-shipbuilding] Modernization meant rebuilding the production system, not just buying better tools — and that was exactly where Britain was constrained: many yards were physically cramped, labor was organized around craft demarcations, and the commercial model still depended on custom orders from British shipowners. The boundary between production architecture and the surrounding business had collapsed.
 
-These two cases point to the same conclusion. Technology choices matter, but they become lock-in through the systems that form around them. In nuclear, reactor design became entangled with delivery and legitimacy. In shipbuilding, production methods became entangled with yards, labor, finance, and demand.
+These two cases point to the same conclusion. Technology choices matter, but they become lock-in when dependencies spread beyond the boundaries meant to contain them. In nuclear, reactor design became inseparable from delivery and legitimacy. In shipbuilding, production methods became inseparable from yards, labor, finance, and demand.
 
-The useful insight is in what makes that entanglement reversible or irreversible. Some systems preserve enough separation that one layer can change while the others hold still. Others collapse those layers together until every correction becomes a system-wide change.
+The useful question is what keeps that coupling reversible. Some systems preserve boundaries that let one layer change while the others hold still. In others, those boundaries collapse until every correction becomes a system-wide change.
 
 ---
 
-Hardware engineering shows this collapse happening at a specific, scheduled moment called a Critical Design Review (CDR). A CDR is the point in a hardware project when the open design choices get fixed enough to build against. Before it, the layers are still separable: architecture, implementation, interfaces, supply. At the review they get locked together. Parts are ordered against the current geometry, tooling is cut for the current tolerances, and interface assumptions harden into physical constraints. After the CDR you can't move one layer without paying to move the others, because the budget, the lead times, and the procurement schedule have all been committed to a single shape.
+Hardware engineering shows bounded coupling happening at a specific, scheduled moment called a Critical Design Review (CDR). A CDR is the point in a hardware project when the open design choices get fixed enough to build against. Before it, the layers are still separable: architecture, implementation, interfaces, supply. At the review they are deliberately coupled. Parts are ordered against the current geometry, tooling is cut for the current tolerances, and interface assumptions harden into physical constraints. After the CDR you can't move one layer without paying to move the others, because the budget, the lead times, and the procurement schedule have all been committed to a single shape.
 
 That coupling isn't a failure of the process; it is the process. In physical systems the implementation and the interface tend to be the same thing. A robot's reach, its battery life, its runtime target, and its enclosure aren't independent knobs — they're dimensions, tolerances, heat, wiring, and mass that constrain one another. Change the motor and you may have to change the chassis, the power budget, and the price.
 
 This is fusion in its most literal form — but fusion isn't yet _lock-in_. A CDR couples the layers on purpose: changing the geometry now means re-cutting tooling and re-running the budget, and you accept that because it's the price of building a real object. Coupling like this is bounded. You can see what moves with what, and you can pay for it.
 
-Lock-in is coupling that has lost its edges. The dependencies keep spreading past the artifact until there's no bounded change left to make — every correction becomes a change to the whole system, and the bill is one nobody can pay. The useful question stops being whether a decision was right when it was made, and becomes whether the system still leaves a path to change it.
+Fusion begins when that coupling stops being bounded: boundaries collapse, and dependencies spread beyond their original layer. It becomes lock-in when they extend so far past the artifact that no affordable local correction remains — every correction becomes a change to the whole system, and the bill is one nobody can pay. The useful question stops being whether a decision was right when it was made, and becomes whether the system still leaves a path to change it.
 
-The British cases failed that test in opposite directions. Shipbuilding fused inward: the production model was bound up with the yards, labor, finance, and customers around it, so it could only change as a whole. Nuclear fused outward: the Sizewell B inquiry ran 340 days[^uk-nuclear] and expanded a single reactor decision into a referendum on safety, legitimacy, and the whole enterprise. In both, the technical choice mattered, but the irreversibility came from the coupling around it.
+The British cases failed that test in opposite directions. Shipbuilding lost internal separability: the production model, yards, labor, finance, and customers could no longer change independently, so modernization required moving them all at once. Nuclear lost external containment: the Sizewell B inquiry ran 340 days[^uk-nuclear] and expanded a single reactor decision into a referendum on safety, legitimacy, and the whole enterprise. In both, the technical choice mattered, but the irreversibility came from the coupling around it.
 
 Software is supposed to be the exception.
 
@@ -53,21 +53,21 @@ Software is supposed to be the exception.
 
 Software is mostly information architecture: code, interfaces, state, and expectations. That is why it is easier to change than hardware; most software changes move symbols and behavior, not atoms or suppliers.
 
-But information hardens once other systems coordinate around it. A schema with production data behind it, an API customers build against, or a deployment relationship between services stops being ordinary code and becomes infrastructure. Stable boundaries keep that infrastructure local: the interface holds while the implementation changes; callers keep working while state moves underneath them.
+But information hardens once other systems coordinate around it. A schema with production data behind it, an API customers build against, or a deployment relationship between services stops being ordinary code and becomes infrastructure. Boundaries that hold keep the consequences of change local: the interface stays stable while the implementation changes; callers keep working while state moves underneath them.
 
-IMO, that's one of the constraints on LLM acceleration. Models make implementation cheaper inside a boundary, but they don't make it much cheaper to decide what the boundary may change, prove compatibility, migrate state, or shift traffic safely.
+IMO, that's one of the constraints on LLM acceleration. Models make implementation cheaper inside a boundary that already holds, but they don't make it much cheaper to decide which contract may change, prove compatibility, migrate state, or shift traffic safely.
 
 The flag-evaluation rewrite I worked on is a useful example of this characteristic.[^rust-rewrite] I moved a service from Django to Rust in about seven months, which felt fast at the time, and current models would probably make the implementation work much faster. But most of the work wasn't literally typing Rust; it was preserving externally visible behavior while the implementation changed.
 
-Faster implementation helps most when boundaries are clean. When they are not, it can make fusion worse. A fused schema turns a database migration into a service rewrite and rollout. Hyrum's Law[^hyrums-law] turns observable behavior into contract. A distributed monolith gives you network-separated services that still change and fail as one unit.
+Faster implementation helps most when boundaries hold. When they collapse, it can spread coupling faster. A collapsed data boundary turns a database migration into a service rewrite and rollout. Hyrum's Law[^hyrums-law] turns observable behavior into contract. A distributed monolith gives you network-separated services that still change and fail as one unit.
 
 State is where information architecture gets closest to atoms. Moving billions of rows is still moving an installed base, even if the installed base is data rather than steel.
 
-Refactoring helps inside a boundary. Fusion crosses boundaries. Breaking it requires interface design, migration work, compatibility policy, and operational discipline — the parts code generation only partially helps with.
+Refactoring helps inside a boundary. It cannot, by itself, restore a boundary that has collapsed. That requires interface design, migration work, compatibility policy, and operational discipline — the parts code generation only partially helps with.
 
 This is the software version of the British cases. Hardware lock-in moves atoms. Software lock-in moves dependencies. Once users, state, contracts, and processes have to move together, the system has lost the ability to adapt incrementally.
 
-CUDA[^cuda] is the hybrid case: physical chips underneath, information architecture above, lock-in created by the way the two are fused.
+CUDA[^cuda] is the hybrid case: physical chips underneath, information architecture above, lock-in created by dependencies that span both.
 
 ---
 
@@ -87,11 +87,11 @@ The policy pieces are visible. The CAC is pushing domestic firms away from NVIDI
 
 The H200 episode shows the mechanism. The United States restricted H100 and A100 exports in 2022,[^h100-controls] closed the H800/A800 workaround in 2023,[^h800-controls] and kept newer parts such as B200 out of reach. Those restrictions acted on hardware, but their second-order effect was software adoption: they protected demand for domestic accelerators and tooling. When Washington later allowed H200 sales to approved Chinese customers with a 25 percent surcharge,[^h200-relaxation] Beijing slow-walked imports and continued urging firms to buy domestic.[^h200-slowwalking] The strategic preference had changed: access to NVIDIA chips was less valuable if it weakened the domestic stack China had been forced to build.
 
-There is an important caveat. The decisive seam may be moving upward. Most developers write to frameworks such as PyTorch rather than directly to CUDA. If portability increasingly lives in framework and compiler layers, then the driver-level fight between CUDA and CANN is only part of the story. The more important question becomes who controls the abstraction layer developers actually target.
+There is an important caveat. The decisive abstraction layer may be moving upward. Most developers write to frameworks such as PyTorch rather than directly to CUDA. If portability increasingly lives in framework and compiler layers, then the driver-level fight between CUDA and CANN is only part of the story. The more important question becomes who controls the abstraction layer developers actually target.
 
-NVIDIA appears to recognize this. Its recent compiler-level work is best understood as defending the seam above the traditional CUDA driver layer, beyond the old CUDA surface. The CUDA moat remains real and load-bearing today. At the same time, the location of the relevant interface may be changing, which makes any simple forecast fragile.
+NVIDIA appears to recognize this. Its recent compiler-level work is best understood as extending its position into the abstraction layer above the traditional CUDA driver interface, beyond the old CUDA surface. The CUDA moat remains real and load-bearing today. At the same time, the location of the relevant interface may be changing, which makes any simple forecast fragile.
 
-The narrower point is enough: export controls supplied demand and a captive user base for a rival stack; China is trying to assemble the rest of the ecosystem; and Beijing's slow-walking of H200 imports shows that the domestic-stack strategy has moved from theory into policy. Whether that ultimately counts as a backfire depends on how the higher-level framework seam develops.
+The narrower point is enough: export controls supplied demand and a captive user base for a rival stack; China is trying to assemble the rest of the ecosystem; and Beijing's slow-walking of H200 imports shows that the domestic-stack strategy has moved from theory into policy. Whether that ultimately counts as a backfire depends on where portability ultimately lives.
 
 ---
 
@@ -99,7 +99,7 @@ The question is the same at every scale: not just whether a technical choice is 
 
 LLMs don't meaningfully move the needle on this constraint. Faster implementation helps, but code is only one layer – the hard work is preserving correctness and compatibility while changing the system underneath active users. If anything, faster implementation raises the stakes: teams can now create coupling faster than they can understand it.
 
-CUDA is the same lesson at strategic scale. The chips set the physical floor, but the developer interface decides which chips workloads can realistically use. Whoever owns that seam owns the system around it.
+CUDA is the same lesson at strategic scale. The chips set the physical floor, but the developer interface decides which chips workloads can realistically use. Whoever controls that interface controls the system around it.
 
 ---
 
