@@ -120,6 +120,7 @@ def write_ico(filename):
 
 write_png("favicon-192x192.png", 192, 6, 0)
 write_png("favicon-512x512.png", 512, 16, 0)
+write_png("social-preview.png", 512, 16, 0)
 write_png("favicon-maskable-512x512.png", 512, 12, 64)
 write_png("apple-touch-icon.png", 180, 5, 10)
 write_ico("favicon.ico")

@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         {% assign page_description = page.post_summary | default: page.description | default: site.description | strip_html | normalize_whitespace | truncate: 160 %}
-        {% assign page_image = page.image | default: '/logo_light.png' %}
+        {% assign page_image = page.image | default: '/social-preview.png' %}
         {% assign page_image_alt = page.image_alt | default: 'Compacted Context logo' %}
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
