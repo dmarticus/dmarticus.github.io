@@ -1,15 +1,16 @@
 ---
 title: "A Few Thoughts on P99 Conf"
 layout: post
+published: false
 tags: [engineering, performance, conferences, ai]
 post_summary: "A conference format I really liked, some excellent performance engineering, and a few thoughts on where AI helps."
 ---
 
-I recently spoke at [P99 Conf](https://p99conf.io/) and watched a bunch of the other talks. I liked it! A few things stood out that I wanted to write down, mostly about the format and the kinds of engineering people were doing.
+I recently spoke at [P99 Conf](https://p99conf.io/) and watched a bunch of the other talks. For me, it was the best conference experience of the year, and there few things stood out that I wanted to write down (mostly about the format and the kinds of engineering people were doing).
 
-## More conferences should do this
+## More conferences should do this format 
 
-The talks were prerecorded, but the speakers were in the chat while their talks played. This was much more engaging than I expected, especially as a presenter.
+The talks were prerecorded, but the speakers were in the chat while their talks played. This was more engaging than I expected, especially as a presenter.
 
 Usually, giving a talk and answering questions are separate activities. You present, people listen, and then there's a time-bound Q&A where someone has to remember the question they had twenty minutes ago. I've generally found these sessions underwhelming.
 
@@ -29,28 +30,28 @@ Different kinds of connection, but I got a lot out of both.
 
 ## Performance has a lot of layers
 
-I think of myself as someone who does performance engineering, but my talk was about application performance. Listening to people working on databases, filesystems, storage clients, and OS-level problems was a fun reminder of how much more there is to get into. I lost count of the `io_uring` mentions.
+I think of myself as a performance engineer, but my talk was on application performance. Listening to people work on databases, filesystems, storage clients, and OS-level problems was a good reminder of how much more there is. I lost count of the `io_uring` mentions.
 
-Two talks that particularly stuck with me were [Amos's talk on holistic profiling with Stax](https://p99conf.io/session/holistic-profiling-with-stax/) and [Nathan's talk on searching 100 billion vectors on object storage at turbopuffer](https://p99conf.io/session/searching-100b-vectors-on-object-storage-200ms-p99/). I also enjoyed [Performance Has Layers](https://p99conf.io/session/performance-has-layers/) and [The Fastest Object Storage Client in the World](https://p99conf.io/session/the-fastest-object-storage-client-in-the-world/).
+Two talks stuck with me: [Amos's on holistic profiling with Stax](https://p99conf.io/session/holistic-profiling-with-stax/) and [Nathan's on searching 100 billion vectors on object storage at turbopuffer](https://p99conf.io/session/searching-100b-vectors-on-object-storage-200ms-p99/). I also liked [Performance Has Layers](https://p99conf.io/session/performance-has-layers/) and [The Fastest Object Storage Client in the World](https://p99conf.io/session/the-fastest-object-storage-client-in-the-world/).
 
-The talks I liked best either had a strong narrative or felt almost like following a proof:
+The best ones had a strong narrative or felt like following a proof:
 
 1. here's the problem
-2. here's the math that describes what we're up against
+2. here's the math for what we're up against
 3. here's what we tried
 4. here's how the measurements worked out
 
-That structure made some fairly hairy engineering easy to follow. I don't need to already know your domain if you can walk me through how you thought about the problem.
+That made hairy engineering easy to follow. I don't need to know the domain if you can walk me through how you thought about the problem.
 
-I got some positive feedback on framing my own talk as an I/O-bound mystery, which was nice. Having engineers whose work I respect engage with the details was rewarding, too.
+I got some good feedback on framing my own talk as an I/O-bound mystery. It was also rewarding to have engineers whose work I respect engage with the details.
 
 ## And, inevitably, AI
 
-I liked Amos's observation that a lot of useful AI-built software is happening in internal tools. It exists; we just don't necessarily see it. Some of it may never become a public product because the economics make sense as an internal tool, not as another SaaS business.
+I liked Amos's point that a lot of useful AI-built software is internal tools. It's out there, we just don't see it. Some of it will probably never be a public product because the economics work as an internal tool, not as another SaaS business.
 
-I was less interested in the general accounts of how much faster AI made development. Those experiences are useful, but the specifics age quickly as the models improve. I'm more curious about which characteristics of performance engineering make it a good or bad fit for these tools.
+I was less interested in the general "AI made development faster" accounts. Those are useful, but the specifics age fast as the models improve. I'm more curious about which parts of performance engineering make a good or bad fit for these tools.
 
-One anecdote captured this well: a model coming back pleased with a roughly 4% improvement when the engineer was looking for 4x. I can imagine having exactly that conversation. The implementation might be improving, but the approach itself needs questioning.
+One anecdote captured it: a model coming back pleased with a roughly 4% improvement when the engineer was looking for 4x. I can imagine having exactly that conversation. The implementation might be getting better, but the approach itself needs questioning.
 
 This connects to [what I've been thinking about lately](/2026/10/13/optimizing-for-human-wisdom.html): agents are very good at making progress once I've framed the problem. Finding a better frame is less automatic.
 
