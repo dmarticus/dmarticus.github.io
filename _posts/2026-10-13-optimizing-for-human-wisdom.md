@@ -101,7 +101,7 @@ And once the direction is good, I want all the leverage I can get! Let the agent
 
 If software is disposable, wisdom can't be. When everyone has access to the same tools, I think the comparative advantage is in how efficiently we accumulate wisdom and how well we preserve it across implementations.
 
-[^coding-more]: Yes, I know I could just write more code by hand, no agents. But the point is to adapt to this new way of working without giving up the wisdom the old one produced—not to preserve manual coding for its own sake.
+[^coding-more]: Yes, I know I could just write more code by hand, no agents. But the point is to adapt to this new way of working without giving up the wisdom the old one produced (and not to preserve manual coding for its own sake).
 
 [^raw-thoughts]: Summarization is useful when the goal is compression (and even then, there's [no such thing as lossless text compression](https://sophiebits.com/2026/06/25/there-are-no-lossless-transformations-of-natural-language-text)). Here the goal is the opposite: to preserve half-formed thoughts and orthogonal connections before a model decides which parts matter.
 
