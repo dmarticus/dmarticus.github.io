@@ -2,14 +2,14 @@
 title: "A Few Thoughts on P99 Conf"
 layout: post
 tags: [engineering, performance, conferences, ai]
-post_summary: "A conference format I really liked, some excellent performance engineering, and a few thoughts on where AI helps."
+post_summary: "Notes on P99 Conf, a conference I liked way more than I expected."
 ---
 
 I recently spoke at [P99 Conf](https://p99conf.io/) and watched a bunch of the other talks. For me, it was the my favorite conference experience of the year so far, and there few things stood out that I wanted to write down.
 
 ## I loved the format
 
-P99 Conf is a fully online (and free!) conference, and because of that, they had some advantages (TODO FOOTNOTE AND DISADVANTAGES) that in-person talks don't have. What I specifically liked was the format of the presentations themselves – the talks were all prerecorded, but the speakers were in the chat while their talks played. This was more engaging than I expected, especially as a presenter.
+P99 Conf is a fully online (and free!) conference, and because of that, they had some advantages that in-person talks don't have. What I specifically liked was the format of the presentations themselves – the talks were all prerecorded, but the speakers were in the chat while their talks played. This was more engaging than I expected, especially as a presenter.
 
 Usually, giving a talk and answering questions are separate activities. You present, people listen, and then there's a time-bound Q&A where someone has to remember the question they had twenty minutes ago. People are also often hesitant to speak up and ask questions, especially if that hasn't been happening a lot during the conference up until that point. I've generally found these sessions underwhelming.
 
@@ -42,7 +42,7 @@ The best ones had a strong narrative or felt like following a proof:
 
 That made hairy engineering easy to follow. I don't need to know the domain if you can walk me through how you thought about the problem.
 
-I got some good feedback on framing my own talk as an I/O-bound mystery (TODO LINK). It was also rewarding to have engineers whose work I respect engage with the details.
+I got some good feedback on framing my own talk as an I/O-bound mystery.[^talk-slides] It was also rewarding to have engineers whose work I respect engage with the details.
 
 ## Can't have a conference in 2026 without mentioning AI
 
@@ -59,3 +59,5 @@ In a lot of these talks around AI-assisted performance engineering, it seem like
 Overall, though I finished up the week excited that there are so many dimensions of performance engineering I haven't worked in yet, and glad I'd gotten to hear from people who have.
 
 Oh, and the swag was awesome.
+
+[^talk-slides]: [Slides from my talk, "From Snakes to Crabs (and what happened after the rewrite!)"](/media/p99-conf-2026.pdf).
