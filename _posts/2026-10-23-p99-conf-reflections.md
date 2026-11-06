@@ -23,9 +23,9 @@ The rest of the logistics worked well, too:
 - the schedule moved along without much awkward downtime
 - recordings were available quickly, so choosing between competing talks wasn't much of a dilemma
 
-I did miss the warmth of meeting people in person. At Dev Week, I had proper sit-down conversations with people that I don't think an online conference can really reproduce. But I also watched more P99 talks than I typically manage at an in-person conference, and afterward I could reach out to speakers with a specific question or observation. A surprisingly high proportion of the talks I watched turned into conversations with the people who gave them.
+I did miss the warmth of meeting people in person, e.g. Dev Week, I had proper sit-down conversations with people that I don't think an online conference can really reproduce. But I also watched more P99 talks than I typically manage at an in-person conference, and afterward I could reach out to speakers with a specific question or observation. A surprisingly high proportion of the talks I watched turned into conversations with the people who gave them.
 
-Different kinds of connection, but I got more out of the conversations I had at P99 than I had expected going in.
+Different kinds of connection, for sure, but I got more out of the conversations I had at P99 than I had initially expected going into it.
 
 ## Performance has a lot of layers
 
