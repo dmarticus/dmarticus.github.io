@@ -9,19 +9,17 @@ I recently spoke at [P99 Conf](https://p99conf.io/) and watched a bunch of the o
 
 ## I loved the format
 
-P99 Conf is a fully online (and free!) conference, and because of that, they had some advantages that in-person talks don't have. What I specifically liked was the format of the presentations themselves – the talks were all prerecorded, but the speakers were in the chat while their talks played. This was more engaging than I expected, especially as a presenter.
+P99 Conf is a fully online (and free!) conference, and because of that, they had some advantages that in-person talks don't have. What I specifically liked was the format of the presentations themselves – the talks were all prerecorded, but the speakers were in the chat while their talks played. This was more engaging than I expected, especially as a presenter. People are also often hesitant to speak up and ask questions (especially if that hasn't been happening a lot during the conference up until that point). In my experience giving talks, the Q&A sessions were often underwhelming, not necessarily because folks didn't have good questions, but the format of the talk didn't really encourage discussion.
 
-Usually, giving a talk and answering questions are separate activities. You present, people listen, and then there's a time-bound Q&A where someone has to remember the question they had twenty minutes ago. People are also often hesitant to speak up and ask questions, especially if that hasn't been happening a lot during the conference up until that point. I've generally found these sessions underwhelming.
+Here, someone could ask a question about what I was saying while I was saying it, and I could answer without interrupting the talk. I could follow the conversation, respond to things as they came up, and go deeper where people were interested (the chat platform supported threads, too, which was great UX for going deeper on specific things). All of this combined into what felt like the most engaged audience I'd ever had during one of my talks.
 
-Here, someone could ask a question about what I was saying *while I was saying it*, and I could answer without interrupting the talk. I could follow the conversation, respond to things as they came up, and go deeper where people were interested. There was also a written record afterward. All of this combined into what felt like the most engaged I'd seen an audience during one of my talks.
-
-Obviously, it's easier to tune out an online conference, but for people who wanted to engage, this was a really good way to do it.
+Obviously, it's easier to tune out an online conference, but for people who wanted to engage, this felt like a really good way to do it.
 
 The rest of the logistics worked well, too:
 
-- it was free
-- the schedule moved along without much awkward downtime
-- recordings were available quickly, so choosing between competing talks wasn't much of a dilemma
+- it was free, and available in US, EU, and APAC-friendly timzones
+- talks stuck to the schedule (easy to do when they're pre-recorded), so it felt like everything moved along without any unncessary downtime
+- recordings were available quickly, so choosing between competing talks wasn't really a dilemma
 
 I did miss the warmth of meeting people in person, e.g. Dev Week, I had proper sit-down conversations with people that I don't think an online conference can really reproduce. But I also watched more P99 talks than I typically manage at an in-person conference, and afterward I could reach out to speakers with a specific question or observation. A surprisingly high proportion of the talks I watched turned into conversations with the people who gave them.
 
