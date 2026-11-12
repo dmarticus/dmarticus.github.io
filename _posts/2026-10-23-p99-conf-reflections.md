@@ -21,7 +21,7 @@ The rest of the logistics worked well, too:
 - talks stuck to the schedule (easy to do when they're pre-recorded), so it felt like everything moved along without any unncessary downtime
 - recordings were available quickly, so choosing between competing talks wasn't really a dilemma
 
-I did miss the warmth of meeting people in person, e.g. Dev Week, I had proper sit-down conversations with people that I don't think an online conference can really reproduce. But I also watched more P99 talks than I typically manage at an in-person conference, and afterward I could reach out to speakers with a specific question or observation. A surprisingly high proportion of the talks I watched turned into conversations with the people who gave them.
+Obviousyly, this isn't a full-on replacement to the non-talk-related benefits of attending conferences in person. Every other previous conversation I've had this year has led to proper sit-down conversations with people that I don't think an online conference can really reproduce. But I also watched more P99 talks than I typically manage at an in-person conference, and afterward I could reach out to speakers with a specific question or observation. A surprisingly high proportion of the talks I watched turned into conversations with the people who gave them.
 
 Different kinds of connection, for sure, but I got more out of the conversations I had at P99 than I had initially expected going into it.
 

@@ -116,7 +116,7 @@ Hover over a step, focus it with the keyboard, or tap it for details.
 
 ## The numbers
 
-This project cost about $140 in image-model calls, mostly for the large canvas runs. I ran `big`, `big2` and `big3` overnight on November 7 and 8.
+This project cost about $140 in image-model calls, mostly for the large canvas runs (I ran those overnight on November 7 and 8).
 
 | Run | Windows drawn | Cost |
 | --- | --- | --- |
