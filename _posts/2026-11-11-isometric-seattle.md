@@ -2,7 +2,7 @@
 title: "Building Isometric Seattle"
 layout: post
 tags: [seattle, maps, ai, fun, software engineering, projects]
-post_summary: "I built a 3.5-gigapixel illustrated map of Seattle with Claude Code, live buses and ferries included. Here's how the rendering, tracing and transit work."
+post_summary: "Claude and I built a 3.5-gigapixel isometrically illustrated map of Seattle (featuring live buses and ferries). Here's how it all came together."
 ---
 
 This week, I built [Isometric Seattle](https://isometricseattle.fun): a 3.5-gigapixel illustrated map of my hometown, with live buses and ferries.
