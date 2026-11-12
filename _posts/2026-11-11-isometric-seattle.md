@@ -45,7 +45,7 @@ Another problem I had was rendering water. Google's source had patchy coverage, 
 
 Next I wanted to do location search, and give users a way to see where a point on the map actually was.
 
-The source render already had a depth grid, whcih I could combine with the camera geometry to give each pixel a latitude, longitude and height. That turned out to be enough enough to place search results, show coordinates, and it laid the groundwork for putting put transit on the right streets (and bodies of water).
+The source render already had a depth grid, which I could combine with the camera geometry to give each pixel a latitude, longitude and height. That turned out to be enough enough to place search results, show coordinates, and it laid the groundwork for putting put transit on the right streets (and bodies of water).
 
 ![Coordinate overlay on top of downtown](/media/isometric-seattle/downtown-coordinate-popup.jpg)
 
