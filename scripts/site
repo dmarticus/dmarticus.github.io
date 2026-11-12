@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+cd -- "$(dirname -- "$0")/.."
+
+if ! command -v rbenv >/dev/null 2>&1; then
+  echo "rbenv is required. Install it, then run rbenv install from the repo root." >&2
+  exit 1
+fi
+
+# Explicit rbenv execution avoids Homebrew Ruby taking precedence in PATH.
+rbenv exec bundle check || rbenv exec bundle install
+
+if [ "$#" -eq 0 ]; then
+  set -- serve
+fi
+
+exec rbenv exec bundle exec jekyll "$@"

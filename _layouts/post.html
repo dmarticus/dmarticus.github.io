@@ -66,5 +66,16 @@ layout: default
     </aside>
 </article>
 
+<dialog class="image-lightbox" aria-label="Image preview" aria-describedby="image-lightbox-caption">
+    <div class="image-lightbox-toolbar">
+        <button type="button" class="image-lightbox-close" autofocus>Close</button>
+    </div>
+    <div class="image-lightbox-stage">
+        <img class="image-lightbox-image" alt="" />
+    </div>
+    <p class="image-lightbox-caption" id="image-lightbox-caption"></p>
+</dialog>
+
+<script src="/assets/js/image-lightbox.js?v={{ site.time | date: '%s' }}" defer></script>
 <script src="/assets/js/footnote-previews.js?v={{ site.time | date: '%s' }}" defer></script>
 <script src="/assets/js/copy-slug.js?v={{ site.time | date: '%s' }}" defer></script>
