@@ -66,7 +66,7 @@ Ferries were easier to render since their route was over open water, all I had t
 
 ![The Wenatchee ferry docked at Seattle's Colman Dock](/media/isometric-seattle/wenatchee-at-seattle.png)
 
-I also tried simulated car traffic, but I dropped it (for now). It was cool, and made the map loop alive from a distance, but when I zoomed in it looked too busy, and too chaotic for my taste. Cars were leaving roads, failing traffic lays, disappearing and popping in a lot, and it was a pain to make a variety of sprites that I was happy with. Buses still have some of these issues re: traffic patterns, but there are fewer of them. I want to bring cars back if I can get them to behave.
+I also tried simulated car traffic, but I dropped it (for now). It was cool, and made the map loop alive from a distance, but when I zoomed in it looked too busy, and too chaotic for my taste. Cars were leaving roads, breaking traffic laws, disappearing and popping in a lot, and it was a pain to make a variety of sprites that I was happy with. Buses still have some of these issues re: traffic patterns, but there are fewer of them. I want to bring cars back if I can get them to behave.
 
 ## Image generation pipeline
 
