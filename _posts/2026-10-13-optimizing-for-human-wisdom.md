@@ -101,7 +101,7 @@ And once the direction is good, I want all the leverage I can get! Let the agent
 
 If software is disposable, wisdom can't be. When everyone has access to the same tools, I think the comparative advantage is in how efficiently we accumulate wisdom and how well we preserve it across implementations.
 
-*This is the latest in an unplanned series about AI-assisted development. Previously: [Spinning Plates](/2025/11/07/spinning-plates.html), [Racing Towards Bethlehem](/2025/11/24/racing-towards-bethlehem.html), [Spinning the Wheel](/2026/02/02/spinning-the-wheel.html), [Contra Yang, et al](/2026/02/21/contra-yang-et-al.html), [Announcing Steelman](/2026/03/11/announcing-steelman.html), [Agentic Failure Modes](/2026/03/24/agentic-failure-modes.html), [Messy Fusion](/2026/06/21/messy-fusion.html).*
+*This is the latest in an unplanned series about AI-assisted development. Previously: [Spinning Plates](/2025/11/07/spinning-plates.html), [Racing Towards Bethlehem](/2025/11/24/racing-towards-bethlehem.html), [Spinning the Wheel](/2026/02/02/spinning-the-wheel.html), [Contra Yang, et al](/2026/02/21/contra-yang-et-al.html), [Agentic Failure Modes](/2026/03/24/agentic-failure-modes.html), [Messy Fusion](/2026/06/21/messy-fusion.html).*
 
 [^coding-more]: Yes, I know I could just write more code by hand, no agents. But the point is to adapt to this new way of working without giving up the wisdom the old one produced (and not to preserve manual coding for its own sake).
 
