@@ -23,7 +23,7 @@
             data-tags="{{ post.tags | join: ',' }}"
         >
             <span class="num">{{ post.date | date: "%b %d" }}</span>
-            <span class="t">{{ post.title }}</span>
+            <span class="t" title="{{ post.title | strip_html | normalize_whitespace | escape }}">{{ post.title }}</span>
         </a>
     </li>
     {% endfor %}
@@ -37,7 +37,7 @@
         <span>Published</span><b data-field="date">{{ first.date | date: "%B %Y" }}</b>
         <span>Length</span><b data-field="words">{{ first.content | number_of_words }} words</b>
     </div>
-    <p data-field="summary">{{ first.post_summary | default: first.summary | strip_html | normalize_whitespace }}</p>
+    <p data-field="summary" title="{{ first.post_summary | default: first.summary | strip_html | normalize_whitespace | escape }}">{{ first.post_summary | default: first.summary | strip_html | normalize_whitespace }}</p>
     <div class="tags" data-field="tags">
         {% for tag in first.tags %}<a class="tag" href="/writing.html?tag={{ tag | url_encode }}" data-tag="{{ tag | downcase }}">{{ tag }}</a>{% endfor %}
     </div>

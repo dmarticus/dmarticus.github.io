@@ -35,7 +35,10 @@
             var d = link.dataset;
             if (date) date.textContent = d.date || "";
             if (words) words.textContent = d.words || "";
-            if (summary) summary.textContent = d.summary || "";
+            if (summary) {
+                summary.textContent = d.summary || "";
+                summary.title = d.summary || "";
+            }
             if (cta) cta.href = link.getAttribute("href");
             if (tags) {
                 tags.innerHTML = "";
