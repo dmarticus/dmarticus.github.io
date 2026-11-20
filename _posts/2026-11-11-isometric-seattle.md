@@ -134,7 +134,7 @@ This project cost about $140 in image-model calls, mostly for the large canvas r
 
 ## Future iteration
 
-Here's a fwe more things I'd like to build, assuming my ambition and wallet cooperate:
+Here's a few more things I'd like to build, assuming my ambition and wallet cooperate:
 
 - Link light rail trains
 - Game days and events
